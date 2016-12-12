@@ -3,7 +3,10 @@
 namespace ShopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Gedmo\Tree\Traits\NestedSetEntity;
+
 
 /**
  * Category
@@ -14,7 +17,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 class Category
 {
 
-    use TimestampableEntity;
+    use TimestampableEntity, NestedSetEntity;
 
     /**
      * @var int
@@ -97,5 +100,100 @@ class Category
     {
         return $this->description;
     }
-}
 
+    /**
+     * Set root
+     *
+     * @param integer $root
+     *
+     * @return Category
+     */
+    public function setRoot($root)
+    {
+        $this->root = $root;
+
+        return $this;
+    }
+
+    /**
+     * Get root
+     *
+     * @return integer
+     */
+    public function getRoot()
+    {
+        return $this->root;
+    }
+
+    /**
+     * Set level
+     *
+     * @param integer $level
+     *
+     * @return Category
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
+
+        return $this;
+    }
+
+    /**
+     * Get level
+     *
+     * @return integer
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
+     * Set left
+     *
+     * @param integer $left
+     *
+     * @return Category
+     */
+    public function setLeft($left)
+    {
+        $this->left = $left;
+
+        return $this;
+    }
+
+    /**
+     * Get left
+     *
+     * @return integer
+     */
+    public function getLeft()
+    {
+        return $this->left;
+    }
+
+    /**
+     * Set right
+     *
+     * @param integer $right
+     *
+     * @return Category
+     */
+    public function setRight($right)
+    {
+        $this->right = $right;
+
+        return $this;
+    }
+
+    /**
+     * Get right
+     *
+     * @return integer
+     */
+    public function getRight()
+    {
+        return $this->right;
+    }
+}

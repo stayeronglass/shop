@@ -4,6 +4,7 @@ namespace ShopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Caster
@@ -38,6 +39,13 @@ class Caster
      * @ORM\Column(name="email", type="string", length=100)
      */
     private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="vk", type="string", length=255)
+     */
+    private $vk;
 
 
     /**
@@ -97,5 +105,28 @@ class Caster
     {
         return $this->email;
     }
-}
 
+    /**
+     * Set vk
+     *
+     * @param string $vk
+     *
+     * @return Caster
+     */
+    public function setVk($vk)
+    {
+        $this->vk = $vk;
+
+        return $this;
+    }
+
+    /**
+     * Get vk
+     *
+     * @return string
+     */
+    public function getVk()
+    {
+        return $this->vk;
+    }
+}
