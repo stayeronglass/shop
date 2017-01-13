@@ -10,10 +10,10 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 /**
  * Orders
  *
- * @ORM\Table(name="orders")
- * @ORM\Entity(repositoryClass="ShopBundle\Repository\OrdersRepository")
+ * @ORM\Table(name="order")
+ * @ORM\Entity(repositoryClass="ShopBundle\Repository\OrderRepository")
  */
-class Orders
+class Order
 {
 
     use TimestampableEntity, SoftDeleteableEntity;
@@ -39,6 +39,11 @@ class Orders
      */
     private $caster;
 
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="orders")
+     */
+    private $user;
 
     /**
      * @var int

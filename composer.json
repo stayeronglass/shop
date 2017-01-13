@@ -27,7 +27,10 @@
         "stof/doctrine-extensions-bundle": "^1.2",
         "knplabs/knp-paginator-bundle": "^2.5",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "doctrine/doctrine-migrations-bundle": "^1.2"
+        "doctrine/doctrine-migrations-bundle": "^1.2",
+        "sonata-project/doctrine-orm-admin-bundle": "^3.1",
+        "sonata-project/admin-bundle": "^3.10",
+        "knplabs/knp-menu-bundle": "^2.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
