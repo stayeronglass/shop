@@ -8,8 +8,9 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\User")
  * @ORM\Table(name="fos_user_extra")
+ *
  */
 
 class UserExtra
@@ -25,7 +26,7 @@ class UserExtra
 
     /**
      *
-     * @ORM\OneToOne(targetEntity="UserBundle\Entity\User", inversedBy="extra")
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\User", inversedBy="extra", cascade={"persist", "remove"} )
      */
     private $user;
 

@@ -49,6 +49,13 @@ class Caster
 
 
     /**
+     *
+     * @ORM\ManyToOne(targetEntity="ShopBundle\Entity\File", inversedBy="caster")
+     */
+    private $pictures;
+
+
+    /**
      * Get id
      *
      * @return int
@@ -128,5 +135,29 @@ class Caster
     public function getVk()
     {
         return $this->vk;
+    }
+
+    /**
+     * Set pictures
+     *
+     * @param \ShopBundle\Entity\File $pictures
+     *
+     * @return Caster
+     */
+    public function setPictures(\ShopBundle\Entity\File $pictures = null)
+    {
+        $this->pictures = $pictures;
+
+        return $this;
+    }
+
+    /**
+     * Get pictures
+     *
+     * @return \ShopBundle\Entity\File
+     */
+    public function getPictures()
+    {
+        return $this->pictures;
     }
 }

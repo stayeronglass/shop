@@ -48,6 +48,21 @@ class Product
      */
     private $caster;
 
+
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="ShopBundle\Entity\Tag", inversedBy="products")
+     */
+    private $tags;
+
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="ShopBundle\Entity\File", inversedBy="product")
+     */
+    private $pictures;
+
+
     /**
      * Get id
      *
@@ -128,5 +143,70 @@ class Product
     public function getCaster()
     {
         return $this->caster;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add tag
+     *
+     * @param \ShopBundle\Entity\Tag $tag
+     *
+     * @return Product
+     */
+    public function addTag(\ShopBundle\Entity\Tag $tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param \ShopBundle\Entity\Tag $tag
+     */
+    public function removeTag(\ShopBundle\Entity\Tag $tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * Set pictures
+     *
+     * @param \ShopBundle\Entity\File $pictures
+     *
+     * @return Product
+     */
+    public function setPictures(\ShopBundle\Entity\File $pictures = null)
+    {
+        $this->pictures = $pictures;
+
+        return $this;
+    }
+
+    /**
+     * Get pictures
+     *
+     * @return \ShopBundle\Entity\File
+     */
+    public function getPictures()
+    {
+        return $this->pictures;
     }
 }

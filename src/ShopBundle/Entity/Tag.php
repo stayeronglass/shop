@@ -11,10 +11,10 @@ use Gedmo\Tree\Traits\NestedSetEntity;
 /**
  * Category
  *
- * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="ShopBundle\Repository\CategoryRepository")
+ * @ORM\Table(name="tag")
+ * @ORM\Entity(repositoryClass="ShopBundle\Repository\TagRepository")
  */
-class Category
+class Tag
 {
 
     use TimestampableEntity, NestedSetEntity;
@@ -58,7 +58,7 @@ class Category
      *
      * @param string $name
      *
-     * @return Category
+     * @return Tag
      */
     public function setName($name)
     {
@@ -82,7 +82,7 @@ class Category
      *
      * @param string $description
      *
-     * @return Category
+     * @return Tag
      */
     public function setDescription($description)
     {
@@ -106,7 +106,7 @@ class Category
      *
      * @param integer $root
      *
-     * @return Category
+     * @return Tag
      */
     public function setRoot($root)
     {
@@ -130,7 +130,7 @@ class Category
      *
      * @param integer $level
      *
-     * @return Category
+     * @return Tag
      */
     public function setLevel($level)
     {
@@ -154,7 +154,7 @@ class Category
      *
      * @param integer $left
      *
-     * @return Category
+     * @return Tag
      */
     public function setLeft($left)
     {
@@ -178,7 +178,7 @@ class Category
      *
      * @param integer $right
      *
-     * @return Category
+     * @return Tag
      */
     public function setRight($right)
     {
