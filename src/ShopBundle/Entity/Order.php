@@ -54,6 +54,13 @@ class Order
 
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
      * Get id
      *
      * @return int
@@ -68,7 +75,7 @@ class Order
      *
      * @param integer $status
      *
-     * @return Orders
+     * @return Order
      */
     public function setStatus($status)
     {
@@ -92,7 +99,7 @@ class Order
      *
      * @param \ShopBundle\Entity\Product $product
      *
-     * @return Orders
+     * @return Order
      */
     public function setProduct(\ShopBundle\Entity\Product $product = null)
     {
@@ -116,7 +123,7 @@ class Order
      *
      * @param \ShopBundle\Entity\Caster $caster
      *
-     * @return Orders
+     * @return Order
      */
     public function setCaster(\ShopBundle\Entity\Caster $caster = null)
     {
@@ -133,5 +140,53 @@ class Order
     public function getCaster()
     {
         return $this->caster;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Order
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \UserBundle\Entity\User $user
+     *
+     * @return Order
+     */
+    public function setUser(\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

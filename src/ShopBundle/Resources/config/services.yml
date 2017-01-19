@@ -2,3 +2,14 @@ services:
 #    shop.example:
 #        class: ShopBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+    shop.admin.product:
+        class: ShopBundle\Admin\ProductAdmin
+        arguments: [~, ShopBundle\Entity\Product, ShopBundle:ProductAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Product }
+
+    shop.admin.tag:
+        class: ShopBundle\Admin\TagAdmin
+        arguments: [~, ShopBundle\Entity\Tag, ShopBundle:TagAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Tag }

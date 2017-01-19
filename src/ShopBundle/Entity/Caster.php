@@ -54,6 +54,12 @@ class Caster
      */
     private $pictures;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
 
     /**
      * Get id
@@ -159,5 +165,29 @@ class Caster
     public function getPictures()
     {
         return $this->pictures;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Caster
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }
