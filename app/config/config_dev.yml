@@ -1,6 +1,13 @@
 imports:
     - { resource: config.yml }
 
+doctrine_migrations:
+    dir_name: "%kernel.root_dir%/DoctrineMigrations"
+    namespace: Application\Migrations
+    table_name: migration_versions
+    name: Application Migrations
+
+
 framework:
     router:
         resource: "%kernel.root_dir%/config/routing_dev.yml"

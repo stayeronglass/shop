@@ -2,14 +2,28 @@
 
 namespace ShopBundle\Admin;
 
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use ShopBundle\Entity\File;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
+use Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager;
 
 class ProductAdmin extends AbstractAdmin
 {
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection
+            ->remove('delete')
+            ->add('step1', $this->getRouterIdParameter().'/step1')
+            ->add('step2', $this->getRouterIdParameter().'/step2')
+        ;
+    }
+
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -18,10 +32,27 @@ class ProductAdmin extends AbstractAdmin
         $datagridMapper
             ->add('id')
             ->add('name')
-            ->add('description')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('deletedAt')
+
+            ->add('createdAt', 'doctrine_orm_date_range', [], 'sonata_type_date_range_picker',
+                [ 'field_options_start' => [
+                    'format' => 'dd.MM.yyyy',
+                    'label'  => 'От',
+                ],
+                    'field_options_end' => [
+                        'format' => 'dd.MM.yyyy',
+                        'label'  => 'До',
+                    ]
+                ])
+            ->add('updatedAt', 'doctrine_orm_date_range', [], 'sonata_type_date_range_picker',
+                [ 'field_options_start' => [
+                    'format' => 'dd.MM.yyyy',
+                    'label'  => 'От',
+                ],
+                    'field_options_end' => [
+                        'format' => 'dd.MM.yyyy',
+                        'label'  => 'До',
+                    ]
+                ])
         ;
     }
 
@@ -33,7 +64,7 @@ class ProductAdmin extends AbstractAdmin
         $listMapper
             ->add('id')
             ->add('name')
-            ->add('createdAt' , 'datetime', [
+            ->add('createdAt', 'datetime', [
                 'format' => 'd.m.Y H:i',
             ])
             ->add('updatedAt', 'datetime', [
@@ -42,10 +73,9 @@ class ProductAdmin extends AbstractAdmin
             ->add('tags')
 
             ->add('_action', null, array(
-                'actions' => array(
+                'actions'  => array(
                     'show' => array(),
                     'edit' => array(),
-                    'delete' => array(),
                 )
             ))
 
@@ -57,17 +87,11 @@ class ProductAdmin extends AbstractAdmin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $fileFieldOptions = [];
-
         $formMapper
             ->add('name')
-            ->add('description')
+            ->add('description' , CKEditorType::class, [
+            ])
             ->add('tags')
-            ->add('pictures', 'sonata_type_collection', array(
-                'label' => 'Documentos',
-                'type_options' => array('delete' => true)), array(
-                'edit' => 'inline', 'inline' => 'table', 'sortable' => 'position')
-            )
         ;
     }
 

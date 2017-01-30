@@ -1,0 +1,6 @@
+ivory_ck_editor:
+    default_config: my_config
+    configs:
+        my_config:
+            # default toolbar plus Format button
+            toolbar: standard

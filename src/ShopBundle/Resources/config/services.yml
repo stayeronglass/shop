@@ -7,6 +7,8 @@ services:
         arguments: [~, ShopBundle\Entity\Product, ShopBundle:ProductAdmin]
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: Product }
+        calls:
+            - [ setTemplate, [edit, admin/product/edit.html.twig]]
 
     shop.admin.tag:
         class: ShopBundle\Admin\TagAdmin

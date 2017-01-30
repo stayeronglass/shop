@@ -58,15 +58,24 @@ class Product
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="ShopBundle\Entity\File", inversedBy="product")
+     * @ORM\OneToMany(targetEntity="ShopBundle\Entity\File", mappedBy="pictures",  cascade={"persist", "remove"})
      */
     private $pictures;
 
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pictures = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -144,13 +153,6 @@ class Product
     {
         return $this->caster;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add tag
@@ -187,23 +189,33 @@ class Product
     }
 
     /**
-     * Set pictures
+     * Add picture
      *
-     * @param \ShopBundle\Entity\File $pictures
+     * @param \ShopBundle\Entity\File $picture
      *
      * @return Product
      */
-    public function setPictures(\ShopBundle\Entity\File $pictures = null)
+    public function addPicture(\ShopBundle\Entity\File $picture)
     {
-        $this->pictures = $pictures;
+        $this->pictures[] = $picture;
 
         return $this;
     }
 
     /**
+     * Remove picture
+     *
+     * @param \ShopBundle\Entity\File $picture
+     */
+    public function removePicture(\ShopBundle\Entity\File $picture)
+    {
+        $this->pictures->removeElement($picture);
+    }
+
+    /**
      * Get pictures
      *
-     * @return \ShopBundle\Entity\File
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPictures()
     {
