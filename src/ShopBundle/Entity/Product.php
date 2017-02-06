@@ -32,6 +32,14 @@ class Product
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 255,
+     *      minMessage = "Your first name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $name;
 
@@ -58,7 +66,7 @@ class Product
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="ShopBundle\Entity\File", mappedBy="pictures",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="ShopBundle\Entity\File", mappedBy="product",  cascade={"persist", "remove"})
      */
     private $pictures;
 
@@ -198,6 +206,7 @@ class Product
     public function addPicture(\ShopBundle\Entity\File $picture)
     {
         $this->pictures[] = $picture;
+        $picture->setProduct($this);
 
         return $this;
     }

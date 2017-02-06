@@ -62,6 +62,12 @@ class Caster
     private $description;
 
     /**
+     *
+     * @ORM\OneToMany(targetEntity="ShopBundle\Entity\Product", mappedBy="caster")
+     */
+    private $products;
+
+    /**
      * Get id
      *
      * @return int
@@ -189,5 +195,46 @@ class Caster
     public function getDescription()
     {
         return $this->description;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add product
+     *
+     * @param \ShopBundle\Entity\Product $product
+     *
+     * @return Caster
+     */
+    public function addProduct(\ShopBundle\Entity\Product $product)
+    {
+        $this->products[] = $product;
+
+        return $this;
+    }
+
+    /**
+     * Remove product
+     *
+     * @param \ShopBundle\Entity\Product $product
+     */
+    public function removeProduct(\ShopBundle\Entity\Product $product)
+    {
+        $this->products->removeElement($product);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProducts()
+    {
+        return $this->products;
     }
 }

@@ -31,6 +31,42 @@
                 <source>Description</source>
                 <target>Описание</target>
             </trans-unit>
+            <trans-unit id="Tags">
+                <source>Tags</source>
+                <target>Теги</target>
+            </trans-unit>
+            <trans-unit id="Tag">
+                <source>Tag</source>
+                <target>Тег</target>
+            </trans-unit>
+
+            <trans-unit id="Product List">
+                <source>Product List</source>
+                <target>Список товаров</target>
+            </trans-unit>
+
+            <trans-unit id="Products">
+                <source>Products</source>
+                <target>Товары</target>
+            </trans-unit>
+            <trans-unit id="Product">
+                <source>Product</source>
+                <target>Товар</target>
+            </trans-unit>
+
+            <trans-unit id="Pictures">
+                <source>Pictures</source>
+                <target>Картинки</target>
+            </trans-unit>
+            <trans-unit id="Picture">
+                <source>Picture</source>
+                <target>Картинка</target>
+            </trans-unit>
+
+            <trans-unit id="File">
+                <source>File</source>
+                <target>Картинка</target>
+            </trans-unit>
 
         </body>
     </file>

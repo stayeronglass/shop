@@ -75,6 +75,9 @@ swiftmailer:
 
 stof_doctrine_extensions:
     default_locale: en_US
+    uploadable:
+        default_file_path: %kernel.root_dir%/../web/uploads
+
     orm:
         default:
             tree: true

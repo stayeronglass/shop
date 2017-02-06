@@ -15,12 +15,64 @@ use Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager;
 class ProductAdmin extends AbstractAdmin
 {
 
+    private $container = null;
+
+    public function __construct($code, $class, $baseControllerName, $container)
+    {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->container = $container;
+    }
+
+    /**
+     * @param $object \ShopBundle\Entity\Product
+     */
+    public function manadgeUploads($object){
+
+        $filedata = $this->getForm()->get('pictures')->getData();
+
+        $uploadableManager = $this->container->get('stof_doctrine_extensions.uploadable.manager');
+        $file = new File();
+
+        $uploadableManager->markEntityToUpload($file, $filedata);
+        $object->addPicture($file);
+    }
+
+
+    public function preUpdate($object){
+        $this->manadgeUploads($object);
+    }
+
+    public function prePersist($object)
+    {
+        $this->manadgeUploads($object);
+    }
+
+    /**
+     * @param FormMapper $formMapper
+     */
+    protected function configureFormFields(FormMapper $formMapper)
+    {
+        $formMapper
+            ->add('name')
+            ->add('description' , CKEditorType::class, [
+            ])
+            ->add('tags')
+            ->add('pictures', 'sonata_type_collection', [
+                'required'   => false,
+            ],
+            [
+                'edit' => 'inline',
+                'inline' => 'table',
+                'sortable' => 'position',
+                'admin_code' => 'shop.admin.file',
+            ])
+        ;
+    }
+
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection
             ->remove('delete')
-            ->add('step1', $this->getRouterIdParameter().'/step1')
-            ->add('step2', $this->getRouterIdParameter().'/step2')
         ;
     }
 
@@ -76,24 +128,18 @@ class ProductAdmin extends AbstractAdmin
                 'actions'  => array(
                     'show' => array(),
                     'edit' => array(),
+                    /*
+                    'photo' => array(
+                        'template' => 'ShopBundle:admin:product/list__action_photo.html.twig'
+                    )
+                    */
                 )
             ))
 
         ;
     }
 
-    /**
-     * @param FormMapper $formMapper
-     */
-    protected function configureFormFields(FormMapper $formMapper)
-    {
-        $formMapper
-            ->add('name')
-            ->add('description' , CKEditorType::class, [
-            ])
-            ->add('tags')
-        ;
-    }
+
 
     /**
      * @param ShowMapper $showMapper

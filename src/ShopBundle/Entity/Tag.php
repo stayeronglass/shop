@@ -61,10 +61,16 @@ class Tag
 
     /**
      * @ORM\OneToMany(targetEntity="Tag", mappedBy="parent")
-     * @ORM\OrderBy({"lft" = "ASC"})
+     * @ORM\OrderBy({"left" = "ASC"})
      */
     private $children;
 
+
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="ShopBundle\Entity\Product", mappedBy="tags")
+     */
+    private $products;
 
     /**
      * Constructor
@@ -290,5 +296,39 @@ class Tag
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * Add product
+     *
+     * @param \ShopBundle\Entity\Product $product
+     *
+     * @return Tag
+     */
+    public function addProduct(\ShopBundle\Entity\Product $product)
+    {
+        $this->products[] = $product;
+
+        return $this;
+    }
+
+    /**
+     * Remove product
+     *
+     * @param \ShopBundle\Entity\Product $product
+     */
+    public function removeProduct(\ShopBundle\Entity\Product $product)
+    {
+        $this->products->removeElement($product);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProducts()
+    {
+        return $this->products;
     }
 }

@@ -4,14 +4,18 @@ services:
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
     shop.admin.product:
         class: ShopBundle\Admin\ProductAdmin
-        arguments: [~, ShopBundle\Entity\Product, ShopBundle:ProductAdmin]
+        arguments: [~, ShopBundle\Entity\Product, ShopBundle:ProductAdmin, '@service_container']
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: Product }
-        calls:
-            - [ setTemplate, [edit, admin/product/edit.html.twig]]
 
     shop.admin.tag:
         class: ShopBundle\Admin\TagAdmin
         arguments: [~, ShopBundle\Entity\Tag, ShopBundle:TagAdmin]
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: Tag }
+
+    shop.admin.file:
+        class: ShopBundle\Admin\FileAdmin
+        arguments: [~, ShopBundle\Entity\File, ShopBundle:FileAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: File }
