@@ -46,7 +46,7 @@ class File
     private $size;
     
     /**
-    * @ORM\ManyToOne(targetEntity="ShopBundle\Entity\Product", inversedBy="pictures")
+    * @ORM\ManyToOne(targetEntity="ShopBundle\Entity\Product", inversedBy="pictures", cascade={"persist"})
     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
     */
     private $product;

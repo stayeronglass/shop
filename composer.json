@@ -32,7 +32,8 @@
         "sonata-project/admin-bundle": "^3.10",
         "knplabs/knp-menu-bundle": "^2.1",
         "egeloen/ckeditor-bundle": "^4.0",
-        "sonata-project/formatter-bundle": "^3.1"
+        "sonata-project/formatter-bundle": "^3.1",
+        "oneup/uploader-bundle": "^1.7"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

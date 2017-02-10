@@ -28,13 +28,21 @@ class ProductAdmin extends AbstractAdmin
      */
     public function manadgeUploads($object){
 
-        $filedata = $this->getForm()->get('pictures')->getData();
-
         $uploadableManager = $this->container->get('stof_doctrine_extensions.uploadable.manager');
-        $file = new File();
+        $pics = $object->getPictures();
+        foreach ($pics as $pic) {
+            $pic->setProduct($object);
+        }
+        dump($pics);
+        exit;
+        $i = 0;
+        foreach ( $this->getRequest()->files->all() as $file):
 
-        $uploadableManager->markEntityToUpload($file, $filedata);
-        $object->addPicture($file);
+            $uploadableManager->markEntityToUpload($pics[$i], $file['pictures'][1]['file']);
+
+            $i++;
+        endforeach;
+
     }
 
 
@@ -61,9 +69,9 @@ class ProductAdmin extends AbstractAdmin
                 'required'   => false,
             ],
             [
-                'edit' => 'inline',
-                'inline' => 'table',
-                'sortable' => 'position',
+                'edit'       => 'inline',
+                'inline'     => 'table',
+                'sortable'   => 'position',
                 'admin_code' => 'shop.admin.file',
             ])
         ;

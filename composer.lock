@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3129ad7b92b5863dcbc574c8968c9ee4",
-    "content-hash": "e9b094df3ce895d33a49c607e78147e3",
+    "hash": "9eee4066dc9fe907914223cf226ffd6d",
+    "content-hash": "10a7bf2e5f5163e1b9773e9d356aec41",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -49,16 +49,16 @@
         },
         {
             "name": "cocur/slugify",
-            "version": "v2.3",
+            "version": "v2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cocur/slugify.git",
-                "reference": "57a00e06a382928e350cc7bbb13b19f1b8f4e73a"
+                "reference": "f11f22d4e60c408187c3efd8ac201c022a93cc3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cocur/slugify/zipball/57a00e06a382928e350cc7bbb13b19f1b8f4e73a",
-                "reference": "57a00e06a382928e350cc7bbb13b19f1b8f4e73a",
+                "url": "https://api.github.com/repos/cocur/slugify/zipball/f11f22d4e60c408187c3efd8ac201c022a93cc3f",
+                "reference": "f11f22d4e60c408187c3efd8ac201c022a93cc3f",
                 "shasum": ""
             },
             "require": {
@@ -109,7 +109,7 @@
                 "slug",
                 "slugify"
             ],
-            "time": "2016-08-09 20:10:17"
+            "time": "2017-02-09 19:27:52"
         },
         {
             "name": "doctrine/annotations",
@@ -390,16 +390,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.5.11",
+            "version": "v2.5.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "1b1effbddbdc0f40d1c8f849f44bcddac4f52a48"
+                "reference": "7b9e911f9d8b30d43b96853dab26898c710d8f44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/1b1effbddbdc0f40d1c8f849f44bcddac4f52a48",
-                "reference": "1b1effbddbdc0f40d1c8f849f44bcddac4f52a48",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/7b9e911f9d8b30d43b96853dab26898c710d8f44",
+                "reference": "7b9e911f9d8b30d43b96853dab26898c710d8f44",
                 "shasum": ""
             },
             "require": {
@@ -457,7 +457,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2017-02-04 21:20:13"
+            "time": "2017-02-08 12:53:47"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -1131,12 +1131,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "a314d4aef3c3a34742bb6ae99065f27e6e49e000"
+                "reference": "6a12083d0f6b53ca312021b15277d92be571cbe6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/a314d4aef3c3a34742bb6ae99065f27e6e49e000",
-                "reference": "a314d4aef3c3a34742bb6ae99065f27e6e49e000",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/6a12083d0f6b53ca312021b15277d92be571cbe6",
+                "reference": "6a12083d0f6b53ca312021b15277d92be571cbe6",
                 "shasum": ""
             },
             "require": {
@@ -1200,7 +1200,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2017-02-02 14:13:19"
+            "time": "2017-02-08 16:08:46"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -2017,6 +2017,75 @@
             "time": "2015-08-09 04:28:19"
         },
         {
+            "name": "oneup/uploader-bundle",
+            "version": "1.7.5",
+            "target-dir": "Oneup/UploaderBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/1up-lab/OneupUploaderBundle.git",
+                "reference": "d9413ed05dda52578ba5e63af60f1be8965f482c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/1up-lab/OneupUploaderBundle/zipball/d9413ed05dda52578ba5e63af60f1be8965f482c",
+                "reference": "d9413ed05dda52578ba5e63af60f1be8965f482c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4",
+                "symfony/finder": "^2.4.0|~3.0",
+                "symfony/framework-bundle": "^2.4.0|~3.0"
+            },
+            "require-dev": {
+                "amazonwebservices/aws-sdk-for-php": "1.5.*",
+                "knplabs/gaufrette": "0.2.*@dev",
+                "oneup/flysystem-bundle": "^1.2",
+                "phpunit/phpunit": "~4.4",
+                "sensio/framework-extra-bundle": "2.*|~3.0",
+                "symfony/browser-kit": "2.*|~3.0",
+                "symfony/class-loader": "2.*|~3.0",
+                "symfony/security-bundle": "2.*|~3.0"
+            },
+            "suggest": {
+                "knplabs/knp-gaufrette-bundle": "0.1.*",
+                "oneup/flysystem-bundle": "^1.2"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Oneup\\UploaderBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jim Schmid",
+                    "email": "js@1up.io",
+                    "homepage": "http://1up.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Handles multi file uploads in Symfony2. Features included: Chunked upload, Orphans management, Gaufrette support.",
+            "homepage": "http://1up.io",
+            "keywords": [
+                "FancyUpload",
+                "FineUploader",
+                "MooUpload",
+                "Uploadify",
+                "YUI3 Uploader",
+                "blueimp",
+                "dropzone",
+                "fileupload",
+                "jQuery File Uploader",
+                "plupload",
+                "upload"
+            ],
+            "time": "2017-01-23 12:57:22"
+        },
+        {
             "name": "paragonie/random_compat",
             "version": "v2.0.4",
             "source": {
@@ -2711,16 +2780,16 @@
         },
         {
             "name": "sonata-project/exporter",
-            "version": "1.7.0",
+            "version": "1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/exporter.git",
-                "reference": "3be6e971533bf2cbb24803e2ccb06c6e3046d5d2"
+                "reference": "8ee7c0e804dc5e162187d8ed440d260adb3f1bce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/3be6e971533bf2cbb24803e2ccb06c6e3046d5d2",
-                "reference": "3be6e971533bf2cbb24803e2ccb06c6e3046d5d2",
+                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/8ee7c0e804dc5e162187d8ed440d260adb3f1bce",
+                "reference": "8ee7c0e804dc5e162187d8ed440d260adb3f1bce",
                 "shasum": ""
             },
             "require": {
@@ -2776,7 +2845,7 @@
                 "export",
                 "xls"
             ],
-            "time": "2016-08-17 08:25:58"
+            "time": "2017-02-09 16:39:40"
         },
         {
             "name": "sonata-project/formatter-bundle",
@@ -3958,22 +4027,23 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v3.2.2",
+            "version": "v3.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "d32e4062c3a3dfb95709d2ca6dd89a327ae51c3b"
+                "reference": "996374975357b569ea319ec1c98c5ca0f7dda610"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/d32e4062c3a3dfb95709d2ca6dd89a327ae51c3b",
-                "reference": "d32e4062c3a3dfb95709d2ca6dd89a327ae51c3b",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/996374975357b569ea319ec1c98c5ca0f7dda610",
+                "reference": "996374975357b569ea319ec1c98c5ca0f7dda610",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "suggest": {
+                "ext-zip": "Zip support is required when using bin/simple-phpunit",
                 "symfony/debug": "For tracking deprecated interfaces usages at runtime with DebugClassLoader"
             },
             "bin": [
@@ -4012,7 +4082,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2017-01-06 17:19:17"
+            "time": "2017-01-21 17:06:35"
         }
     ],
     "aliases": [],
