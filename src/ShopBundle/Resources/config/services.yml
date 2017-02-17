@@ -1,5 +1,5 @@
 services:
- acme_hello.upload_listener:
+    acme_hello.upload_listener:
         class: ShopBundle\EventListener\UploadListener
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
