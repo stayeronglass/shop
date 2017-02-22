@@ -19,6 +19,10 @@ class UploadListener
 
     public function onUpload(PostPersistEvent $event)
     {
+        /*
+        $request = $event->getRequest();
+        $gallery = $request->get('gallery');
+       */
         $response = $event->getResponse();
         $response['success'] = true;
 

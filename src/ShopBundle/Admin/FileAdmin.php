@@ -2,6 +2,7 @@
 
 namespace ShopBundle\Admin;
 
+use ShopBundle\Form\Type\Multipleupload;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -56,11 +57,7 @@ class FileAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('file', 'file', [
-                'required'   => false,
-                'data_class' => null,
-                'mapped'     => false,
-            ])
+            ->add('file', Multipleupload::class, [])
         ;
     }
 

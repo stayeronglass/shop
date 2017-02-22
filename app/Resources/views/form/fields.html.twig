@@ -1,0 +1,19 @@
+{# app/Resources/views/form/fields.html.twig #}
+{% block multipleupload_widget %}
+
+    <script type="text/javascript" src="{{ asset('bundles/shop/js/jquery.ui.widget.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/shop/js/jquery.iframe-transport.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/shop/js/jquery.fileupload.js') }}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            debugger;
+            $('#fileupload').fileupload({});
+        });
+    </script>
+
+
+    <input id="fileupload" type="file" name="files[]" data-url="{{ oneup_uploader_endpoint('gallery') }}" multiple />
+
+{% endblock %}
