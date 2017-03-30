@@ -66,12 +66,15 @@ class ProductAdmin extends AbstractAdmin
             ->add('description' , CKEditorType::class, [
             ])
             ->add('tags')
-            ->add('pictures', MultipleuploadType::class, [
+            ->add('pictures', 'sonata_type_collection', [
                 'required'   => false,
             ],
-            [
-
-            ])
+                [
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'position',
+                    'admin_code' => 'shop.admin.file',
+                ])
         ;
     }
 

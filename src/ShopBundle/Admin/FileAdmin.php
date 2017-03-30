@@ -2,12 +2,14 @@
 
 namespace ShopBundle\Admin;
 
+use ShopBundle\Form\Type\LinkuploadType;
 use ShopBundle\Form\Type\Multipleupload;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class FileAdmin extends AbstractAdmin
 {
@@ -57,7 +59,9 @@ class FileAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('file', Multipleupload::class, [])
+            ->add('file', TextType::class, [
+                'mapped' => false
+            ])
         ;
     }
 
