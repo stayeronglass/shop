@@ -14,6 +14,10 @@ class LinkuploadType extends AbstractType
             'required'   => false,
             'data_class' => null,
             'mapped'     => false,
+            'attr' => [
+                'placeholder' => 'Скопипастить сюда ссылку на фотку',
+                'class' => 'link',
+            ]
         ]);
     }
 

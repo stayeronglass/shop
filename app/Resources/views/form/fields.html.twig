@@ -19,5 +19,15 @@
 {% endblock %}
 
 {% block linkupload_widget %}
-    <input type="text" name="links[]"  />
+    {{ block('form_widget_simple') }}
+
+    <script type="text/javascript">
+        $("#links").bind('paste', function(e) {
+            var self = this;
+            setTimeout(function(e) {
+                alert($(self).val());
+            }, 0);
+        });
+    </script>
+
 {% endblock %}

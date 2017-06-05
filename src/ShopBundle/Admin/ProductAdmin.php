@@ -4,6 +4,7 @@ namespace ShopBundle\Admin;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use ShopBundle\Entity\File;
+use ShopBundle\Form\Type\LinkuploadType;
 use ShopBundle\Form\Type\MultipleuploadType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -34,8 +35,6 @@ class ProductAdmin extends AbstractAdmin
         foreach ($pics as $pic) {
             $pic->setProduct($object);
         }
-        dump($pics);
-        exit;
         $i = 0;
         foreach ( $this->getRequest()->files->all() as $file):
 
@@ -66,15 +65,10 @@ class ProductAdmin extends AbstractAdmin
             ->add('description' , CKEditorType::class, [
             ])
             ->add('tags')
-            ->add('pictures', 'sonata_type_collection', [
-                'required'   => false,
-            ],
-                [
-                    'edit' => 'inline',
-                    'inline' => 'table',
-                    'sortable' => 'position',
-                    'admin_code' => 'shop.admin.file',
-                ])
+            ->add('foto' , LinkuploadType::class, [
+
+            ]);
+
         ;
     }
 
