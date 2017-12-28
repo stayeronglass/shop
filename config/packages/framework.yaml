@@ -3,20 +3,15 @@ framework:
     #default_locale: en
     #csrf_protection: ~
     #http_method_override: true
-    #trusted_hosts: ~
-    # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
-    #session:
-    #    # The native PHP session handler will be used
-    #    handler_id: ~
+
+    # uncomment this entire section to enable sessions
+    session:
+        # With this config, PHP's native session handling is used
+        handler_id: ~
+
+    templating:
+        engines: ['twig']
     #esi: ~
     #fragments: ~
     php_errors:
         log: true
-    templating:
-        engines: ['twig']
-    session:
-        # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
-        handler_id: session.handler.native_file
-        save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
-
-    translator: { fallbacks: ["%locale%"] }
