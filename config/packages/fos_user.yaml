@@ -1,7 +1,0 @@
-fos_user:
-    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
-    user_class: AppBundle\Entity\User
-    firewall_name: main
-    from_email:
-        address: "111"
-        sender_name: "222"
