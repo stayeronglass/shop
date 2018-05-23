@@ -1,9 +1,10 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: 'en'
+    locale: 'ru'
 
 services:
+
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
@@ -26,3 +27,25 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+
+    admin.material:
+        class: App\Admin\MaterialAdmin
+        arguments: [~, App\Entity\Material, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Material }
+        public: true
+
+    admin.manufacturer:
+        class: App\Admin\ManufacturerAdmin
+        arguments: [~, App\Entity\Manufacturer, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Manufacturer }
+        public: true
+
+    admin.category:
+        class: App\Admin\CategoryAdmin
+        arguments: [~, App\Entity\Category, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Category }
+        public: true

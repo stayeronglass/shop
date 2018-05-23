@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+
+            <trans-unit id="default">
+                <source>default</source>
+                <target>Умолчание</target>
+            </trans-unit>
+            <trans-unit id="Name">
+                <source>Name</source>
+                <target>Название</target>
+            </trans-unit>
+            <trans-unit id="Category List">
+                <source>Category List</source>
+                <target>Список категорий</target>
+            </trans-unit>
+            <trans-unit id="Material">
+                <source>Material</source>
+                <target>Материалы</target>
+            </trans-unit>
+            <trans-unit id="Manufacturer">
+                <source>Manufacturer</source>
+                <target>Производитель</target>
+            </trans-unit>
+            <trans-unit id="Category">
+                <source>Category</source>
+                <target>Категория</target>
+            </trans-unit>
+            <trans-unit id="toggle_navigation">
+                <source>toggle_navigation</source>
+                <target>Toggle Navigation</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

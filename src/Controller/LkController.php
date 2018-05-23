@@ -5,15 +5,15 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class CategoryController extends Controller
+class LkController extends Controller
 {
     /**
-     * @Route("/category", name="category")
+     * @Route("/lk", name="lk")
      */
     public function index()
     {
-        return $this->render('category/index.html.twig', [
-            'controller_name' => 'CategoryController',
+        return $this->render('lk/index.html.twig', [
+            'controller_name' => 'LkController',
         ]);
     }
 }
