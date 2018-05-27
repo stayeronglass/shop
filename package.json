@@ -1,13 +1,30 @@
 {
-    "devDependencies": {
-        "@symfony/webpack-encore": "^0.17.0"
-    },
-    "license": "UNLICENSED",
-    "private": true,
-    "scripts": {
-        "dev-server": "encore dev-server",
-        "dev": "encore dev",
-        "watch": "encore dev --watch",
-        "build": "encore production"
-    }
+  "name": "shop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@symfony/webpack-encore": "^0.20.1",
+    "webpack-notifier": "^1.6.0"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stayeronglass/shop.git"
+  },
+  "keywords": [
+    "shop"
+  ],
+  "author": "stayeronglass",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stayeronglass/shop/issues"
+  },
+  "homepage": "https://github.com/stayeronglass/shop#readme"
 }
