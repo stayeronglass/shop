@@ -16,5 +16,4 @@
 /public/build/
 ###< symfony/webpack-encore-pack ###
 .gitignore
-.idea
 .idea/
