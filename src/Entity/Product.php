@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
@@ -12,7 +13,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  */
 class Product
 {
-    use TimestampableEntity;
+    use TimestampableEntity, SoftDeleteableEntity;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -35,6 +36,7 @@ class Product
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $categories;
+
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
@@ -45,6 +47,7 @@ class Product
      * @ORM\JoinColumn(name="manufacturer_id", referencedColumnName="id")
      */
     private $manufacturers;
+
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
@@ -55,13 +58,14 @@ class Product
      * @ORM\JoinColumn(name="material_id", referencedColumnName="id")
      */
     private $material;
+
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $material_id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Image", inversedBy="products")
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="products", cascade={"persist"})
      */
     private $images;
 

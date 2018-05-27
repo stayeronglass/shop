@@ -26,9 +26,12 @@ class Image
     private $name;
 
     /**
-    * @ORM\ManyToMany(targetEntity="App\Entity\Product", mappedBy="images")
+    * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="images")
+    * @ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="CASCADE")
     */
     private $products;
+
+    private $product_id;
 
     /**
      * @ORM\Column(type="string", length=3)
