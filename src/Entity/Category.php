@@ -15,6 +15,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class Category
 {
     use TimestampableEntity, NestedSetEntity;
+	
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
