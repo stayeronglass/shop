@@ -48,9 +48,10 @@ class Category
 
     /**
      * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
-     * @ORM\OrderBy({"lft" = "ASC"})
+     * @ORM\OrderBy({"left" = "ASC"})
      */
     private $children;
+
 
     public function __construct()
     {
@@ -71,6 +72,18 @@ class Category
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
@@ -149,23 +162,9 @@ class Category
         return $this;
     }
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-
 
     public function __toString()
     {
-        return (string) $this->getName();
+        return (string) $this->name;
     }
-
 }
