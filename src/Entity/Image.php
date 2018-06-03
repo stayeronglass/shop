@@ -31,17 +31,15 @@ class Image
     */
     private $products;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
     private $product_id;
 
     /**
      * @ORM\Column(type="string", length=3)
      */
     private $ext;
-
-    public function __construct()
-    {
-        $this->products = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -60,6 +58,18 @@ class Image
         return $this;
     }
 
+    public function getProductId(): ?int
+    {
+        return $this->product_id;
+    }
+
+    public function setProductId(?int $product_id): self
+    {
+        $this->product_id = $product_id;
+
+        return $this;
+    }
+
     public function getExt(): ?string
     {
         return $this->ext;
@@ -72,33 +82,17 @@ class Image
         return $this;
     }
 
-    /**
-     * @return Collection|Product[]
-     */
-    public function getProducts(): Collection
+    public function getProducts(): ?Product
     {
         return $this->products;
     }
 
-    public function addProduct(Product $product): self
+    public function setProducts(?Product $products): self
     {
-        if (!$this->products->contains($product)) {
-            $this->products[] = $product;
-            $product->addImage($this);
-        }
+        $this->products = $products;
 
         return $this;
     }
 
-    public function removeProduct(Product $product): self
-    {
-        if ($this->products->contains($product)) {
-            $this->products->removeElement($product);
-            $product->removeImage($this);
-        }
-
-        return $this;
-    }
-
-    
+       
 }

@@ -2,6 +2,8 @@
 
 namespace App\Command;
 
+use App\Entity\Image;
+use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -37,6 +39,80 @@ class MinifanImportCommand extends ContainerAwareCommand
         ;
     }
 
+    private function productsOnPage($url){
+        $res = $this->client->request('GET', $url);
+        $body = (string) $res->getBody();
+        $products = [];
+        $matches = '';
+        preg_match_all('#<a  href=\'/product/(.*)\'>#sU', $body,$matches );
+
+        foreach ($matches[1] as $match):
+            $products[] = "http://www.miniaturesfan.ru/product/$match/";
+        endforeach;
+
+        return $products;
+    }
+
+    private function Pages($url){
+        $res     = $this->client->request('GET', $url);
+        $body    = (string) $res->getBody();
+        $matches = '';
+        $pages = [$url];
+        preg_match_all('#<a class=no_underline href\="(.*)">#U', $body, $matches);
+
+        foreach ($matches[1] as $match ):
+            if (preg_match('#all#', $match)) continue;
+            $pages[] = "http://www.miniaturesfan.ru$match";
+        endforeach;
+
+        $pages = array_unique($pages);
+
+        return $pages;
+    }
+
+    private function parseProduct($url){
+        $res = $this->client->request('GET', $url);
+        $body = $res->getBody();
+
+        $product = new Product();
+        $matches = '';
+        preg_match('#<h1>(.*)</h1>#',$body, $matches);
+
+        $title = trim($matches[1]);
+        $product->setTitle($title);
+
+        preg_match('#<div class="cpt_product_description"><div>(.*)</div></div>#s',$body, $matches);
+        $desc = $matches[1];
+        $product->setDescription($desc);
+
+        preg_match('#<span class="totalPrice">(.*) руб.</span>#s',$body, $matches);
+        $price = (int) $matches[1];
+        $product->setPrice($price);
+
+        $images = [];
+        preg_match_all("#'.*/products_pictures/.*enl.*\.jpg'#", $body, $images);
+
+        foreach ($images[0] as $image):
+            /*
+            $image = trim($image, "'");
+            $img = file_get_contents("http://www.miniaturesfan.ru$image");
+            */
+            $i = new Image();
+            $i->setName(md5(rand()));
+            $i->setExt('jpg');
+            $product->addImage($i);
+
+            //$im = imagecreatefromstring($img);
+            //exit('123');
+
+        endforeach;
+
+        if (preg_match('#Нет в наличии #', $body)) $product->setOutOfStock(true);
+
+        return $product;
+
+    }
+
 
     /**
      * @param InputInterface $input
@@ -53,39 +129,16 @@ class MinifanImportCommand extends ContainerAwareCommand
             $io->note(sprintf('You passed an argument: %s', $arg1));
         }
 
+        $url = 'http://www.miniaturesfan.ru/category/warhammer40k-chaos-daemons/';
 
+        foreach ($this->Pages($url) as $page) {
+            foreach ($this->productsOnPage($page) as $product) {
+                $this->em->persist($this->parseProduct($product));
+                break;
+            }
+            break;
+        }
 
-    }
-
-
-    private function parseCategory($url)
-    {
-        do {
-            foreach ($this->getProducts($url) as $product):
-                $this->parseProduct($product);
-            endforeach;
-
-            $url = $this->nextPage();
-        } while (!empty($url));
-    }
-
-
-    /**
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
-    private function parseProduct($url)
-    {
-        $res = $this->client->request('GET', 'http://www.miniaturesfan.ru/product/ardboys/');
-        $body = $res->getBody();
-
-        $matches = '';
-        preg_match('#<h1>(.*)</h1>#',$body, $matches);
-        preg_match('#<div class="cpt_product_description"><div>(.*)</div></div>#s',$body, $matches);
-
-
-        preg_match_all("#'.*/products_pictures/.*enl.*\.jpg'#", $body, $matches);
-        var_dump($matches);
-        exit('111');
-
+        $this->em->flush();
     }
 }

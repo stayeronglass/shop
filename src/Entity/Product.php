@@ -74,6 +74,13 @@ class Product
      */
     private $description;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $outOfStock = false;
+
+
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -156,6 +163,18 @@ class Product
         return $this;
     }
 
+    public function getOutOfStock(): ?bool
+    {
+        return $this->outOfStock;
+    }
+
+    public function setOutOfStock(bool $outOfStock): self
+    {
+        $this->outOfStock = $outOfStock;
+
+        return $this;
+    }
+
     public function getCategories(): ?Category
     {
         return $this->categories;
@@ -204,6 +223,7 @@ class Product
     {
         if (!$this->images->contains($image)) {
             $this->images[] = $image;
+            $image->setProducts($this);
         }
 
         return $this;
@@ -213,10 +233,15 @@ class Product
     {
         if ($this->images->contains($image)) {
             $this->images->removeElement($image);
+            // set the owning side to null (unless already changed)
+            if ($image->getProducts() === $this) {
+                $image->setProducts(null);
+            }
         }
 
         return $this;
     }
+
 
 
 }
