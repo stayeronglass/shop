@@ -97,10 +97,14 @@ class MinifanImportCommand extends ContainerAwareCommand
             $image = trim($image, "'");
             $img = file_get_contents("http://www.miniaturesfan.ru$image");
             */
+            $filename = md5(rand());
             $i = new Image();
-            $i->setName(md5(rand()));
+            $i->setName($filename);
             $i->setExt('jpg');
             $product->addImage($i);
+
+            $dirname = 'upload/' . $filename[0] . '/' . $filename[1];
+            if(!file_exists(dirname($dirname))) mkdir($dirname, 0777, true);
 
             //$im = imagecreatefromstring($img);
             //exit('123');
