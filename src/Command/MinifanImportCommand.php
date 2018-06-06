@@ -103,8 +103,8 @@ class MinifanImportCommand extends ContainerAwareCommand
             $i->setExt('jpg');
             $product->addImage($i);
 
-            $dirname = 'upload/' . $filename[0] . '/' . $filename[1];
-            if(!file_exists($dirname)) mkdir($dirname, 0777, true);
+            $dirname = 'upload' . DIRECTORY_SEPARATOR . $filename[0] . DIRECTORY_SEPARATOR . $filename[1];
+            if(!file_exists($dirname)) mkdir($dirname, 0755, true);
 
             //$im = imagecreatefromstring($img);
             //exit('123');
