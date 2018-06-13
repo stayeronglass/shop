@@ -1,20 +1,326 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}Hello!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <!-- *** SLIDER ***-->
+    <div id="slider" class="owl-carousel owl-theme">
+        <div class="item"><a href="#"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/slide1.jpg" alt="" class="img-fluid"></a></div>
+        <div class="item"><a href="#"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/slide2.jpg" alt="" class="img-fluid"></a></div>
+        <div class="item"><a href="#"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/slide3.jpg" alt="" class="img-fluid"></a></div>
+        <div class="item"><a href="#"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/slide4.jpg" alt="" class="img-fluid"></a></div>
+        <div class="item"><a href="#"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/slide5.jpg" alt="" class="img-fluid"></a></div>
+        <div class="item"><a href="#"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/slide6.jpg" alt="" class="img-fluid"></a></div>
+    </div>
+    <!-- /#slider-->
+    <!-- *** SLIDER END ***-->
+    <div id="all">
+        <div id="content">
+            <div class="container">
+                <!-- *** ADVANTAGES ***-->
+                <div id="advantages">
+                    <div class="box text-center">
+                        <h3 class="text-uppercase">About Minimal</h3>
+                        <p>Minimal contains <strong>25 beautiful HTML pages</strong> and is built with strong attention to detail.</p>
+                        <div class="same-height-row row">
+                            <div class="col-md-3 col-6 justify-content-md-center align-items-md-center">
+                                <div class="box no-border d-flex justify-content-center align-items-center">
+                                    <div class="icon"><i class="fa fa-heart-o"></i></div>
+                                    <h4><a href="text.html">Satisfied customers</a></h4>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="box no-border d-flex justify-content-center align-items-center">
+                                    <div class="icon"><i class="fa fa-tags"></i></div>
+                                    <h4><a href="text.html">Best prices</a></h4>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="box no-border d-flex justify-content-center align-items-center">
+                                    <div class="icon"><i class="fa fa-send-o"></i></div>
+                                    <h4><a href="faq.html">Next day delivery</a></h4>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="box no-border d-flex justify-content-center align-items-center">
+                                    <div class="icon"><i class="fa fa-refresh"></i></div>
+                                    <h4><a href="contact.html">Free returns for 3 months</a></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /#advantages-->
+                <!-- *** ADVANTAGES END ***-->
+                <div class="box text-center">
+                    <h3 class="text-uppercase">New summer arrivals</h3>
+                    <h4 class="text-muted"><span class="accent">Free shipping</span> on all</h4>
+                </div>
+                <div class="row products">
+                    <div class="col-md-3 col-sm-4">
+                        <div class="product">
+                            <div class="image"><a href="detail.html"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/product1.jpg" alt="" class="img-fluid image1"></a>
+                                <div class="quick-view-button"><a href="#" data-toggle="modal" data-target="#product-quick-view-modal" class="btn btn-outline-white-secondary btn-sm">Quick view</a></div>
+                            </div>
+                            <!-- /.image-->
+                            <div class="text">
+                                <h3><a href="detail.html">Fur coat with very but very very long name</a></h3>
+                                <p class="price">$143.00</p>
+                            </div>
+                            <!-- /.text-->
+                        </div>
+                        <!-- /.product-->
+                    </div>
+                    <div class="col-md-3 col-sm-4">
+                        <div class="product">
+                            <div class="image"><a href="detail.html"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/product2.jpg" alt="" class="img-fluid image1"></a>
+                                <div class="quick-view-button"><a href="#" data-toggle="modal" data-target="#product-quick-view-modal" class="btn btn-outline-white-secondary btn-sm">Quick view</a></div>
+                            </div>
+                            <!-- /.image-->
+                            <div class="text">
+                                <h3><a href="detail.html">White Blouse Armani</a></h3>
+                                <p class="price">
+                                    <del>$280</del> $143.00
+                                </p>
+                            </div>
+                            <!-- /.text-->
+                            <div class="ribbon sale">
+                                <div class="theribbon">SALE</div>
+                                <div class="ribbon-background"></div>
+                            </div>
+                            <!-- /.ribbon-->
+                            <div class="ribbon new">
+                                <div class="theribbon">NEW</div>
+                                <div class="ribbon-background"></div>
+                            </div>
+                            <!-- /.ribbon-->
+                        </div>
+                        <!-- /.product-->
+                    </div>
+                    <div class="col-md-3 col-sm-4">
+                        <div class="product">
+                            <div class="image"><a href="detail.html"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/product3.jpg" alt="" class="img-fluid image1"></a>
+                                <div class="quick-view-button"><a href="#" data-toggle="modal" data-target="#product-quick-view-modal" class="btn btn-outline-white-secondary btn-sm">Quick view</a></div>
+                            </div>
+                            <!-- /.image-->
+                            <div class="text">
+                                <h3><a href="detail.html">Black Blouse Versace</a></h3>
+                                <p class="price">$143.00</p>
+                            </div>
+                            <!-- /.text-->
+                        </div>
+                        <!-- /.product-->
+                    </div>
+                    <div class="col-md-3 col-sm-4">
+                        <div class="product">
+                            <div class="image"><a href="detail.html"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/product4.jpg" alt="" class="img-fluid image1"></a>
+                                <div class="quick-view-button"><a href="#" data-toggle="modal" data-target="#product-quick-view-modal" class="btn btn-outline-white-secondary btn-sm">Quick view</a></div>
+                            </div>
+                            <!-- /.image-->
+                            <div class="text">
+                                <h3><a href="detail.html">Black Blouse Versace</a></h3>
+                                <p class="price">$143.00</p>
+                            </div>
+                            <!-- /.text-->
+                        </div>
+                        <!-- /.product-->
+                    </div>
+                    <div class="col-md-3 col-sm-4">
+                        <div class="product">
+                            <div class="image"><a href="detail.html"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/product3.jpg" alt="" class="img-fluid image1"></a>
+                                <div class="quick-view-button"><a href="#" data-toggle="modal" data-target="#product-quick-view-modal" class="btn btn-outline-white-secondary btn-sm">Quick view</a></div>
+                            </div>
+                            <!-- /.image-->
+                            <div class="text">
+                                <h3><a href="detail.html">White Blouse Armani</a></h3>
+                                <p class="price">
+                                    <del>$280</del> $143.00
+                                </p>
+                            </div>
+                            <!-- /.text-->
+                            <div class="ribbon sale">
+                                <div class="theribbon">SALE</div>
+                                <div class="ribbon-background"></div>
+                            </div>
+                            <!-- /.ribbon-->
+                            <div class="ribbon new">
+                                <div class="theribbon">NEW</div>
+                                <div class="ribbon-background"></div>
+                            </div>
+                            <!-- /.ribbon-->
+                        </div>
+                        <!-- /.product-->
+                    </div>
+                    <div class="col-md-3 col-sm-4">
+                        <div class="product">
+                            <div class="image"><a href="detail.html"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/product4.jpg" alt="" class="img-fluid image1"></a>
+                                <div class="quick-view-button"><a href="#" data-toggle="modal" data-target="#product-quick-view-modal" class="btn btn-outline-white-secondary btn-sm">Quick view</a></div>
+                            </div>
+                            <!-- /.image-->
+                            <div class="text">
+                                <h3><a href="detail.html">White Blouse Versace</a></h3>
+                                <p class="price">$143.00</p>
+                            </div>
+                            <!-- /.text-->
+                            <div class="ribbon new">
+                                <div class="theribbon">NEW</div>
+                                <div class="ribbon-background"></div>
+                            </div>
+                            <!-- /.ribbon-->
+                        </div>
+                        <!-- /.product-->
+                    </div>
+                    <div class="col-md-3 col-sm-4">
+                        <div class="product">
+                            <div class="image"><a href="detail.html"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/product2.jpg" alt="" class="img-fluid image1"></a>
+                                <div class="quick-view-button"><a href="#" data-toggle="modal" data-target="#product-quick-view-modal" class="btn btn-outline-white-secondary btn-sm">Quick view</a></div>
+                            </div>
+                            <!-- /.image-->
+                            <div class="text">
+                                <h3><a href="detail.html">White Blouse Versace</a></h3>
+                                <p class="price">$143.00</p>
+                            </div>
+                            <!-- /.text-->
+                            <div class="ribbon new">
+                                <div class="theribbon">NEW</div>
+                                <div class="ribbon-background"></div>
+                            </div>
+                            <!-- /.ribbon-->
+                        </div>
+                        <!-- /.product-->
+                    </div>
+                    <div class="col-md-3 col-sm-4">
+                        <div class="product">
+                            <div class="image"><a href="detail.html"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/product1.jpg" alt="" class="img-fluid image1"></a>
+                                <div class="quick-view-button"><a href="#" data-toggle="modal" data-target="#product-quick-view-modal" class="btn btn-outline-white-secondary btn-sm">Quick view</a></div>
+                            </div>
+                            <!-- /.image-->
+                            <div class="text">
+                                <h3><a href="detail.html">Fur coat</a></h3>
+                                <p class="price">$143.00</p>
+                            </div>
+                            <!-- /.text-->
+                        </div>
+                        <!-- /.product-->
+                    </div>
+                    <!-- /.col-md-4-->
+                    <div id="product-quick-view-modal" tabindex="-1" role="dialog" aria-hidden="false" class="modal fade">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+                                    <div class="row quick-view product-main">
+                                        <div class="col-sm-6">
+                                            <div class="quick-view-main-image"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/detailbig1.jpg" alt="" class="img-fluid"></div>
+                                            <div class="ribbon ribbon-quick-view sale">
+                                                <div class="theribbon">SALE</div>
+                                                <div class="ribbon-background"></div>
+                                            </div>
+                                            <!-- /.ribbon-->
+                                            <div class="ribbon ribbon-quick-view new">
+                                                <div class="theribbon">NEW</div>
+                                                <div class="ribbon-background"></div>
+                                            </div>
+                                            <!-- /.ribbon-->
+                                            <div class="row thumbs">
+                                                <div class="col-4"><a href="img/detailbig1.jpg" class="thumb"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/detailsquare.jpg" alt="" class="img-fluid"></a></div>
+                                                <div class="col-4"><a href="img/detailbig2.jpg" class="thumb"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/detailsquare2.jpg" alt="" class="img-fluid"></a></div>
+                                                <div class="col-4"><a href="img/detailbig3.jpg" class="thumb"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/detailsquare3.jpg" alt="" class="img-fluid"></a></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h2>White Blouse Armani</h2>
+                                            <p class="text-muted text-small text-center">White lace top, woven, has a round neck, short sleeves, has knitted lining attached</p>
+                                            <div class="box">
+                                                <form>
+                                                    <div class="sizes">
+                                                        <h3>Available sizes</h3>
+                                                        <label for="size_s"><a href="#">S</a>
+                                                            <input id="size_s" type="radio" name="size" value="s" class="size-input">
+                                                        </label>
+                                                        <label for="size_m"><a href="#">M</a>
+                                                            <input id="size_m" type="radio" name="size" value="m" class="size-input">
+                                                        </label>
+                                                        <label for="size_l"><a href="#">L</a>
+                                                            <input id="size_l" type="radio" name="size" value="l" class="size-input">
+                                                        </label>
+                                                    </div>
+                                                    <p class="price">$124.00</p>
+                                                    <p class="text-center">
+                                                        <button type="submit" class="btn btn-outline-primary"><i class="fa fa-shopping-cart"></i> Add to cart</button>
+                                                        <button type="submit" data-toggle="tooltip" data-placement="top" title="Add to wishlist" class="btn btn-outline-secondary"><i class="fa fa-heart-o"></i></button>
+                                                    </p>
+                                                </form>
+                                            </div>
+                                            <!-- /.box-->
+                                            <div class="quick-view-social">
+                                                <h4>Show it to your friends</h4>
+                                                <p><a href="#" data-animate-hover="pulse" class="external facebook"><i class="fa fa-facebook"></i></a><a href="#" data-animate-hover="pulse" class="external gplus"><i class="fa fa-google-plus"></i></a><a href="#" data-animate-hover="pulse" class="external twitter"><i class="fa fa-twitter"></i></a><a href="#" data-animate-hover="pulse" class="email"><i class="fa fa-envelope"></i></a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.modal-dialog-->
+                    </div>
+                    <!-- /.modal-->
+                </div>
+                <!-- /.products-->
+            </div>
+            <!--
+            *** PROMO BAR ***
+            _________________________________________________________
+            -->
+            <div class="bar background-image-fixed-2 no-mb color-white text-center">
+                <div class="dark-mask"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="icon icon-lg"><i class="fa fa-file-code-o"></i></div>
+                            <h1>Do you want to see more?</h1>
+                            <p class="lead">We have prepared for you 25 different HTML pages, including 2 variations of homepage.</p>
+                            <p class="text-center"><a href="index2.html" class="btn btn-outline-white-primary">See another homepage variant</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- *** PROMO BAR END ***-->
+            <div class="container">
+                <!--
+                *** BLOG HOMEPAGE ***
+                _________________________________________________________
+                -->
+                <div class="box text-center">
+                    <h3 class="text-uppercase">From our blog</h3>
+                    <p class="text-italic text-large">What's new in the world of fashion? <span class="accent">Check our blog!</span></p>
+                </div>
+                <div id="blog-homepage" class="row">
+                    <div class="col-sm-6">
+                        <div class="post">
+                            <h4><a href="post.html">Fashion now</a></h4>
+                            <p class="author-category">By <a href="#">John Slim</a> in <a href="">Fashion and style</a></p>
+                            <hr>
+                            <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+                            <p class="read-more"><a href="post.html" class="btn btn-outline-primary">Continue reading</a></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="post">
+                            <h4><a href="post.html">Who is who - example blog post</a></h4>
+                            <p class="author-category">By <a href="#">John Slim</a> in <a href="">About Minimal</a></p>
+                            <hr>
+                            <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+                            <p class="read-more"><a href="post.html" class="btn btn-outline-primary">Continue reading</a></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- /#blog-homepage-->
+                <!-- *** BLOG HOMEPAGE END ***-->
+            </div>
+        </div>
+    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'src/Controller/DefaultController.php'|file_link(0) }}">src/Controller/DefaultController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'templates/default/index.html.twig'|file_link(0) }}">templates/default/index.html.twig</a></code></li>
-    </ul>
-</div>
+
 {% endblock %}

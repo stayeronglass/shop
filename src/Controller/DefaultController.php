@@ -13,7 +13,16 @@ class DefaultController extends Controller
     public function index()
     {
         return $this->render('default/index.html.twig', [
-            'controller_name' => 'DefaultController',
+        ]);
+    }
+
+    public function header(){
+        return $this->render('default/header.html.twig', [
+        ]);
+    }
+
+    public function footer(){
+        return $this->render('default/footer.html.twig', [
         ]);
     }
 }

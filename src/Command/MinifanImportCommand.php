@@ -93,10 +93,10 @@ class MinifanImportCommand extends ContainerAwareCommand
         preg_match_all("#'.*/products_pictures/.*enl.*\.jpg'#", $body, $images);
 
         foreach ($images[0] as $image):
-            /*
+
             $image = trim($image, "'");
             $img = file_get_contents("http://www.miniaturesfan.ru$image");
-            */
+
             $filename = md5(rand());
             $i = new Image();
             $i->setName($filename);
@@ -106,9 +106,8 @@ class MinifanImportCommand extends ContainerAwareCommand
             $dirname = 'upload' . DIRECTORY_SEPARATOR . $filename[0] . DIRECTORY_SEPARATOR . $filename[1];
             if(!file_exists($dirname)) mkdir($dirname, 0755, true);
 
-            //$im = imagecreatefromstring($img);
-            //exit('123');
-
+            $im = imagecreatefromstring($img);
+            imagejpeg($im,$dirname . DIRECTORY_SEPARATOR . $filename . '.jpg');
         endforeach;
 
         if (preg_match('#Нет в наличии #', $body)) $product->setOutOfStock(true);
