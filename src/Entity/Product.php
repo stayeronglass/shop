@@ -79,6 +79,17 @@ class Product
      */
     private $outOfStock = false;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $new = false;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $banner = false;
+
+
 
 
     public function __construct()
@@ -171,6 +182,30 @@ class Product
     public function setOutOfStock(bool $outOfStock): self
     {
         $this->outOfStock = $outOfStock;
+
+        return $this;
+    }
+
+    public function getNew(): ?bool
+    {
+        return $this->new;
+    }
+
+    public function setNew(bool $new): self
+    {
+        $this->new = $new;
+
+        return $this;
+    }
+
+    public function getBanner(): ?bool
+    {
+        return $this->banner;
+    }
+
+    public function setBanner(bool $banner): self
+    {
+        $this->banner = $banner;
 
         return $this;
     }

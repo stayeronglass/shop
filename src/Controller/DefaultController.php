@@ -16,6 +16,15 @@ class DefaultController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/contacts", name="contacts")
+     */
+    public function contacts()
+    {
+        return $this->render('default/contacts.html.twig', [
+        ]);
+    }
+
     public function header(){
         return $this->render('default/header.html.twig', [
         ]);

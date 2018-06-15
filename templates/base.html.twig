@@ -27,10 +27,14 @@
     <link rel="shortcut icon" href="{{ asset('/favicon.png') }}">
 </head>
 <body class="undefined">
-{{ render(controller('App\\Controller\\DefaultController:header')) }}
+
+{{ render(controller('App\\Controller\\DefaultController::header')) }}
+
     {% block body %}
     {% endblock %}
-{{ render(controller('App\\Controller\\DefaultController:footer')) }}
+
+{{ render(controller('App\\Controller\\DefaultController::footer')) }}
+
 
     {% block javascripts %}
         <script src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/vendor/jquery/jquery.min.js"></script>
