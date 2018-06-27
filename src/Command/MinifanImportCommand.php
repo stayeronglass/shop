@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Entity\Category;
 use App\Entity\Image;
 use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,14 +29,12 @@ class MinifanImportCommand extends ContainerAwareCommand
 
     }
 
-
-
     protected function configure()
     {
         $this
             ->setDescription('Import product from miniaturesfan')
-            ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
-            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
+            ->addArgument('arg1', InputArgument::REQUIRED, 'url')
+            ->addArgument('arg2', InputArgument::REQUIRED, 'category')
         ;
     }
 
@@ -47,10 +46,10 @@ class MinifanImportCommand extends ContainerAwareCommand
         preg_match_all('#<a  href=\'/product/(.*)\'>#sU', $body,$matches );
 
         foreach ($matches[1] as $match):
-            $products[] = "http://www.miniaturesfan.ru/product/$match/";
+            $products[] = "http://www.miniaturesfan.ru/product/$match";
         endforeach;
 
-        return $products;
+        return array_unique($products);
     }
 
     private function Pages($url){
@@ -103,7 +102,7 @@ class MinifanImportCommand extends ContainerAwareCommand
             $i->setExt('jpg');
             $product->addImage($i);
 
-            $dirname = 'upload' . DIRECTORY_SEPARATOR . $filename[0] . DIRECTORY_SEPARATOR . $filename[1];
+            $dirname = 'public/upload' . DIRECTORY_SEPARATOR . $filename[0] . DIRECTORY_SEPARATOR . $filename[1];
             if(!file_exists($dirname)) mkdir($dirname, 0755, true);
 
             $im = imagecreatefromstring($img);
@@ -125,23 +124,25 @@ class MinifanImportCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $io = new SymfonyStyle($input, $output);
-        $arg1 = $input->getArgument('arg1');
+        $io   = new SymfonyStyle($input, $output);
 
-        if ($arg1) {
-            $io->note(sprintf('You passed an argument: %s', $arg1));
-        }
+        $url  = $input->getArgument('arg1');
+        $arg2 = $input->getArgument('arg2');
 
-        $url = 'http://www.miniaturesfan.ru/category/warhammer40k-chaos-daemons/';
+        $category = $this->em->getRepository(Category::class)->find($arg2);
 
         foreach ($this->Pages($url) as $page) {
             foreach ($this->productsOnPage($page) as $product) {
-                $this->em->persist($this->parseProduct($product));
-                break;
+                $p = $this->parseProduct($product);
+                $p->addCategory($category);
+
+                $this->em->persist($p);
             }
-            break;
         }
 
         $this->em->flush();
-    }
+
+        $io->success('ALL DONE!');
+
+    }//protected function execute(InputInterface $input, OutputInterface $output)
 }

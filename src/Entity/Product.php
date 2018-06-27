@@ -32,15 +32,9 @@ class Product
     private $price;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * @ORM\ManyToMany(targetEntity="Category", inversedBy="products")
      */
     private $categories;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $category_id;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Manufacturer", inversedBy="products")
@@ -89,11 +83,9 @@ class Product
      */
     private $banner = false;
 
-
-
-
     public function __construct()
     {
+        $this->categories = new ArrayCollection();
         $this->images = new ArrayCollection();
     }
 
@@ -122,18 +114,6 @@ class Product
     public function setPrice(int $price): self
     {
         $this->price = $price;
-
-        return $this;
-    }
-
-    public function getCategoryId(): ?int
-    {
-        return $this->category_id;
-    }
-
-    public function setCategoryId(?int $category_id): self
-    {
-        $this->category_id = $category_id;
 
         return $this;
     }
@@ -210,14 +190,28 @@ class Product
         return $this;
     }
 
-    public function getCategories(): ?Category
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategories(): Collection
     {
         return $this->categories;
     }
 
-    public function setCategories(?Category $categories): self
+    public function addCategory(Category $category): self
     {
-        $this->categories = $categories;
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+        }
 
         return $this;
     }
@@ -276,7 +270,6 @@ class Product
 
         return $this;
     }
-
 
 
 }
