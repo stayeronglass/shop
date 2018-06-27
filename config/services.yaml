@@ -49,3 +49,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Category }
         public: true
+
+    admin.product:
+        class: App\Admin\ProductAdmin
+        arguments: [~, App\Entity\Product, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Product }
+        public: true
