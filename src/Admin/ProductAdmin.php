@@ -34,7 +34,6 @@ class ProductAdmin extends AbstractAdmin
         $formMapper->add('categories', ModelAutocompleteType::class, [
             'property' => 'name',
             'multiple' => true,
-
         ]);
 
         $formMapper->add('manufacturers', ModelAutocompleteType::class, [
