@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -17,6 +18,16 @@ class CategoryRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Category::class);
+    }
+
+    public function getMainCategories(){
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.main = :main')
+            ->setParameter('main', 1)
+            ->orderBy('p.id', 'ASC')
+            ->getQuery()
+            ->getResult(Query::HYDRATE_ARRAY);
+        ;
     }
 
 //    /**

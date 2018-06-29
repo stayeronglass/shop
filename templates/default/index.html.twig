@@ -6,12 +6,13 @@
 
     <!-- *** SLIDER ***-->
     <div id="slider" class="owl-carousel owl-theme">
-        <div class="item"><a href="#"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/slide1.jpg" alt="" class="img-fluid"></a></div>
-        <div class="item"><a href="#"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/slide2.jpg" alt="" class="img-fluid"></a></div>
-        <div class="item"><a href="#"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/slide3.jpg" alt="" class="img-fluid"></a></div>
-        <div class="item"><a href="#"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/slide4.jpg" alt="" class="img-fluid"></a></div>
-        <div class="item"><a href="#"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/slide5.jpg" alt="" class="img-fluid"></a></div>
-        <div class="item"><a href="#"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/slide6.jpg" alt="" class="img-fluid"></a></div>
+        {% for b in banner %}
+        <div class="item">
+            <a href="#">
+                {{ b.title }}
+                <img src="" alt="" class="img-fluid">
+            </a></div>
+        {% endfor %}
     </div>
     <!-- /#slider-->
     <!-- *** SLIDER END ***-->
@@ -24,64 +25,22 @@
                         <h3 class="text-uppercase">About Minimal</h3>
                         <p>Minimal contains <strong>25 beautiful HTML pages</strong> and is built with strong attention to detail.</p>
                         <div class="same-height-row row">
+                            {% for category in categories %}
                             <div class="col-md-3 col-6 justify-content-md-center align-items-md-center">
                                 <div class="box no-border d-flex justify-content-center align-items-center">
                                     <div class="icon"><i class="fa fa-heart-o"></i></div>
-                                    <h4><a href="text.html">Warhammer 40000</a></h4>
+                                    <h4><a href="#">{{ category.name }}</a></h4>
                                 </div>
                             </div>
-                            <div class="col-md-3 col-6">
-                                <div class="box no-border d-flex justify-content-center align-items-center">
-                                    <div class="icon"><i class="fa fa-tags"></i></div>
-                                    <h4><a href="text.html">Warhammer age of sigmar</a></h4>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <div class="box no-border d-flex justify-content-center align-items-center">
-                                    <div class="icon"><i class="fa fa-send-o"></i></div>
-                                    <h4><a href="faq.html">Malifaux</a></h4>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <div class="box no-border d-flex justify-content-center align-items-center">
-                                    <div class="icon"><i class="fa fa-refresh"></i></div>
-                                    <h4><a href="contact.html">Технолог</a></h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="same-height-row row">
-                            <div class="col-md-3 col-6 justify-content-md-center align-items-md-center">
-                                <div class="box no-border d-flex justify-content-center align-items-center">
-                                    <div class="icon"><i class="fa fa-heart-o"></i></div>
-                                    <h4><a href="text.html">Warhammer 40000</a></h4>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <div class="box no-border d-flex justify-content-center align-items-center">
-                                    <div class="icon"><i class="fa fa-tags"></i></div>
-                                    <h4><a href="text.html">Warhammer age of sigmar</a></h4>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <div class="box no-border d-flex justify-content-center align-items-center">
-                                    <div class="icon"><i class="fa fa-send-o"></i></div>
-                                    <h4><a href="faq.html">Malifaux</a></h4>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <div class="box no-border d-flex justify-content-center align-items-center">
-                                    <div class="icon"><i class="fa fa-refresh"></i></div>
-                                    <h4><a href="contact.html">Технолог</a></h4>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
                 <!-- /#advantages-->
                 <!-- *** ADVANTAGES END ***-->
                 <div class="box text-center">
-                    <h3 class="text-uppercase">New summer arrivals</h3>
-                    <h4 class="text-muted"><span class="accent">Free shipping</span> on all</h4>
+                    <h3 class="text-uppercase">Новые коробочки</h3>
+                    <h4 class="text-muted"><span class="accent">бесплатная доставка</span> на всё</h4>
                 </div>
                 <div class="row products">
                     <div class="col-md-3 col-sm-4">

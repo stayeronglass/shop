@@ -69,7 +69,7 @@ class Product
     private $description;
 
     /**
-     * @ORM\Column(type="boolean", nullable=false)
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $outOfStock = false;
 

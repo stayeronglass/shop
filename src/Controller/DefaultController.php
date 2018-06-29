@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
+use App\Entity\Product;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -12,7 +14,13 @@ class DefaultController extends Controller
      */
     public function index()
     {
+        $em = $this->getDoctrine()->getManager();
+        $banner = $em->getRepository(Product::class)->getSliderProducts();
+        $categories = $em->getRepository(Category::class)->getMainCategories();
+        
         return $this->render('default/index.html.twig', [
+            'banner'     => $banner,
+            'categories' => $categories,
         ]);
     }
 

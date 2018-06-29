@@ -52,11 +52,22 @@ class Category
      */
     private $children;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $main = false;
 
     public function __construct()
     {
         $this->products = new ArrayCollection();
         $this->children = new ArrayCollection();
+    }
+
+
+
+    public function __toString()
+    {
+        return (string) $this->name;
     }
 
     public function getId(): ?int
@@ -88,6 +99,18 @@ class Category
         return $this;
     }
 
+    public function getMain(): ?bool
+    {
+        return $this->main;
+    }
+
+    public function setMain(?bool $main): self
+    {
+        $this->main = $main;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Product[]
      */
@@ -100,7 +123,7 @@ class Category
     {
         if (!$this->products->contains($product)) {
             $this->products[] = $product;
-            $product->setCategories($this);
+            $product->addCategory($this);
         }
 
         return $this;
@@ -110,10 +133,7 @@ class Category
     {
         if ($this->products->contains($product)) {
             $this->products->removeElement($product);
-            // set the owning side to null (unless already changed)
-            if ($product->getCategories() === $this) {
-                $product->setCategories(null);
-            }
+            $product->removeCategory($this);
         }
 
         return $this;
@@ -160,11 +180,5 @@ class Category
         }
 
         return $this;
-    }
-
-
-    public function __toString()
-    {
-        return (string) $this->name;
     }
 }

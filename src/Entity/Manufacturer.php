@@ -102,5 +102,9 @@ class Manufacturer
     }
 
 
+    public function __toString()
+    {
+        return $this->name;
+    }
 
 }
