@@ -41,6 +41,14 @@ class Image
      */
     private $ext;
 
+
+    /**
+     * Главное изображение. Показывается первым и на всяких баннерах
+     *
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $main = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -82,6 +90,18 @@ class Image
         return $this;
     }
 
+    public function getMain(): ?bool
+    {
+        return $this->main;
+    }
+
+    public function setMain(?bool $main): self
+    {
+        $this->main = $main;
+
+        return $this;
+    }
+
     public function getProducts(): ?Product
     {
         return $this->products;
@@ -93,6 +113,7 @@ class Image
 
         return $this;
     }
+
 
        
 }

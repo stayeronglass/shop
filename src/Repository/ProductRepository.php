@@ -6,6 +6,7 @@ use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\Query\Expr;
 
 /**
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
@@ -23,6 +24,8 @@ class ProductRepository extends ServiceEntityRepository
 
     public function getSliderProducts(){
         return $this->createQueryBuilder('p')
+            ->select('p.id,p.title, i.name,i.ext')
+            ->innerJoin('p.images', 'i',Expr\Join::WITH, 'i.main = 1')
             ->andWhere('p.banner = :banner')
             ->setParameter('banner', 1)
             ->orderBy('p.id', 'ASC')

@@ -9,8 +9,7 @@
         {% for b in banner %}
         <div class="item">
             <a href="#">
-                {{ b.title }}
-                <img src="" alt="" class="img-fluid">
+                <img src="/upload/{{ b.name[:1] }}/{{ b.name[1:1] }}/{{ b.name}}.{{ b.ext}}" alt="" class="img-fluid" width="450" height="450">
             </a></div>
         {% endfor %}
     </div>
