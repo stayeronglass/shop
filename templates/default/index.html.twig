@@ -8,7 +8,7 @@
     <div id="slider" class="owl-carousel owl-theme">
         {% for b in banner %}
         <div class="item">
-            <a href="#">
+            <a href="{{ path('product_show', {'id':b.id}) }}">
                 <img src="/upload/{{ b.name[:1] }}/{{ b.name[1:1] }}/{{ b.name}}.{{ b.ext}}" alt="" class="img-fluid" width="450" height="450">
             </a></div>
         {% endfor %}
