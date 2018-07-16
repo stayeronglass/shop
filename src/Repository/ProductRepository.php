@@ -34,6 +34,17 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
 
+    public function getImages(){
+        return $this->createQueryBuilder('i')
+            ->select('i.name,i.ext')
+            ->from('App:Image', 'i')
+            ->orderBy('i.id', 'ASC')
+            ->addOrderBy("i.main desc")
+            ->getQuery()
+            ->getResult(Query::HYDRATE_ARRAY);
+        ;
+    }
+
 //    /**
 //     * @return Product[] Returns an array of Product objects
 //     */

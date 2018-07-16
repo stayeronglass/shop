@@ -3,6 +3,62 @@
 {% block title %}{{ product.title }} - купить {% endblock %}
 
 {% block body %}
-
-    тут будет товар!
+    <div id="all">
+    <div id="content">
+        <div class="container">
+            <ul class="breadcrumb justify-content-md-end justify-content-center">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active">White Blouse Armani</li>
+            </ul>
+            <div class="box text-center">
+                <div class="row">
+                    <div class="col-md-10 offset-md-1">
+                        <h1>{{ product.title }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="productMain" class="row">
+                        <div class="col-md-6">
+                            <div id="mainImage"><img src="https://demo.bootstrapious.com/minimal/2-1-0/img/detailbig2.jpg" alt="" class="img-fluid"></div>
+                            <div class="ribbon sale">
+                                <div class="theribbon">SALE</div>
+                                <div class="ribbon-background"></div>
+                            </div>
+                            <div class="ribbon new">
+                                <div class="theribbon">NEW</div>
+                                <div class="ribbon-background"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <form>
+                                <div class="sizes">
+                                    <h3>Available sizes</h3>
+                                </div>
+                                <p class="price">Цена: {{ product.price }} &#8381;</p>
+                                <p class="text-center">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</button>
+                                    <button type="submit" data-toggle="tooltip" data-placement="top" title="" class="btn btn-outline-secondary" data-original-title="Add to wishlist"><i class="fa fa-heart-o"></i></button>
+                                </p>
+                            </form>
+                            <div id="thumbs" class="row">
+                                {% for i in product.images %}
+                                    <div class="col-4">
+                                        <a href="/upload/{{ i.name[:1] }}/{{ i.name[1:1] }}/{{ i.name}}.{{ i.ext}}" class="thumb">
+                                            <img src="/upload/{{ i.name[:1] }}/{{ i.name[1:1] }}/{{ i.name}}.{{ i.ext}}" alt="" class="img-fluid">
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div id="details" class="box">
+                        <h4>{{ product.title }}</h4>
+                        {{ product.description | raw }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
