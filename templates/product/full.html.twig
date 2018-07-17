@@ -21,13 +21,14 @@
                 <div class="col-lg-12">
                     <div id="productMain" class="row">
                         <div class="col-md-6">
-                            <div id="mainImage"><img src="https://demo.bootstrapious.com/minimal/2-1-0/img/detailbig2.jpg" alt="" class="img-fluid"></div>
+                            {% set im = images[0] %}
+                            <div id="mainImage"><img src="/upload/{{ im.name[:1] }}/{{ im.name[1:1] }}/{{ im.name}}.{{ im.ext}}" alt="" class="img-fluid"></div>
                             <div class="ribbon sale">
-                                <div class="theribbon">SALE</div>
+                                <div class="theribbon">РАСПРОДАЖА</div>
                                 <div class="ribbon-background"></div>
                             </div>
                             <div class="ribbon new">
-                                <div class="theribbon">NEW</div>
+                                <div class="theribbon">НОВИНКА</div>
                                 <div class="ribbon-background"></div>
                             </div>
                         </div>
@@ -43,13 +44,15 @@
                                 </p>
                             </form>
                             <div id="thumbs" class="row">
-                                {% for i in product.images %}
-                                    <div class="col-4">
-                                        <a href="/upload/{{ i.name[:1] }}/{{ i.name[1:1] }}/{{ i.name}}.{{ i.ext}}" class="thumb">
-                                            <img src="/upload/{{ i.name[:1] }}/{{ i.name[1:1] }}/{{ i.name}}.{{ i.ext}}" alt="" class="img-fluid">
-                                        </a>
-                                    </div>
-                                {% endfor %}
+                                {% for i in images %}
+                                    {% if not loop.first %}
+                                        <div class="col-4">
+                                            <a href="/upload/{{ i.name[:1] }}/{{ i.name[1:1] }}/{{ i.name}}.{{ i.ext}}" class="thumb">
+                                                <img src="/upload/{{ i.name[:1] }}/{{ i.name[1:1] }}/{{ i.name}}.{{ i.ext}}" alt="" class="img-fluid">
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                 {% endfor %}
                             </div>
                         </div>
                     </div>

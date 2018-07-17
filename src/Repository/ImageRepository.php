@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Image;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\Query\Expr;
 
 /**
  * @method Image|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +19,18 @@ class ImageRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Image::class);
+    }
+
+    public function getTImages($product_id){
+        return $this->createQueryBuilder('i')
+            ->select('i.name, i.ext')
+            ->andWhere('i.product_id = :product_id')
+            ->addOrderBy('i.main', 'DESC')
+            ->addOrderBy('i.id', 'ASC')
+            ->setParameter('product_id', $product_id)
+            ->getQuery()
+            ->getResult(Query::HYDRATE_SCALAR);
+        ;
     }
 
 //    /**
