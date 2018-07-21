@@ -5,14 +5,17 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class BasketController extends Controller
+/**
+ * @Route("/cart")
+ */
+class CartController extends Controller
 {
     /**
-     * @Route("/basket", name="basket")
+     * @Route("/", name="cart")
      */
     public function index()
     {
-        return $this->render('basket/index.html.twig', [
+        return $this->render('cart/index.html.twig', [
             'controller_name' => 'BasketController',
         ]);
     }

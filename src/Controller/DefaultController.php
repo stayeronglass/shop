@@ -25,6 +25,15 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/category/{category}", name="category", requirements={"category"="\s+"})
+     */
+    public function category(Category $category)
+    {
+
+    }
+
+
+    /**
      * @Route("/contacts", name="contacts")
      */
     public function contacts()

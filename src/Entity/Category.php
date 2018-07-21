@@ -57,6 +57,8 @@ class Category
      */
     private $main = false;
 
+
+
     public function __construct()
     {
         $this->products = new ArrayCollection();

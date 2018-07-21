@@ -5,10 +5,15 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+
+/**
+ * @Route("/search", name="search")
+ */
+
 class SearchController extends Controller
 {
     /**
-     * @Route("/search", name="search")
+     * @Route("/", name="search")
      */
     public function search()
     {
