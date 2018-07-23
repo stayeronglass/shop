@@ -3,5 +3,22 @@
 {% block title %}Hello!{% endblock %}
 
 {% block body %}
-    111
+    <div id="content">
+        <div class="container">
+            <ul class="breadcrumb justify-content-md-start justify-content-center">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active">Frequently asked questions</li>
+            </ul>
+        </div>
+        <div class="box text-center">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <h1>{{ category.name }}</h1>
+                    <p>
+                        {{ category.description }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
