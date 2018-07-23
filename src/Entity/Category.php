@@ -29,6 +29,12 @@ class Category
     private $name;
 
     /**
+     * @Gedmo\Slug(fields={"name"}, separator="_")
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
@@ -57,19 +63,10 @@ class Category
      */
     private $main = false;
 
-
-
     public function __construct()
     {
         $this->products = new ArrayCollection();
         $this->children = new ArrayCollection();
-    }
-
-
-
-    public function __toString()
-    {
-        return (string) $this->name;
     }
 
     public function getId(): ?int
@@ -87,6 +84,11 @@ class Category
         $this->name = $name;
 
         return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
     }
 
     public function getDescription(): ?string
@@ -183,4 +185,6 @@ class Category
 
         return $this;
     }
+
+
 }

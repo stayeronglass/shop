@@ -25,11 +25,13 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/category/{category}", name="category", requirements={"category"="\s+"})
+     * @Route("/category/{slug}", name="category")
      */
     public function category(Category $category)
     {
-
+        return $this->render('default/category.html.twig', [
+            'category' => $category,
+        ]);
     }
 
 
