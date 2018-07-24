@@ -53,4 +53,23 @@ class DefaultController extends Controller
         return $this->render('default/footer.html.twig', [
         ]);
     }
+
+    /**
+     * @Route("/breadcrumbs", name="breadcrumbs")
+     */
+    public function breadcrumbs($node)
+    {
+
+        $em   = $this->getDoctrine()->getManager();
+        $repo = $categories = $em->getRepository(Category::class);
+
+        if(is_integer($node))
+            $node = $repo->find($node);
+
+        $breadcrumbs = $repo->getPathQuery($node)->getArrayResult();
+
+        return $this->render('default/breadcrumbs.html.twig', [
+            'breadcrumbs' => $breadcrumbs,
+        ]);
+    }
 }

@@ -5,10 +5,10 @@
 {% block body %}
     <div id="content">
         <div class="container">
-            <ul class="breadcrumb justify-content-md-start justify-content-center">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item active">Frequently asked questions</li>
-            </ul>
+            {{ render(controller(
+                'App\\Controller\\DefaultController::breadcrumbs',
+                { 'node': category }
+            )) }}
         </div>
         <div class="box text-center">
             <div class="row">

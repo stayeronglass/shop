@@ -1,0 +1,10 @@
+<ul class="breadcrumb justify-content-md-start justify-content-center">
+    <li class="breadcrumb-item"><a href="{{ path('main') }}">Главная</a></li>
+    {% for b in breadcrumbs %}
+        {% if loop.last %}
+            <li class="breadcrumb-item active">{{ b.name }}</li>
+        {% else %}
+            <li class="breadcrumb-item"><a href="{{ path('category', {'slug':b.slug }) }}">{{ b.name }}</a></li>
+        {% endif %}
+    {% endfor %}
+</ul>
