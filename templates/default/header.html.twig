@@ -24,7 +24,7 @@
             </div>
             <div class="d-none d-lg-block">
                 <button type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-outline-secondary mr-1"><span class="sr-only">User login</span><i class="fa fa-users"></i></button>
-                <a href="basket.html" class="btn btn-outline-primary"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">3 items <span class="hidden-md">in cart   </span></span></a>
+                {{ render(controller('App\\Controller\\CartController::header')) }}
             </div>
         </div>
         <!-- /.nav-collapse-->

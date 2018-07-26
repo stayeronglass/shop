@@ -19,4 +19,15 @@ class CartController extends Controller
             'controller_name' => 'BasketController',
         ]);
     }
+
+
+    /**
+     * @Route("/header", name="cart_header")
+     */
+    public function header()
+    {
+        return $this->render('cart/header.html.twig', [
+        ]);
+    }
+
 }
