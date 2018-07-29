@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -29,5 +30,8 @@ class CartController extends Controller
         return $this->render('cart/header.html.twig', [
         ]);
     }
+
+    public function add(Request $request){}
+    public function addAnonymous(Request $request){}
 
 }

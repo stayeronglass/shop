@@ -1,0 +1,80 @@
+<!-- *** NAVBAR *** -->
+<nav id="navbar" role="navigation" class="navbar navbar-light fixed-top navbar-expand-lg yamm justify-content-between">
+    <div class="search-area">
+        <div class="search-area-inner d-flex align-items-center justify-content-center">
+            <div class="close-btn"><i class="fa fa-close"></i></div>
+            <form action="#">
+                <div class="form-group">
+                    <input type="search" name="search" id="search" placeholder="What are you looking for?">
+                    <button type="submit" class="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="container"><a href="/" class="navbar-brand home"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/logo.png" alt="Minimal logo" class="d-none d-md-inline-block"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/logo-small.png" alt="Minimal logo" class="d-md-none"><span class="sr-only">Minimal - go to homepage</span></a>
+        <div class="navbar-buttons d-lg-none">
+            <button type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-outline-secondary mr-1"><span class="sr-only">User login</span><i class="fa fa-users"></i></button>
+            <button class="btn btn-outline-secondary search mr-1"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></button> <a href="basket.html" class="btn btn-outline-primary mr-1"><i class="fa fa-shopping-cart"></i><span class="d-none d-sm-inline">3 items in cart</span></a>
+            <button type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation" class="btn btn-outline-primary"><i class="fa fa-align-justify"></i><span class="sr-only">Toggle navigation</span></button>
+        </div>
+        <div id="navigation" class="navbar-collapse collapse">
+            <div class="navbar-nav mr-auto">
+
+
+            </div>
+            <div class="d-none d-lg-block">
+                <button type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-outline-secondary mr-1"><span class="sr-only">User login</span><i class="fa fa-users"></i></button>
+                <a href="basket.html" class="btn btn-outline-primary"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">3 items <span class="hidden-md">in cart   </span></span></a>
+            </div>
+        </div>
+        <!-- /.nav-collapse-->
+    </div>
+</nav>
+<!-- /#navbar-->
+<!-- *** NAVBAR END ***-->
+<!--  *** LOGIN MODAL ***-->
+<div tabindex="-1" role="dialog" class="modal">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true" class="modal fade">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Customer login</h4>
+                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+            </div>
+            <div class="modal-body">
+                <form action="customer-orders.html" method="get">
+                    <div class="form-group">
+                        <input id="email" type="text" placeholder="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input id="password" type="password" placeholder="password" class="form-control">
+                    </div>
+                    <p class="text-center">
+                        <button class="btn btn-outline-primary"><i class="fa fa-sign-in"></i> Log in</button>
+                    </p>
+                </form>
+                <p class="text-center text-muted">Not registered yet?</p>
+                <p class="text-center text-muted"><a href="register.html"><strong>Register now</strong></a>! It is easy and done in 1 minute and gives you access
+                    to special discounts and much more!
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- *** LOGIN MODAL END ***-->

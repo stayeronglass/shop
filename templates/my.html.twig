@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <meta name="keywords" content="">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="{{ asset('/shop/css/bootstrap.min.css') }} ">
+    <!-- Google fonts - Montserrat and Merriweather-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Merriweather:400,400italic" rel="stylesheet" type="text/css">
+    <!-- Font Awesome css-->
+    <link rel="stylesheet" href="{{ asset('/shop/css/font-awesome.min.css') }}">
+    <!-- Owl Carousel-->
+    <link rel="stylesheet" href="{{ asset('/shop/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/shop/css/owl.theme.default.min.css') }}">
+    <!-- Theme stylesheet-->
+    <link id="theme-stylesheet" href="{{ asset('/shop/css/style.default.css') }}" rel="stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link href="{{ asset('/shop/css/shop.css') }}" rel="stylesheet">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="{{ asset('/favicon.png') }}">
+</head>
+<body class="undefined">
+
+{{ render(controller('App\\Controller\\LkController::header')) }}
+
+{% block body %}
+{% endblock %}
+
+{{ render(controller('App\\Controller\\LkController::footer')) }}
+
+
+{% block javascripts %}
+    <script src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/vendor/jquery/jquery.min.js"></script>
+    <script src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/vendor/popper.js/umd/popper.min.js"> </script>
+    <script src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <!-- main script-->
+    <script src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/js/front.js"> </script>
+{% endblock %}
+
+</body>
+</html>

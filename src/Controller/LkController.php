@@ -19,4 +19,15 @@ class LkController extends Controller
             'controller_name' => 'LkController',
         ]);
     }
+
+    public function header(){
+        return $this->render('lk/header.html.twig', [
+        ]);
+    }
+
+    public function footer(){
+        return $this->render('lk/footer.html.twig', [
+        ]);
+
+    }
 }
