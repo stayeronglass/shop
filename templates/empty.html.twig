@@ -6,14 +6,12 @@
 </head>
 <body class="undefined">
 
-{{ render(controller('App\\Controller\\DefaultController::header')) }}
 
-    {% block body %}
-    {% endblock %}
-
-{{ render(controller('App\\Controller\\DefaultController::footer')) }}
+{% block body %}
+{% endblock %}
 
 
 {% include '_layout/footer.html.twig' %}
+
 </body>
 </html>

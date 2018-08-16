@@ -31,6 +31,15 @@
                 <source>toggle_navigation</source>
                 <target>Toggle Navigation</target>
             </trans-unit>
+            <trans-unit id="add_to_cart">
+                <source>Add to cart</source>
+                <target>В корзину</target>
+            </trans-unit>
+            <trans-unit id="price">
+                <source>Price</source>
+                <target>Цена</target>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>
