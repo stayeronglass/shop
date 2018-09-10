@@ -35,3 +35,6 @@ doctrine:
             softdeleteable:
                 class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                 enabled: true
+        dql:
+            string_functions:
+                match: DoctrineExtensions\Query\Mysql\MatchAgainst
