@@ -39,6 +39,10 @@
                 <source>Price</source>
                 <target>Цена</target>
             </trans-unit>
+            <trans-unit id="what_are_you_looking_for">
+                <source>What are you looking for</source>
+                <target>Что ищем</target>
+            </trans-unit>
 
         </body>
     </file>
