@@ -7,13 +7,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 
 /**
- * @Route("/search", name="search")
+ * @Route("/search", name="search_")
  */
 
 class SearchController extends Controller
 {
     /**
-     * @Route("/", name="search")
+     * @Route("/", name="index")
      */
     public function search()
     {
