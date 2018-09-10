@@ -20,6 +20,7 @@ class ProductController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $images = $em->getRepository(Image::class)->getTImages($product->getId());
+
         return $this->render('product/full.html.twig', [
             'product' => $product,
             'images'  => $images,

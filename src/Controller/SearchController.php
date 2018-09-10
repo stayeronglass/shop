@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -15,10 +17,16 @@ class SearchController extends Controller
     /**
      * @Route("/", name="index")
      */
-    public function search()
+    public function search(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $products = $em->getRepository(Product::class)->searchProducts($request->get('q'));
+
+        var_dump($products);
+    exit;
         return $this->render('search/full.html.twig', [
-            'controller_name' => 'LkController',
+            'products' => $products,
         ]);
     }
 }
