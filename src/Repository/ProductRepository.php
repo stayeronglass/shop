@@ -35,14 +35,20 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     public function searchProducts($q){
-        return $this->createQueryBuilder('p')
-            ->select('MATCH(p.title) AGAINST(\':q\') as relevance, p.title, p.id, i.name, i.ext')
-            ->innerJoin('p.images', 'i',Expr\Join::WITH, 'i.main = 1')
-            ->orderBy('relevance', 'DESC')
-            ->setParameter('q', $q)
-            ->getQuery()
+        return $this->searchProductsQuery($q)
             ->getResult(Query::HYDRATE_ARRAY);
         ;
     }
 
+    public function searchProductsQuery($q){
+        $this->getEntityManager()->getConnection()->quote($q);
+
+        return $this->createQueryBuilder('p')
+            ->select("MATCH(p.title) AGAINST('{$q}\') as relevance, p.title, p.id, i.name, i.ext")
+            ->innerJoin('p.images', 'i',Expr\Join::WITH, 'i.main = 1')
+            ->orderBy('relevance', 'DESC')
+            ->getQuery()
+
+        ;
+    }
 }

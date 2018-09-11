@@ -3,5 +3,12 @@
 {% block title %}Поиск{% endblock %}
 
 {% block body %}
-    222
+
+    {% for product in products %}
+        {% include 'product/short.html.twig' with {'product': product} %}
+    {% endfor %}
+
+    <div class="navigation">
+        {{ knp_pagination_render(products) }}
+    </div>
 {% endblock %}

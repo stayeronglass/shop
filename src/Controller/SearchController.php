@@ -21,12 +21,17 @@ class SearchController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $products = $em->getRepository(Product::class)->searchProducts($request->get('q'));
+        $query = $em->getRepository(Product::class)->searchProductsQuery($request->get('q'));
 
-        var_dump($products);
-    exit;
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
+
         return $this->render('search/full.html.twig', [
-            'products' => $products,
+            'products' => $pagination,
         ]);
     }
 }
