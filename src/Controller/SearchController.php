@@ -27,7 +27,7 @@ class SearchController extends Controller
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
-            10/*limit per page*/
+            10
         );
 
         return $this->render('search/full.html.twig', [

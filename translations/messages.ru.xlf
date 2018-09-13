@@ -43,6 +43,16 @@
                 <source>What are you looking for</source>
                 <target>Что ищем</target>
             </trans-unit>
+            <trans-unit id="quick_view">
+                <source>Quick view</source>
+                <target>Быстрый просмотр</target>
+            </trans-unit>
+            <trans-unit id="load_more">
+                <source>Load more</source>
+                <target>Показать еще</target>
+            </trans-unit>
+
+
 
         </body>
     </file>
