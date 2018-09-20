@@ -51,6 +51,10 @@
                 <source>Load more</source>
                 <target>Показать еще</target>
             </trans-unit>
+            <trans-unit id="in_cart">
+                <source>in cart</source>
+                <target>в корзине</target>
+            </trans-unit>
 
 
 
