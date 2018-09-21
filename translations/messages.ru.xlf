@@ -55,6 +55,34 @@
                 <source>in cart</source>
                 <target>в корзине</target>
             </trans-unit>
+            <trans-unit id="сustomer_login">
+                <source>Customer login</source>
+                <target>Вход</target>
+            </trans-unit>
+            <trans-unit id="email">
+                <source>email</source>
+                <target>емейл</target>
+            </trans-unit>
+            <trans-unit id="password">
+                <source>password</source>
+                <target>пароль</target>
+            </trans-unit>
+            <trans-unit id="not_registered_yet">
+                <source>Not registered yet</source>
+                <target>Еще не зарегистрированы</target>
+            </trans-unit>
+            <trans-unit id="register_now">
+                <source>Register now</source>
+                <target>Зарегистрируйтесь</target>
+            </trans-unit>
+            <trans-unit id="register_now_text">
+                <source>It is easy and done in 1 minute and gives you access to special discounts and much more</source>
+                <target>Это займет не больше минуты</target>
+            </trans-unit>
+            <trans-unit id="log_in">
+                <source>log in</source>
+                <target>вход</target>
+            </trans-unit>
 
 
 

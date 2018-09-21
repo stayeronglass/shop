@@ -55,24 +55,24 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Customer login</h4>
+                <h4 class="modal-title">{% trans %}Customer login{% endtrans %}</h4>
                 <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
             </div>
             <div class="modal-body">
                 <form action="customer-orders.html" method="get">
                     <div class="form-group">
-                        <input id="email" type="text" placeholder="email" class="form-control">
+                        <input id="email" type="text" placeholder="{% trans %}email{% endtrans %}" class="form-control">
                     </div>
                     <div class="form-group">
-                        <input id="password" type="password" placeholder="password" class="form-control">
+                        <input id="password" type="password" placeholder="{% trans %}password{% endtrans %}" class="form-control">
                     </div>
                     <p class="text-center">
-                        <button class="btn btn-outline-primary"><i class="fa fa-sign-in"></i> Log in</button>
+                        <button class="btn btn-outline-primary"><i class="fa fa-sign-in"></i> {% trans %}log in{% endtrans %}</button>
                     </p>
                 </form>
-                <p class="text-center text-muted">Not registered yet?</p>
-                <p class="text-center text-muted"><a href="register.html"><strong>Register now</strong></a>! It is easy and done in 1 minute and gives you access
-                    to special discounts and much more!
+                <p class="text-center text-muted">{% trans %}Not registered yet{% endtrans %}?</p>
+                <p class="text-center text-muted"><a href="{{ path('fos_user_registration_register') }}"><strong>{% trans %}Register now{% endtrans %}</strong></a>!
+                    {% trans %}It is easy and done in 1 minute and gives you access to special discounts and much more{% endtrans %}!
                 </p>
             </div>
         </div>
