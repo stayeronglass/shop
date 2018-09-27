@@ -1,8 +1,7 @@
 <div class="row">
     <div class="col-lg-7 offset-3">
         <div class="box" style="border: none;">
-            <h1>{% trans %}New account{% endtrans %}</h1>
-            <p class="lead">Not our registered customer yet?</p>
+            <h1 class="text-capitalize">{% trans %}new account{% endtrans %}</h1>
             <p>
                 With registration with us new world of fashion, fantastic discounts and much more opens to you! The whole process
                 will not take you more than a minute!
@@ -13,10 +12,16 @@
             {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
             {{ form_widget(form) }}
             <div class="text-center">
-                <button type="submit" class="btn btn-primary"><i class="fa fa-user-md"></i>{% trans %}Register{% endtrans %}</button>
+                <button type="submit" class="btn btn-primary "><i class="fa fa-user-md"></i>{% trans %}register{% endtrans %}</button>
             </div>
             {{ form_end(form) }}
         </div>
+
+        <hr />
+        <p class="text-muted">
+            {% trans %}already registered{% endtrans %}?
+            <a class="text-capitalize" href="{{ path('fos_user_security_login') }}">{% trans %}log in here{% endtrans %}</a>.
+        </p>
     </div>
 </div>
 

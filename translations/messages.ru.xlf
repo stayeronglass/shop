@@ -71,21 +71,36 @@
                 <source>Not registered yet</source>
                 <target>Еще не зарегистрированы</target>
             </trans-unit>
+            <trans-unit id="already_registered">
+                <source>already registered</source>
+                <target>Уже зарегистрированы</target>
+            </trans-unit>
+
             <trans-unit id="register_now">
-                <source>Register now</source>
-                <target>Зарегистрируйтесь</target>
+                <source>register now</source>
+                <target>зарегистрируйтесь</target>
             </trans-unit>
             <trans-unit id="register_now_text">
-                <source>It is easy and done in 1 minute and gives you access to special discounts and much more</source>
-                <target>Это займет не больше минуты</target>
+                <source>it is easy and done in 1 minute and gives you access to special discounts and much more</source>
+                <target>это займет не больше минуты</target>
             </trans-unit>
+            <trans-unit id="register">
+                <source>register</source>
+                <target>зарегистрироваться</target>
+            </trans-unit>
+
             <trans-unit id="log_in">
                 <source>log in</source>
                 <target>вход</target>
             </trans-unit>
+            <trans-unit id="log in here">
+                <source>log in here</source>
+                <target>вход здесь</target>
+            </trans-unit>
+
             <trans-unit id="new_account">
-                <source>New account</source>
-                <target>Новый пользователь</target>
+                <source>new account</source>
+                <target>новый пользователь</target>
             </trans-unit>
             <trans-unit id="already_our_customer">
                 <source>Already our customer</source>
@@ -93,7 +108,7 @@
             </trans-unit>
             <trans-unit id="remember_me">
                 <source>remember me</source>
-                <target>запомниить</target>
+                <target>запомнить</target>
             </trans-unit>
             <trans-unit id="login">
                 <source>login</source>

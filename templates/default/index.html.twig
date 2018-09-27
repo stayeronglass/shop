@@ -3,7 +3,7 @@
 {% block title %}Hello!{% endblock %}
 
 {% block body %}
-
+    {{ render(controller('App\\Controller\\DefaultController::header')) }}
     <!-- *** SLIDER ***-->
     <div id="slider" class="owl-carousel owl-theme">
         {% for b in banner %}
@@ -306,5 +306,5 @@
         </div>
     </div>
 
-
+    {{ render(controller('App\\Controller\\DefaultController::footer')) }}
 {% endblock %}

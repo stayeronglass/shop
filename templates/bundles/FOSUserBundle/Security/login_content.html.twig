@@ -4,14 +4,8 @@
 <div class="row">
     <div class="col-lg-7 offset-3">
         <div class="box" style="border: none;">
-            <h1>{% trans %}Login{% endtrans %}</h1>
-            <p class="lead">Already our customer?</p>
+            <h1>{% trans %}log in{% endtrans %}</h1>
 
-            <p class="text-muted">
-                Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
-                quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
-                ultricies mi vitae est. Mauris placerat eleifend leo.
-            </p>
 
             <form action="{{ path("fos_user_security_check") }}" method="post">
                 {% if csrf_token %}
@@ -39,6 +33,13 @@
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i>{% trans %}log in{% endtrans %}</button>
                 </div>
+
+                <hr />
+
+                <p class="text-muted">
+                    {% trans %}Not registered yet{% endtrans %}?
+                    <a class="text-capitalize" href="{{ path('fos_user_registration_register') }}">{% trans %}register now{% endtrans %}</a>, {% trans %} it is easy and done in 1 minute and gives you access to special discounts and much more {% endtrans %}.
+                </p>
 
             </form>
         </div>

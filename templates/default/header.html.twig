@@ -15,7 +15,9 @@
         <div class="navbar-buttons d-lg-none">
             <button type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-outline-secondary mr-1"><span class="sr-only">User login</span><i class="fa fa-users"></i></button>
             <button class="btn btn-outline-secondary search mr-1"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></button>
-            {{ render(controller('App\\Controller\\CartController::header')) }}
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                {{ render(controller('App\\Controller\\CartController::header')) }}
+            {% endif %}
         </div>
         <div id="navigation" class="navbar-collapse collapse">
             <div class="navbar-nav mr-auto">
@@ -23,7 +25,9 @@
 
             </div>
             <div class="d-none d-lg-block">
-                {{ render(controller('App\\Controller\\CartController::header')) }}
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {{ render(controller('App\\Controller\\CartController::header')) }}
+                {% endif %}
                 <button type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-outline-secondary mr-1"><span class="sr-only">User login</span><i class="fa fa-users"></i></button>
             </div>
         </div>
@@ -58,9 +62,9 @@
                 <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
             </div>
             <div class="modal-body">
-                <form action="customer-orders.html" method="get">
+                <form action="{{ path('fos_user_security_check') }}" method="post" enctype="application/x-www-form-urlencoded">
                     <div class="form-group">
-                        <input id="email" type="text" placeholder="{% trans %}email{% endtrans %}" class="form-control">
+                        <input id="email" type="text" placeholder="{% trans %}login{% endtrans %}" class="form-control">
                     </div>
                     <div class="form-group">
                         <input id="password" type="password" placeholder="{% trans %}password{% endtrans %}" class="form-control">
