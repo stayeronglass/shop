@@ -83,6 +83,22 @@
                 <source>log in</source>
                 <target>вход</target>
             </trans-unit>
+            <trans-unit id="new_account">
+                <source>New account</source>
+                <target>Новый пользователь</target>
+            </trans-unit>
+            <trans-unit id="already_our_customer">
+                <source>Already our customer</source>
+                <target>Уже зарегистрированы</target>
+            </trans-unit>
+            <trans-unit id="remember_me">
+                <source>remember me</source>
+                <target>запомниить</target>
+            </trans-unit>
+            <trans-unit id="login">
+                <source>login</source>
+                <target>логин</target>
+            </trans-unit>
 
 
 

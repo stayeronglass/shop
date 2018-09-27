@@ -7,10 +7,14 @@
 <body class="undefined">
 
 {{ render(controller('App\\Controller\\DefaultController::header')) }}
-
-    {% block body %}
-    {% endblock %}
-
+<div id="all">
+    <div id="content">
+        <div class="container">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
 {{ render(controller('App\\Controller\\DefaultController::footer')) }}
 
 

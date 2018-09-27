@@ -1,22 +1,46 @@
-{% trans_default_domain 'FOSUserBundle' %}
-
 {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
+<div class="row">
+    <div class="col-lg-7 offset-3">
+        <div class="box" style="border: none;">
+            <h1>{% trans %}Login{% endtrans %}</h1>
+            <p class="lead">Already our customer?</p>
 
-<form action="{{ path("fos_user_security_check") }}" method="post">
-    {% if csrf_token %}
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-    {% endif %}
+            <p class="text-muted">
+                Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
+                quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
+                ultricies mi vitae est. Mauris placerat eleifend leo.
+            </p>
 
-    <label for="username">{{ 'security.login.username'|trans }}</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" />
+            <form action="{{ path("fos_user_security_check") }}" method="post">
+                {% if csrf_token %}
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+                {% endif %}
 
-    <label for="password">{{ 'security.login.password'|trans }}</label>
-    <input type="password" id="password" name="_password" required="required" autocomplete="current-password" />
+                <div class="form-group">
+                <label for="username" class="required text-capitalize">{% trans %}login{% endtrans %}</label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" required="required"
+                       autocomplete="username" class="form-control" />
+                </div>
+                <div class="form-group">
+                <label for="password" class="required text-capitalize">{% trans %}password{% endtrans %}</label>
+                <input type="password" id="password" name="_password" required="required"
+                       autocomplete="current-password" class="form-control" />
+                </div>
+                <div class="form-group text-capitalize">
+                    <label class="btn btn-outline-primary">
+                        <input type="checkbox" autocomplete="off">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        {% trans %}remember me{% endtrans %}
+                    </label>
 
-    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i>{% trans %}log in{% endtrans %}</button>
+                </div>
 
-    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
-</form>
+            </form>
+        </div>
+    </div>
+</div>

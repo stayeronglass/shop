@@ -1,8 +1,25 @@
-{% trans_default_domain 'FOSUserBundle' %}
+<div class="row">
+    <div class="col-lg-7 offset-3">
+        <div class="box" style="border: none;">
+            <h1>{% trans %}New account{% endtrans %}</h1>
+            <p class="lead">Not our registered customer yet?</p>
+            <p>
+                With registration with us new world of fashion, fantastic discounts and much more opens to you! The whole process
+                will not take you more than a minute!
+            </p>
+            <p class="text-muted">If you have any questions, please feel free to <a href="{{ path('contacts') }}">contact us</a>, our customer service center is working for you 24/7.</p>
+            <hr>
 
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans }}" />
+            {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+            {{ form_widget(form) }}
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-user-md"></i>{% trans %}Register{% endtrans %}</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
     </div>
-{{ form_end(form) }}
+</div>
+
+
+
+
