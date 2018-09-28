@@ -1,11 +1,12 @@
 <!-- *** NAVBAR *** -->
+
 <nav id="navbar" role="navigation" class="navbar navbar-light fixed-top navbar-expand-lg yamm justify-content-between">
     <div class="search-area">
         <div class="search-area-inner d-flex align-items-center justify-content-center">
             <div class="close-btn"><i class="fa fa-close"></i></div>
             <form action="{{ path('search_index') }}" method="get">
                 <div class="form-group">
-                    <input type="search" name="q" id="search" placeholder="{% trans %}What are you looking for{% endtrans %}?">
+                    <input type="search" name="q" id="search" placeholder="{% trans %}What are you looking for{% endtrans %}?" >
                     <button type="submit" class="submit"><i class="fa fa-search"></i></button>
                 </div>
             </form>
@@ -13,22 +14,31 @@
     </div>
     <div class="container"><a href="/" class="navbar-brand home"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/logo.png" alt="Minimal logo" class="d-none d-md-inline-block"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/logo-small.png" alt="Minimal logo" class="d-md-none"><span class="sr-only">Minimal - go to homepage</span></a>
         <div class="navbar-buttons d-lg-none">
-            <button type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-outline-secondary mr-1"><span class="sr-only">User login</span><i class="fa fa-users"></i></button>
             <button class="btn btn-outline-secondary search mr-1"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></button>
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 {{ render(controller('App\\Controller\\CartController::header')) }}
+            {% else %}
+                <button type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-outline-secondary mr-1"><span class="sr-only">User login</span><i class="fa fa-users"></i></button>
             {% endif %}
         </div>
         <div id="navigation" class="navbar-collapse collapse">
             <div class="navbar-nav mr-auto">
-
-
+                <form class="navbar-form" role="search" method="get" action="{{ path('search_index') }}">
+                <div class="input-group">
+                    <input name="q" type="text" class="form-control" placeholder="{% trans %}What are you looking for{% endtrans %}?" value="{{ q }}">
+                    <div class="input-group-btn">
+                        <button class="btn btn-outline-secondary search mr-1"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+                </form>
             </div>
             <div class="d-none d-lg-block">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     {{ render(controller('App\\Controller\\CartController::header')) }}
+                {% else %}
+                    <button type="submit" class="btn btn-outline-secondary mr-1"><span class="sr-only">User login</span><i class="fa fa-users"></i></button>
                 {% endif %}
-                <button type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-outline-secondary mr-1"><span class="sr-only">User login</span><i class="fa fa-users"></i></button>
+
             </div>
         </div>
         <!-- /.nav-collapse-->
@@ -37,23 +47,6 @@
 <!-- /#navbar-->
 <!-- *** NAVBAR END ***-->
 <!--  *** LOGIN MODAL ***-->
-<div tabindex="-1" role="dialog" class="modal">
-    <div role="document" class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
-            </div>
-            <div class="modal-body">
-                <p>Modal body text goes here.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save changes</button>
-                <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true" class="modal fade">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -64,10 +57,10 @@
             <div class="modal-body">
                 <form action="{{ path('fos_user_security_check') }}" method="post" enctype="application/x-www-form-urlencoded">
                     <div class="form-group">
-                        <input id="email" type="text" placeholder="{% trans %}login{% endtrans %}" class="form-control">
+                        <input id="email" type="text" placeholder="{% trans %}login{% endtrans %}" class="form-control" required="required">
                     </div>
                     <div class="form-group">
-                        <input id="password" type="password" placeholder="{% trans %}password{% endtrans %}" class="form-control">
+                        <input id="password" type="password" placeholder="{% trans %}password{% endtrans %}" class="form-control" required="required">
                     </div>
                     <p class="text-center">
                         <button class="btn btn-outline-primary"><i class="fa fa-sign-in"></i> {% trans %}log in{% endtrans %}</button>

@@ -45,7 +45,9 @@ class DefaultController extends Controller
     }
 
     public function header(){
+        $q = $_GET['q'] ?? '';
         return $this->render('default/header.html.twig', [
+            'q' => $q,
         ]);
     }
 

@@ -1,6 +1,19 @@
 <a href="{{ path('cart') }}" class="btn btn-outline-primary mr-1 d-lg-none">
-    <i class="fa fa-shopping-cart"></i><span class="d-none d-sm-inline">3 items {% trans %}in cart{% endtrans %}</span>
+    <i class="fa fa-shopping-cart"></i><span class="d-none d-sm-inline">
+        {% if items != 0 %}
+            <span id="cart_items_count">{{ items }}</span> items {% trans %}in cart{% endtrans %}
+        {% else %}
+            {% trans %}no item in cart{% endtrans %}
+        {% endif %}
+    </span>
 </a>
 <a href="{{ path('cart') }}" class="btn btn-outline-primary d-none d-lg-inline-block">
-    <i class="fa fa-shopping-cart"></i><span class="hidden-sm">1 items <span class="hidden-md">{% trans %}in cart{% endtrans %}</span></span>
+    <i class="fa fa-shopping-cart"></i><span class="hidden-sm">
+        {% if items != 0 %}
+            <span id="cart_items_count">{{ items }}</span> items <span class="hidden-md">{% trans %}in cart{% endtrans %}</span>
+        {% else %}
+            <span class="hidden-md">{% trans %}no items in cart{% endtrans %}</span>
+        {% endif %}
+
+        </span>
 </a>

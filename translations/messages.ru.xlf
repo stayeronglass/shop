@@ -114,6 +114,10 @@
                 <source>login</source>
                 <target>логин</target>
             </trans-unit>
+            <trans-unit id="cart">
+                <source>cart</source>
+                <target>корзина</target>
+            </trans-unit>
 
 
 

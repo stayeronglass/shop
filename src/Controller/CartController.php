@@ -27,7 +27,9 @@ class CartController extends Controller
      */
     public function header()
     {
+        $items = 0;
         return $this->render('cart/header.html.twig', [
+            'items' => $items,
         ]);
     }
 

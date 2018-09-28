@@ -16,7 +16,6 @@ security:
             pattern: ^/
             form_login:
                 provider: fos_userbundle
-                user_checker: fos_user.user_checker
                 csrf_token_generator: security.csrf.token_manager
             logout:       true
             anonymous:    true
