@@ -1,4 +1,7 @@
 security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: ~ }
@@ -13,6 +16,7 @@ security:
             pattern: ^/
             form_login:
                 provider: fos_userbundle
+                user_checker: fos_user.user_checker
                 csrf_token_generator: security.csrf.token_manager
             logout:       true
             anonymous:    true

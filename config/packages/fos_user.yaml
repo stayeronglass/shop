@@ -8,3 +8,6 @@ fos_user:
     service:
         mailer: 'fos_user.mailer.noop'
         # mailer: 'fos_user.mailer.twig_swift' # Works as well
+    registration:
+        form:
+            validation_groups: [MyRegistration, Default]
