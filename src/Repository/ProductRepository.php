@@ -44,7 +44,7 @@ class ProductRepository extends ServiceEntityRepository
         $this->getEntityManager()->getConnection()->quote($q);
 
         return $this->createQueryBuilder('p')
-            ->select("MATCH(p.title) AGAINST('{$q}\') as relevance, p.title, p.id, p.price, i.name as image_name, i.ext as image_ext ")
+            ->select("MATCH(p.title) AGAINST('{$q}') as relevance, p.title, p.id, p.price, i.name as image_name, i.ext as image_ext ")
             ->innerJoin('p.images', 'i',Expr\Join::WITH, 'i.main = 1')
             ->orderBy('relevance', 'DESC')
             ->getQuery()
