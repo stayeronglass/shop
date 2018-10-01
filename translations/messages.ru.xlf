@@ -97,6 +97,12 @@
                 <source>log in here</source>
                 <target>вход здесь</target>
             </trans-unit>
+            <trans-unit id="logout">
+                <source>logout</source>
+                <target>выход</target>
+            </trans-unit>
+
+
 
             <trans-unit id="new_account">
                 <source>new account</source>

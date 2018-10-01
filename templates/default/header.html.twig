@@ -35,8 +35,9 @@
             <div class="d-none d-lg-block">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     {{ render(controller('App\\Controller\\CartController::header')) }}
+                    <a href="{{ path('fos_user_security_logout') }}" class="btn btn-primary" title="{% trans %}Logout{% endtrans %}"><span class="sr-only">User logout</span><i class="fa fa-sign-out"></i></a>
                 {% else %}
-                    <button type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-outline-secondary mr-1"><span class="sr-only">User login</span><i class="fa fa-users"></i></button>
+                    <button type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-outline-secondary mr-1" title="{% trans %}log in{% endtrans %}"><span class="sr-only">User login</span><i class="fa fa-sign-in"></i></button>
                 {% endif %}
 
             </div>
