@@ -36,7 +36,7 @@
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     {{ render(controller('App\\Controller\\CartController::header')) }}
                 {% else %}
-                    <button type="submit" class="btn btn-outline-secondary mr-1"><span class="sr-only">User login</span><i class="fa fa-users"></i></button>
+                    <button type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-outline-secondary mr-1"><span class="sr-only">User login</span><i class="fa fa-users"></i></button>
                 {% endif %}
 
             </div>
@@ -56,11 +56,12 @@
             </div>
             <div class="modal-body">
                 <form action="{{ path('fos_user_security_check') }}" method="post" enctype="application/x-www-form-urlencoded">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
                     <div class="form-group">
-                        <input id="email" type="text" placeholder="{% trans %}login{% endtrans %}" class="form-control" required="required">
+                        <input id="email" name="_username" type="text" placeholder="{% trans %}login{% endtrans %}" class="form-control" required="required">
                     </div>
                     <div class="form-group">
-                        <input id="password" type="password" placeholder="{% trans %}password{% endtrans %}" class="form-control" required="required">
+                        <input id="password" name="_password" type="password" placeholder="{% trans %}password{% endtrans %}" class="form-control" required="required">
                     </div>
                     <p class="text-center">
                         <button class="btn btn-outline-primary"><i class="fa fa-sign-in"></i> {% trans %}log in{% endtrans %}</button>

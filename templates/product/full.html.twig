@@ -33,7 +33,13 @@
                                 </div>
                                 <p class="price">{% trans %}Price{% endtrans %}: {{ product.price }} &#8381;</p>
                                 <p class="text-center">
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> {% trans %}Add to cart {% endtrans %}</button>
+                                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                        <button type="button" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> {% trans %}Add to cart {% endtrans %}</button>
+                                    {% else %}
+                                        <button type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-outline-secondary mr-1">
+                                            <i class="fa fa-shopping-cart"></i> {% trans %}Add to cart{% endtrans %}
+                                        </button>
+                                    {% endif %}
                                 </p>
                             </form>
                             <div id="thumbs" class="row">

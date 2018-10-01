@@ -31,6 +31,7 @@ class DefaultController extends Controller
     {
         return $this->render('default/category.html.twig', [
             'category' => $category,
+            'csrf_token' => '',
         ]);
     }
 
