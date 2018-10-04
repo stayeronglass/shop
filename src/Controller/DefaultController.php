@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Entity\Product;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -47,14 +46,11 @@ class DefaultController extends Controller
         ]);
     }
 
-    public function header(RequestStack $requestStack){
-        $request  = $requestStack->getMasterRequest();
-        $q        = $request->get('q', '');
-        $redirect = $request->getRequestUri();
+    public function header(){
 
         return $this->render('default/header.html.twig', [
-            'q'            => $q,
-            'redirect_url' => $redirect,
+            'q'            => $_GET['q'] ?? '',
+            'redirect_url' => $_SERVER['REQUEST_URI'],
         ]);
     }
 

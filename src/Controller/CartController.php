@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Cart;
+use App\Entity\Product;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,8 +29,25 @@ class CartController extends Controller
      */
     public function add(Request $request)
     {
-        $product_id  = $request->get('product_id');
-        return $this->json($product_id);
+        $em = $this->getDoctrine()->getManager();
+        $product = $em->getRepository(Product::class)->find($request->get('product_id'));
+
+
+
+        $cart = new Cart();
+        $cart->setUser($this->getUser());
+        $cart->setProduct($product);
+        $cart->setAmount(1);
+
+        $em->persist($cart);
+        $em->flush();
+        $result = [
+          'message'       => 'Товар добавле нв корзину',
+          'cart_message'  => 'Товар добавле нв корзину',
+          'error_message' => '',
+        ];
+
+        return new JsonResponse($result);
     }
 
 

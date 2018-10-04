@@ -12,7 +12,7 @@
 
                 <del>$280</del>&nbsp;{{  product.price }} &#8381; &nbsp;&nbsp;
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <a href="javascript:void(0)" onclick="addBasket({{ product.id }})" class="btn btn-outline-primary mr-1" title="в корзину"><i class="fa fa-shopping-cart"></i></a>
+                    <a href="javascript:void(0)" onclick="add(this, {{ product.id }})" class="btn btn-outline-primary mr-1" title="в корзину"><i class="fa fa-shopping-cart"></i></a>
                 {% else %}
                     <a href="{{ path('fos_user_security_login') }}" class="btn btn-outline-primary mr-1" title="в корзину"><i class="fa fa-shopping-cart"></i></a>
                 {% endif %}
