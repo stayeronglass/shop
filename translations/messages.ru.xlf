@@ -124,7 +124,14 @@
                 <source>cart</source>
                 <target>корзина</target>
             </trans-unit>
-
+            <trans-unit id="no_items_in_cart">
+                <source>no items in cart</source>
+                <target>корзина пуста ;(</target>
+            </trans-unit>
+            <trans-unit id="personal_account">
+                <source>Personal account</source>
+                <target>Личный кабинет</target>
+            </trans-unit>
 
 
         </body>

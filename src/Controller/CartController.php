@@ -7,18 +7,27 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
- * @Route("/cart")
+ * @Route("/cart", name="cart_")
  */
 class CartController extends Controller
 {
     /**
-     * @Route("/", name="cart")
+     * @Route("/", name="index")
      */
     public function index()
     {
         return $this->render('cart/index.html.twig', [
             'controller_name' => 'BasketController',
         ]);
+    }
+
+    /**
+     * @Route("/add", name="add")
+     */
+    public function add(Request $request)
+    {
+        $product_id  = $request->get('product_id');
+        return $this->json($product_id);
     }
 
 
@@ -32,8 +41,4 @@ class CartController extends Controller
             'items' => $items,
         ]);
     }
-
-    public function add(Request $request){}
-    public function addAnonymous(Request $request){}
-
 }

@@ -3,15 +3,17 @@
 namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
- * @Route("/my", name="my")
+ * @Route("/my", name="my_")
+ * @IsGranted("IS_AUTHENTICATED_FULLY")
  */
 class LkController extends Controller
 {
     /**
-     * @Route("/", name="my_main")
+     * @Route("/", name="main")
      */
     public function index()
     {
