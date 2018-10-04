@@ -34,7 +34,7 @@
                                 <p class="price">{% trans %}Price{% endtrans %}: {{ product.price }} &#8381;</p>
                                 <p class="text-center">
                                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> {% trans %}Add to cart {% endtrans %}</button>
+                                        <button  id="button_add_cart" type="button" class="btn btn-primary" onclick="add({{ product.id }})"><i class="fa fa-shopping-cart"></i> {% trans %}Add to cart {% endtrans %}</button>
                                     {% else %}
                                         <button type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-outline-secondary mr-1">
                                             <i class="fa fa-shopping-cart"></i> {% trans %}Add to cart{% endtrans %}
@@ -61,4 +61,14 @@
                     </div>
                 </div>
             </div>
+<script type="text/javascript">
+    function add(product_id) {
+        $('#button_add_cart').attr("disabled", true);
+            $.post( "/cart/add",{ product_id: product_id }, function( data ) {
+                console.log(data);
+                $('#button_add_cart').attr("disabled", false);
+            });
+    }
+
+</script>
 {% endblock %}
