@@ -29,20 +29,22 @@ class CartController extends Controller
      */
     public function add(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em      = $this->getDoctrine()->getManager();
         $product = $em->getRepository(Product::class)->find($request->get('product_id'));
-
+        $user    = $this->getUser();
 
 
 
         $cart = new Cart();
-        $cart->setUser($this->getUser());
-        $cart->setProduct($product);
-        $cart->setAmount(1);
-
+        $cart
+            ->setUser($user)
+            ->setProduct($product)
+            ->setAmount(1)
+        ;
         $em->persist($cart);
         $em->flush();
-        $cart   = $em->getRepository(Cart::class)->getCartByUser($this->getUser()->getId());
+
+        $cart   = $em->getRepository(Cart::class)->getCartByUser($user->getId());
 
         $result = [
           'message'       => 'Товар добавлен в корзину',
