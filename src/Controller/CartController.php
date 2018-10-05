@@ -61,23 +61,22 @@ class CartController extends Controller
         return new JsonResponse($result);
     }
 
-
     /**
-     * @Route("/header", name="cart_header")
-     * @IsGranted("IS_AUTHENTICATED_ANONYMOUSLY")
+     * @Route("/remove/{id}", name="remove")
      */
-    public function header()
-    {
-        $items = 0;
+    public function remove($id){
 
-        if ($this->isGranted('IS_AUTHENTICATED_FULLY')){
-            $em    = $this->getDoctrine()->getManager();
-            $cart  = $em->getRepository(Cart::class)->getCartByUser($this->getUser()->getId());
-            $items = count($cart);
+        $em   = $this->getDoctrine()->getManager();
+        $cart = $em->getRepository(Cart::class)->findBy(['id' => $id, 'user_id' => $this->getUser()->getId()]);
+
+        if ($cart){
+            $em->remove($cart);
+            $em->flush();
         }
 
-        return $this->render('cart/header.html.twig', [
-            'items' => $items,
-        ]);
+        $result = [
+        ];
+
+        return new JsonResponse($result);
     }
 }

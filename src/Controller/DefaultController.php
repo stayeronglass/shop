@@ -7,6 +7,8 @@ use App\Entity\Product;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Entity\Cart;
+
 
 class DefaultController extends Controller
 {
@@ -48,9 +50,17 @@ class DefaultController extends Controller
 
     public function header(){
 
+        $items = 0;
+        if ($this->isGranted('IS_AUTHENTICATED_FULLY')){
+            $em    = $this->getDoctrine()->getManager();
+            $cart  = $em->getRepository(Cart::class)->getCartByUser($this->getUser()->getId());
+            $items = count($cart);
+        }
+
         return $this->render('default/header.html.twig', [
             'q'            => $_GET['q'] ?? '',
             'redirect_url' => $_SERVER['REQUEST_URI'],
+            'cart_items'   => $items,
         ]);
     }
 
