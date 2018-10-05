@@ -28,4 +28,15 @@ class CartRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult(Query::HYDRATE_ARRAY);
     }
+
+    public function getFullCartByUser($uid){
+        return $this->createQueryBuilder('c')
+            ->select('c.id, c.amount, p.id as pid, p.title, p.price')
+            ->innerJoin('c.product', 'p')
+            ->andWhere('c.user_id = :user_id')
+            ->setParameter('user_id', $uid)
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult(Query::HYDRATE_ARRAY);
+    }
 }

@@ -8,9 +8,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/cart", name="cart_")
+ * @IsGranted("IS_AUTHENTICATED_FULLY")
  */
 class CartController extends Controller
 {
@@ -19,8 +21,12 @@ class CartController extends Controller
      */
     public function index()
     {
+        $em      = $this->getDoctrine()->getManager();
+        $user    = $this->getUser();
+        $cart   = $em->getRepository(Cart::class)->getFullCartByUser($user->getId());
+
         return $this->render('cart/index.html.twig', [
-            'controller_name' => 'BasketController',
+            'cart' => $cart,
         ]);
     }
 
@@ -58,6 +64,7 @@ class CartController extends Controller
 
     /**
      * @Route("/header", name="cart_header")
+     * @IsGranted("IS_AUTHENTICATED_ANONYMOUSLY")
      */
     public function header()
     {
