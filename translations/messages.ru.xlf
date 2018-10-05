@@ -36,8 +36,8 @@
                 <target>В корзину</target>
             </trans-unit>
             <trans-unit id="price">
-                <source>Price</source>
-                <target>Цена</target>
+                <source>price</source>
+                <target>цена</target>
             </trans-unit>
             <trans-unit id="what_are_you_looking_for">
                 <source>What are you looking for</source>
@@ -136,6 +136,10 @@
             <trans-unit id="personal_account">
                 <source>Personal account</source>
                 <target>Личный кабинет</target>
+            </trans-unit>
+            <trans-unit id="out_of_stock">
+                <source>Out of stock</source>
+                <target>Нет в наличии</target>
             </trans-unit>
 
 

@@ -31,14 +31,18 @@
                                 <div class="sizes">
                                     <h3>Available sizes</h3>
                                 </div>
-                                <p class="price">{% trans %}Price{% endtrans %}: {{ product.price }} &#8381;</p>
+                                <p class="price capitalize_first_letter">{% trans %}price{% endtrans %}: {{ product.price }} &#8381;</p>
                                 <p class="text-center">
-                                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                        <button  id="button_add_cart" type="button" class="btn btn-primary" onclick="add(this, {{ product.id }})"><i class="fa fa-shopping-cart"></i> {% trans %}Add to cart {% endtrans %}</button>
+                                    {% if product.outOfStock %}
+                                        {% trans %}Out of stock{% endtrans %}
                                     {% else %}
-                                        <button type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-outline-secondary mr-1">
-                                            <i class="fa fa-shopping-cart"></i> {% trans %}Add to cart{% endtrans %}
-                                        </button>
+                                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                            <button  id="button_add_cart" type="button" class="btn btn-primary" onclick="add(this, {{ product.id }})"><i class="fa fa-shopping-cart"></i> {% trans %}Add to cart {% endtrans %}</button>
+                                        {% else %}
+                                            <button type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-outline-secondary mr-1">
+                                                <i class="fa fa-shopping-cart"></i> {% trans %}Add to cart{% endtrans %}
+                                            </button>
+                                        {% endif %}
                                     {% endif %}
                                 </p>
                             </form>

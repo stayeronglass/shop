@@ -1,1 +1,8 @@
-require('../css/shop.css');
+function add(button, product_id) {
+    button  =  $(button);
+    button.attr("disabled", true);
+    $.post( "/cart/add",{ product_id: product_id }, function( data ) {
+        console.log(data);
+        button.attr("disabled", false);
+    });
+}
