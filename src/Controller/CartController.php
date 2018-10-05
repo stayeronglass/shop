@@ -34,6 +34,7 @@ class CartController extends Controller
 
 
 
+
         $cart = new Cart();
         $cart->setUser($this->getUser());
         $cart->setProduct($product);
@@ -41,9 +42,11 @@ class CartController extends Controller
 
         $em->persist($cart);
         $em->flush();
+        $cart   = $em->getRepository(Cart::class)->getCartByUser($this->getUser()->getId());
+
         $result = [
-          'message'       => 'Товар добавле нв корзину',
-          'cart_message'  => 'Товар добавле нв корзину',
+          'message'       => 'Товар добавлен в корзину',
+          'cart_message'  => count($cart),
           'error_message' => '',
         ];
 
@@ -57,6 +60,13 @@ class CartController extends Controller
     public function header()
     {
         $items = 0;
+
+        if ($this->isGranted('IS_AUTHENTICATED_FULLY')){
+            $em    = $this->getDoctrine()->getManager();
+            $cart  = $em->getRepository(Cart::class)->getCartByUser($this->getUser()->getId());
+            $items = count($cart);
+        }
+
         return $this->render('cart/header.html.twig', [
             'items' => $items,
         ]);
