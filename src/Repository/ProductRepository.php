@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
@@ -50,5 +51,20 @@ class ProductRepository extends ServiceEntityRepository
             ->getQuery()
 
         ;
+    }
+
+    /**
+     * @param Category $category
+     */
+    public function getProductByCategory($cqb){
+
+        $qb = $this->createQueryBuilder('p')
+            ->select("p.title, p.id, p.price, i.name as image_name, i.ext as image_ext, cat.id ")
+            ->innerJoin('p.images', 'i',Expr\Join::WITH, 'i.main = 1')
+            ->leftJoin('p.categories', 'cat')
+            ->orderBy('p.createdAt', 'DESC')
+            ;
+
+        return $qb->getQuery();
     }
 }

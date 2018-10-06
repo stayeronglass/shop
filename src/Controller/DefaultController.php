@@ -30,11 +30,24 @@ class DefaultController extends Controller
     /**
      * @Route("/category/{slug}", name="category")
      */
-    public function category(Category $category)
+    public function category($slug, Request $request)
     {
+        $em       = $this->getDoctrine()->getManager();
+        $category = $em->getRepository(Category::class)->findOneBy(['slug' => $slug]);
+        if(null === $category) throw $this->createNotFoundException();
+
+        $catQb = $em->getRepository(Category::class)->getChildrenQueryBuilder($category, true);
+
+        $query = $em->getRepository(Product::class)->getProductByCategory($catQb);
+        $products  = $this->get('knp_paginator')->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10
+        );
+
         return $this->render('default/category.html.twig', [
             'category' => $category,
-            'csrf_token' => '',
+            'products' => $products,
         ]);
     }
 

@@ -15,11 +15,11 @@ class ProductController extends Controller
     /**
      * @Route("/{id}", name="product_show")
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $images = $em->getRepository(Image::class)->getTImages($product->getId());
+        $em      = $this->getDoctrine()->getManager();
+        $product = $em->getRepository(Product::class)->find($id);
+        $images  = $em->getRepository(Image::class)->getTImages($product->getId());
 
         return $this->render('product/full.html.twig', [
             'product' => $product,
