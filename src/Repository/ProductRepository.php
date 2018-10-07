@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\ORM\Query\Expr;
 
@@ -53,17 +54,26 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
 
-    /**
-     * @param Category $category
-     */
-    public function getProductByCategory($cqb){
 
+    /**
+     * @param QueryBuilder $cqb
+     *
+     * @return Query
+     */
+    public function getProductByCategory(QueryBuilder $cqb)
+    {
         $qb = $this->createQueryBuilder('p')
-            ->select("p.title, p.id, p.price, i.name as image_name, i.ext as image_ext, cat.id ")
+            ->select("p.title, p.id, p.price, i.name as image_name, i.ext as image_ext, cat.id AS cat_id")
             ->innerJoin('p.images', 'i',Expr\Join::WITH, 'i.main = 1')
-            ->leftJoin('p.categories', 'cat')
+            ->innerJoin('p.categories', 'cat')
             ->orderBy('p.createdAt', 'DESC')
-            ;
+        ;
+        $qb->andWhere(
+            $qb->expr()->in(
+                'cat.id',
+                $cqb->getDQL()
+        ))->setParameters($cqb->getParameters())
+        ;
 
         return $qb->getQuery();
     }

@@ -19,6 +19,8 @@ class ProductController extends Controller
     {
         $em      = $this->getDoctrine()->getManager();
         $product = $em->getRepository(Product::class)->find($id);
+        if(null === $product) throw $this->createNotFoundException();
+
         $images  = $em->getRepository(Image::class)->getTImages($product->getId());
 
         return $this->render('product/full.html.twig', [

@@ -17,8 +17,8 @@ class DefaultController extends Controller
      */
     public function index()
     {
-        $em = $this->getDoctrine()->getManager();
-        $banner = $em->getRepository(Product::class)->getSliderProducts();
+        $em         = $this->getDoctrine()->getManager();
+        $banner     = $em->getRepository(Product::class)->getSliderProducts();
         $categories = $em->getRepository(Category::class)->getMainCategories();
         
         return $this->render('default/index.html.twig', [
@@ -32,22 +32,26 @@ class DefaultController extends Controller
      */
     public function category($slug, Request $request)
     {
-        $em       = $this->getDoctrine()->getManager();
-        $category = $em->getRepository(Category::class)->findOneBy(['slug' => $slug]);
+        $em           = $this->getDoctrine()->getManager();
+        $categoryRepo = $em->getRepository(Category::class);
+
+        $category     = $categoryRepo->findOneBy(['slug' => $slug]);
         if(null === $category) throw $this->createNotFoundException();
 
-        $catQb = $em->getRepository(Category::class)->getChildrenQueryBuilder($category, true);
+        $title = $category->getName();
+        $catQb = $categoryRepo->getChildrenQueryBuilder($category, true);
 
-        $query = $em->getRepository(Product::class)->getProductByCategory($catQb);
+        $query     = $em->getRepository(Product::class)->getProductByCategory($catQb);
         $products  = $this->get('knp_paginator')->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
-            10
+            $request->query->getInt('per_page', 10)/* items per page*/
         );
 
         return $this->render('default/category.html.twig', [
             'category' => $category,
             'products' => $products,
+            'title' => $title,
         ]);
     }
 
@@ -61,8 +65,8 @@ class DefaultController extends Controller
         ]);
     }
 
-    public function header(){
-
+    public function header()
+    {
         $items = 0;
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')){
             $em    = $this->getDoctrine()->getManager();
@@ -87,17 +91,14 @@ class DefaultController extends Controller
      */
     public function breadcrumbs($node)
     {
-
         $em   = $this->getDoctrine()->getManager();
-        $repo = $categories = $em->getRepository(Category::class);
+        $repo = $em->getRepository(Category::class);
 
-        if(is_integer($node))
+        if(is_int($node))
             $node = $repo->find($node);
 
-        $breadcrumbs = $repo->getPathQuery($node)->getArrayResult();
-
         return $this->render('default/breadcrumbs.html.twig', [
-            'breadcrumbs' => $breadcrumbs,
+            'breadcrumbs' => $repo->getPathQuery($node)->getArrayResult(),
         ]);
     }
 }
