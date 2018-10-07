@@ -18,13 +18,15 @@
                             {% set im = images[0] %}
                             <div id="mainImage"><img src="/upload/{{ im.name[:1] }}/{{ im.name[1:1] }}/{{ im.name}}.{{ im.ext}}" alt="" class="img-fluid"></div>
                             <div class="ribbon sale">
-                                <div class="theribbon">РАСПРОДАЖА</div>
+                                <div class="theribbon">{% trans %}sale{% endtrans %}</div>
                                 <div class="ribbon-background"></div>
                             </div>
-                            <div class="ribbon new">
-                                <div class="theribbon">НОВИНКА</div>
-                                <div class="ribbon-background"></div>
-                            </div>
+                            {% if product.new %}
+                                <div class="ribbon new">
+                                    <div class="theribbon">{% trans %}new{% endtrans %}</div>
+                                    <div class="ribbon-background"></div>
+                                </div>
+                            {% endif %}
                         </div>
                         <div class="col-md-6">
                             <form>
