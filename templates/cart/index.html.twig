@@ -14,7 +14,7 @@
 <div class="row">
     <div id="basket" class="col-lg-9">
         <div class="box">
-            <form method="get" action="checkout1.html">
+            <form method="post" action="{{ path('cart_checkout') }}" enctype="application/x-www-form-urlencoded">
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -32,7 +32,7 @@
                             {% set total = total +  c.price*c.amount %}
                             <tr>
                                 <td><a href="{{ path('product_show', {'id' : c.pid }) }}">
-                                        <img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/detailsquare.jpg" alt="White Blouse Armani">
+                                        <img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/detailsquare.jpg" alt="{{ c.title }}">
                                     </a>
                                 </td>
                                 <td><a href="{{ path('product_show', {'id' : c.pid }) }}">{{ c.title}}</a></td>

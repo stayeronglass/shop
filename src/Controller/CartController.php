@@ -79,4 +79,14 @@ class CartController extends Controller
 
         return new JsonResponse($result);
     }
+
+    /**
+     * @Route("/checkout", name="checkout")
+     */
+    public function checkout(Request $request){
+
+        return $this->render('cart/checkout.html.twig',[
+
+        ]);
+    }
 }
