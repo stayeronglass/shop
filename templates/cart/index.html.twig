@@ -6,8 +6,8 @@
     <div class="box text-center">
         <div class="row">
             <div class="col-md-10 offset-md-1">
-                <h1>Shopping cart</h1>
-                <p class="text-muted">You currently have 3 item(s) in your cart.</p>
+                <h1 class="capitalize_first_letter">{% trans %}shopping cart{% endtrans %}</h1>
+                <p class="text-muted">{% trans %}You currently have 3 item(s) in your cart.{% endtrans %}</p>
             </div>
         </div>
     </div>
@@ -19,11 +19,11 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th colspan="2">Product</th>
-                            <th>Quantity</th>
-                            <th>Unit price</th>
-                            <th>Discount</th>
-                            <th colspan="2">Total</th>
+                            <th colspan="2" class="capitalize_first_letter">{% trans %}product{% endtrans %}</th>
+                            <th class="capitalize_first_letter">{% trans %}quantity{% endtrans %}</th>
+                            <th class="capitalize_first_letter">{% trans %}unit price{% endtrans %}</th>
+                            <th class="capitalize_first_letter">{% trans %}discount{% endtrans %}</th>
+                            <th colspan="2" class="capitalize_first_letter">{% trans %}total{% endtrans %}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -31,7 +31,10 @@
                         {% for c in cart %}
                             {% set total = total +  c.price*c.amount %}
                             <tr>
-                                <td><a href="{{ path('product_show', {'id' : c.pid }) }}"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/detailsquare.jpg" alt="White Blouse Armani"></a></td>
+                                <td><a href="{{ path('product_show', {'id' : c.pid }) }}">
+                                        <img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/detailsquare.jpg" alt="White Blouse Armani">
+                                    </a>
+                                </td>
                                 <td><a href="{{ path('product_show', {'id' : c.pid }) }}">{{ c.title}}</a></td>
                                 <td>
                                     <input value="{{ c.amount }}" class="form-control" type="number">
@@ -44,18 +47,18 @@
                         {% endfor  %}
                         <tfoot>
                         <tr>
-                            <th colspan="5">Total</th>
+                            <th colspan="5" class="capitalize_first_letter">{% trans %}total{% endtrans %}</th>
                             <th colspan="2">{{ total }} &#8381;</th>
                         </tr>
                         </tfoot>
                     </table>
                 </div>
                 <div class="box-footer">
-                    <div class="pull-left"><a href="{{ path('main') }}" class="btn btn-outline-white-secondary"><i class="fa fa-chevron-left"></i> Continue shopping</a></div>
+                    <div class="pull-left"><a href="{{ path('main') }}" class="btn btn-outline-white-secondary capitalize_first_letter"><i class="fa fa-chevron-left"></i> Continue shopping</a></div>
                     <div class="pull-right">
                         {% if total %}
-                            <button class="btn btn-outline-white-secondary"><i class="fa fa-refresh"></i> Update cart</button>
-                            <button type="submit" class="btn btn-outline-white-primary">Proceed to checkout<i class="fa fa-chevron-right"></i></button>
+                            <button class="btn btn-outline-white-secondary capitalize_first_letter"><i class="fa fa-refresh"></i>{% trans %}update cart{% endtrans %}</button>
+                            <button type="submit" class="btn btn-outline-white-primary capitalize_first_letter">{% trans %}proceed to checkout{% endtrans %}<i class="fa fa-chevron-right"></i></button>
                         {% endif %}
                     </div>
                 </div>
