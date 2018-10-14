@@ -39,7 +39,7 @@ class DefaultController extends Controller
         if(null === $category) throw $this->createNotFoundException();
 
         $title = $category->getName();
-        $catQb = $categoryRepo->getChildrenQueryBuilder($category, true);
+        $catQb = $categoryRepo->getChildrenQueryBuilder($category, true, null, 'ASC', true);
 
         $query     = $em->getRepository(Product::class)->getProductByCategory($catQb);
         $products  = $this->get('knp_paginator')->paginate(
@@ -51,7 +51,7 @@ class DefaultController extends Controller
         return $this->render('default/category.html.twig', [
             'category' => $category,
             'products' => $products,
-            'title' => $title,
+            'title'    => $title,
         ]);
     }
 
@@ -94,8 +94,11 @@ class DefaultController extends Controller
         $em   = $this->getDoctrine()->getManager();
         $repo = $em->getRepository(Category::class);
 
-        if(is_int($node))
+        if(is_scalar($node)){
             $node = $repo->find($node);
+            if(null === $node) throw $this->createNotFoundException();
+        }
+
 
         return $this->render('default/breadcrumbs.html.twig', [
             'breadcrumbs' => $repo->getPathQuery($node)->getArrayResult(),

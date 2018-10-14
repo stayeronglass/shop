@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -12,7 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends BaseUser
 {
-    
+    use SoftDeleteableEntity;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
