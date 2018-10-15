@@ -22,6 +22,33 @@ class LkController extends Controller
         ]);
     }
 
+
+    /**
+     * @Route("/orders", name="orders")
+     */
+    public function orders(){}
+
+
+    /**
+     * @Route("/messages", name="messages")
+     */
+    public function messages(){}
+
+
+    /**
+     * @Route("/addresses", name="addresses")
+     */
+    public function addresses(){}
+
+
+    /**
+     * @Route("/personal", name="personal")
+     */
+    public function personal(){
+        return $this->render('lk/personal.html.twig', [
+        ]);
+    }
+
     public function header(){
         return $this->render('lk/header.html.twig', [
         ]);

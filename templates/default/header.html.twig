@@ -43,7 +43,7 @@
             {% endif %}
         </div>
         <div id="navigation" class="navbar-collapse collapse">
-            <div class=" col-lg-6">
+            <div class="w-50">
                 <form class="navbar-form" role="search" method="get" action="{{ path('search_index') }}">
                 <div class="input-group">
                     <input name="q" type="text" class="form-control" placeholder="{% trans %}What are you looking for{% endtrans %}?" value="{{ q }}">
@@ -53,7 +53,7 @@
                 </div>
                 </form>
             </div>
-            <div class="d-none d-lg-block">
+            <div class="d-none d-lg-block ml-auto">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <a href="{{ path('cart_index') }}" class="btn btn-outline-primary mr-1 d-lg-none">
                         <i class="fa fa-shopping-cart"></i>
