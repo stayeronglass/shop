@@ -133,10 +133,15 @@
                 <source>no item in cart</source>
                 <target>корзина пуста ;(</target>
             </trans-unit>
-            <trans-unit id="personal_account">
+            <trans-unit id="Personal_account">
                 <source>Personal account</source>
                 <target>Личный кабинет</target>
             </trans-unit>
+            <trans-unit id="personal_account">
+                <source>personal account</source>
+                <target>личный кабинет</target>
+            </trans-unit>
+
             <trans-unit id="out_of_stock">
                 <source>Out of stock</source>
                 <target>Нет в наличии</target>
@@ -174,6 +179,12 @@
                 <source>update cart</source>
                 <target>пересчитать</target>
             </trans-unit>
+
+            <trans-unit id="checkout">
+                <source>Checkout</source>
+                <target>Оплата</target>
+            </trans-unit>
+
             <trans-unit id="proceed_to_checkout">
                 <source>proceed to checkout</source>
                 <target>к оплате</target>
