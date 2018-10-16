@@ -6,28 +6,7 @@
 <div class="col-md-9">
     <div class="info-bar">
         <div class="row">
-            <div class="col-lg-4 products-showing">Showing <strong>{{ products.count }}</strong> of <strong>{{ products.getTotalItemCount }}</strong> products</div>
-            <div class="col-lg-8 products-number-sort">
-                <form class="form-inline"></form>
-                <div class="row">
-                    <div class="col-6 col-lg-7">
-                        <div class="products-number"><strong>Show</strong><a href="#" class="btn btn-sm btn-outline-primary mr-1">12</a>
-                            <a href="#" class="btn btn-outline-secondary btn-sm mr-1">24</a>
-                            <a href="#" class="btn btn-outline-secondary btn-sm mr-1">All</a>
-                            products
-                        </div>
-                    </div>
-                    <div class="col-6 col-lg-5">
-                        <div class="products-sort-by d-flex justify-content-end"><strong>Sort by</strong>
-                            <select name="sort-by" class="form-control form-control-sm">
-                                <option>Price</option>
-                                <option>Name</option>
-                                <option>Sales first</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="col-lg-4 products-showing capitalize_first_letter">{% trans %}showing{% endtrans %} <strong>{{ products.getTotalItemCount }}</strong> {% trans %}of{% endtrans %} <strong>{{ products.getTotalItemCount }}</strong> {% trans %}products{% endtrans %}</div>
         </div>
     </div>
 

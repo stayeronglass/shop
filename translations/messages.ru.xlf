@@ -193,6 +193,18 @@
                 <source>some.translation.key</source>
                 <target>{0} коробочек|{1} коробочка|[2,Inf] коробочки</target>
             </trans-unit>
+            <trans-unit id="showing">
+                <source>showing</source>
+                <target>показано</target>
+            </trans-unit>
+            <trans-unit id="of">
+                <source>of</source>
+                <target>из</target>
+            </trans-unit>
+            <trans-unit id="products">
+                <source>products</source>
+                <target>коробочек</target>
+            </trans-unit>
 
         </body>
     </file>
