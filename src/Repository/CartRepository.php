@@ -6,6 +6,7 @@ use App\Entity\Cart;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\ORM\Query;
+use Doctrine\ORM\Query\Expr;
 
 /**
  * @method Cart|null find($id, $lockMode = null, $lockVersion = null)
@@ -26,17 +27,18 @@ class CartRepository extends ServiceEntityRepository
             ->andWhere('c.user_id = :user_id')
             ->setParameter('user_id', $uid)
             ->getQuery()
-            ->getResult(Query::HYDRATE_ARRAY);
+            ->getResult(Query::HYDRATE_SCALAR);
     }
 
     public function getFullCartByUser($uid){
         return $this->createQueryBuilder('c')
-            ->select('c.id, c.amount, p.id as pid, p.title, p.price')
+            ->select('c.id, c.amount, p.id as pid, p.title, p.price, i.name as image_name, i.ext as image_ext ')
             ->innerJoin('c.product', 'p')
+            ->innerJoin('p.images', 'i',Expr\Join::WITH, 'i.main = 1')
             ->andWhere('c.user_id = :user_id')
             ->setParameter('user_id', $uid)
             ->orderBy('c.id', 'ASC')
             ->getQuery()
-            ->getResult(Query::HYDRATE_ARRAY);
+            ->getResult(Query::HYDRATE_SCALAR);
     }
 }

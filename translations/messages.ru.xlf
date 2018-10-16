@@ -142,6 +142,46 @@
                 <target>Нет в наличии</target>
             </trans-unit>
 
+            <trans-unit id="сontinue_shopping">
+                <source>сontinue shopping</source>
+                <target>продолжить покупки</target>
+            </trans-unit>
+            <trans-unit id="total">
+                <source>total</source>
+                <target>итого</target>
+            </trans-unit>
+            <trans-unit id="product">
+                <source>product</source>
+                <target>товар</target>
+            </trans-unit>
+            <trans-unit id="quantity">
+                <source>quantity</source>
+                <target>количество</target>
+            </trans-unit>
+            <trans-unit id="unit_price">
+                <source>unit price</source>
+                <target>цена</target>
+            </trans-unit>
+            <trans-unit id="discount">
+                <source>discount</source>
+                <target>скидка</target>
+            </trans-unit>
+            <trans-unit id="shopping_cart">
+                <source>shopping cart</source>
+                <target>корзина</target>
+            </trans-unit>
+            <trans-unit id="update_cart">
+                <source>update cart</source>
+                <target>пересчитать</target>
+            </trans-unit>
+            <trans-unit id="proceed_to_checkout">
+                <source>proceed to checkout</source>
+                <target>к оплате</target>
+            </trans-unit>
+            <trans-unit id="1">
+                <source>some.translation.key</source>
+                <target>{0} коробочек|{1} коробочка|[2,Inf] коробочки</target>
+            </trans-unit>
 
         </body>
     </file>

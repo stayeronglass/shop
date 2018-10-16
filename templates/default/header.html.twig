@@ -19,7 +19,7 @@
                     <i class="fa fa-shopping-cart"></i>
                     <span class="d-none d-sm-inline">
                         {% if cart_items != 0 %}
-                            <span id="cart_items_count">{{ cart_items }}</span> items {% trans %}in cart{% endtrans %}
+                            <span id="cart_items_count">{{ cart_items }}</span> {{ 'some.translation.key'|transchoice(cart_items) }} {% trans %}in cart{% endtrans %}
                         {% else %}
                             {% trans %}no item in cart{% endtrans %}
                         {% endif %}
@@ -29,7 +29,7 @@
                     <i class="fa fa-shopping-cart"></i>
                     <span class="hidden-sm">
                         {% if cart_items != 0 %}
-                            <span id="cart_items_count">{{ cart_items }}</span> items <span class="hidden-md">{% trans %}in cart{% endtrans %}</span>
+                            <span id="cart_items_count">{{ cart_items }}</span> {{ 'some.translation.key'|transchoice(cart_items) }} <span class="hidden-md">{% trans %}in cart{% endtrans %}</span>
                         {% else %}
                             <span class="hidden-md">{% trans %}no item in cart{% endtrans %}</span>
                         {% endif %}
@@ -59,7 +59,7 @@
                         <i class="fa fa-shopping-cart"></i>
                         <span class="d-none d-sm-inline">
                             {% if cart_items != 0 %}
-                                <span id="cart_items_count">{{ cart_items }}</span> items {% trans %}in cart{% endtrans %}
+                                <span id="cart_items_count">{{ cart_items }}</span> {{ 'some.translation.key'|transchoice(cart_items) }} {% trans %}in cart{% endtrans %}
                             {% else %}
                                 {% trans %}no item in cart{% endtrans %}
                             {% endif %}
@@ -68,7 +68,7 @@
                     <a href="{{ path('cart_index') }}" class="btn btn-outline-primary d-none d-lg-inline-block">
                         <i class="fa fa-shopping-cart"></i><span class="hidden-sm">
                         {% if cart_items != 0 %}
-                            <span id="cart_items_count">{{ cart_items }}</span> items <span class="hidden-md">{% trans %}in cart{% endtrans %}</span>
+                            <span id="cart_items_count">{{ cart_items }}</span> {{ 'some.translation.key'|transchoice(cart_items) }} <span class="hidden-md">{% trans %}in cart{% endtrans %}</span>
                         {% else %}
                             <span class="hidden-md">{% trans %}no item in cart{% endtrans %}</span>
                         {% endif %}
