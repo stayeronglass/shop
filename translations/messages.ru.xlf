@@ -35,6 +35,12 @@
                 <source>Add to cart</source>
                 <target>В корзину</target>
             </trans-unit>
+
+            <trans-unit id="sale">
+                <source>sale</source>
+                <target>распродажа</target>
+            </trans-unit>
+
             <trans-unit id="price">
                 <source>price</source>
                 <target>цена</target>

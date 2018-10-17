@@ -89,19 +89,20 @@ class DefaultController extends Controller
     /**
      * @Route("/breadcrumbs", name="breadcrumbs")
      */
-    public function breadcrumbs($node)
+    public function breadcrumbs($node, $product = null)
     {
         $em   = $this->getDoctrine()->getManager();
         $repo = $em->getRepository(Category::class);
 
-        if(is_scalar($node)){
+        if (is_scalar($node)){
             $node = $repo->find($node);
-            if(null === $node) throw $this->createNotFoundException();
         }
 
+        if (null === $node) throw $this->createNotFoundException();
 
         return $this->render('default/breadcrumbs.html.twig', [
-            'breadcrumbs' => $repo->getPathQuery($node)->getArrayResult(),
+            'breadcrumbs' => $repo->getPathQuery($node)->getScalarResult(),
+            'product'     => $product,
         ]);
     }
 }

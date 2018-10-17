@@ -1,0 +1,18 @@
+<div class="col-lg-3">
+    <!--  *** CUSTOMER MENU ***-->
+    <div class="card sidebar-menu">
+        <div class="card-header">
+            <h5 class="mb-0 text-uppercase">{% trans %}Customer section{% endtrans %}</h5>
+        </div>
+        <div class="card-body">
+            <ul class="nav nav-pills flex-column">
+                <li><a href="{{ path('my_orders') }}" class="nav-link active"><i class="fa fa-list"></i>{% trans %}My orders{% endtrans %}</a></li>
+                <li><a href="{{ path('my_addresses') }}" class="nav-link"><i class="fa fa-heart"></i>{% trans %}My messages{% endtrans %}</a></li>
+                <li><a href="{{ path('my_account') }}" class="nav-link"><i class="fa fa-user"></i>{% trans %}My account{% endtrans %}</a></li>
+                <li><a href="{{ path('fos_user_security_logout') }}" class="nav-link"><i class="fa fa-sign-out"></i>{% trans %}Logout{% endtrans %}</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- *** CUSTOMER MENU END ***-->
+</div>
+<!--  *** RIGHT COLUMN END***-->

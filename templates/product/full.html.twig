@@ -3,7 +3,7 @@
 {% block title %}{{ product.title }} - купить {% endblock %}
 
 {% block body %}
-            {{ render(controller('App\\Controller\\DefaultController::breadcrumbs',{ 'node': product.categories[0] } )) }}
+            {{ render(controller('App\\Controller\\DefaultController::breadcrumbs',{ 'node': product.categories[0], 'product': product } )) }}
             <div class="box text-center">
                 <div class="row">
                     <div class="col-md-10 offset-md-1">
@@ -30,9 +30,6 @@
                         </div>
                         <div class="col-md-6">
                             <form>
-                                <div class="sizes">
-                                    <h3>{% trans %}Available sizes{% endtrans %}</h3>
-                                </div>
                                 <p class="price capitalize_first_letter">{% trans %}price{% endtrans %}: {{ product.price }} &#8381;</p>
                                 <p class="text-center">
                                     {% if product.outOfStock %}

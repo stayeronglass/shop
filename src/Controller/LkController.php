@@ -42,7 +42,7 @@ class LkController extends Controller
 
 
     /**
-     * @Route("/personal", name="personal")
+     * @Route("/account", name="account")
      */
     public function personal(){
         return $this->render('lk/personal.html.twig', [
@@ -58,5 +58,10 @@ class LkController extends Controller
         return $this->render('lk/footer.html.twig', [
         ]);
 
+    }
+
+    public function right(){
+        return $this->render('lk/right.html.twig', [
+        ]);
     }
 }
