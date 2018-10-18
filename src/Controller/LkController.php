@@ -28,7 +28,9 @@ class LkController extends Controller
      */
     public function orders()
     {
+        $orders = [];
         return $this->render('lk/orders.html.twig', [
+            'orders' => $orders,
         ]);
     }
 
@@ -38,7 +40,9 @@ class LkController extends Controller
      */
     public function messages()
     {
+        $messages = [];
         return $this->render('lk/messages.html.twig', [
+            'messages' => $messages,
         ]);
     }
 
@@ -48,7 +52,9 @@ class LkController extends Controller
      */
     public function addresses()
     {
+        $addresses = [];
         return $this->render('lk/addresses.html.twig', [
+            'addresses' => $addresses,
         ]);
     }
 
@@ -56,16 +62,20 @@ class LkController extends Controller
     /**
      * @Route("/account", name="account")
      */
-    public function personal(){
+    public function personal()
+    {
+
         return $this->render('lk/personal.html.twig', [
         ]);
     }
+
 
     public function header()
     {
         return $this->render('lk/header.html.twig', [
         ]);
     }
+
 
     public function footer()
     {
@@ -74,9 +84,10 @@ class LkController extends Controller
 
     }
 
-    public function right()
+    public function right($active = 'index')
     {
         return $this->render('lk/right.html.twig', [
+            'active' => $active,
         ]);
     }
 }

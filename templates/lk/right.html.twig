@@ -3,9 +3,11 @@
     <div class="card sidebar-menu">
         <div class="card-body">
             <ul class="nav nav-pills flex-column">
-                <li><a href="{{ path('my_account') }}" class="nav-link active"><i class="fa fa-user"></i>{% trans %}my account{% endtrans %}</a></li>
-                <li><a href="{{ path('my_orders') }}" class="nav-link "><i class="fa fa-list"></i>{% trans %}my orders{% endtrans %}</a></li>
-                <li><a href="{{ path('my_addresses') }}" class="nav-link"><i class="fa fa-heart"></i>{% trans %}my messages{% endtrans %}</a></li>
+                <li><a href="{{ path('my_main') }}" class="nav-link {% if 'index' == active %} active {% endif %}"><i class="fa fa-users"></i>{% trans %}my main{% endtrans %}</a></li>
+                <li><a href="{{ path('my_account') }}" class="nav-link {% if 'account' == active %} active {% endif %}"><i class="fa fa-user"></i>{% trans %}my account{% endtrans %}</a></li>
+                <li><a href="{{ path('my_orders') }}" class="nav-link {% if 'orders' == active %} active {% endif %}"><i class="fa fa-list"></i>{% trans %}my orders{% endtrans %}</a></li>
+                <li><a href="{{ path('my_messages') }}" class="nav-link {% if 'message' == active %} active {% endif %}"><i class="fa fa-heart"></i>{% trans %}my messages{% endtrans %}</a></li>
+                <li><a href="{{ path('my_addresses') }}" class="nav-link {% if 'address' == active %} active {% endif %}"><i class="fa fa-heart"></i>{% trans %}my addresses{% endtrans %}</a></li>
                 <li><a href="{{ path('fos_user_security_logout') }}" class="nav-link"><i class="fa fa-sign-out"></i>{% trans %}logout{% endtrans %}</a></li>
             </ul>
         </div>

@@ -14,11 +14,15 @@
     <div class="row">
         <!-- *** LEFT COLUMN ***-->
         <div id="customer-account" class="col-lg-9">
+            {% if orders %}
+            {% else %}
+                <p>you have no orders!</p>
+            {% endif %}
         </div>
         <!-- *** LEFT COLUMN END ***-->
 
         <!--  *** RIGHT COLUMN ***-->
-        {{ render(controller('App\\Controller\\LkController::right')) }}
+        {{ render(controller('App\\Controller\\LkController::right', { 'active': 'orders'} )) }}
         <!--  *** RIGHT COLUMN END ***-->
     </div>
 

@@ -18,7 +18,7 @@
         <!-- *** LEFT COLUMN END ***-->
 
         <!--  *** RIGHT COLUMN ***-->
-        {{ render(controller('App\\Controller\\LkController::right')) }}
+        {{ render(controller('App\\Controller\\LkController::right', { 'active': 'account'} )) }}
         <!--  *** RIGHT COLUMN END ***-->
     </div>
 

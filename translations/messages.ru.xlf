@@ -232,6 +232,11 @@
                 <source>orders information</source>
                 <target>информация по заказам</target>
             </trans-unit>
+            <trans-unit id="my_messages">
+                <source>my messages</source>
+                <target>мои сообщения</target>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>
