@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-7 offset-3">
         <div class="box" style="border: none;">
-            <h1 class="text-capitalize">{% trans %}new account{% endtrans %}</h1>
+            <h1 class="capitalize_first_letter">{% trans %}new account{% endtrans %}</h1>
             <p>
                 With registration with us new world of fashion, fantastic discounts and much more opens to you! The whole process
                 will not take you more than a minute!
@@ -18,10 +18,12 @@
         </div>
 
         <hr />
-        <p class="text-muted">
-            {% trans %}already registered{% endtrans %}?
-            <a class="text-capitalize" href="{{ path('fos_user_security_login') }}">{% trans %}log in here{% endtrans %}</a>.
-        </p>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <td class="capitalize_first_letter text-right">{% trans %}already registered{% endtrans %}? &nbsp;</td>
+                <td class="capitalize_first_letter"><a class="capitalize_first_letter" href="{{ path('fos_user_security_login') }}">{% trans %}log in here{% endtrans %}</a>.</td>
+            </tr>
+        </table>
     </div>
 </div>
 

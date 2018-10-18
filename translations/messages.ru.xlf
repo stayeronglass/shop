@@ -84,7 +84,7 @@
             </trans-unit>
             <trans-unit id="already_registered">
                 <source>already registered</source>
-                <target>Уже зарегистрированы</target>
+                <target>уже зарегистрированы</target>
             </trans-unit>
 
 
