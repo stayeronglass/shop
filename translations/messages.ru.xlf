@@ -216,7 +216,22 @@
                 <source>products</source>
                 <target>коробочек</target>
             </trans-unit>
-
+            <trans-unit id="my_account">
+                <source>my account</source>
+                <target>мои данные</target>
+            </trans-unit>
+            <trans-unit id="my_account_text">
+                <source>change your personal details or your password here</source>
+                <target>здесь можно сменить пароль или другую личную иформацию</target>
+            </trans-unit>
+            <trans-unit id="my_orders">
+                <source>my orders</source>
+                <target>мои заказы</target>
+            </trans-unit>
+            <trans-unit id="my_orders_text">
+                <source>orders information</source>
+                <target>информация по заказам</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

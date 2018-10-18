@@ -1,7 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}Hello {% endblock %}
 
 {% block body %}
+    <div class="box text-center">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <h1 class="capitalize_first_letter">{% trans %}my messages{% endtrans %}</h1>
+                <p class="lead capitalize_first_letter">{% trans %}my messages info{% endtrans %}.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!-- *** LEFT COLUMN ***-->
+        <div id="customer-account" class="col-lg-9">
+        </div>
+        <!-- *** LEFT COLUMN END ***-->
+
+        <!--  *** RIGHT COLUMN ***-->
+        {{ render(controller('App\\Controller\\LkController::right')) }}
+        <!--  *** RIGHT COLUMN END ***-->
+    </div>
 
 {% endblock %}
