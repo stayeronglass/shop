@@ -17,10 +17,12 @@
                         <div class="col-md-6">
                             {% set im = images[0] %}
                             <div id="mainImage"><img src="/upload/{{ im.name[:1] }}/{{ im.name[1:1] }}/{{ im.name}}.{{ im.ext}}" alt="" class="img-fluid"></div>
-                            <div class="ribbon sale">
-                                <div class="theribbon">{% trans %}sale{% endtrans %}</div>
-                                <div class="ribbon-background"></div>
-                            </div>
+                            {% if product.salePrice %}
+                                <div class="ribbon sale">
+                                    <div class="theribbon">{% trans %}sale{% endtrans %}</div>
+                                    <div class="ribbon-background"></div>
+                                </div>
+                            {% endif %}
                             {% if product.new %}
                                 <div class="ribbon new">
                                     <div class="theribbon">{% trans %}new{% endtrans %}</div>
@@ -30,7 +32,13 @@
                         </div>
                         <div class="col-md-6">
                             <form>
-                                <p class="price capitalize_first_letter">{% trans %}price{% endtrans %}: {{ product.price }} &#8381;</p>
+                                <p class="price capitalize_first_letter">{% trans %}price{% endtrans %}:
+                                    {% if product.salePrice %}
+                                        {{ product.salePrice }} &#8381;
+                                    {% else %}
+                                        {{ product.price }} &#8381;
+                                    {% endif %}
+                                </p>
                                 <p class="text-center">
                                     {% if product.outOfStock %}
                                         {% trans %}Out of stock{% endtrans %}

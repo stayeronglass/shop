@@ -41,6 +41,11 @@
                 <target>распродажа</target>
             </trans-unit>
 
+            <trans-unit id="new">
+                <source>new</source>
+                <target>новинка</target>
+            </trans-unit>
+
             <trans-unit id="price">
                 <source>price</source>
                 <target>цена</target>

@@ -35,6 +35,11 @@ class Product
     private $price;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $salePrice = null;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Category", inversedBy="products")
      */
     private $categories;
@@ -121,6 +126,18 @@ class Product
         return $this;
     }
 
+    public function getSalePrice(): ?int
+    {
+        return $this->salePrice;
+    }
+
+    public function setSalePrice(?int $salePrice): self
+    {
+        $this->salePrice = $salePrice;
+
+        return $this;
+    }
+
     public function getManufacturerId(): ?int
     {
         return $this->manufacturer_id;
@@ -162,7 +179,7 @@ class Product
         return $this->outOfStock;
     }
 
-    public function setOutOfStock(bool $outOfStock): self
+    public function setOutOfStock(?bool $outOfStock): self
     {
         $this->outOfStock = $outOfStock;
 
