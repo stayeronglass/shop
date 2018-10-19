@@ -48,18 +48,6 @@ class LkController extends Controller
 
 
     /**
-     * @Route("/addresses", name="addresses")
-     */
-    public function addresses()
-    {
-        $addresses = [];
-        return $this->render('lk/addresses.html.twig', [
-            'addresses' => $addresses,
-        ]);
-    }
-
-
-    /**
      * @Route("/account", name="account")
      */
     public function personal()
