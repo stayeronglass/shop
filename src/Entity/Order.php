@@ -15,6 +15,8 @@ class Order
 {
     use TimestampableEntity, SoftDeleteableEntity;
 
+    const ORDER_STATUS_CREATED = 1;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -30,47 +32,18 @@ class Order
     private $user_id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Address", inversedBy="orders")
-     * @ORM\JoinColumn(name="address_id", referencedColumnName="id")
-     */
-    private $address;
-    private $address_id;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Product")
-     */
-    private $products;
-
-    /**
-     * @ORM\Column(type="bigint", nullable=false)
-     */
-    private $total;
-
-    /**
      * @ORM\Column(type="integer", nullable=false)
      */
-    private $status = 1;
+    private $status = self::ORDER_STATUS_CREATED;
 
-    public function __construct()
-    {
-        $this->products = new ArrayCollection();
-    }
+    /**
+     * @ORM\Column(type="array", nullable=false)
+     */
+    private $data;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getTotal(): ?int
-    {
-        return $this->total;
-    }
-
-    public function setTotal(int $total): self
-    {
-        $this->total = $total;
-
-        return $this;
     }
 
     public function getStatus(): ?int
@@ -81,6 +54,18 @@ class Order
     public function setStatus(int $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getData(): ?array
+    {
+        return $this->data;
+    }
+
+    public function setData(array $data): self
+    {
+        $this->data = $data;
 
         return $this;
     }
@@ -97,42 +82,5 @@ class Order
         return $this;
     }
 
-    public function getAddress(): ?Address
-    {
-        return $this->address;
-    }
-
-    public function setAddress(?Address $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Product[]
-     */
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
-
-    public function addProduct(Product $product): self
-    {
-        if (!$this->products->contains($product)) {
-            $this->products[] = $product;
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Product $product): self
-    {
-        if ($this->products->contains($product)) {
-            $this->products->removeElement($product);
-        }
-
-        return $this;
-    }
 
 }

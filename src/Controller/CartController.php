@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @Route("/cart", name="cart_")
@@ -33,7 +34,7 @@ class CartController extends Controller
     /**
      * @Route("/add", name="add")
      */
-    public function add(Request $request)
+    public function add(Request $request, TranslatorInterface $translator)
     {
         $em      = $this->getDoctrine()->getManager();
         $product = $em->getRepository(Product::class)->find($request->get('product_id'));
@@ -45,7 +46,7 @@ class CartController extends Controller
         $cart
             ->setUser($user)
             ->setProduct($product)
-            ->setAmount(1)
+            ->setAmount($request->get('amount', 1))
         ;
         $em->persist($cart);
         $em->flush();
@@ -54,7 +55,7 @@ class CartController extends Controller
 
         $result = [
           'message'       => 'Товар добавлен в корзину',
-          'cart_message'  => count($cart),
+          'cart_message'  => count($cart) .' '. $translator->transChoice('some.translation.key', count($cart) ).' '. $translator->trans('in cart'),
           'error_message' => '',
         ];
 
@@ -67,7 +68,7 @@ class CartController extends Controller
     public function remove($id){
 
         $em   = $this->getDoctrine()->getManager();
-        $cart = $em->getRepository(Cart::class)->findBy(['id' => $id, 'user_id' => $this->getUser()->getId()]);
+        $cart = $em->getRepository(Cart::class)->findOneBy(['id' => $id, 'user_id' => $this->getUser()->getId()]);
 
         if ($cart){
             $em->remove($cart);
