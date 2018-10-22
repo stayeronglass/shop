@@ -20,14 +20,15 @@ class CartController extends Controller
     /**
      * @Route("/", name="index")
      */
-    public function index()
+    public function index(TranslatorInterface $translator)
     {
         $em      = $this->getDoctrine()->getManager();
         $user    = $this->getUser();
         $cart   = $em->getRepository(Cart::class)->getFullCartByUser($user->getId());
 
+
         return $this->render('cart/index.html.twig', [
-            'cart' => $cart,
+            'cart'  => $cart,
         ]);
     }
 
@@ -54,7 +55,7 @@ class CartController extends Controller
         $cart   = $em->getRepository(Cart::class)->getCartByUser($user->getId());
 
         $result = [
-          'message'       => 'Товар добавлен в корзину',
+          'alert_message'       => 'Товар добавлен в корзину',
           'cart_message'  => count($cart) .' '. $translator->transChoice('some.translation.key', count($cart) ).' '. $translator->trans('in cart'),
           'error_message' => '',
         ];
@@ -65,8 +66,8 @@ class CartController extends Controller
     /**
      * @Route("/remove/{id}", name="remove")
      */
-    public function remove($id){
-
+    public function remove($id, TranslatorInterface $translator)
+    {
         $em   = $this->getDoctrine()->getManager();
         $cart = $em->getRepository(Cart::class)->findOneBy(['id' => $id, 'user_id' => $this->getUser()->getId()]);
 
@@ -75,7 +76,12 @@ class CartController extends Controller
             $em->flush();
         }
 
+        $cartItems   = $em->getRepository(Cart::class)->getCartByUser($this->getUser()->getId());
+
         $result = [
+            'alert_message' => '',
+            'cart_message'  => count($cartItems) .' '. $translator->transChoice('some.translation.key', count($cartItems) ).' '. $translator->trans('in cart'),
+            'error_message' => '',
         ];
 
         return new JsonResponse($result);
@@ -84,7 +90,8 @@ class CartController extends Controller
     /**
      * @Route("/checkout", name="checkout")
      */
-    public function checkout(Request $request){
+    public function checkout(Request $request)
+    {
 
         return $this->render('cart/checkout.html.twig',[
 
