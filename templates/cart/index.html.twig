@@ -55,7 +55,7 @@
                 <div class="box-footer">
                     <div class="pull-left"><a href="{{ path('main') }}" class="btn btn-outline-white-secondary capitalize_first_letter"><i class="fa fa-chevron-left"></i>{% trans %}сontinue shopping{% endtrans %}</a></div>
                     <div class="pull-right">
-                        {% if total %}
+                        {% if cart is not empty %}
                             <button class="btn btn-outline-white-secondary capitalize_first_letter"><i class="fa fa-refresh"></i>{% trans %}update cart{% endtrans %}</button>
                             <button type="submit" class="btn btn-outline-white-primary capitalize_first_letter">{% trans %}proceed to checkout{% endtrans %}<i class="fa fa-chevron-right"></i></button>
                         {% endif %}

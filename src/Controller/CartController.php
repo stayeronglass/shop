@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Cart;
+use App\Entity\Order;
 use App\Entity\Product;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,9 +23,9 @@ class CartController extends Controller
      */
     public function index(TranslatorInterface $translator)
     {
-        $em      = $this->getDoctrine()->getManager();
-        $user    = $this->getUser();
-        $cart   = $em->getRepository(Cart::class)->getFullCartByUser($user->getId());
+        $em   = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $cart = $em->getRepository(Cart::class)->getFullCartByUser($user->getId());
 
 
         return $this->render('cart/index.html.twig', [
@@ -93,8 +94,39 @@ class CartController extends Controller
     public function checkout(Request $request)
     {
 
-        return $this->render('cart/checkout.html.twig',[
+        $user  = $this->getUser();
+        $em    = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository(Cart::class);
+        $cart  = $repository->getCartByUser($user->getId());
+        $cart  = $repository->find($cart[0]['id']);
+        $order = new Order();
+        $data  = [];
 
+        $fullCart = $repository->getFullCartByUser($user->getId());
+        $total = 0;
+
+        foreach ($fullCart as $item):
+            $data[] = [
+                'title'  => $item['title'],
+                'price'  => $item['price'],
+                'amount' => $item['amount'],
+            ];
+            $total = $total + $item['price'] * $item['amount'];
+        endforeach;
+
+        $data['total'] = $total;
+        $order
+            ->setUser($user)
+            ->setData($data)
+        ;
+
+
+        $em->persist($order);
+        $em->remove($cart);
+        $em->flush();
+
+        return $this->render('cart/checkout.html.twig', [
+            'order' => $order,
         ]);
     }
 }
