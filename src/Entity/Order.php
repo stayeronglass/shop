@@ -26,7 +26,7 @@ class Order
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="orders")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;

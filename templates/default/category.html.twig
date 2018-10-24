@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ title }} - купить {% endblock %}
+{% block title %}{{ title|capitalize }} - купить {% endblock %}
 
 {% block body %}
     {{ render(controller('App\\Controller\\DefaultController::breadcrumbs',{ 'node': category } )) }}

@@ -97,15 +97,11 @@ class CartController extends Controller
         $user  = $this->getUser();
         $em    = $this->getDoctrine()->getManager();
         $repository = $em->getRepository(Cart::class);
-        $cart  = $repository->getCartByUser($user->getId());
-        $cart  = $repository->find($cart[0]['id']);
-        $order = new Order();
-        $data  = [];
 
-        $fullCart = $repository->getFullCartByUser($user->getId());
+        $data  = [];
         $total = 0;
 
-        foreach ($fullCart as $item):
+        foreach ($repository->getFullCartByUser($user->getId()) as $item):
             $data[] = [
                 'title'  => $item['title'],
                 'price'  => $item['price'],
@@ -114,16 +110,18 @@ class CartController extends Controller
             $total = $total + $item['price'] * $item['amount'];
         endforeach;
 
-        $data['total'] = $total;
-        $order
-            ->setUser($user)
-            ->setData($data)
-        ;
+        if (!empty($data)){
+            $order = new Order();
+            $data['total'] = $total;
+            $order
+                ->setUser($user)
+                ->setData($data)
+            ;
 
-
-        $em->persist($order);
-        $em->remove($cart);
-        $em->flush();
+            $em->persist($order);
+            $em->flush();
+            $repository->clearCartByUser($user->getId());
+        }
 
         return $this->render('cart/checkout.html.twig', [
             'order' => $order,

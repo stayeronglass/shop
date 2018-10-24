@@ -41,4 +41,15 @@ class CartRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult(Query::HYDRATE_SCALAR);
     }
+
+    public function clearCartByUser($uid)
+    {
+        return $this->createQueryBuilder('c')
+            ->delete()
+            ->where('c.user_id = :user_id')
+            ->setParameter('user_id' ,$uid)
+            ->getQuery()
+            ->getResult(Query::HYDRATE_SCALAR)
+        ;
+    }
 }

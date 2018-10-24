@@ -190,12 +190,6 @@
                 <source>update cart</source>
                 <target>пересчитать</target>
             </trans-unit>
-
-            <trans-unit id="checkout">
-                <source>Checkout</source>
-                <target>Оплата</target>
-            </trans-unit>
-
             <trans-unit id="proceed_to_checkout">
                 <source>proceed to checkout</source>
                 <target>к оплате</target>
@@ -235,6 +229,10 @@
             <trans-unit id="my_messages">
                 <source>my messages</source>
                 <target>мои сообщения</target>
+            </trans-unit>
+            <trans-unit id="checkout">
+                <source>checkout</source>
+                <target>оплата</target>
             </trans-unit>
 
         </body>

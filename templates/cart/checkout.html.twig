@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% trans %}checkout{% endtrans %}{% endblock %}
+{% block title %}{{ 'checkout'|trans|capitalize }}{% endblock %}
 
 {% block body %}
     {{ dump(order) }}

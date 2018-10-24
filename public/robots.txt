@@ -3,3 +3,4 @@ Allow: /
 
 Disallow: /search
 Disallow: /my
+Disallow: /cart
