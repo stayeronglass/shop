@@ -5,7 +5,7 @@
             <div class="close-btn"><i class="fa fa-close"></i></div>
             <form action="{{ path('search_index') }}" method="get">
                 <div class="form-group">
-                    <input type="search" name="q" id="search" placeholder="{% trans %}What are you looking for{% endtrans %}?" >
+                    <input type="search" name="q" required="required" id="search" placeholder="{% trans %}What are you looking for{% endtrans %}?" value="{{ q }}">
                     <button type="submit" class="submit"><i class="fa fa-search"></i></button>
                 </div>
             </form>
@@ -45,7 +45,7 @@
             <div class="w-100">
                 <form class="navbar-form" role="search" method="get" action="{{ path('search_index') }}">
                 <div class="input-group">
-                    <input name="q" type="text" class="form-control" placeholder="{% trans %}What are you looking for{% endtrans %}?" value="{{ q }}">
+                    <input name="q" type="text" required="required" class="form-control" placeholder="{% trans %}What are you looking for{% endtrans %}?" value="{{ q }}">
                     <div class="input-group-btn">
                         <button class="btn btn-outline-secondary  mr-1"><i class="fa fa-search"></i></button>
                     </div>
@@ -63,7 +63,7 @@
                             {% endif %}
                         </span>
                     </a>
-                    <a href="{{ path('cart_index') }}" class="btn btn-outline-primary d-none d-lg-inline-block">
+                    <a href="{{ path('cart_index') }}" class="btn btn-outline-primary d-none d-lg-inline-block" style="margin: 5px;">
                         <i class="fa fa-shopping-cart"></i><span class="hidden-sm">
                         {% if cart_items != 0 %}
                             <span id="cart_items_count">{{ cart_items }}</span> {{ 'some.translation.key'|transchoice(cart_items) }} <span class="hidden-md">{% trans %}in cart{% endtrans %}</span>
