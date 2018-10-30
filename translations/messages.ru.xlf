@@ -235,6 +235,59 @@
                 <target>оплата</target>
             </trans-unit>
 
+            <trans-unit id="where_to_find_us">
+                <source>where to find us</source>
+                <target>как нас найти</target>
+            </trans-unit>
+
+            <trans-unit id="Obaju_Ltd">
+                <source>obaju ltd</source>
+                <target>магазин "голова ногина"</target>
+            </trans-unit>
+            <trans-unit id="13_25_New_Avenue">
+                <source>13/25 New Avenue</source>
+                <target>м. Китай-город</target>
+            </trans-unit>
+            <trans-unit id="new_heaven">
+                <source>new heaven</source>
+                <target>ул. Покровка 2/1 с. 2</target>
+            </trans-unit>
+            <trans-unit id="go_to_contact_page">
+                <source>go to contact page</source>
+                <target>схема проезда</target>
+            </trans-unit>
+            <trans-unit id="great_britain">
+                <source>great britain</source>
+                <target>россия</target>
+            </trans-unit>
+            <trans-unit id="england">
+                <source>england</source>
+                <target>москва</target>
+            </trans-unit>
+
+            <trans-unit id="45Y_73J">
+                <source>45Y 73J</source>
+                <target></target>
+            </trans-unit>
+            <trans-unit id="terms_and_conditions">
+                <source>terms and conditions</source>
+                <target>договор оферты</target>
+            </trans-unit>
+            <trans-unit id="about_us">
+                <source>about us</source>
+                <target>о магазине</target>
+            </trans-unit>
+            <trans-unit id="contact_us">
+                <source>contact us</source>
+                <target>контакты</target>
+            </trans-unit>
+            <trans-unit id="faq">
+                <source>faq</source>
+                <target>faq</target>
+            </trans-unit>
+
+
+
         </body>
     </file>
 </xliff>

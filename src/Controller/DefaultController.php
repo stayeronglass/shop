@@ -105,4 +105,31 @@ class DefaultController extends Controller
             'product'     => $product,
         ]);
     }
+
+
+    /**
+     * @Route("/about", name="about")
+     */
+    public function about(){
+        return $this->render('default/about.html.twig', [
+        ]);
+    }
+
+
+    /**
+     * @Route("/faq", name="faq")
+     */
+    public function faq(){
+        return $this->render('default/faq.html.twig', [
+        ]);
+    }
+
+
+    /**
+     * @Route("/termsandconditions", name="termsandconditions")
+     */
+    public function termsandconditions(){
+        return $this->render('default/termsandconditions.html.twig', [
+        ]);
+    }
 }
