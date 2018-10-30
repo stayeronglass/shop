@@ -285,7 +285,14 @@
                 <source>faq</source>
                 <target>faq</target>
             </trans-unit>
-
+            <trans-unit id="pages">
+                <source>pages</source>
+                <target>информация</target>
+            </trans-unit>
+            <trans-unit id="user_sectionpages">
+                <source>user section</source>
+                <target>пользователи</target>
+            </trans-unit>
 
 
         </body>
