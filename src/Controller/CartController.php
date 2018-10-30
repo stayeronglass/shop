@@ -41,23 +41,38 @@ class CartController extends Controller
         $em      = $this->getDoctrine()->getManager();
         $product = $em->getRepository(Product::class)->find($request->get('product_id'));
         $user    = $this->getUser();
+        $cartRepo    = $em->getRepository(Cart::class);
+        $cartItems   = $cartRepo->getFullCartByUser($user->getId());
 
 
+        $found = false;
+        foreach ($cartItems as $item) {
+            if($item['pid'] == $product->getId()){
+                $found = true;
+                $cart  = $cartRepo->find($item['id']);
+                $cart->setAmount($cart->getAmount() + 1);
+                break;
+            }
+        }
 
-        $cart = new Cart();
-        $cart
-            ->setUser($user)
-            ->setProduct($product)
-            ->setAmount($request->get('amount', 1))
-        ;
+        if(!$found){
+            $cart = new Cart();
+            $cart
+                ->setUser($user)
+                ->setProduct($product)
+                ->setAmount($request->query->getInt('amount', 1))
+            ;
+        }
+
         $em->persist($cart);
         $em->flush();
 
-        $cart   = $em->getRepository(Cart::class)->getCartByUser($user->getId());
+        $cartItems = $cartRepo->getCartAmountByUser($user->getId())[0]['amount'];
 
         $result = [
-          'alert_message'       => 'Товар добавлен в корзину',
-          'cart_message'  => count($cart) .' '. $translator->transChoice('some.translation.key', count($cart) ).' '. $translator->trans('in cart'),
+          'alert_message' => 'Товар добавлен в корзину',
+          'full_cart_message'  => '<span id="cart_items_count">'.($cartItems).'</span>' . $translator->transChoice('some.translation.key', ($cartItems) ) .' ' . $translator->trans('in cart'),
+          'short_cart_message'  => '<span id="cart_items_count">'.($cartItems).'</span>' . $translator->transChoice('some.translation.key', ($cartItems) ).' '.'<span class="hidden-md">'. $translator->trans('in cart') . '</span>',
           'error_message' => '',
         ];
 

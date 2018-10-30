@@ -293,6 +293,14 @@
                 <source>user section</source>
                 <target>пользователи</target>
             </trans-unit>
+            <trans-unit id="top_categories">
+                <source>top categories</source>
+                <target>топ категорий</target>
+            </trans-unit>
+            <trans-unit id="stay_in_touch">
+                <source>stay in touch</source>
+                <target>мы в соцсетях</target>
+            </trans-unit>
 
 
         </body>

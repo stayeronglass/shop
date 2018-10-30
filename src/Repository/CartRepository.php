@@ -52,4 +52,13 @@ class CartRepository extends ServiceEntityRepository
             ->getResult(Query::HYDRATE_SCALAR)
         ;
     }
+
+    public function getCartAmountByUser($uid){
+        return $this->createQueryBuilder('c')
+            ->select('sum(c.amount) as amount')
+            ->andWhere('c.user_id = :user_id')
+            ->setParameter('user_id', $uid)
+            ->getQuery()
+            ->getResult(Query::HYDRATE_SCALAR);
+    }
 }

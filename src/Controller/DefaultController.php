@@ -70,8 +70,7 @@ class DefaultController extends Controller
         $items = 0;
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')){
             $em    = $this->getDoctrine()->getManager();
-            $cart  = $em->getRepository(Cart::class)->getCartByUser($this->getUser()->getId());
-            $items = count($cart);
+            $items = $em->getRepository(Cart::class)->getCartAmountByUser($this->getUser()->getId())[0]['amount'];
         }
 
         return $this->render('default/header.html.twig', [
@@ -121,6 +120,7 @@ class DefaultController extends Controller
      */
     public function faq(){
         return $this->render('default/faq.html.twig', [
+            'title' => 'FAQ',
         ]);
     }
 
