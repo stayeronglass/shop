@@ -38,11 +38,11 @@ class CartController extends Controller
      */
     public function add(Request $request, TranslatorInterface $translator)
     {
-        $em      = $this->getDoctrine()->getManager();
-        $product = $em->getRepository(Product::class)->find($request->get('product_id'));
-        $user    = $this->getUser();
-        $cartRepo    = $em->getRepository(Cart::class);
-        $cartItems   = $cartRepo->getFullCartByUser($user->getId());
+        $em        = $this->getDoctrine()->getManager();
+        $product   = $em->getRepository(Product::class)->find($request->get('product_id'));
+        $user      = $this->getUser();
+        $cartRepo  = $em->getRepository(Cart::class);
+        $cartItems = $cartRepo->getFullCartByUser($user->getId());
 
 
         $found = false;
@@ -67,7 +67,7 @@ class CartController extends Controller
         $em->persist($cart);
         $em->flush();
 
-        $cartItems = $cartRepo->getCartAmountByUser($user->getId())[0]['amount'];
+        $cartItems = $cartRepo->getCartAmountByUser($user->getId());
 
         $result = [
           'alert_message' => 'Товар добавлен в корзину',
@@ -84,19 +84,21 @@ class CartController extends Controller
      */
     public function remove($id, TranslatorInterface $translator)
     {
-        $em   = $this->getDoctrine()->getManager();
-        $cart = $em->getRepository(Cart::class)->findOneBy(['id' => $id, 'user_id' => $this->getUser()->getId()]);
+        $em       = $this->getDoctrine()->getManager();
+        $cartRepo = $em->getRepository(Cart::class);
+        $user     = $this->getUser();
+        $cart     = $cartRepo->findOneBy(['id' => $id, 'user_id' => $user->getId()]);
 
         if ($cart){
             $em->remove($cart);
             $em->flush();
         }
 
-        $cartItems   = $em->getRepository(Cart::class)->getCartByUser($this->getUser()->getId());
+        $cartItems = $cartRepo->getCartAmountByUser($user->getId());
 
         $result = [
             'alert_message' => '',
-            'cart_message'  => count($cartItems) .' '. $translator->transChoice('some.translation.key', count($cartItems) ).' '. $translator->trans('in cart'),
+            'cart_message'  => $cartItems .' '. $translator->transChoice('some.translation.key', $cartItems).' '. $translator->trans('in cart'),
             'error_message' => '',
         ];
 

@@ -5,8 +5,6 @@ namespace App\Repository;
 use App\Entity\Image;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-use Doctrine\ORM\Query;
-use Doctrine\ORM\Query\Expr;
 
 /**
  * @method Image|null find($id, $lockMode = null, $lockVersion = null)
@@ -29,7 +27,7 @@ class ImageRepository extends ServiceEntityRepository
             ->addOrderBy('i.id', 'ASC')
             ->setParameter('product_id', $product_id)
             ->getQuery()
-            ->getResult(Query::HYDRATE_SCALAR);
+            ->getScalarResult()
         ;
     }
 

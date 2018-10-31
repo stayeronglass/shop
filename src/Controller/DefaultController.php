@@ -70,7 +70,7 @@ class DefaultController extends Controller
         $items = 0;
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')){
             $em    = $this->getDoctrine()->getManager();
-            $items = $em->getRepository(Cart::class)->getCartAmountByUser($this->getUser()->getId())[0]['amount'];
+            $items = $em->getRepository(Cart::class)->getCartAmountByUser($this->getUser()->getId());
         }
 
         return $this->render('default/header.html.twig', [

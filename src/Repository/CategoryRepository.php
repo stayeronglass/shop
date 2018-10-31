@@ -3,11 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Category;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Query;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
-use Doctrine\ORM\Query\Expr;
 
 /**
  * @method Category|null find($id, $lockMode = null, $lockVersion = null)
@@ -24,7 +20,7 @@ class CategoryRepository extends NestedTreeRepository
             ->setParameter('main', 1)
             ->orderBy('p.id', 'ASC')
             ->getQuery()
-            ->getResult(Query::HYDRATE_ARRAY)
+            ->getArrayResult()
         ;
     }
 

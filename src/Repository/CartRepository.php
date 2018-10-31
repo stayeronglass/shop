@@ -5,7 +5,6 @@ namespace App\Repository;
 use App\Entity\Cart;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\Expr;
 
 /**
@@ -27,7 +26,8 @@ class CartRepository extends ServiceEntityRepository
             ->andWhere('c.user_id = :user_id')
             ->setParameter('user_id', $uid)
             ->getQuery()
-            ->getResult(Query::HYDRATE_SCALAR);
+            ->getScalarResult()
+            ;
     }
 
     public function getFullCartByUser($uid){
@@ -39,7 +39,8 @@ class CartRepository extends ServiceEntityRepository
             ->setParameter('user_id', $uid)
             ->orderBy('c.id', 'ASC')
             ->getQuery()
-            ->getResult(Query::HYDRATE_SCALAR);
+            ->getScalarResult()
+            ;
     }
 
     public function clearCartByUser($uid)
@@ -49,16 +50,18 @@ class CartRepository extends ServiceEntityRepository
             ->where('c.user_id = :user_id')
             ->setParameter('user_id' ,$uid)
             ->getQuery()
-            ->getResult(Query::HYDRATE_SCALAR)
+            ->getScalarResult()
         ;
     }
 
     public function getCartAmountByUser($uid){
-        return $this->createQueryBuilder('c')
+        $res =  $this->createQueryBuilder('c')
             ->select('sum(c.amount) as amount')
             ->andWhere('c.user_id = :user_id')
             ->setParameter('user_id', $uid)
             ->getQuery()
-            ->getResult(Query::HYDRATE_SCALAR);
+            ->getScalarResult();
+
+        return $res[0]['amount'] ?? 0;
     }
 }

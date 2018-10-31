@@ -196,7 +196,7 @@
             </trans-unit>
             <trans-unit id="1">
                 <source>some.translation.key</source>
-                <target>{0} коробочек|{1} коробочка|[2,Inf] коробочки</target>
+                <target>{0} коробочек|{1} коробочка|[2,5] коробочки|[6, Inf] коробочек</target>
             </trans-unit>
             <trans-unit id="showing">
                 <source>showing</source>

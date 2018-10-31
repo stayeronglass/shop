@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Entity\Category;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
@@ -32,13 +31,13 @@ class ProductRepository extends ServiceEntityRepository
             ->setParameter('banner', 1)
             ->orderBy('p.id', 'ASC')
             ->getQuery()
-            ->getResult(Query::HYDRATE_ARRAY);
+            ->getArrayResult()
         ;
     }
 
     public function searchProducts($q){
         return $this->searchProductsQuery($q)
-            ->getResult(Query::HYDRATE_ARRAY);
+            ->getArrayResult()
         ;
     }
 
