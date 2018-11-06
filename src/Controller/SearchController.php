@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 class SearchController extends Controller
 {
     /**
-     * @Route("/", name="index")
+     * @Route("/", name="index", methods="GET")
      */
     public function search(Request $request): Response
     {

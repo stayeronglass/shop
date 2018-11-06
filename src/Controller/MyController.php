@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Form\AddressType;
+use App\Repository\MessageRepository;
+use App\Repository\OrderRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -31,7 +33,7 @@ class MyController extends Controller
     /**
      * @Route("/orders", name="orders")
      */
-    public function orders(): Response
+    public function orders(OrderRepository $repository): Response
     {
         $orders = [];
         return $this->render('my/orders.html.twig', [
@@ -87,9 +89,9 @@ class MyController extends Controller
 
 
     /**
-     * @Route("/messages", name="messages")
+     * @Route("/messages", name="messages", methods="GET")
      */
-    public function messages(): Response
+    public function messages(MessageRepository $repository): Response
     {
         $messages = [];
         return $this->render('my/messages.html.twig', [

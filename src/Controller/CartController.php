@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 class CartController extends Controller
 {
     /**
-     * @Route("/", name="index")
+     * @Route("/", name="index", methods="GET"))
      */
     public function index(TranslatorInterface $translator): Response
     {

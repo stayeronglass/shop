@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="main")
+     * @Route("/", name="main", methods="GET")
      */
     public function index(): Response
     {
@@ -29,7 +29,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/category/{slug}", name="category")
+     * @Route("/category/{slug}", name="category", methods="GET"))
      */
     public function category($slug, Request $request): Response
     {
@@ -58,7 +58,7 @@ class DefaultController extends Controller
 
 
     /**
-     * @Route("/contacts", name="contacts")
+     * @Route("/contacts", name="contacts", methods="GET"))
      */
     public function contacts(): Response
     {
@@ -109,7 +109,7 @@ class DefaultController extends Controller
 
 
     /**
-     * @Route("/about", name="about")
+     * @Route("/about", name="about", methods="GET"))
      */
     public function about(): Response
     {
@@ -119,7 +119,7 @@ class DefaultController extends Controller
 
 
     /**
-     * @Route("/faq", name="faq")
+     * @Route("/faq", name="faq", methods="GET"))
      */
     public function faq(): Response
     {
@@ -130,7 +130,7 @@ class DefaultController extends Controller
 
 
     /**
-     * @Route("/termsandconditions", name="termsandconditions")
+     * @Route("/termsandconditions", name="termsandconditions", methods="GET"))
      */
     public function termsandconditions(): Response
     {
