@@ -6,6 +6,8 @@ use App\Entity\Image;
 use App\Entity\Product;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
+
 /**
  * @Route("/product")
  */
@@ -15,7 +17,7 @@ class ProductController extends Controller
     /**
      * @Route("/{id}", name="product_show")
      */
-    public function show($id)
+    public function show($id): Response
     {
         $em      = $this->getDoctrine()->getManager();
         $product = $em->getRepository(Product::class)->find($id);

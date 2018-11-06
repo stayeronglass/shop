@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\Cart;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class DefaultController extends Controller
@@ -15,7 +16,7 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="main")
      */
-    public function index()
+    public function index(): Response
     {
         $em         = $this->getDoctrine()->getManager();
         $banner     = $em->getRepository(Product::class)->getSliderProducts();
@@ -30,7 +31,7 @@ class DefaultController extends Controller
     /**
      * @Route("/category/{slug}", name="category")
      */
-    public function category($slug, Request $request)
+    public function category($slug, Request $request): Response
     {
         $em           = $this->getDoctrine()->getManager();
         $categoryRepo = $em->getRepository(Category::class);
@@ -59,13 +60,13 @@ class DefaultController extends Controller
     /**
      * @Route("/contacts", name="contacts")
      */
-    public function contacts()
+    public function contacts(): Response
     {
         return $this->render('default/contacts.html.twig', [
         ]);
     }
 
-    public function header()
+    public function header(): Response
     {
         $items = 0;
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')){
@@ -80,7 +81,8 @@ class DefaultController extends Controller
         ]);
     }
 
-    public function footer(){
+    public function footer(): Response
+    {
         return $this->render('default/footer.html.twig', [
         ]);
     }
@@ -88,7 +90,7 @@ class DefaultController extends Controller
     /**
      * @Route("/breadcrumbs", name="breadcrumbs")
      */
-    public function breadcrumbs($node, $product = null)
+    public function breadcrumbs($node, $product = null): Response
     {
         $em   = $this->getDoctrine()->getManager();
         $repo = $em->getRepository(Category::class);
@@ -109,7 +111,8 @@ class DefaultController extends Controller
     /**
      * @Route("/about", name="about")
      */
-    public function about(){
+    public function about(): Response
+    {
         return $this->render('default/about.html.twig', [
         ]);
     }
@@ -118,7 +121,8 @@ class DefaultController extends Controller
     /**
      * @Route("/faq", name="faq")
      */
-    public function faq(){
+    public function faq(): Response
+    {
         return $this->render('default/faq.html.twig', [
             'title' => 'FAQ',
         ]);
@@ -128,7 +132,8 @@ class DefaultController extends Controller
     /**
      * @Route("/termsandconditions", name="termsandconditions")
      */
-    public function termsandconditions(){
+    public function termsandconditions(): Response
+    {
         return $this->render('default/termsandconditions.html.twig', [
         ]);
     }

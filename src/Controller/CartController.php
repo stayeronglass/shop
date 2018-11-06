@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Route("/cart", name="cart_")
@@ -21,7 +22,7 @@ class CartController extends Controller
     /**
      * @Route("/", name="index")
      */
-    public function index(TranslatorInterface $translator)
+    public function index(TranslatorInterface $translator): Response
     {
         $em   = $this->getDoctrine()->getManager();
         $user = $this->getUser();
@@ -36,7 +37,7 @@ class CartController extends Controller
     /**
      * @Route("/add", name="add")
      */
-    public function add(Request $request, TranslatorInterface $translator)
+    public function add(Request $request, TranslatorInterface $translator): JsonResponse
     {
         $em        = $this->getDoctrine()->getManager();
         $product   = $em->getRepository(Product::class)->find($request->get('product_id'));
@@ -82,7 +83,7 @@ class CartController extends Controller
     /**
      * @Route("/remove/{id}", name="remove")
      */
-    public function remove($id, TranslatorInterface $translator)
+    public function remove($id, TranslatorInterface $translator): JsonResponse
     {
         $em       = $this->getDoctrine()->getManager();
         $cartRepo = $em->getRepository(Cart::class);
@@ -108,7 +109,7 @@ class CartController extends Controller
     /**
      * @Route("/checkout", name="checkout")
      */
-    public function checkout(Request $request)
+    public function checkout(Request $request): JsonResponse
     {
 
         $user  = $this->getUser();
