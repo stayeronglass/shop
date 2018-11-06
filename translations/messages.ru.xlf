@@ -301,7 +301,38 @@
                 <source>stay in touch</source>
                 <target>мы в соцсетях</target>
             </trans-unit>
-
+            <trans-unit id="zip">
+                <source>zip</source>
+                <target>индекс</target>
+            </trans-unit>
+            <trans-unit id="country">
+                <source>country</source>
+                <target>страна</target>
+            </trans-unit>
+            <trans-unit id="city">
+                <source>city</source>
+                <target>город</target>
+            </trans-unit>
+            <trans-unit id="bld">
+                <source>bld</source>
+                <target>адрес</target>
+            </trans-unit>
+            <trans-unit id="recipient">
+                <source>recipient</source>
+                <target>кому</target>
+            </trans-unit>
+            <trans-unit id="phone">
+                <source>phone</source>
+                <target>телефон</target>
+            </trans-unit>
+            <trans-unit id="create_new_address">
+                <source>create new address</source>
+                <target>добавить адрес</target>
+            </trans-unit>
+            <trans-unit id="new_address">
+                <source>new_address</source>
+                <target>новый адрес</target>
+            </trans-unit>
 
         </body>
     </file>

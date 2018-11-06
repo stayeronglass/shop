@@ -24,7 +24,6 @@ class MyController extends Controller
     public function index(): Response
     {
         return $this->render('my/index.html.twig', [
-            'controller_name' => 'LkController',
         ]);
     }
 
@@ -67,7 +66,7 @@ class MyController extends Controller
     }
 
     /**
-     * @Route("/address/{id}/edit", name="address_edit",methods="GET|POST")
+     * @Route("/address/{id}/edit", name="address_edit", methods="GET|POST")
      */
     public function addressedit(Request $request, Address $address): Response
     {

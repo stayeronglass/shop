@@ -17,7 +17,7 @@ class SearchController extends Controller
     /**
      * @Route("/", name="index")
      */
-    public function search(Request $request)
+    public function search(Request $request): Response
     {
         $em = $this->getDoctrine()->getManager();
 
