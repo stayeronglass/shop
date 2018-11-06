@@ -5,3 +5,8 @@
 form label::first-letter{
     text-transform: uppercase !important;
 }
+
+form label:after {
+    content:"*";
+    color:red;
+}
