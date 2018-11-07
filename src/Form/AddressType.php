@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Address;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -13,23 +14,45 @@ class AddressType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('recipient', TextType::class, [
+                'label' => 'recipient',
+                'help' => 'ФИО получателя',
+                'attr'  => [
+                    'placeholder' => "Иванову Ивану Ивановичу",
+                ],
+            ])
+            ->add('phone', TelType::class, [
+                'label' => 'phone',
+                'help' => 'телефон получателя',
+            ])
+
             ->add('zip', TextType::class, [
                 'label' => 'zip',
+                'help' => 'почтовый индекс',
+                'attr'  => [
+                    'placeholder' => "127001",
+                ],
             ])
             ->add('country', TextType::class, [
                 'label' => 'country',
+                'help' => 'страна',
+                'attr'  => [
+                    'placeholder' => "Россия",
+                ],
             ])
             ->add('city', TextType::class, [
                 'label' => 'city',
+                'help' => 'город',
+                'attr'  => [
+                    'placeholder' => "Москва",
+                ],
             ])
             ->add('bld', TextType::class, [
                 'label' => 'bld',
-            ])
-            ->add('recipient', TextType::class, [
-                'label' => 'recipient',
-            ])
-            ->add('phone', TextType::class, [
-                'label' => 'phone',
+                'help' => 'адрес в городе',
+                'attr'  => [
+                    'placeholder' => "улица Ленина дом 5, квартира 1",
+                ],
             ])
         ;
     }

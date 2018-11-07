@@ -1,4 +1,13 @@
 {{ form_start(form) }}
+<h3>Кому</h3>
+<div>
+    {{ form_row(form.recipient) }}
+    {{ form_row(form.phone) }}
+</div>
+<br />
+<div>
+    <h3>Куда</h3>
     {{ form_widget(form) }}
+</div>
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
