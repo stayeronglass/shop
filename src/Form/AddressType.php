@@ -24,18 +24,19 @@ class AddressType extends AbstractType
             ->add('phone', TelType::class, [
                 'label' => 'phone',
                 'help' => 'телефон получателя',
+                'required' => false,
             ])
 
             ->add('zip', TextType::class, [
                 'label' => 'zip',
-                'help' => 'почтовый индекс',
+                'help' => 'zip',
                 'attr'  => [
                     'placeholder' => "127001",
                 ],
             ])
             ->add('country', TextType::class, [
                 'label' => 'country',
-                'help' => 'страна',
+                'help' => 'country',
                 'attr'  => [
                     'placeholder' => "Россия",
                 ],
@@ -49,7 +50,7 @@ class AddressType extends AbstractType
             ])
             ->add('bld', TextType::class, [
                 'label' => 'bld',
-                'help' => 'адрес в городе',
+                'help' => 'address',
                 'attr'  => [
                     'placeholder' => "улица Ленина дом 5, квартира 1",
                 ],

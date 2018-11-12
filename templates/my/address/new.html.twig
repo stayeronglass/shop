@@ -1,10 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'new_address'|trans|capitalize }}{% endblock %}
+{% block title %}{{ 'new address'|trans|capitalize }}{% endblock %}
 
 {% block body %}
-    <h1 class="capitalize_first_letter">{% trans %}create new address{% endtrans %}</h1>
+    <div class="box text-center">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <h1 class="capitalize_first_letter">{% trans %}new address{% endtrans %}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="customer-account" class="col-lg-9">
+            {{ include('my/address/_form.html.twig') }}
+        </div>
 
-    {{ include('my/address/_form.html.twig') }}
-
+        <!--  *** RIGHT COLUMN ***-->
+        {{ render(controller('App\\Controller\\MyController::right', { 'active': 'address'} )) }}
+        <!--  *** RIGHT COLUMN END ***-->
+    </div>
 {% endblock %}

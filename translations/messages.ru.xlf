@@ -330,10 +330,13 @@
                 <target>добавить адрес</target>
             </trans-unit>
             <trans-unit id="new_address">
-                <source>new_address</source>
-                <target>новый адрес</target>
+                <source>new address</source>
+                <target>новый почтовый адрес</target>
             </trans-unit>
-
-        </body>
+            <trans-unit id="address">
+                <source>address</source>
+                <target>адрес в городе</target>
+            </trans-unit>
+       </body>
     </file>
 </xliff>
