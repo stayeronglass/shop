@@ -109,7 +109,7 @@ class CartController extends Controller
     /**
      * @Route("/checkout", name="checkout")
      */
-    public function checkout(Request $request): JsonResponse
+    public function checkout(Request $request): Response
     {
 
         $user  = $this->getUser();
