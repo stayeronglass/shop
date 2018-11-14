@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Cart;
 use App\Entity\Order;
 use App\Entity\Product;
+use App\Repository\CartRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,11 +23,9 @@ class CartController extends Controller
     /**
      * @Route("/", name="index", methods="GET"))
      */
-    public function index(TranslatorInterface $translator): Response
+    public function index(CartRepository $repository): Response
     {
-        $em   = $this->getDoctrine()->getManager();
-        $user = $this->getUser();
-        $cart = $em->getRepository(Cart::class)->getFullCartByUser($user->getId());
+        $cart = $repository->getFullCartByUser($this->getUser()->getId());
 
 
         return $this->render('cart/index.html.twig', [
@@ -56,24 +55,30 @@ class CartController extends Controller
             }
         }
 
-        if(!$found){
+        if (!$found && $product){
             $cart = new Cart();
             $cart
                 ->setUser($user)
                 ->setProduct($product)
                 ->setAmount($request->query->getInt('amount', 1))
             ;
+        } elseif (!$product){
+
         }
 
-        $em->persist($cart);
-        $em->flush();
+        if ($cart){
+            $em->persist($cart);
+            $em->flush();
+        }
+
 
         $cartItems = $cartRepo->getCartAmountByUser($user->getId());
 
         $result = [
-          'alert_message' => 'Товар добавлен в корзину',
-          'full_cart_message'  => '<span id="cart_items_count">'.($cartItems).'</span>' . $translator->transChoice('some.translation.key', ($cartItems) ) .' ' . $translator->trans('in cart'),
-          'short_cart_message'  => '<span id="cart_items_count">'.($cartItems).'</span>' . $translator->transChoice('some.translation.key', ($cartItems) ).' '.'<span class="hidden-md">'. $translator->trans('in cart') . '</span>',
+          'message' => 'Товар добавлен в корзину',
+            'cart'  => $this->renderView('default/_cart.html.twig', [
+                'cart_items' => ($cartItems),
+            ]),
           'error_message' => '',
         ];
 
@@ -98,8 +103,10 @@ class CartController extends Controller
         $cartItems = $cartRepo->getCartAmountByUser($user->getId());
 
         $result = [
-            'alert_message' => '',
-            'cart_message'  => $cartItems .' '. $translator->transChoice('some.translation.key', $cartItems).' '. $translator->trans('in cart'),
+            'message' => '',
+            'cart'  => $this->renderView('default/_cart.html.twig', [
+                'cart_items' => ($cartItems),
+            ]),
             'error_message' => '',
         ];
 

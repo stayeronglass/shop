@@ -1,0 +1,22 @@
+<span id="cart">
+<a href="{{ path('cart_index') }}" class="btn btn-outline-primary mr-1 d-lg-none" >
+    <i class="fa fa-shopping-cart"></i>
+    <span class="d-none d-sm-inline">
+                            {% if cart_items != 0 %}
+                                <span id="cart_items_count">{{ cart_items }}</span> {{ 'some.translation.key'|transchoice(cart_items) }} {% trans %}in cart{% endtrans %}
+                            {% else %}
+                                {% trans %}no item in cart{% endtrans %}
+                            {% endif %}
+                        </span>
+</a>
+<a href="{{ path('cart_index') }}" class="btn btn-outline-primary d-none d-lg-inline-block" style="margin: 5px;">
+    <i class="fa fa-shopping-cart"></i><span class="hidden-sm">
+                        {% if cart_items != 0 %}
+                            <span id="cart_items_count">{{ cart_items }}</span> {{ 'some.translation.key'|transchoice(cart_items) }} <span class="hidden-md">{% trans %}in cart{% endtrans %}</span>
+                        {% else %}
+                            <span class="hidden-md">{% trans %}no item in cart{% endtrans %}</span>
+                        {% endif %}
+
+                        </span>
+</a>
+</span>
