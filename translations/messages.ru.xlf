@@ -319,7 +319,7 @@
             </trans-unit>
             <trans-unit id="recipient">
                 <source>recipient</source>
-                <target>кому</target>
+                <target>ФИО</target>
             </trans-unit>
             <trans-unit id="phone">
                 <source>phone</source>
@@ -335,8 +335,26 @@
             </trans-unit>
             <trans-unit id="address">
                 <source>address</source>
-                <target>адрес в городе</target>
+                <target>почтовый адрес</target>
             </trans-unit>
+            <trans-unit id="№">
+                <source>№</source>
+                <target>№</target>
+            </trans-unit>
+            <trans-unit id="action">
+                <source>action</source>
+                <target>действия</target>
+            </trans-unit>
+            <trans-unit id="edit">
+                <source>edit</source>
+                <target>редактировать</target>
+            </trans-unit>
+            <trans-unit id="my_main">
+                <source>my main</source>
+                <target>my main</target>
+            </trans-unit>
+
+
        </body>
     </file>
 </xliff>

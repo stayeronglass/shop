@@ -1,13 +1,41 @@
-{{ form_start(form) }}
-<h3>Кому</h3>
-<div>
-    {{ form_row(form.recipient) }}
-    {{ form_row(form.phone) }}
+<div class="box clearfix">
+        {{ form_start(form) }}
+        <h3>Кому</h3>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    {{ form_row(form.recipient) }}
+
+                </div>
+            </div>
+        </div>
+    <hr />
+        <h3>Куда</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    {{ form_row(form.zip) }}
+                </div>
+            </div>
+        </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                {{ form_row(form.address) }}
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_row(form.phone) }}
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary capitalize_first_letter"><i class="fa fa-save"></i>{% trans %}сохранить{% endtrans %}</button>
+    </div>
+        {{ form_end(form) }}
 </div>
-<br />
-<div>
-    <h3>Куда</h3>
-    {{ form_widget(form) }}
-</div>
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
