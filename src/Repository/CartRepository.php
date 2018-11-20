@@ -3,7 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Cart;
+use App\Entity\Product;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use phpDocumentor\Reflection\DocBlock\Tags\Uses;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\ORM\Query\Expr;
 
@@ -63,5 +66,22 @@ class CartRepository extends ServiceEntityRepository
             ->getScalarResult();
 
         return $res[0]['amount'] ?? 0;
+    }
+
+    public function add($amount, Product $product, User $user)
+    {
+        $cart = $this->findOneBy(['product_id' => $product->getId(), 'user_id' => $user->getId()]);
+
+        $cart = $cart ??  new Cart();
+        $cart
+            ->setUser($user)
+            ->setProduct($product)
+            ->setAmount($cart->getAmount() + $amount)
+        ;
+
+        $this->_em->persist($cart);
+        $this->_em->flush();
+
+        return true;
     }
 }

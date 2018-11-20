@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Cart;
 use App\Entity\Order;
 use App\Entity\Product;
+use App\Form\MasterCartType;
 use App\Repository\CartRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,65 +22,46 @@ use Symfony\Component\HttpFoundation\Response;
 class CartController extends Controller
 {
     /**
-     * @Route("/", name="index", methods="GET"))
+     * @Route("/", name="index", methods="GET|POST"))
      */
-    public function index(CartRepository $repository): Response
+    public function index(Request $request, CartRepository $repository): Response
     {
         $cart = $repository->getFullCartByUser($this->getUser()->getId());
+        $em        = $this->getDoctrine()->getManager();
 
+        $items = $em->getRepository(Cart::class)->findBy(['user_id' => $this->getUser()->getId()]);
+        $form = $this->createForm(MasterCartType::class, $items);
 
         return $this->render('cart/index.html.twig', [
             'cart'  => $cart,
+            'form'  => $form->createView(),
         ]);
     }
 
     /**
      * @Route("/add", name="add")
      */
-    public function add(Request $request, TranslatorInterface $translator): JsonResponse
+    public function add(Request $request, CartRepository $cartRepository): JsonResponse
     {
         $em        = $this->getDoctrine()->getManager();
+
+
         $product   = $em->getRepository(Product::class)->find($request->get('product_id'));
         $user      = $this->getUser();
-        $cartRepo  = $em->getRepository(Cart::class);
-        $cartItems = $cartRepo->getFullCartByUser($user->getId());
+        $error_message = '';
 
-
-        $found = false;
-        foreach ($cartItems as $item) {
-            if($item['pid'] == $product->getId()){
-                $found = true;
-                $cart  = $cartRepo->find($item['id']);
-                $cart->setAmount($cart->getAmount() + 1);
-                break;
-            }
+        if ($product){
+            $cartRepository->add($request->query->getInt('amount', 1), $product, $user);
+        } else {
+            $error_message = 'product mot found!';
         }
-
-        if (!$found && $product){
-            $cart = new Cart();
-            $cart
-                ->setUser($user)
-                ->setProduct($product)
-                ->setAmount($request->query->getInt('amount', 1))
-            ;
-        } elseif (!$product){
-
-        }
-
-        if ($cart){
-            $em->persist($cart);
-            $em->flush();
-        }
-
-
-        $cartItems = $cartRepo->getCartAmountByUser($user->getId());
 
         $result = [
           'message' => 'Товар добавлен в корзину',
             'cart'  => $this->renderView('default/_cart.html.twig', [
-                'cart_items' => ($cartItems),
+                'cart_items' => $cartRepository->getCartAmountByUser($user->getId()),
             ]),
-          'error_message' => '',
+          'error_message' => $error_message,
         ];
 
         return new JsonResponse($result);

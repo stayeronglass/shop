@@ -21,7 +21,7 @@ class Cart
     /**
      * @ORM\Column(type="bigint")
      */
-    private $amount;
+    private $amount = 0;
 
 
     /**
