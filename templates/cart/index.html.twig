@@ -13,7 +13,7 @@
 <div class="row">
     <div id="basket" class="col-lg-9">
         <div class="box">
-            <form method="post" action="{{ path('cart_checkout') }}" enctype="application/x-www-form-urlencoded">
+            <form method="post" action="" enctype="application/x-www-form-urlencoded">
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -56,8 +56,8 @@
                     <div class="pull-left"><a href="{{ path('main') }}" class="btn btn-outline-white-secondary capitalize_first_letter"><i class="fa fa-chevron-left"></i>{% trans %}сontinue shopping{% endtrans %}</a></div>
                     <div class="pull-right">
                         {% if cart is not empty %}
-                            <button class="btn btn-outline-white-secondary capitalize_first_letter"><i class="fa fa-refresh"></i>{% trans %}update cart{% endtrans %}</button>
-                            <button type="submit" class="btn btn-outline-white-primary capitalize_first_letter">{% trans %}proceed to checkout{% endtrans %}<i class="fa fa-chevron-right"></i></button>
+                            <button formaction="{{ path('cart_index') }}" class="btn btn-outline-white-secondary capitalize_first_letter"><i class="fa fa-refresh"></i>{% trans %}update cart{% endtrans %}</button>
+                            <a href="{{ path('cart_delivery') }}" class="btn btn-outline-white-primary capitalize_first_letter">{% trans %}proceed to delivery{% endtrans %}<i class="fa fa-chevron-right"></i></a>
                         {% endif %}
                     </div>
                 </div>

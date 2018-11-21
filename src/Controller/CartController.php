@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Entity\Cart;
 use App\Entity\Order;
 use App\Entity\Product;
+use App\Form\DeliveryType;
 use App\Form\MasterCartType;
 use App\Repository\CartRepository;
+use PhpParser\Node\Expr\New_;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -132,6 +134,18 @@ class CartController extends Controller
 
         return $this->render('cart/checkout.html.twig', [
             'order' => $order,
+        ]);
+    }
+
+    /**
+     * @Route("/delivery", name="delivery")
+     */
+    public function delivery(Request $request)
+    {
+        $form = $this->createForm(DeliveryType::class);
+
+        return $this->render('cart/delivery.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }

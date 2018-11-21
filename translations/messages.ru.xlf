@@ -194,6 +194,14 @@
                 <source>proceed to checkout</source>
                 <target>к оплате</target>
             </trans-unit>
+            <trans-unit id="proceed_to_delivery">
+                <source>proceed to delivery</source>
+                <target>доставка</target>
+            </trans-unit>
+            <trans-unit id="delivery">
+                <source>delivery</source>
+                <target>доставка</target>
+            </trans-unit>
             <trans-unit id="1">
                 <source>some.translation.key</source>
                 <target>{0} коробочек|{1} коробочка|[2,5] коробочки|[6, Inf] коробочек</target>
