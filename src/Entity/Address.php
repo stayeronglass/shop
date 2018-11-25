@@ -20,16 +20,10 @@ class Address
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=1000)
      * @Assert\NotBlank()
      */
-    private $country;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     */
-    private $city;
+    private $address;
 
     /**
      * @ORM\Column(type="string", length=10)
@@ -38,57 +32,40 @@ class Address
     private $zip;
 
     /**
-     * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank()
-     */
-    private $bld;
-
-    /**
      * @ORM\Column(type="string", length=1000)
      * @Assert\NotBlank()
      */
     private $recipient;
 
     /**
-     * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $phone;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="addresses")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
     private $user_id;
-
-
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCountry(): ?string
+    public function getAddress(): ?string
     {
-        return $this->country;
+        return $this->address;
     }
 
-    public function setCountry(string $country): self
+    public function setAddress(string $address): self
     {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): self
-    {
-        $this->city = $city;
+        $this->address = $address;
 
         return $this;
     }
@@ -101,18 +78,6 @@ class Address
     public function setZip(string $zip): self
     {
         $this->zip = $zip;
-
-        return $this;
-    }
-
-    public function getBld(): ?string
-    {
-        return $this->bld;
-    }
-
-    public function setBld(string $bld): self
-    {
-        $this->bld = $bld;
 
         return $this;
     }
@@ -134,9 +99,21 @@ class Address
         return $this->phone;
     }
 
-    public function setPhone(string $phone): self
+    public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(?int $user_id): self
+    {
+        $this->user_id = $user_id;
 
         return $this;
     }

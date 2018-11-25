@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Address;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Types\Type;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -19,32 +20,19 @@ class AddressRepository extends ServiceEntityRepository
         parent::__construct($registry, Address::class);
     }
 
-//    /**
-//     * @return Address[] Returns an array of Address objects
-//     */
-    /*
-    public function findByExampleField($value)
+    public function getUserAddressQuery($uid)
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        return $this->_em->createQuery('
+            SELECT a.id, a.address FROM App\Entity\Address a WHERE a.user_id = :user_id 
+            ORDER BY a.id ASC
+        ')
+            ->setParameter('user_id', $uid, Type::INTEGER)
         ;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Address
+    public function getUserAddress($uid)
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->getUserAddressQuery($uid)->getScalarResult();
     }
-    */
+
 }

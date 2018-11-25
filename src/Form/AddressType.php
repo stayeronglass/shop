@@ -14,47 +14,38 @@ class AddressType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+
+
             ->add('recipient', TextType::class, [
                 'label' => 'recipient',
-                'help' => 'ФИО получателя',
+                'help' => 'например: Иванову Ивану Ивановичу',
                 'attr'  => [
-                    'placeholder' => "Иванову Ивану Ивановичу",
+                    'placeholder' => "",
                 ],
             ])
-            ->add('phone', TelType::class, [
-                'label' => 'phone',
-                'help' => 'телефон получателя',
-                'required' => false,
+
+            ->add('address', TextType::class, [
+                'label' => 'address',
+                'help' => 'например: Россия, Москва, ул. Ленина, дом 5, кв. 15',
+                'attr'  => [
+                ],
             ])
 
             ->add('zip', TextType::class, [
                 'label' => 'zip',
-                'help' => 'zip',
+                'help' => 'например: 127001',
                 'attr'  => [
-                    'placeholder' => "127001",
+                    'placeholder' => "",
                 ],
             ])
-            ->add('country', TextType::class, [
-                'label' => 'country',
-                'help' => 'country',
-                'attr'  => [
-                    'placeholder' => "Россия",
-                ],
+
+            ->add('phone', TelType::class, [
+                'label' => 'phone',
+                'help' => 'например: +70000010',
+                'required' => false,
             ])
-            ->add('city', TextType::class, [
-                'label' => 'city',
-                'help' => 'город',
-                'attr'  => [
-                    'placeholder' => "Москва",
-                ],
-            ])
-            ->add('bld', TextType::class, [
-                'label' => 'bld',
-                'help' => 'address',
-                'attr'  => [
-                    'placeholder' => "улица Ленина дом 5, квартира 1",
-                ],
-            ])
+
+
         ;
     }
 

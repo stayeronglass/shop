@@ -78,7 +78,7 @@ class MyController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('address_index', ['id' => $address->getId()]);
+            return $this->redirectToRoute('my_account');
         }
 
         return $this->render('my/address/edit.html.twig', [
@@ -106,7 +106,7 @@ class MyController extends Controller
     public function personal(AddressRepository $addressRepository): Response
     {
         return $this->render('my/personal.html.twig', [
-            'addresses' => $addressRepository->findByUser($this->getUser()),
+            'addresses' => $addressRepository->getUserAddress($this->getUser()->getId()),
         ]);
     }
 
