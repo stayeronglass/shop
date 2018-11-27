@@ -6,7 +6,6 @@ use App\Entity\Cart;
 use App\Entity\Order;
 use App\Entity\Product;
 use App\Form\DeliveryType;
-use App\Form\MasterCartType;
 use App\Repository\CartRepository;
 use PhpParser\Node\Expr\New_;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -26,17 +25,12 @@ class CartController extends Controller
     /**
      * @Route("/", name="index", methods="GET|POST"))
      */
-    public function index(Request $request, CartRepository $repository): Response
+    public function index(CartRepository $repository): Response
     {
         $cart = $repository->getFullCartByUser($this->getUser()->getId());
-        $em        = $this->getDoctrine()->getManager();
-
-        $items = $em->getRepository(Cart::class)->findBy(['user_id' => $this->getUser()->getId()]);
-        $form = $this->createForm(MasterCartType::class, $items);
 
         return $this->render('cart/index.html.twig', [
             'cart'  => $cart,
-            'form'  => $form->createView(),
         ]);
     }
 

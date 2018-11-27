@@ -56,3 +56,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Product }
         public: true
+
+    admin.delivery:
+        class: App\Admin\DeliveryAdmin
+        arguments: [~, App\Entity\Delivery, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Delivery }
+        public: true

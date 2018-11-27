@@ -23,6 +23,32 @@
                 <source>Manufacturer</source>
                 <target>Производитель</target>
             </trans-unit>
+            <trans-unit id="Delivery">
+                <source>Delivery</source>
+                <target>Доставка</target>
+            </trans-unit>
+            <trans-unit id="Delivery List">
+                <source>Delivery List</source>
+                <target>Список досствок</target>
+            </trans-unit>
+            <trans-unit id="Description">
+                <source>Description</source>
+                <target>Описание</target>
+            </trans-unit>
+            <trans-unit id="Price">
+                <source>Price</source>
+                <target>Цена</target>
+            </trans-unit>
+
+            <trans-unit id="Product">
+                <source>Product</source>
+                <target>Товары</target>
+            </trans-unit>
+            <trans-unit id="Title">
+                <source>Title</source>
+                <target>Название</target>
+            </trans-unit>
+
             <trans-unit id="Category">
                 <source>Category</source>
                 <target>Категория</target>
