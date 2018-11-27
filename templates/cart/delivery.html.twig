@@ -1,8 +1,15 @@
 {% extends 'base.html.twig' %}
 
+
 {% block title %}{{ 'delivery'|trans|capitalize }}{% endblock %}
 
 {% block body %}
+<style>
+    .form-check{
+        width: 10% !important;
+        display: inline !important;
+    }
+</style>
     <div class="box text-center">
         <div class="row">
             <div class="col-md-10 offset-md-1">
@@ -15,22 +22,20 @@
             <div id="accordion" class="accordion mb-5">
                 {{ form_start(form) }}
                 {% for key, child in form.children.delivery %}
-                    {% if key != 'placeholder' %}
                     <div class="card">
-                        <div id="heading0" class="card-header bg-primary">
+                        <div id="heading{{ key }}" class="card-header bg-primary">
                             <h5 class="mb-0">
-                                <a data-toggle="collapse" data-target="#collapse0" aria-expanded="false" aria-controls="collapse0" href="" class="text-white collapsed">
-                                   {{ key }} {{ form_widget(child) }} {{ child.vars.label }} {{ form.children.delivery.vars.choices[key].data.price }} &#x20bd;
+                                <a data-toggle="collapse" data-target="#collapse{{ key }}" aria-expanded="false" aria-controls="collapse{{ key }}" href="" class="text-white collapsed">
+                                     {{ form_widget(child) }} {{ form.children.delivery.vars.choices[key].data.title }} {{ form.children.delivery.vars.choices[key].data.price }} &#x20bd;
                                 </a>
                             </h5>
                         </div>
-                        <div aria-labelledby="heading0" data-parent="#accordion" id="collapse0" class="collapse" style="">
+                        <div aria-labelledby="heading{{ key }}" data-parent="#accordion" id="collapse{{ key }}" class="collapse" style="">
                             <div class="card-body">
                                 <p>{{ form.children.delivery.vars.choices[key].data.description }}</p>
                             </div>
                         </div>
                     </div>
-                    {% endif %}
                 {% endfor %}
                 {{ form_end(form) }}
             </div>

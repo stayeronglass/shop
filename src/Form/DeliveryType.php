@@ -13,12 +13,15 @@ class DeliveryType extends AbstractType
     {
         $builder
             ->add('delivery', EntityType::class, [
-                'choice_label' => 'title',
                 'class'        => Delivery::class,
+                'placeholder'  => false,
                 'expanded'     => true,
                 'multiple'     => false,
                 'required'     => false,
-                'placeholder' => '',
+                'label' => '',
+                'choice_label' => function() {
+                    return '';
+                },
             ]);
     }
 
