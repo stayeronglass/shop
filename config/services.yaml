@@ -63,3 +63,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Delivery }
         public: true
+
+    admin.payment:
+        class: App\Admin\PaymentAdmin
+        arguments: [~, App\Entity\Payment, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Payment }
+        public: true

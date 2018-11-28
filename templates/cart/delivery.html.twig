@@ -19,8 +19,8 @@
     </div>
     <div class="row">
         <div id="basket" class="col-lg-9">
+            {{ form_start(form) }}
             <div id="accordion" class="accordion mb-5">
-                {{ form_start(form) }}
                 {% for key, child in form.children.delivery %}
                     <div class="card">
                         <div id="heading{{ key }}" class="card-header bg-primary">
@@ -37,9 +37,17 @@
                         </div>
                     </div>
                 {% endfor %}
-                {{ form_end(form) }}
+
             </div>
         </div>
+        <div class="box-footer">
+            <div class="pull-left"><a href="{{ path('cart_index') }}" class="btn btn-outline-white-secondary capitalize_first_letter"><i class="fa fa-chevron-left"></i>{% trans %}back to cart{% endtrans %}</a></div>
+            <div class="pull-right">
+                <a href="{{ path('cart_payment') }}" class="btn btn-outline-white-primary capitalize_first_letter">{% trans %}proceed to payment{% endtrans %}<i class="fa fa-chevron-right"></i></a>
+            </div>
+            {{ form_end(form) }}
+        </div>
+
     </div>
 
 {% endblock %}

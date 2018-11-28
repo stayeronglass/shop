@@ -15,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\Response;
+use App\Form\PaymentType;
 
 /**
  * @Route("/cart", name="cart_")
@@ -142,4 +143,17 @@ class CartController extends Controller
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/payment", name="payment")
+     */
+    public function payment(Request $request)
+    {
+        $form = $this->createForm(PaymentType::class);
+
+        return $this->render('cart/payment.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
 }
