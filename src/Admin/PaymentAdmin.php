@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class PaymentAdmin extends AbstractAdmin
@@ -20,7 +21,6 @@ class PaymentAdmin extends AbstractAdmin
             'ckeditor_context' => 'default', // optional
         ]);
 
-        $formMapper->add('price');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
