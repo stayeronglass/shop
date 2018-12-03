@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Product;
+use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -17,11 +17,9 @@ class SearchController extends Controller
     /**
      * @Route("/", name="index", methods="GET")
      */
-    public function search(Request $request): Response
+    public function search(Request $request, ProductRepository $repository): Response
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $query = $em->getRepository(Product::class)->searchProductsQuery($request->get('q'));
+        $query = $repository->searchProductsQuery($request->get('q'));
 
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(

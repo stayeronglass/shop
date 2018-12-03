@@ -387,6 +387,10 @@
                 <source>my main</source>
                 <target>my main</target>
             </trans-unit>
+            <trans-unit id="payment">
+                <source>payment</source>
+                <target>оплата</target>
+            </trans-unit>
 
 
        </body>

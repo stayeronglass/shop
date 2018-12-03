@@ -6,7 +6,7 @@ use App\Entity\Category;
 use App\Entity\Product;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use App\Entity\Cart;
 use Symfony\Component\HttpFoundation\Response;
 

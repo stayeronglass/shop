@@ -6,21 +6,21 @@ use App\Entity\Category;
 use App\Entity\Image;
 use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class MinifanImportCommand extends ContainerAwareCommand
+class MinifanImportCommand extends Command
 {
     protected static $defaultName = 'minifan-import';
 
     private $client;
     private $em;
 
-    public function __construct(?string $name = null, EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, ?string $name = null)
     {
         parent::__construct($name);
 

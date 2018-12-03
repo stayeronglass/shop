@@ -7,13 +7,12 @@ use App\Entity\Order;
 use App\Entity\Product;
 use App\Form\DeliveryType;
 use App\Repository\CartRepository;
-use PhpParser\Node\Expr\New_;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\Response;
 use App\Form\PaymentType;
 
@@ -21,8 +20,10 @@ use App\Form\PaymentType;
  * @Route("/cart", name="cart_")
  * @IsGranted("IS_AUTHENTICATED_FULLY")
  */
-class CartController extends Controller
+class CartController extends AbstractController
 {
+
+
     /**
      * @Route("/", name="index", methods="GET|POST"))
      */
@@ -34,6 +35,7 @@ class CartController extends Controller
             'cart'  => $cart,
         ]);
     }
+
 
     /**
      * @Route("/add", name="add")
@@ -64,10 +66,11 @@ class CartController extends Controller
         return new JsonResponse($result);
     }
 
+
     /**
      * @Route("/remove/{id}", name="remove")
      */
-    public function remove($id, TranslatorInterface $translator): JsonResponse
+    public function remove($id): JsonResponse
     {
         $em       = $this->getDoctrine()->getManager();
         $cartRepo = $em->getRepository(Cart::class);
@@ -91,6 +94,7 @@ class CartController extends Controller
 
         return new JsonResponse($result);
     }
+
 
     /**
      * @Route("/checkout", name="checkout")
@@ -132,6 +136,7 @@ class CartController extends Controller
         ]);
     }
 
+
     /**
      * @Route("/delivery", name="delivery")
      */
@@ -143,6 +148,7 @@ class CartController extends Controller
             'form' => $form->createView(),
         ]);
     }
+
 
     /**
      * @Route("/payment", name="payment")
