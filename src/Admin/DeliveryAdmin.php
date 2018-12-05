@@ -30,6 +30,9 @@ class DeliveryAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('title');
+        $listMapper
+            ->add('id')
+            ->addIdentifier('title')
+        ;
     }
 }

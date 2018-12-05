@@ -23,6 +23,9 @@ class ManufacturerAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('name');
+        $listMapper
+            ->add('id')
+            ->addIdentifier('name')
+        ;
     }
 }

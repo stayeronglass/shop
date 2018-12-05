@@ -45,6 +45,7 @@ class Cart
      */
     private $product_id;
 
+
     public function getId(): ?int
     {
         return $this->id;

@@ -25,11 +25,14 @@ class PaymentAdmin extends AbstractAdmin
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
+
         $datagridMapper->add('title');
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('title');
+        $listMapper
+            ->add('id')
+            ->addIdentifier('title');
     }
 }

@@ -392,6 +392,15 @@
                 <target>оплата</target>
             </trans-unit>
 
+            <trans-unit id="Payment">
+                <source>Payment</source>
+                <target>Оплата</target>
+            </trans-unit>
+
+            <trans-unit id="product_iist">
+                <source>Product List</source>
+                <target>Список товаров</target>
+            </trans-unit>
 
        </body>
     </file>
