@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Cart;
 use App\Entity\Order;
 use App\Entity\Product;
+use App\Form\AddressType;
+use App\Form\CartAddressType;
 use App\Form\DeliveryType;
 use App\Repository\CartRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -162,4 +164,16 @@ class CartController extends AbstractController
         ]);
     }
 
+
+    /**
+     * @Route("/address", name="address")
+     */
+    public function address(Request $request)
+    {
+        $form = $this->createForm(CartAddressType::class);
+
+        return $this->render('cart/address.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 }

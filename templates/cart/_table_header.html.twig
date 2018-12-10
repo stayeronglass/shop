@@ -1,6 +1,14 @@
 <ul class="nav nav-pills nav-fill">
-    <li class="nav-item"><a href="checkout1.html" class="nav-link"><i class="fa fa-map-marker"></i><br>Address</a></li>
-    <li class="nav-item"><a href="#" class="nav-link active"><i class="fa fa-truck"></i><br>Delivery Method</a></li>
-    <li class="nav-item"><a href="#" class="nav-link disabled"><i class="fa fa-money"></i><br>Payment Method</a></li>
-    <li class="nav-item"><a href="#" class="nav-link disabled"><i class="fa fa-eye"></i><br>Order Review</a></li>
+    <li class="nav-item"><a href="#" class="nav-link  {% if active is same as(1)  %}active{% else  %}disabled{% endif %}" ><i class="fa fa-map-marker"></i><br>
+            {% trans %}address{% endtrans %}
+        </a></li>
+    <li class="nav-item"><a href="#" class="nav-link {% if  active is same as(2)  %}active{% else  %}disabled{% endif %}"><i class="fa fa-truck"></i><br>
+            {% trans %}delivery{% endtrans %}
+        </a></li>
+    <li class="nav-item"><a href="#" class="nav-link {% if  active is same as(3)  %}active{% else  %}disabled{% endif %}"><i class="fa fa-money"></i><br>
+            {% trans %}payment{% endtrans %}
+        </a></li>
+    <li class="nav-item"><a href="#" class="nav-link {% if  active is same as(4)  %}active{% else  %}disabled{% endif %}"><i class="fa fa-eye"></i><br>
+            {% trans %}order review{% endtrans %}
+        </a></li>
 </ul>

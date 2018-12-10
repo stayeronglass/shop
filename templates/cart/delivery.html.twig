@@ -21,6 +21,7 @@
     <div class="row">
         <div id="basket" class="col-lg-9">
             <div class="box">
+                {{ include('/cart/_table_header.html.twig', {active: 2}) }}
                 <div id="accordion" class="accordion mb-5">
                     {% for key, child in form.children.delivery %}
                         <div class="card">

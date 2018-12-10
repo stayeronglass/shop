@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}{{ 'payment'|trans|capitalize }}{% endblock %}
+
+{% block body %}
+    <style>
+        .form-check{
+            width: 10% !important;
+            display: inline !important;
+        }
+    </style>
+    <div class="box text-center">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <h1 class="capitalize_first_letter">оплата</h1>
+            </div>
+        </div>
+    </div>
+    {{ form_start(form) }}
+    <div class="row">
+        <div id="basket" class="col-lg-9">
+            <div class="box">
+                {{ include('/cart/_table_header.html.twig', {active: 1}) }}
+                <div id="accordion" class="accordion mb-5">
+                    {% for key, child in form.children.address %}
+                        <div class="card">
+                            <div id="heading{{ key }}" class="card-header bg-primary">
+                                <h5 class="mb-0">
+                                    <a data-toggle="collapse" data-target="#collapse{{ key }}" aria-expanded="false" aria-controls="collapse{{ key }}" href="" class="text-white collapsed">
+                                        {{ form_widget(child) }} {{ form.children.address.vars.choices[key].data.recipient }}
+                                    </a>
+                                </h5>
+                            </div>
+                            <div aria-labelledby="heading{{ key }}" data-parent="#accordion" id="collapse{{ key }}" class="collapse" style="">
+                                <div class="card-body">
+                                    <p>{{ form.children.address.vars.choices[key].data.address }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="box-footer">
+                    <div class="pull-left">
+                        <a href="{{ path('cart_index') }}" class="btn btn-outline-white-secondary capitalize_first_letter"><i class="fa fa-chevron-left"></i>{% trans %}back to cart{% endtrans %}</a>
+                    </div>
+                    <div class="pull-right">
+                        <a href="{{ path('cart_delivery') }}" class="btn btn-outline-white-primary capitalize_first_letter">{% trans %}proceed to delivery{% endtrans %} <i class="fa fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}
