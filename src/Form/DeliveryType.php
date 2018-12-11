@@ -19,9 +19,9 @@ class DeliveryType extends AbstractType
                 'expanded'     => true,
                 'multiple'     => false,
                 'required'     => false,
-                'label' => '',
+                'label' => false,
                 'choice_label' => function() {
-                    return '';
+                    return false;
                 },
             ]);
     }

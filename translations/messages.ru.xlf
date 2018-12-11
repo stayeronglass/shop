@@ -218,7 +218,7 @@
             </trans-unit>
             <trans-unit id="proceed_to_checkout">
                 <source>proceed to checkout</source>
-                <target>оформить заказ</target>
+                <target>оформление</target>
             </trans-unit>
             <trans-unit id="proceed_to_delivery">
                 <source>proceed to delivery</source>
@@ -401,6 +401,27 @@
                 <source>Product List</source>
                 <target>Список товаров</target>
             </trans-unit>
+            <trans-unit id="contacts">
+                <source>contacts</source>
+                <target>контакты</target>
+            </trans-unit>
+            <trans-unit id="back_to_cart">
+                <source>back to cart</source>
+                <target>в корзину</target>
+            </trans-unit>
+            <trans-unit id="order_review">
+                <source>order review</source>
+                <target>подтверждение</target>
+            </trans-unit>
+            <trans-unit id="proceed_to_payment">
+                <source>proceed to payment</source>
+                <target>оплата</target>
+            </trans-unit>
+            <trans-unit id="next">
+                <source>next</source>
+                <target>далее</target>
+            </trans-unit>
+
 
        </body>
     </file>

@@ -9,6 +9,7 @@ function add(button, product_id) {
 
 function select_radio(elem){
     elem = $(elem);
-    console.log(elem.children(0).children(0).prop("checked", true));
-
+    elem.children(0).children(0).prop("checked", true);
+    console.log(elem.children(0).children(0));
+    return true;
 }

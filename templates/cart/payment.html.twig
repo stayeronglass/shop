@@ -27,7 +27,7 @@
                     <div class="card">
                         <div id="heading{{ key }}" class="card-header bg-primary">
                             <h5 class="mb-0">
-                                <a data-toggle="collapse" data-target="#collapse{{ key }}" aria-expanded="false" aria-controls="collapse{{ key }}" href="" class="text-white collapsed">
+                                <a onclick="select_radio(this)" data-toggle="collapse" data-target="#collapse{{ key }}" aria-expanded="false" aria-controls="collapse{{ key }}" href="" class="text-white collapsed">
                                     {{ form_widget(child) }} {{ form.children.payment.vars.choices[key].data.title }}
                                 </a>
                             </h5>
@@ -46,7 +46,7 @@
                     <a href="{{ path('cart_index') }}" class="btn btn-outline-white-secondary capitalize_first_letter"><i class="fa fa-chevron-left"></i>{% trans %}back to cart{% endtrans %}</a>
                 </div>
                 <div class="pull-right">
-                    <a href="{{ path('cart_payment') }}" class="btn btn-outline-white-primary capitalize_first_letter">{% trans %}proceed to checkout{% endtrans %} <i class="fa fa-chevron-right"></i></a>
+                    <a href="{{ path('cart_checkout') }}" class="btn btn-outline-white-primary capitalize_first_letter">{% trans %}proceed to checkout{% endtrans %} <i class="fa fa-chevron-right"></i></a>
                 </div>
             </div>
         </div>

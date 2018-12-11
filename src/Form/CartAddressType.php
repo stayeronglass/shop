@@ -18,7 +18,7 @@ class CartAddressType extends AbstractType
                 'placeholder'  => false,
                 'expanded'     => true,
                 'multiple'     => false,
-                'required'     => false,
+                'required'     => true,
                 'label' => '',
                 'choice_label' => function() {
                     return '';

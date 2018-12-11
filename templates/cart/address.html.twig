@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 
-{% block title %}{{ 'payment'|trans|capitalize }}{% endblock %}
+{% block title %}{{ 'address'|trans|capitalize }}{% endblock %}
 
 {% block body %}
     <style>
@@ -13,7 +13,7 @@
     <div class="box text-center">
         <div class="row">
             <div class="col-md-10 offset-md-1">
-                <h1 class="capitalize_first_letter">оплата</h1>
+                <h1 class="capitalize_first_letter">{% trans %}address{% endtrans %}</h1>
             </div>
         </div>
     </div>
@@ -27,8 +27,8 @@
                         <div class="card">
                             <div id="heading{{ key }}" class="card-header bg-primary">
                                 <h5 class="mb-0">
-                                    <a data-toggle="collapse" data-target="#collapse{{ key }}" aria-expanded="false" aria-controls="collapse{{ key }}" href="" class="text-white collapsed">
-                                        {{ form_widget(child) }} {{ form.children.address.vars.choices[key].data.recipient }}
+                                    <a onclick="select_radio(this)" data-toggle="collapse" data-target="#collapse{{ key }}" aria-expanded="false" aria-controls="collapse{{ key }}" href="" class="text-white collapsed">
+                                        {{ form_widget(child) }}{{ form.children.address.vars.choices[key].data.recipient }}
                                     </a>
                                 </h5>
                             </div>
@@ -46,7 +46,7 @@
                         <a href="{{ path('cart_index') }}" class="btn btn-outline-white-secondary capitalize_first_letter"><i class="fa fa-chevron-left"></i>{% trans %}back to cart{% endtrans %}</a>
                     </div>
                     <div class="pull-right">
-                        <a href="{{ path('cart_delivery') }}" class="btn btn-outline-white-primary capitalize_first_letter">{% trans %}proceed to delivery{% endtrans %} <i class="fa fa-chevron-right"></i></a>
+                        <input type="submit" class="btn btn-outline-white-primary capitalize_first_letter" value="{% trans %}next{% endtrans %}">
                     </div>
                 </div>
             </div>
