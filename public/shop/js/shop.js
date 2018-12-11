@@ -6,3 +6,9 @@ function add(button, product_id) {
         button.attr("disabled", false);
     });
 }
+
+function select_radio(elem){
+    elem = $(elem);
+    console.log(elem.children(0).children(0).prop("checked", true));
+
+}
