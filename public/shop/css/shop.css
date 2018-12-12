@@ -27,3 +27,7 @@ form label::first-letter
 .form-check input{
     margin-top: .1rem;
 }
+
+.noasterisk::after {
+    content: '' !important;
+}
