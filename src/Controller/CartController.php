@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Address;
 use App\Entity\Cart;
 use App\Entity\Order;
 use App\Entity\Product;
@@ -140,11 +141,35 @@ class CartController extends AbstractController
 
 
     /**
+     * @Route("/address", name="address")
+     */
+    public function address(Request $request)
+    {
+        $address = new Address();
+        $form    = $this->createForm(CartAddressType::class, $address);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            return $this->redirectToRoute('cart_delivery');
+        }
+
+        return $this->render('cart/address.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+    /**
      * @Route("/delivery", name="delivery")
      */
     public function delivery(Request $request)
     {
         $form = $this->createForm(DeliveryType::class);
+
+        if (Request::METHOD_POST === $request->getMethod()) {
+            return $this->redirectToRoute('cart_payment');
+        }
 
         return $this->render('cart/delivery.html.twig', [
             'form' => $form->createView(),
@@ -159,21 +184,15 @@ class CartController extends AbstractController
     {
         $form = $this->createForm(PaymentType::class);
 
+        if (Request::METHOD_POST === $request->getMethod()){
+            return $this->redirectToRoute('cart_checkout');
+        }
+
         return $this->render('cart/payment.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
 
-    /**
-     * @Route("/address", name="address")
-     */
-    public function address(Request $request)
-    {
-        $form = $this->createForm(CartAddressType::class);
 
-        return $this->render('cart/address.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
 }
