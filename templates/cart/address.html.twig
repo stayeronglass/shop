@@ -22,24 +22,7 @@
         <div id="basket" class="col-lg-9">
             <div class="box">
                 {{ include('/cart/_table_header.html.twig', {active: 1}) }}
-                <div id="accordion" class="accordion mb-5">
-                    {% for key, child in form.children.address %}
-                        <div class="card">
-                            <div id="heading{{ key }}" class="card-header bg-primary">
-                                <h5 class="mb-0">
-                                    <a onclick="select_radio(this)" data-toggle="collapse" data-target="#collapse{{ key }}" aria-expanded="false" aria-controls="collapse{{ key }}" href="" class="text-white collapsed">
-                                        {{ form_widget(child, {'label_attr': {'class': 'noasterisk'}}) }} {{ form.children.address.vars.choices[key].data.recipient }}
-                                    </a>
-                                </h5>
-                            </div>
-                            <div aria-labelledby="heading{{ key }}" data-parent="#accordion" id="collapse{{ key }}" class="collapse" style="">
-                                <div class="card-body">
-                                    <p>{{ form.children.address.vars.choices[key].data.address }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
+                {{ form(form) }}
 
                 <div class="box-footer">
                     <div class="pull-left">

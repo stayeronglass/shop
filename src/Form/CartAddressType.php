@@ -19,18 +19,13 @@ class CartAddressType extends AbstractType
                 'expanded'     => true,
                 'multiple'     => false,
                 'required'     => true,
-                'property_path' => 'address',
-                'choice_label' => function() {
-                    return '';
-                },
+                'choice_label' => 'recipient',
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => Address::class,
-        ]);
+
     }
 
 }

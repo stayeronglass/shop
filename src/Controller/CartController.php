@@ -145,12 +145,11 @@ class CartController extends AbstractController
      */
     public function address(Request $request)
     {
-        $address = new Address();
-        $form    = $this->createForm(CartAddressType::class, $address);
+        $form = $this->createForm(CartAddressType::class);
 
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()){
+            $address = $form->getData();
             return $this->redirectToRoute('cart_delivery');
         }
 
