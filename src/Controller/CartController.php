@@ -8,7 +8,7 @@ use App\Entity\Order;
 use App\Entity\Product;
 use App\Form\AddressType;
 use App\Form\CartAddressType;
-use App\Form\DeliveryType;
+use App\Form\CartDeliveryType;
 use App\Repository\CartRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\Response;
-use App\Form\PaymentType;
+use App\Form\CartPaymentType;
 
 /**
  * @Route("/cart", name="cart_")
@@ -164,9 +164,11 @@ class CartController extends AbstractController
      */
     public function delivery(Request $request)
     {
-        $form = $this->createForm(DeliveryType::class);
+        $form = $this->createForm(CartDeliveryType::class);
 
-        if (Request::METHOD_POST === $request->getMethod()) {
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $delivery  = $form->getData();
             return $this->redirectToRoute('cart_payment');
         }
 
@@ -181,7 +183,7 @@ class CartController extends AbstractController
      */
     public function payment(Request $request)
     {
-        $form = $this->createForm(PaymentType::class);
+        $form = $this->createForm(CartPaymentType::class);
 
         if (Request::METHOD_POST === $request->getMethod()){
             return $this->redirectToRoute('cart_checkout');

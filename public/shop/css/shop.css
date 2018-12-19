@@ -31,3 +31,6 @@ form label::first-letter
 .noasterisk::after {
     content: '' !important;
 }
+.white_label{
+    color: white !important;
+}

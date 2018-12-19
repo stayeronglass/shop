@@ -28,7 +28,7 @@
                         <div id="heading{{ key }}" class="card-header bg-primary">
                             <h5 class="mb-0">
                                 <a onclick="select_radio(this)" data-toggle="collapse" data-target="#collapse{{ key }}" aria-expanded="false" aria-controls="collapse{{ key }}" href="" class="text-white collapsed">
-                                    {{ form_widget(child) }} {{ form.children.payment.vars.choices[key].data.title }}
+                                    {{ form_widget(child, {'label_attr': {'class': 'noasterisk white_label'}}) }}
                                 </a>
                             </h5>
                         </div>

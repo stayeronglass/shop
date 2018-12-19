@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class PaymentType extends AbstractType
+class CartPaymentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -19,17 +19,14 @@ class PaymentType extends AbstractType
                 'expanded'     => true,
                 'multiple'     => false,
                 'required'     => false,
-                'label' => '',
-                'choice_label' => function() {
-                    return '';
-                },
+                'choice_label' => function (Payment $payment) {
+                    return $payment->getTitle();
+                }
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => Payment::class,
-        ]);
+
     }
 }
