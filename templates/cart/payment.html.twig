@@ -46,7 +46,7 @@
                     <a href="{{ path('cart_index') }}" class="btn btn-outline-white-secondary capitalize_first_letter"><i class="fa fa-chevron-left"></i>{% trans %}back to cart{% endtrans %}</a>
                 </div>
                 <div class="pull-right">
-                    <a href="{{ path('cart_checkout') }}" class="btn btn-outline-white-primary capitalize_first_letter">{% trans %}proceed to checkout{% endtrans %} <i class="fa fa-chevron-right"></i></a>
+                    <input type="submit" class="btn btn-outline-white-primary" value="{% trans %}proceed to checkout{% endtrans %}">
                 </div>
             </div>
         </div>

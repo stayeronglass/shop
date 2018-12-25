@@ -185,7 +185,9 @@ class CartController extends AbstractController
     {
         $form = $this->createForm(CartPaymentType::class);
 
-        if (Request::METHOD_POST === $request->getMethod()){
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $payment  = $form->getData();
             return $this->redirectToRoute('cart_checkout');
         }
 

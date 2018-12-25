@@ -8,7 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DeliveryType extends AbstractType
+class CartDeliveryType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -19,18 +19,15 @@ class DeliveryType extends AbstractType
                 'expanded'     => true,
                 'multiple'     => false,
                 'required'     => false,
-                'label' => false,
-                'choice_label' => function() {
-                    return false;
-                },
+                'choice_label' => function (Delivery $delivery) {
+                    return $delivery->getTitle() . ' ' . $delivery->getPrice() . '₽';
+                }
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => Delivery::class,
-        ]);
+
     }
 
 }
