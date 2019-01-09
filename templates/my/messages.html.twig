@@ -13,7 +13,33 @@
     </div>
     <div class="row">
         <!-- *** LEFT COLUMN ***-->
-        <div id="customer-account" class="col-lg-9">
+        <div id="customer-orders" class="col-lg-9">
+            <div class="box">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>{% trans %}№{% endtrans %}</th>
+                            <th class="capitalize_first_letter" >{% trans %}message{% endtrans %}</th>
+                            <th class="capitalize_first_letter">{% trans %}action{% endtrans %}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for message in messages %}
+                            <tr>
+                                <td># {{ message.id }} </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td class="font-weight-bold">{% trans %}no messages found{% endtrans %}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive-->
+            </div>
+            <!-- /.box-->
         </div>
         <!-- *** LEFT COLUMN END ***-->
 

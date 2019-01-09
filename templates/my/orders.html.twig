@@ -13,11 +13,35 @@
     </div>
     <div class="row">
         <!-- *** LEFT COLUMN ***-->
-        <div id="customer-account" class="col-lg-9">
-            {% if orders %}
-            {% else %}
-                <p>you have no orders!</p>
-            {% endif %}
+        <div id="customer-orders" class="col-lg-9">
+            <div class="box">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>{% trans %}№{% endtrans %}</th>
+                            <th class="capitalize_first_letter" >{% trans %}order{% endtrans %}</th>
+                            <th class="capitalize_first_letter">{% trans %}action{% endtrans %}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for order in orders %}
+                            <tr>
+                                <td># {{ order.id }} </td>
+                                <td>{{ order.address }} </td>
+                                <td><a href="{{ path('my_order_show', {'id':order.id }) }} " class="btn btn-outline-primary btn-sm">{% trans %}show{% endtrans %}</a></td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td class="font-weight-bold">{% trans %}no orders found{% endtrans %}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive-->
+            </div>
+            <!-- /.box-->
         </div>
         <!-- *** LEFT COLUMN END ***-->
 
@@ -25,6 +49,5 @@
         {{ render(controller('App\\Controller\\MyController::right', { 'active': 'orders'} )) }}
         <!--  *** RIGHT COLUMN END ***-->
     </div>
-
 {% endblock %}
 

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Order;
 use App\Form\AddressType;
 use App\Repository\MessageRepository;
 use App\Repository\OrderRepository;
@@ -34,12 +35,22 @@ class MyController extends Controller
      */
     public function orders(OrderRepository $repository): Response
     {
-        $orders = [];
+        $orders = $repository->getOrdersByUser($this->getUser());
+
         return $this->render('my/orders.html.twig', [
             'orders' => $orders,
         ]);
     }
 
+    /**
+     * @Route("/order/{id}", name="order_show")
+     */
+    public function order_show(Order $order): Response
+    {
+        return $this->render('my/orders.html.twig', [
+            'order' => $order,
+        ]);
+    }
 
     /**
      * @Route("/address/new", name="address_new", methods="GET|POST")
@@ -92,7 +103,7 @@ class MyController extends Controller
      */
     public function messages(MessageRepository $repository): Response
     {
-        $messages = [];
+        $messages = $repository->getMessagesByUser($this->getUser());
         return $this->render('my/messages.html.twig', [
             'messages' => $messages,
         ]);
@@ -105,7 +116,7 @@ class MyController extends Controller
     public function personal(AddressRepository $addressRepository): Response
     {
         return $this->render('my/personal.html.twig', [
-            'addresses' => $addressRepository->getUserAddress($this->getUser()->getId()),
+            'addresses' => [],
         ]);
     }
 

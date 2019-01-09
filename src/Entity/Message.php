@@ -31,14 +31,14 @@ class Message
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="sender_messages")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(name="sender_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $sender;
     private $sender_id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="recipient_id_messages")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(name="recipient_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $recipient;

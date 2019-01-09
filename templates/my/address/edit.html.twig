@@ -3,7 +3,7 @@
 {% block title %}Edit Address{% endblock %}
 
 {% block body %}
-    <h1>Edit Address</h1>
+    <h1 class="capitalize_first_letter">{% trans %}edit address{% endtrans %}</h1>
 
     {{ include('my/address/_form.html.twig', {'button_label': 'Update'}) }}
 

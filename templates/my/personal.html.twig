@@ -31,6 +31,10 @@
                                 <td>{{ address.address }} </td>
                                 <td><a href="{{ path('my_address_edit', {'id':address.id }) }} " class="btn btn-outline-primary btn-sm">{% trans %}edit{% endtrans %}</a></td>
                             </tr>
+                        {% else %}
+                            <tr>
+                                <td class="font-weight-bold">{% trans %}no addresses found{% endtrans %}</td>
+                            </tr>
                         {% endfor %}
                         </tbody>
                     </table>
