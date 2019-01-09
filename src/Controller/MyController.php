@@ -116,7 +116,7 @@ class MyController extends Controller
     public function personal(AddressRepository $addressRepository): Response
     {
         return $this->render('my/personal.html.twig', [
-            'addresses' => [],
+            'addresses' => $addressRepository->getUserAddress($this->getUser()->getId()),
         ]);
     }
 
