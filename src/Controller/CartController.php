@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\Response;
 use App\Form\CartPaymentType;
 
@@ -106,9 +105,9 @@ class CartController extends AbstractController
     public function checkout(SessionInterface $session): Response
     {
 
-        $user    = $this->getUser();
-        $userId  = $user->getId();
-        $em      = $this->getDoctrine()->getManager();
+        $user   = $this->getUser();
+        $userId = $user->getId();
+        $em     = $this->getDoctrine()->getManager();
         $repository = $em->getRepository(Cart::class);
 
         $data  = [];
@@ -123,22 +122,24 @@ class CartController extends AbstractController
             $total = $total + $item['price'] * $item['amount'];
         endforeach;
 
-        if (!empty($data)){
-            $data['address']  = $session->get('order_address');
-            $data['delivery'] = $session->get('order_delivery');
-            $data['paymenn']  = $session->get('order_delivery');
-
-            $order = new Order();
-            $data['total'] = $total;
-            $order
-                ->setUser($user)
-                ->setData($data)
-            ;
-
-            $em->persist($order);
-            $em->flush();
-            $repository->clearCartByUser($userId);
+        if (empty($data)) {
+            $this->createNotFoundException();
         }
+
+        $data['address']  = $session->get('order_address');
+        $data['delivery'] = $session->get('order_delivery');
+        $data['payment']  = $session->get('order_delivery');
+
+        $order = new Order();
+        $data['total'] = $total;
+        $order
+            ->setUser($user)
+            ->setData($data)
+            ->setTotal($total);
+
+        $em->persist($order);
+        $em->flush();
+
 
         return $this->render('cart/checkout.html.twig', [
             'order' => $order,
@@ -155,7 +156,7 @@ class CartController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
-            $address = $form->getData();
+            $address = $form->getData()['address'];
             $session->set('order_address', $address->getId());
 
             return $this->redirectToRoute('cart_delivery');
@@ -176,7 +177,7 @@ class CartController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
-            $delivery  = $form->getData();
+            $delivery  = $form->getData()['delivery'];
             $session->set('order_delivery', $delivery->getId());
 
             return $this->redirectToRoute('cart_payment');
@@ -197,7 +198,7 @@ class CartController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
-            $payment  = $form->getData();
+            $payment  = $form->getData()['payment'];
             $session->set('order_payment', $payment->getId());
 
             return $this->redirectToRoute('cart_checkout');

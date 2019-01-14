@@ -20,7 +20,8 @@
                         <thead>
                         <tr>
                             <th>{% trans %}№{% endtrans %}</th>
-                            <th class="capitalize_first_letter" >{% trans %}order{% endtrans %}</th>
+                            <th class="capitalize_first_letter" >{% trans %}status{% endtrans %}</th>
+                            <th class="capitalize_first_letter">{% trans %}date{% endtrans %}</th>
                             <th class="capitalize_first_letter">{% trans %}action{% endtrans %}</th>
                         </tr>
                         </thead>
@@ -28,16 +29,22 @@
                         {% for order in orders %}
                             <tr>
                                 <td># {{ order.id }} </td>
-                                <td>{{ order.address }} </td>
+                                <td>{{ order.status }} </td>
+                                <td>{{ order.createdAt | date('d.m.Y H:i:s') }} </td>
                                 <td><a href="{{ path('my_order_show', {'id':order.id }) }} " class="btn btn-outline-primary btn-sm">{% trans %}show{% endtrans %}</a></td>
                             </tr>
                         {% else %}
                             <tr>
-                                <td class="font-weight-bold">{% trans %}no orders found{% endtrans %}</td>
+                                <td class="font-weight-bold capitalize_first_letter">{% trans %}no orders found{% endtrans %}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
                     </table>
+                </div>
+                <div class="pages">
+                    <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-4">
+                        {{ knp_pagination_render(orders) }}
+                    </nav>
                 </div>
                 <!-- /.table-responsive-->
             </div>

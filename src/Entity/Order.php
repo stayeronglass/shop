@@ -16,7 +16,8 @@ class Order
 {
     use TimestampableEntity, SoftDeleteableEntity;
 
-    const ORDER_STATUS_CREATED = 1;
+    const ORDER_STATUS_CREATED   = 1;
+    const ORDER_STATUS_CONFIRMED = 1;
 
     /**
      * @ORM\Id()
@@ -30,6 +31,10 @@ class Order
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
     private $user_id;
 
     /**
@@ -42,9 +47,28 @@ class Order
      */
     private $data;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $total = 0;
+
+
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(int $user_id): self
+    {
+        $this->user_id = $user_id;
+
+        return $this;
     }
 
     public function getStatus(): ?int
@@ -71,6 +95,18 @@ class Order
         return $this;
     }
 
+    public function getTotal(): ?int
+    {
+        return $this->total;
+    }
+
+    public function setTotal(int $total): self
+    {
+        $this->total = $total;
+
+        return $this;
+    }
+
     public function getUser(): ?User
     {
         return $this->user;
@@ -82,6 +118,5 @@ class Order
 
         return $this;
     }
-
 
 }

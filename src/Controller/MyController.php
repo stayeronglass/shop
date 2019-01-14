@@ -13,7 +13,7 @@ use App\Entity\Address;
 use App\Repository\AddressRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
+use Knp\Component\Pager\PaginatorInterface;
 /**
  * @Route("/my", name="my_")
  * @IsGranted("IS_AUTHENTICATED_FULLY")
@@ -33,9 +33,14 @@ class MyController extends Controller
     /**
      * @Route("/orders", name="orders")
      */
-    public function orders(OrderRepository $repository): Response
+    public function orders(PaginatorInterface $paginator, Request $request, OrderRepository $repository): Response
     {
-        $orders = $repository->getOrdersByUser($this->getUser());
+
+        $orders = $paginator->paginate(
+            $repository->getOrdersQueryByUser($this->getUser()->getId()),
+            $request->query->getInt('page', 1),
+            10
+        );
 
         return $this->render('my/orders.html.twig', [
             'orders' => $orders,
@@ -47,7 +52,10 @@ class MyController extends Controller
      */
     public function order_show(Order $order): Response
     {
-        return $this->render('my/orders.html.twig', [
+        if ($order->getUserId() !== $this->getUser()->getId())
+            $this->createNotFoundException();
+
+        return $this->render('my/order/show.html.twig', [
             'order' => $order,
         ]);
     }
@@ -82,6 +90,9 @@ class MyController extends Controller
      */
     public function addressedit(Request $request, Address $address): Response
     {
+        if ($address->getUserId() !== $this->getUser()->getId())
+            $this->createNotFoundException();
+
         $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);
 

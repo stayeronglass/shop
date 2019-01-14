@@ -266,7 +266,7 @@
             </trans-unit>
             <trans-unit id="checkout">
                 <source>checkout</source>
-                <target>оплата</target>
+                <target>оформление</target>
             </trans-unit>
 
             <trans-unit id="where_to_find_us">
@@ -421,8 +421,30 @@
                 <source>next</source>
                 <target>далее</target>
             </trans-unit>
-
-
+            <trans-unit id="edit_address">
+                <source>edit address</source>
+                <target>редактировать почтовый адрес</target>
+            </trans-unit>
+            <trans-unit id="no_orders_found">
+                <source>no orders found</source>
+                <target>заказов пока нет ;(</target>
+            </trans-unit>
+            <trans-unit id="order">
+                <source>order</source>
+                <target>заказ</target>
+            </trans-unit>
+            <trans-unit id="show">
+                <source>show</source>
+                <target>показать</target>
+            </trans-unit>
+           <trans-unit id="date">
+                <source>date</source>
+                <target>дата</target>
+            </trans-unit>
+           <trans-unit id="status">
+                <source>status</source>
+                <target>статус</target>
+            </trans-unit>
        </body>
     </file>
 </xliff>
