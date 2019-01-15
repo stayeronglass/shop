@@ -33,8 +33,8 @@ class MinifanImportCommand extends Command
     {
         $this
             ->setDescription('Import product from miniaturesfan')
-            ->addArgument('arg1', InputArgument::REQUIRED, 'url')
-            ->addArgument('arg2', InputArgument::REQUIRED, 'category')
+            ->addArgument('url', InputArgument::REQUIRED, 'url')
+            ->addArgument('category', InputArgument::REQUIRED, 'category')
         ;
     }
 
@@ -91,13 +91,16 @@ class MinifanImportCommand extends Command
         $images = [];
         preg_match_all("#'.*/products_pictures/.*enl.*\.jpg'#", $body, $images);
 
-        foreach ($images[0] as $image):
+        foreach ($images[0] as $key => $image):
 
             $image = trim($image, "'");
             $img = file_get_contents("http://www.miniaturesfan.ru$image");
 
             $filename = md5(rand());
             $i = new Image();
+
+            if (0 === $key) $i->setMain(1);
+
             $i->setName($filename);
             $i->setExt('jpg');
             $product->addImage($i);
@@ -126,8 +129,8 @@ class MinifanImportCommand extends Command
     {
         $io   = new SymfonyStyle($input, $output);
 
-        $url  = $input->getArgument('arg1');
-        $arg2 = $input->getArgument('arg2');
+        $url  = $input->getArgument('url');
+        $arg2 = $input->getArgument('category');
 
         $category = $this->em->getRepository(Category::class)->find($arg2);
 
