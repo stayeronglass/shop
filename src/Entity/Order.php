@@ -17,7 +17,6 @@ class Order
     use TimestampableEntity, SoftDeleteableEntity;
 
     const ORDER_STATUS_CREATED   = 1;
-    const ORDER_STATUS_CONFIRMED = 1;
 
     /**
      * @ORM\Id()
@@ -38,9 +37,15 @@ class Order
     private $user_id;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\OrderStatus")
+     * @ORM\JoinColumn(name="status_id", referencedColumnName="id")
      */
-    private $status = self::ORDER_STATUS_CREATED;
+    private $orderStatus;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $status_id;
 
     /**
      * @ORM\Column(type="array", nullable=false)
@@ -51,8 +56,6 @@ class Order
      * @ORM\Column(type="integer")
      */
     private $total = 0;
-
-
 
     public function getId(): ?int
     {
@@ -71,14 +74,14 @@ class Order
         return $this;
     }
 
-    public function getStatus(): ?int
+    public function getStatusId(): ?int
     {
-        return $this->status;
+        return $this->status_id;
     }
 
-    public function setStatus(int $status): self
+    public function setStatusId(int $status_id): self
     {
-        $this->status = $status;
+        $this->status_id = $status_id;
 
         return $this;
     }
@@ -118,5 +121,19 @@ class Order
 
         return $this;
     }
+
+    public function getOrderStatus(): ?OrderStatus
+    {
+        return $this->orderStatus;
+    }
+
+    public function setOrderStatus(?OrderStatus $orderStatus): self
+    {
+        $this->orderStatus = $orderStatus;
+
+        return $this;
+    }
+
+
 
 }

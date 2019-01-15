@@ -111,13 +111,15 @@ class CartController extends AbstractController
         $repository = $em->getRepository(Cart::class);
 
         $data  = [];
+        $data['products'] = [];
         $total = 0;
 
         foreach ($repository->getFullCartByUser($userId) as $item):
-            $data[] = [
+            $data['products'][] = [
                 'title'  => $item['title'],
                 'price'  => $item['price'],
                 'amount' => $item['amount'],
+                'total'  => $item['price'] * $item['amount'],
             ];
             $total = $total + $item['price'] * $item['amount'];
         endforeach;
@@ -126,12 +128,13 @@ class CartController extends AbstractController
             $this->createNotFoundException();
         }
 
+        $data['total'] = $total;
+
         $data['address']  = $session->get('order_address');
         $data['delivery'] = $session->get('order_delivery');
         $data['payment']  = $session->get('order_delivery');
 
         $order = new Order();
-        $data['total'] = $total;
         $order
             ->setUser($user)
             ->setData($data)

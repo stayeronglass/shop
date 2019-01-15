@@ -6,12 +6,43 @@
     <div class="box text-center">
         <div class="row">
             <div class="col-md-10 offset-md-1">
-                <h1 class="capitalize_first_letter">{% trans %}order{% endtrans %}</h1>
+                <h1 class="capitalize_first_letter">{% trans %}order{% endtrans %} № {{ order.id }}</h1>
             </div>
         </div>
     </div>
     <div class="row">
         <div id="customer-account" class="col-lg-9">
+            <table class="table table-striped">
+                <tr>
+                    <td class="font-weight-bold capitalize_first_letter">{% trans %}№{% endtrans %}</td><td>{{ order.id }}</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold capitalize_first_letter">{% trans %}date{% endtrans %}</td><td>{{ order.createdAt | date('d.m.Y H:i:s') }} </td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold capitalize_first_letter">{% trans %}status{% endtrans %}</td><td>{{ order.orderStatus }} </td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold capitalize_first_letter">{% trans %}total{% endtrans %}</td><td>{{ order.total }} </td>
+                </tr>
+            </table>
+
+            <table class="table table-striped">
+                <tr>
+                    <td class="font-weight-bold capitalize_first_letter">№</td>
+                    <td class="font-weight-bold capitalize_first_letter">название</td>
+                    <td class="font-weight-bold capitalize_first_letter">цена</td>
+                    <td class="font-weight-bold capitalize_first_letter">количество</td>
+                </tr>
+            {% for product in order.data %}
+                <tr>
+                    <td>1</td>
+                    <td>{{ product.title }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.amount }}</td>
+                </tr>
+            {% endfor %}
+            </table>
         </div>
 
     </div>

@@ -55,8 +55,11 @@ class MyController extends Controller
         if ($order->getUserId() !== $this->getUser()->getId())
             $this->createNotFoundException();
 
+
+        var_dump($order->getData());
+exit;
         return $this->render('my/order/show.html.twig', [
-            'order' => $order,
+            'order'    => $order,
         ]);
     }
 
