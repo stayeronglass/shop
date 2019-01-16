@@ -8,8 +8,11 @@ function add(button, product_id) {
 }
 
 function select_radio(elem){
+
     elem = $(elem);
-    elem.children(0).children(0).prop("checked", true);
-    console.log(elem.children(0).children(0));
+
+    radio = elem.find("input[type=radio]");
+    radio.prop("checked", true);
+    console.log(radio);
     return true;
 }

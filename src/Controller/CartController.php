@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Address;
 use App\Entity\Cart;
+use App\Entity\Delivery;
 use App\Entity\Order;
+use App\Entity\Payment;
 use App\Entity\Product;
 use App\Form\AddressType;
 use App\Form\CartAddressType;
@@ -130,9 +132,23 @@ class CartController extends AbstractController
 
         $data['total'] = $total;
 
-        $data['address']  = $session->get('order_address');
-        $data['delivery'] = $session->get('order_delivery');
-        $data['payment']  = $session->get('order_delivery');
+        $address  = $em->getRepository(Address::class)->find($session->get('order_address'));
+        if($address->getUserId() !== $userId) $this->createNotFoundException();
+
+        $delivery = $em->getRepository(Delivery::class)->find($session->get('order_delivery'));
+        $payment  = $em->getRepository(Payment::class)->find($session->get('order_payment'));
+
+
+        $data['address']['zip']       = $address->getZip();
+        $data['address']['address']   = $address->getAddress();
+        $data['address']['recipient'] = $address->getRecipient();
+        $data['address']['phone']     = $address->getPhone();
+
+        $data['payment'] = $payment->getTitle();
+
+        $data['delivery']['title'] = $delivery->getTitle();
+        $data['delivery']['price'] = $delivery->getPrice();
+
 
         $order = new Order();
         $order

@@ -218,7 +218,7 @@
             </trans-unit>
             <trans-unit id="proceed_to_checkout">
                 <source>proceed to checkout</source>
-                <target>оформление</target>
+                <target>оформить заказ</target>
             </trans-unit>
             <trans-unit id="proceed_to_delivery">
                 <source>proceed to delivery</source>

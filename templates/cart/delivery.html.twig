@@ -28,7 +28,7 @@
                             <div id="heading{{ key }}" class="card-header bg-primary">
                                 <h5 class="mb-0">
                                     <a onclick="select_radio(this)" data-toggle="collapse" data-target="#collapse{{ key }}" aria-expanded="true"
-                                       aria-controls="collapse{{ key }}" href="" class="text-white collapsed">
+                                       aria-controls="collapse{{ key }}" href="javascript:void(0);return false;" class="text-white collapsed">
                                         {{ form_widget(child, {'label_attr': {'class': 'noasterisk white_label'}}) }}</a>
                                 </h5>
                             </div>
@@ -48,7 +48,7 @@
                     <a href="{{ path('cart_index') }}" class="btn btn-outline-white-secondary"><i class="fa fa-chevron-left"></i>{% trans %}back to cart{% endtrans %}</a>
                 </div>
                 <div class="pull-right">
-                    <input type="submit" class="btn btn-outline-white-primary" value="{% trans %}proceed to payment{% endtrans %}">
+                    <button type="submit" class="btn btn-outline-white-secondary ">{% trans %}proceed to payment{% endtrans %}<i class="fa fa-chevron-right"></i></button>
                 </div>
             </div>
         </div>
