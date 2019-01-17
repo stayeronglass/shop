@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use App\Entity\Cart;
 use Symfony\Component\HttpFoundation\Response;
+use Knp\Component\Pager\PaginatorInterface;
 
 
 class DefaultController extends Controller
@@ -31,7 +32,7 @@ class DefaultController extends Controller
     /**
      * @Route("/category/{slug}", name="category", methods="GET"))
      */
-    public function category($slug, Request $request): Response
+    public function category($slug, Request $request, PaginatorInterface $paginator): Response
     {
         $em           = $this->getDoctrine()->getManager();
         $categoryRepo = $em->getRepository(Category::class);
@@ -43,7 +44,7 @@ class DefaultController extends Controller
         $catQb = $categoryRepo->getChildrenQueryBuilder($category, true, null, 'ASC', true);
 
         $query     = $em->getRepository(Product::class)->getProductByCategory($catQb);
-        $products  = $this->get('knp_paginator')->paginate(
+        $products  = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             $request->query->getInt('per_page', 10)/* items per page*/
