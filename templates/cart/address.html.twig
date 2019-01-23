@@ -4,12 +4,7 @@
 {% block title %}{{ 'address'|trans|capitalize }}{% endblock %}
 
 {% block body %}
-    <style>
-        .form-check{
-            width: 10% !important;
-            display: inline !important;
-        }
-    </style>
+
     <div class="box text-center">
         <div class="row">
             <div class="col-md-10 offset-md-1">
@@ -19,34 +14,78 @@
     </div>
     {{ form_start(form) }}
     <div class="row">
-        <div id="basket" class="col-lg-9">
-            <div class="box">
-                {{ include('/cart/_table_header.html.twig', {active: 1}) }}
-                <div id="accordion" class="accordion mb-5">
-                    {% for key, child in form.children.address %}
-                        <div class="card">
-                            <div id="heading{{ key }}" class="card-header bg-primary">
-                                <h5 class="mb-0">
-                                    <a onclick="select_radio(this)" data-toggle="collapse" data-target="#collapse{{ key }}" aria-expanded="false" aria-controls="collapse{{ key }}" href="" class="text-white collapsed">
-                                        {{ form_widget(child, {'label_attr': {'class': 'noasterisk white_label'}}) }}
-                                    </a>
-                                </h5>
-                            </div>
-                            <div aria-labelledby="heading{{ key }}" data-parent="#accordion" id="collapse{{ key }}" class="collapse" style="">
-                                <div class="card-body">
-                                    <p>{{ form.children.address.vars.choices[key].data.address }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
+    <div id="checkout" class="col-lg-9">
+    <div class="">
 
-                <div class="box-footer">
+        {{ include('/cart/_table_header.html.twig', {active: 1}) }}
+
+        <div class="content">
+            <div class="row">
+                <table class="table">
+                {% for key, child in form.children.address %}
+                        <tr>
+                            <td>
+                                {{ form_widget(child, {'label_attr': {'class': 'noasterisk black_label h4'}}) }}
+
+                            {{ form.children.address.vars.choices[key].data.zip }}
+                                , {{ form.children.address.vars.choices[key].data.address }}</td>
+                        </tr>
+
+
+                {% endfor %}
+                    </table>
+            </div>
+        </div>
+        <hr/>
+        {{ include('/cart/_table_header.html.twig', {active: 2}) }}
+
+        <div class="content">
+            <div class="row">
+                <table>
+                {% for key, child in delivery.children.delivery %}
+
+                        <tr>
+                            <td class="">
+                                {{ form_widget(child, {'label_attr': {'class': 'noasterisk black_label h4'}}) }}
+                            {{ delivery.children.delivery.vars.choices[key].data.description }}</td>
+                        </tr>
+
+                {% endfor %}
+                </table>
+            </div>
+        </div>
+        <hr/>
+        {{ include('/cart/_table_header.html.twig', {active: 3}) }}
+        <div class="content">
+            <div class="row">
+                <table>
+                {% for key, child in payment.children.payment %}
+
+                        <tr>
+                            <td >
+                                {{ form_widget(child, {'label_attr': {'class': 'noasterisk black_label h4'}}) }}
+                            {{ payment.children.payment.vars.choices[key].data.description }}</td>
+                        </tr>
+                {% endfor %}
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <hr/>
+    {{ include('/cart/_table_header.html.twig', {active: 4}) }}
+    <div class="content">
+        <div class="row align-content-center center-block">
+            <div class="col-lg-6 align-content-center center-block col-lg-offset-3">
+                <div class="box-footer center-block">
                     <div class="pull-left">
-                        <a href="{{ path('cart_index') }}" class="btn btn-outline-white-secondary "><i class="fa fa-chevron-left"></i>{% trans %}back to cart{% endtrans %}</a>
+                        <a href="{{ path('cart_index') }}" class="btn btn-outline-white-secondary "><i
+                                    class="fa fa-chevron-left"></i>{% trans %}back to cart{% endtrans %}</a>
                     </div>
                     <div class="pull-right">
-                        <button type="submit" class="btn btn-outline-white-secondary ">{% trans %}proceed to delivery{% endtrans %}<i class="fa fa-chevron-right"></i></button>
+                        <button type="submit"
+                                class="btn btn-outline-white-secondary ">{% trans %}proceed to delivery{% endtrans %}<i
+                                    class="fa fa-chevron-right"></i></button>
                     </div>
                 </div>
             </div>

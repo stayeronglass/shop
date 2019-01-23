@@ -34,3 +34,7 @@ form label::first-letter
 .white_label{
     color: white !important;
 }
+
+.black_label{
+    color: black !important;
+}

@@ -181,8 +181,13 @@ class CartController extends AbstractController
             return $this->redirectToRoute('cart_delivery');
         }
 
+        $delivery = $this->createForm(CartDeliveryType::class);
+        $payment = $this->createForm(CartPaymentType::class);
+
         return $this->render('cart/address.html.twig', [
-            'form' => $form->createView(),
+            'form'     => $form->createView(),
+            'delivery' => $delivery->createView(),
+            'payment'  => $payment->createView(),
         ]);
     }
 
