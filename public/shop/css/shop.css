@@ -38,3 +38,7 @@ form label::first-letter
 .black_label{
     color: black !important;
 }
+
+.nomargin{
+    margin: 0 !important;
+}
