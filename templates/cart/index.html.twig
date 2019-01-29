@@ -56,7 +56,7 @@
                     <div class="pull-right">
                         {% if cart is not empty %}
                             <button formaction="{{ path('cart_index') }}" class="btn btn-outline-white-secondary capitalize_first_letter"><i class="fa fa-refresh"></i>{% trans %}update cart{% endtrans %}</button>
-                            <a href="{{ path('cart_address') }}" class="btn btn-outline-white-primary capitalize_first_letter">{% trans %}proceed to checkout{% endtrans %}<i class="fa fa-chevron-right"></i></a>
+                            <a href="{{ path('cart_checkout') }}" class="btn btn-outline-white-primary capitalize_first_letter">{% trans %}proceed to checkout{% endtrans %}<i class="fa fa-chevron-right"></i></a>
                         {% endif %}
                     </div>
                 </div>

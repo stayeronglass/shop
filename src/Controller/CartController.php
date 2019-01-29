@@ -8,9 +8,6 @@ use App\Entity\Delivery;
 use App\Entity\Order;
 use App\Entity\Payment;
 use App\Entity\Product;
-use App\Form\AddressType;
-use App\Form\CartAddressType;
-use App\Form\CartDeliveryType;
 use App\Repository\CartRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
-use App\Form\CartPaymentType;
+use App\Form\CartCheckoutType;
 
 /**
  * @Route("/cart", name="cart_")
@@ -48,8 +45,6 @@ class CartController extends AbstractController
     public function add(Request $request, CartRepository $cartRepository): JsonResponse
     {
         $em        = $this->getDoctrine()->getManager();
-
-
         $product   = $em->getRepository(Product::class)->find($request->get('product_id'));
         $user      = $this->getUser();
         $error_message = '';
@@ -100,11 +95,29 @@ class CartController extends AbstractController
         return new JsonResponse($result);
     }
 
-
     /**
      * @Route("/checkout", name="checkout")
      */
-    public function checkout(SessionInterface $session): Response
+    public function checkout(Request $request)
+    {
+        $form = $this->createForm(CartCheckoutType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+
+            return $this->redirectToRoute('cart_delivery');
+        }
+
+
+        return $this->render('cart/checkout.html.twig', [
+            'form'     => $form->createView(),
+        ]);
+    }
+
+
+
+    public function checkout2(SessionInterface $session): Response
     {
 
         $user   = $this->getUser();
@@ -164,75 +177,5 @@ class CartController extends AbstractController
             'order' => $order,
         ]);
     }
-
-
-    /**
-     * @Route("/address", name="address")
-     */
-    public function address(Request $request, SessionInterface $session)
-    {
-        $form = $this->createForm(CartAddressType::class);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()){
-            $address = $form->getData()['address'];
-            $session->set('order_address', $address->getId());
-
-            return $this->redirectToRoute('cart_delivery');
-        }
-
-        $delivery = $this->createForm(CartDeliveryType::class);
-        $payment = $this->createForm(CartPaymentType::class);
-
-        return $this->render('cart/address.html.twig', [
-            'form'     => $form->createView(),
-            'delivery' => $delivery->createView(),
-            'payment'  => $payment->createView(),
-        ]);
-    }
-
-
-    /**
-     * @Route("/delivery", name="delivery")
-     */
-    public function delivery(Request $request, SessionInterface $session)
-    {
-        $form = $this->createForm(CartDeliveryType::class);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()){
-            $delivery  = $form->getData()['delivery'];
-            $session->set('order_delivery', $delivery->getId());
-
-            return $this->redirectToRoute('cart_payment');
-        }
-
-        return $this->render('cart/delivery.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
-
-
-    /**
-     * @Route("/payment", name="payment")
-     */
-    public function payment(Request $request, SessionInterface $session)
-    {
-        $form = $this->createForm(CartPaymentType::class);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()){
-            $payment  = $form->getData()['payment'];
-            $session->set('order_payment', $payment->getId());
-
-            return $this->redirectToRoute('cart_checkout');
-        }
-
-        return $this->render('cart/payment.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
-
-
 
 }

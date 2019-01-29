@@ -445,6 +445,11 @@
                 <source>status</source>
                 <target>статус</target>
             </trans-unit>
+           <trans-unit id="place_an_order">
+                <source>place an order</source>
+                <target>оформить заказ</target>
+            </trans-unit>
+
        </body>
     </file>
 </xliff>
