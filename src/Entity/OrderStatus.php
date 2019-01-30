@@ -11,6 +11,9 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  */
 class OrderStatus
 {
+
+    const ORDER_STATUS_CREATED = 1;
+
     use TimestampableEntity, SoftDeleteableEntity;
 
     /**

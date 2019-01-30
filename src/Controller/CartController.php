@@ -6,9 +6,12 @@ use App\Entity\Address;
 use App\Entity\Cart;
 use App\Entity\Delivery;
 use App\Entity\Order;
+use App\Entity\OrderStatus;
 use App\Entity\Payment;
 use App\Entity\Product;
 use App\Repository\CartRepository;
+use App\Repository\OrderRepository;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -98,7 +101,7 @@ class CartController extends AbstractController
     /**
      * @Route("/checkout", name="checkout")
      */
-    public function checkout(Request $request)
+    public function checkout(Request $request, SessionInterface $session): Response
     {
         $form = $this->createForm(CartCheckoutType::class);
 
@@ -106,7 +109,10 @@ class CartController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()){
 
-            return $this->redirectToRoute('cart_delivery');
+            $order = $this->createOrder($form);
+            $session->set('order', $order->getId());
+
+            return $this->redirectToRoute('cart_finish');
         }
 
 
@@ -115,9 +121,22 @@ class CartController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/finish", name="finish")
+     */
+
+     public function finish(OrderRepository $repository, SessionInterface $session): Response
+     {
+         $order = $repository->find($session->get('order'));
+         if (!$order) $this->createNotFoundException();
 
 
-    public function checkout2(SessionInterface $session): Response
+         return $this->render('cart/finish.html.twig', [
+             'order'     => $order,
+         ]);
+     }
+
+    public function createOrder(Form $form): Order
     {
 
         $user   = $this->getUser();
@@ -143,13 +162,17 @@ class CartController extends AbstractController
             $this->createNotFoundException();
         }
 
+
+
         $data['total'] = $total;
 
-        $address  = $em->getRepository(Address::class)->find($session->get('order_address'));
+        $formData = $form->getData();
+        $address = $formData['address'];
+
         if($address->getUserId() !== $userId) $this->createNotFoundException();
 
-        $delivery = $em->getRepository(Delivery::class)->find($session->get('order_delivery'));
-        $payment  = $em->getRepository(Payment::class)->find($session->get('order_payment'));
+        $delivery = $formData['delivery'];
+        $payment  = $formData['payment'];
 
 
         $data['address']['zip']       = $address->getZip();
@@ -167,15 +190,16 @@ class CartController extends AbstractController
         $order
             ->setUser($user)
             ->setData($data)
-            ->setTotal($total);
+            ->setTotal($total)
+            ->setStatusId(OrderStatus::ORDER_STATUS_CREATED);
+        ;
 
         $em->persist($order);
         $em->flush();
 
+        $repository->clearCartByUser($userId);
 
-        return $this->render('cart/checkout.html.twig', [
-            'order' => $order,
-        ]);
+       return $order;
     }
 
 }
