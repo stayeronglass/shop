@@ -56,8 +56,6 @@ class MyController extends Controller
             $this->createNotFoundException();
 
 
-        var_dump($order->getData());
-exit;
         return $this->render('my/order/show.html.twig', [
             'order'    => $order,
         ]);

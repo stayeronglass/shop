@@ -3,9 +3,9 @@
 {% block title %}{{ 'order'|trans|capitalize }}{% endblock %}
 
 {% block body %}
-    <div class="box text-center">
+    <div class=" text-center">
         <div class="row">
-            <div class="col-md-10 offset-md-1">
+            <div class="col-md-9 offset-md-1">
                 <h1 class="capitalize_first_letter">{% trans %}order{% endtrans %} № {{ order.id }}</h1>
             </div>
         </div>
@@ -26,24 +26,35 @@
                     <td class="font-weight-bold capitalize_first_letter">{% trans %}total{% endtrans %}</td><td>{{ order.total }} </td>
                 </tr>
             </table>
+            <div>&nbsp;</div>
+            <table class="table">
 
-            <table class="table table-striped">
                 <tr>
-                    <td class="font-weight-bold capitalize_first_letter">№</td>
-                    <td class="font-weight-bold capitalize_first_letter">название</td>
+                    <td class="font-weight-bold capitalize_first_letter">товар</td>
                     <td class="font-weight-bold capitalize_first_letter">цена</td>
                     <td class="font-weight-bold capitalize_first_letter">количество</td>
+                    <td class="font-weight-bold capitalize_first_letter">cтоимость</td>
                 </tr>
-            {% for product in order.data %}
+            {% for key, product in  order.data.products %}
                 <tr>
-                    <td>1</td>
                     <td>{{ product.title }}</td>
                     <td>{{ product.price }}</td>
                     <td>{{ product.amount }}</td>
+                    <td>{{ product.amount * product.price }}</td>
                 </tr>
             {% endfor %}
             </table>
+            <div>&nbsp;</div>
+            <table class="table table-striped">
+                <tr>
+                    <td class="capitalize_first_letter font-weight-bold">{% trans %}total{% endtrans %}</td>
+                    <td colspan="10" class="font-weight-bold text-right">{{ order.total }} </td>
+                </tr>
+            </table>
         </div>
 
+        <!--  *** RIGHT COLUMN ***-->
+        {{ render(controller('App\\Controller\\MyController::right', { 'active': 'orders'} )) }}
+        <!--  *** RIGHT COLUMN END ***-->
     </div>
 {% endblock %}

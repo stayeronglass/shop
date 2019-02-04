@@ -2,12 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Address;
 use App\Entity\Cart;
-use App\Entity\Delivery;
 use App\Entity\Order;
 use App\Entity\OrderStatus;
-use App\Entity\Payment;
 use App\Entity\Product;
 use App\Repository\CartRepository;
 use App\Repository\OrderRepository;
@@ -167,7 +164,7 @@ class CartController extends AbstractController
         $data['total'] = $total;
 
         $formData = $form->getData();
-        $address = $formData['address'];
+        $address  = $formData['address'];
 
         if($address->getUserId() !== $userId) $this->createNotFoundException();
 

@@ -449,6 +449,10 @@
                 <source>place an order</source>
                 <target>оформить заказ</target>
             </trans-unit>
+           <trans-unit id="main_page">
+                <source>main page</source>
+                <target>главная</target>
+            </trans-unit>
 
        </body>
     </file>
