@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'order'|trans|capitalize }}{% endblock %}
+
+{% block body %}
+    <div class=" text-center">
+        <div class="row">
+            <div class="col-md-9 offset-md-1">
+                <h1 class="capitalize_first_letter">{% trans %}order{% endtrans %} № {{ order.id }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="customer-account" class="col-lg-9">
+            <table class="table table-striped">
+                <tr>
+                    <td class="font-weight-bold capitalize_first_letter">{% trans %}№{% endtrans %}</td><td>{{ order.id }}</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold capitalize_first_letter">{% trans %}date{% endtrans %}</td><td>{{ order.createdAt | date('d.m.Y H:i:s') }} </td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold capitalize_first_letter">{% trans %}status{% endtrans %}</td><td>{{ order.orderStatus }} </td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold capitalize_first_letter">{% trans %}total{% endtrans %}</td><td>{{ order.total }} </td>
+                </tr>
+            </table>
+            <div>&nbsp;</div>
+            <table class="table">
+
+                <tr>
+                    <td class="font-weight-bold capitalize_first_letter">товар</td>
+                    <td class="font-weight-bold capitalize_first_letter">цена</td>
+                    <td class="font-weight-bold capitalize_first_letter">количество</td>
+                    <td class="font-weight-bold capitalize_first_letter">cтоимость</td>
+                </tr>
+                {% for key, product in  order.data.products %}
+                    <tr>
+                        <td>{{ product.title }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>{{ product.amount }}</td>
+                        <td>{{ product.amount * product.price }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <div>&nbsp;</div>
+            <table class="table table-striped">
+                <tr>
+                    <td class="capitalize_first_letter font-weight-bold">{% trans %}total{% endtrans %}</td>
+                    <td colspan="10" class="font-weight-bold text-right">{{ order.total }} </td>
+                </tr>
+            </table>
+        </div>
+
+        <!--  *** RIGHT COLUMN ***-->
+        {{ render(controller('App\\Controller\\MyController::right', { 'active': 'orders'} )) }}
+        <!--  *** RIGHT COLUMN END ***-->
+    </div>
+{% endblock %}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Order;
 use App\Form\AddressType;
+use App\Form\OrderPaymentType;
 use App\Repository\MessageRepository;
 use App\Repository\OrderRepository;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,12 +15,15 @@ use App\Repository\AddressRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Knp\Component\Pager\PaginatorInterface;
+
+
 /**
  * @Route("/my", name="my_")
  * @IsGranted("IS_AUTHENTICATED_FULLY")
  */
 class MyController extends Controller
 {
+
     /**
      * @Route("/", name="main")
      */
@@ -58,6 +62,34 @@ class MyController extends Controller
 
         return $this->render('my/order/show.html.twig', [
             'order'    => $order,
+        ]);
+    }
+
+        /**
+         * @Route("/order/pay/{id}", name="order_pay")
+         */
+    public function order_pay(Order $order, Request $request): Response
+    {
+        if ($order->getUserId() !== $this->getUser()->getId())
+            $this->createNotFoundException();
+
+        $form    = $this->createForm(OrderPaymentType::class, $order);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $order->setStatusId(2);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($order);
+            $em->flush();
+
+            return $this->redirectToRoute('my_orders');
+        }
+
+        return $this->render('my/order/pay.html.twig', [
+            'order' => $order,
+            'form'  => $form,
         ]);
     }
 

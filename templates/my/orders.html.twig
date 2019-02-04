@@ -31,7 +31,10 @@
                                 <td># {{ order.id }} </td>
                                 <td>{{ order.status }} </td>
                                 <td>{{ order.createdAt | date('d.m.Y H:i:s') }} </td>
-                                <td><a href="{{ path('my_order_show', {'id':order.id }) }} " class="btn btn-outline-primary btn-sm">{% trans %}show{% endtrans %}</a></td>
+                                <td>
+                                    <a href="{{ path('my_order_show', {'id':order.id }) }} " class="btn btn-outline-primary btn-sm">{% trans %}show{% endtrans %}</a>
+                                    <a href="{{ path('my_order_pay', {'id':order.id }) }} " class="btn btn-outline-primary btn-sm">{% trans %}pay{% endtrans %}</a>
+                                </td>
                             </tr>
                         {% else %}
                             <tr>

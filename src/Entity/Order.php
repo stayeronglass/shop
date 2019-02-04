@@ -36,6 +36,12 @@ class Order
      */
     private $user_id;
 
+
+    /**
+     * @ORM\Column(type="string" , nullable=true, length=255)
+     */
+    private $payment;
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\OrderStatus")
      * @ORM\JoinColumn(name="status_id", referencedColumnName="id")
@@ -74,12 +80,24 @@ class Order
         return $this;
     }
 
+    public function getPayment(): ?string
+    {
+        return $this->payment;
+    }
+
+    public function setPayment(?string $payment): self
+    {
+        $this->payment = $payment;
+
+        return $this;
+    }
+
     public function getStatusId(): ?int
     {
         return $this->status_id;
     }
 
-    public function setStatusId(int $status_id): self
+    public function setStatusId(?int $status_id): self
     {
         $this->status_id = $status_id;
 
@@ -133,7 +151,6 @@ class Order
 
         return $this;
     }
-
 
 
 }

@@ -453,6 +453,10 @@
                 <source>main page</source>
                 <target>главная</target>
             </trans-unit>
+           <trans-unit id="pay">
+                <source>pay</source>
+                <target>оплатить</target>
+            </trans-unit>
 
        </body>
     </file>
