@@ -131,6 +131,19 @@ class DefaultController extends Controller
 
 
     /**
+     * @Route("/privacy", name="privacy", methods="GET"))
+     */
+    public function privacy(): Response
+    {
+        return $this->render('default/privacy.html.twig', [
+            'title' => 'FAQ',
+        ]);
+    }
+
+
+
+
+    /**
      * @Route("/termsandconditions", name="termsandconditions", methods="GET"))
      */
     public function termsandconditions(): Response

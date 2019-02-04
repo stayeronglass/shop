@@ -77,6 +77,11 @@ class Product
     private $description;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $short;
+
+    /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $outOfStock = false;
@@ -170,6 +175,18 @@ class Product
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getShort(): ?string
+    {
+        return $this->short;
+    }
+
+    public function setShort(?string $short): self
+    {
+        $this->short = $short;
 
         return $this;
     }
