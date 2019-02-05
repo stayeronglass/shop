@@ -16,7 +16,8 @@ class Order
 {
     use TimestampableEntity, SoftDeleteableEntity;
 
-    const ORDER_STATUS_CREATED   = 1;
+    const ORDER_STATUS_CREATED = 1;
+    const ORDER_STATUS_PAID    = 2;
 
     /**
      * @ORM\Id()

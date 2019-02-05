@@ -22,15 +22,21 @@
                             <th>{% trans %}№{% endtrans %}</th>
                             <th class="capitalize_first_letter" >{% trans %}status{% endtrans %}</th>
                             <th class="capitalize_first_letter">{% trans %}date{% endtrans %}</th>
+                            <th class="capitalize_first_letter">{% trans %}total{% endtrans %}</th>
                             <th class="capitalize_first_letter">{% trans %}action{% endtrans %}</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for order in orders %}
                             <tr>
-                                <td># {{ order.id }} </td>
-                                <td>{{ order.status }} </td>
-                                <td>{{ order.createdAt | date('d.m.Y H:i:s') }} </td>
+                                <td>
+                                    <a href="{{ path('my_order_show', {'id':order.id }) }}">
+                                       # {{ order.id }}
+                                    </a>
+                                </td>
+                                <td>{{ order.status|trans }} </td>
+                                <td>{{ order.createdAt|localizeddate('short', 'none') }} </td>
+                                <td>{{ order.total }} </td>
                                 <td>
                                     <a href="{{ path('my_order_show', {'id':order.id }) }} " class="btn btn-outline-primary btn-sm">{% trans %}show{% endtrans %}</a>
                                     <a href="{{ path('my_order_pay', {'id':order.id }) }} " class="btn btn-outline-primary btn-sm">{% trans %}pay{% endtrans %}</a>

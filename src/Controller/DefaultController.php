@@ -151,4 +151,15 @@ class DefaultController extends Controller
         return $this->render('default/termsandconditions.html.twig', [
         ]);
     }
+
+
+    /**
+     * @Route("/info", name="info", methods="GET"))
+     */
+    public function info()
+    {
+        phpinfo();
+        exit;
+    }
+
 }

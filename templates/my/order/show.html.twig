@@ -20,7 +20,10 @@
                     <td class="font-weight-bold capitalize_first_letter">{% trans %}date{% endtrans %}</td><td>{{ order.createdAt | date('d.m.Y H:i:s') }} </td>
                 </tr>
                 <tr>
-                    <td class="font-weight-bold capitalize_first_letter">{% trans %}status{% endtrans %}</td><td>{{ order.orderStatus }} </td>
+                    <td class="font-weight-bold capitalize_first_letter">{% trans %}payment{% endtrans %}</td><td>{{ order.payment }} </td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold capitalize_first_letter">{% trans %}status{% endtrans %}</td><td>{{ order.orderStatus|trans }} </td>
                 </tr>
                 <tr>
                     <td class="font-weight-bold capitalize_first_letter">{% trans %}total{% endtrans %}</td><td>{{ order.total }} </td>

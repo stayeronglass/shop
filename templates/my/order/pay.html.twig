@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="row">
-        <div id="customer-account" class="col-lg-9">
+        <div id="customer-account" class="col-lg-8">
             <table class="table table-striped">
                 <tr>
                     <td class="font-weight-bold capitalize_first_letter">{% trans %}№{% endtrans %}</td><td>{{ order.id }}</td>
@@ -20,7 +20,12 @@
                     <td class="font-weight-bold capitalize_first_letter">{% trans %}date{% endtrans %}</td><td>{{ order.createdAt | date('d.m.Y H:i:s') }} </td>
                 </tr>
                 <tr>
-                    <td class="font-weight-bold capitalize_first_letter">{% trans %}status{% endtrans %}</td><td>{{ order.orderStatus }} </td>
+                    <td class="font-weight-bold capitalize_first_letter" colspan="2">
+                        {{ form(form) }}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold capitalize_first_letter">{% trans %}status{% endtrans %}</td><td>{{ order.orderStatus|trans }} </td>
                 </tr>
                 <tr>
                     <td class="font-weight-bold capitalize_first_letter">{% trans %}total{% endtrans %}</td><td>{{ order.total }} </td>

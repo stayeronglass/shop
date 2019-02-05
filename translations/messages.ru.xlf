@@ -458,6 +458,23 @@
                 <target>оплатить</target>
             </trans-unit>
 
+           <trans-unit id="order.status.created">
+                <source>created</source>
+                <target>создан</target>
+            </trans-unit>
+
+
+           <trans-unit id="button.submit">
+                <source>submit</source>
+                <target>сохранить</target>
+            </trans-unit>
+
+           <trans-unit id="transaction_number">
+                <source>transaction number</source>
+                <target>номер платежа</target>
+            </trans-unit>
+
+
        </body>
     </file>
 </xliff>

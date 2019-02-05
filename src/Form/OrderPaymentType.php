@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class OrderPaymentType extends AbstractType
 {
@@ -15,7 +16,13 @@ class OrderPaymentType extends AbstractType
         $builder
             ->add('payment', TextType::class, [
                 'required' => true,
+                'attr' => [
+                    'placeholder' => 'transaction number',
+                ],
             ])
+            ->add('save', SubmitType::class, [
+                'label' => 'submit',
+            ]);
         ;
     }
 

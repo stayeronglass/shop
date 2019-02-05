@@ -3,8 +3,9 @@
     <div class="card sidebar-menu">
         <div class="card-body">
             <ul class="nav nav-pills flex-column">
-                <li><a href="{{ path('my_main') }}" class="nav-link {% if 'index' == active %} active {% endif %}"><i class="fa fa-list"></i>{% trans %}main page{% endtrans %}</a></li>
                 <!--
+                <li><a href="{{ path('my_main') }}" class="nav-link {% if 'index' == active %} active {% endif %}"><i class="fa fa-list"></i>{% trans %}main page{% endtrans %}</a></li>
+
                 <li><a href="{{ path('my_main') }}" class="nav-link {% if 'index' == active %} active {% endif %}"><i class="fa fa-users"></i>{% trans %}my main{% endtrans %}</a></li>
                 -->
                 <li><a href="{{ path('my_orders') }}" class="nav-link {% if 'orders' == active %} active {% endif %}"><i class="fa fa-list"></i>{% trans %}my orders{% endtrans %}</a></li>

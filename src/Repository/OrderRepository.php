@@ -23,7 +23,7 @@ class OrderRepository extends ServiceEntityRepository
     public function getOrdersQueryByUser($uid)
     {
         return $this->_em->createQuery('
-            SELECT o.id, o.createdAt, os.title AS status 
+            SELECT o.id, o.createdAt, o.total, os.title AS status 
             FROM App\Entity\Order o 
             INNER JOIN o.orderStatus os
             WHERE o.user_id = :user_id 
