@@ -17,7 +17,7 @@
                     <td class="font-weight-bold capitalize_first_letter">{% trans %}№{% endtrans %}</td><td>{{ order.id }}</td>
                 </tr>
                 <tr>
-                    <td class="font-weight-bold capitalize_first_letter">{% trans %}date{% endtrans %}</td><td>{{ order.createdAt | date('d.m.Y H:i:s') }} </td>
+                    <td class="font-weight-bold capitalize_first_letter">{% trans %}date{% endtrans %}</td><td>{{ order.createdAt | localizeddate('short', 'none') }} </td>
                 </tr>
                 <tr>
                     <td class="font-weight-bold capitalize_first_letter" colspan="2">
