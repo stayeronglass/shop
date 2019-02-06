@@ -1,6 +1,6 @@
 {% extends 'empty.html.twig' %}
 
-{% block title %}Hello!{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block body %}
     {{ render(controller('App\\Controller\\DefaultController::header')) }}
@@ -21,8 +21,8 @@
                 <!-- *** ADVANTAGES ***-->
                 <div id="advantages">
                     <div class="box text-center">
-                        <h3 class="text-uppercase">About Minimal</h3>
-                        <p>Minimal contains <strong>25 beautiful HTML pages</strong> and is built with strong attention to detail.</p>
+                        <h3 class="text-uppercase">{% trans %}bestsellers{% endtrans %}</h3>
+                        <p>{% trans %}25 beautiful HTML pages{% endtrans %}</p>
                         <div class="same-height-row row">
                             {% for category in categories %}
                             <div class="col-md-3 col-6 justify-content-md-center align-items-md-center">

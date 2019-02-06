@@ -562,11 +562,10 @@ a i.fa, button i.fa {
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: #ccc
 }
 
 #advantages .box.no-border h4 a {
-    color: #ccc
+    color: black;
 }
 
 #advantages .box.no-border h4 a:hover {

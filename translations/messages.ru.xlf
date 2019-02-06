@@ -3,6 +3,17 @@
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
 
+            <trans-unit id="main.about.header">
+                <source>bestsellers</source>
+                <target>любимые в народе категории</target>
+            </trans-unit>
+
+            <trans-unit id="main.about.text">
+                <source>25 beautiful HTML pages</source>
+                <target>всё лучшее - детям. Американским.</target>
+            </trans-unit>
+
+
             <trans-unit id="default">
                 <source>default</source>
                 <target>Умолчание</target>
