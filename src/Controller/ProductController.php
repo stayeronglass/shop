@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
+
+
     /**
      * @Route("/{id}", name="product_show", methods="GET"))
      */

@@ -95,6 +95,7 @@ class CartController extends AbstractController
         return new JsonResponse($result);
     }
 
+
     /**
      * @Route("/checkout", name="checkout")
      */
@@ -118,10 +119,10 @@ class CartController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/finish", name="finish", methods="GET")
      */
-
      public function finish(OrderRepository $repository, SessionInterface $session): Response
      {
          $order = $repository->find($session->get('order'));
@@ -132,6 +133,7 @@ class CartController extends AbstractController
              'order'     => $order,
          ]);
      }
+
 
     public function createOrder(Form $form): Order
     {

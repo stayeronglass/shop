@@ -15,6 +15,8 @@ use Knp\Component\Pager\PaginatorInterface;
 
 class SearchController extends Controller
 {
+
+
     /**
      * @Route("/", name="index", methods="GET")
      */

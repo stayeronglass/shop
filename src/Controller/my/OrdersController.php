@@ -21,7 +21,7 @@ class OrdersController extends AbstractController
 {
 
     /**
-     * @Route("/orders", name="orders")
+     * @Route("/orders", name="orders", methods="GET")
      */
     public function orders(PaginatorInterface $paginator, Request $request, OrderRepository $repository): Response
     {
@@ -37,8 +37,9 @@ class OrdersController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("/order/{id}", name="order_show")
+     * @Route("/order/{id}", name="order_show", methods="GET")
      * @Security("is_granted('order', order)")
      */
     public function order_show(Order $order): Response
@@ -48,8 +49,9 @@ class OrdersController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("/order/pay/{id}", name="order_pay")
+     * @Route("/order/pay/{id}", name="order_pay", methods="GET|POST")
      * @Security("is_granted('order', order)")
      */
     public function order_pay(Order $order, Request $request): Response

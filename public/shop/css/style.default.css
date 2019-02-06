@@ -861,7 +861,7 @@ a i.fa, button i.fa {
 
 @media (max-width: 767.98px) {
     .product .image img.img-fluid {
-        min-width: 100%
+        min-width: 100%;
     }
 }
 
@@ -873,41 +873,42 @@ a i.fa, button i.fa {
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
     -webkit-transition: all .2s ease-out;
-    transition: all .2s ease-out
+    transition: all .2s ease-out;
 }
 
 .product .image .quick-view-button .btn {
     opacity: 0;
     font-size: 11px;
-    text-align: center
+    text-align: center;
 }
 
 @media (max-width: 767.98px) {
     .product .image .quick-view-button {
-        display: none
+        display: none;
     }
 }
 
 .product .text {
-    padding: 10px
+    padding-top: 10px;
 }
 
 .product .text h3 {
     font-size: 1.1rem;
     font-weight: 700;
-    height: 2.42rem
+    height: 2.42rem;
 }
 
 .product .text h3 a {
-    color: #343a40
+    color: #343a40;
 }
 
 .product .text p.price {
-    font-size: 1.1rem
+    font-size: 1.1rem;
+    margin-top: 10px;
 }
 
 .product .text p.price del {
-    color: #999
+    color: #999;
 }
 
 .product .buttons {
@@ -921,25 +922,25 @@ a i.fa, button i.fa {
     background: rgba(255, 255, 255, 0.9);
     -webkit-transition: all .2s ease-out;
     transition: all .2s ease-out;
-    text-align: center
+    text-align: center;
 }
 
 .product .buttons .btn {
-    margin-bottom: 20px
+    margin-bottom: 20px;
 }
 
 .product:hover {
     border-bottom: solid 1px gray;
-    top: 0
+    top: 0;
 }
 
 .product:hover .quick-view-button .btn {
-    opacity: .8
+    opacity: .8;
 }
 
 .product:hover .image img {
     -webkit-transform: scale(1.1, 1.1);
-    transform: scale(1.1, 1.1)
+    transform: scale(1.1, 1.1);
 }
 
 .banner {
