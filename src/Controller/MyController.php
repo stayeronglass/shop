@@ -23,7 +23,7 @@ class MyController extends Controller
 {
 
     /**
-     * @Route("/", name="main")
+     * @Route("/", name="main", methods="GET")
      */
     public function index(): Response
     {
@@ -52,7 +52,7 @@ class MyController extends Controller
 
 
     /**
-     * @Route("/account", name="account")
+     * @Route("/account", name="account", methods="GET")
      */
     public function personal(AddressRepository $addressRepository): Response
     {

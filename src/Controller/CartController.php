@@ -119,7 +119,7 @@ class CartController extends AbstractController
     }
 
     /**
-     * @Route("/finish", name="finish")
+     * @Route("/finish", name="finish", methods="GET")
      */
 
      public function finish(OrderRepository $repository, SessionInterface $session): Response
