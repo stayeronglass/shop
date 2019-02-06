@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * @Route("/my", name="my_")
@@ -38,13 +39,10 @@ class OrdersController extends AbstractController
 
     /**
      * @Route("/order/{id}", name="order_show")
+     * @Security("is_granted('order', order)")
      */
     public function order_show(Order $order): Response
     {
-        if ($order->getUserId() !== $this->getUser()->getId())
-            $this->createNotFoundException();
-
-
         return $this->render('my/order/show.html.twig', [
             'order'    => $order,
         ]);
@@ -52,12 +50,10 @@ class OrdersController extends AbstractController
 
     /**
      * @Route("/order/pay/{id}", name="order_pay")
+     * @Security("is_granted('order', order)")
      */
     public function order_pay(Order $order, Request $request): Response
     {
-        if ($order->getUserId() !== $this->getUser()->getId())
-            $this->createNotFoundException();
-
         $form    = $this->createForm(OrderPaymentType::class, $order);
         $form->handleRequest($request);
 
