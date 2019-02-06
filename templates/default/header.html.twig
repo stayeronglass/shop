@@ -69,8 +69,8 @@
 <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true" class="modal fade">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">{% trans %}Customer login{% endtrans %}</h4>
+            <div class="modal-header capitalize_first_letter">
+                <h4 class="modal-title text-capitalize">{% trans %}customer login{% endtrans %}</h4>
                 <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
             </div>
             <div class="modal-body">
@@ -87,10 +87,8 @@
                         <button class="btn btn-outline-primary"><i class="fa fa-sign-in"></i> {% trans %}log in{% endtrans %}</button>
                     </p>
                 </form>
-                <p class="text-center text-muted">{% trans %}Not registered yet{% endtrans %}?</p>
-                <p class="text-center text-muted"><a href="{{ path('fos_user_registration_register') }}"><strong>{% trans %}Register now{% endtrans %}</strong></a>!
-                    {% trans %}It is easy and done in 1 minute and gives you access to special discounts and much more{% endtrans %}!
-                </p>
+                <p class="text-center text-muted capitalize_first_letter">{% trans %}not registered yet{% endtrans %}?</p>
+                <a class="text-capitalize" href="{{ path('fos_user_registration_register') }}">{% trans %}register now{% endtrans %}</a>, {% trans %} it is easy and done in 1 minute and gives you access to special discounts and much more {% endtrans %}.
             </div>
         </div>
     </div>

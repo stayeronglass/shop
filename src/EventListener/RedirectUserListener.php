@@ -12,11 +12,13 @@ class RedirectUserListener
     private $tokenStorage;
     private $router;
 
-    public function __construct(TokenStorageInterface $t, RouterInterface $r)
+
+    public function __construct(TokenStorageInterface $tokenStorage, RouterInterface $router)
     {
-        $this->tokenStorage = $t;
-        $this->router = $r;
+        $this->tokenStorage = $tokenStorage;
+        $this->router       = $router;
     }
+
 
     public function onKernelRequest( $event)
     {
@@ -24,20 +26,23 @@ class RedirectUserListener
 
             $currentRoute = $event->getRequest()->attributes->get('_route');
 
-            if ($this->isAuthenticatedUserOnAnonymousPage($currentRoute)) {
+            if ($this->isAnonymousPage($currentRoute)) {
                 $response = new RedirectResponse($this->router->generate('my_main'));
                 $event->setResponse($response);
             }
         }
     }
 
+
     private function isUserLogged()
     {
-        $user = $this->tokenStorage->getToken()->getUser();
-        return $user instanceof User;
+        $token = $this->tokenStorage->getToken();
+
+        return $token && ($token->getUser() instanceof User);
     }
 
-    private function isAuthenticatedUserOnAnonymousPage($currentRoute)
+
+    private function isAnonymousPage($currentRoute)
     {
         return \in_array(
             $currentRoute,

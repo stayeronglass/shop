@@ -93,8 +93,8 @@
                 <target>в корзине</target>
             </trans-unit>
             <trans-unit id="сustomer_login">
-                <source>Customer login</source>
-                <target>Вход</target>
+                <source>customer login</source>
+                <target>вход</target>
             </trans-unit>
             <trans-unit id="email">
                 <source>email</source>
@@ -104,9 +104,9 @@
                 <source>password</source>
                 <target>пароль</target>
             </trans-unit>
-            <trans-unit id="not_registered_yet">
-                <source>Not registered yet</source>
-                <target>Еще не зарегистрированы</target>
+            <trans-unit id="register.not_registered_yet">
+                <source>not registered yet</source>
+                <target>еще не зарегистрированы</target>
             </trans-unit>
             <trans-unit id="already_registered">
                 <source>already registered</source>
@@ -114,18 +114,25 @@
             </trans-unit>
 
 
-            <trans-unit id="Register_now">
-                <source>Register now</source>
-                <target>Зарегистрируйтесь</target>
+            <trans-unit id="register.text.one">
+                <source>With registration with us new world of fashion, fantastic discounts and much more opens to you</source>
+                <target>With registration with us new world of fashion, fantastic discounts and much more opens to you</target>
             </trans-unit>
-            <trans-unit id="register_now">
+            <trans-unit id="register.text.two">
+                <source>The whole process will not take you more than a minute</source>
+                <target>The whole process will not take you more than a minute</target>
+            </trans-unit>
+
+            <trans-unit id="register.now">
                 <source>register now</source>
                 <target>зарегистрируйтесь</target>
             </trans-unit>
-            <trans-unit id="register_now_text">
-                <source>It is easy and done in 1 minute and gives you access to special discounts and much more</source>
-                <target>Это займет не больше минуты</target>
+
+            <trans-unit id="register.now.text">
+                <source>it is easy and done in 1 minute and gives you access to special discounts and much more</source>
+                <target>это займет не больше минуты</target>
             </trans-unit>
+
             <trans-unit id="register">
                 <source>register</source>
                 <target>зарегистрироваться</target>
@@ -170,10 +177,7 @@
                 <source>no item in cart</source>
                 <target>корзина пуста ;(</target>
             </trans-unit>
-            <trans-unit id="Personal_account">
-                <source>Personal account</source>
-                <target>Личный кабинет</target>
-            </trans-unit>
+
             <trans-unit id="personal_account">
                 <source>personal account</source>
                 <target>личный кабинет</target>
