@@ -11,7 +11,8 @@
             </form>
         </div>
     </div>
-    <div class="container"><a href="/" class="navbar-brand home"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/logo.png" alt="Minimal logo" class="d-none d-md-inline-block"><img src="https://d19m59y37dris4.cloudfront.net/minimal/2-0/img/logo-small.png" alt="Minimal logo" class="d-md-none"><span class="sr-only">Minimal - go to homepage</span></a>
+    <div class="container">
+        <a href="/" class="navbar-brand home h3" style="vertical-align: text-bottom;" >ГН</a>
         <div class="navbar-buttons d-lg-none">
             <button class="btn btn-outline-secondary search mr-1"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></button>
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -36,7 +37,7 @@
                     </span>
                 </a>
 
-                <a href="{{ path('my_main') }}" class="btn btn-primary" title="{% trans %}Personal account{% endtrans %}"><span class="sr-only">User logout</span><i class="fa fa-user"></i></a>
+                <a href="{{ path('my_main') }}" class="btn btn-primary" title="{% trans %}personal account{% endtrans %}"><span class="sr-only">User logout</span><i class="fa fa-user"></i></a>
             {% else %}
                 <button type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-outline-secondary mr-1" title="{% trans %}log in{% endtrans %}"><span class="sr-only">User login</span><i class="fa fa-sign-in"></i></button>
             {% endif %}
@@ -54,7 +55,7 @@
             </div>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     {{ include('default/_cart.html.twig', {cart_items: cart_items}) }}
-                    <a href="{{ path('my_main') }}" class="btn btn-primary" title="{% trans %}Personal account{% endtrans %}"><span class="sr-only">User logout</span><i class="fa fa-user"></i></a>
+                    <a href="{{ path('my_main') }}" class="btn btn-primary" title="{% trans %}personal account{% endtrans %}"><span class="sr-only">User logout</span><i class="fa fa-user"></i></a>
                 {% else %}
                     <button type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-outline-secondary mr-1" title="{% trans %}log in{% endtrans %}"><span class="sr-only">User login</span><i class="fa fa-sign-in"></i></button>
                 {% endif %}
