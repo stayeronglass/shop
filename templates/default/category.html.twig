@@ -13,12 +13,15 @@
                     </p>
                 </div>
             </div>
+
+            <div class="row products">
+                {% for product in products %}
+                    {% include 'product/short.html.twig' with {'product': product} %}
+                {% endfor %}
+            </div>
+
         </div>
-    <div class="row products">
-        {% for product in products %}
-            {% include 'product/short.html.twig' with {'product': product} %}
-        {% endfor %}
-    </div>
+
 
     <div class="pages">
         <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-4">

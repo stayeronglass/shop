@@ -1,13 +1,13 @@
-<div class="col-md-4 col-sm-6">
+<div class="col-md-3 col-sm-4">
     <div class="product">
         <div class="image">
             <a href="{{ path('product_show', {'id' : product.id }) }}">
-                <img src="/upload/{{ product.image_name[:1] }}/{{ product.image_name[1:1] }}/{{ product.image_name}}.{{ product.image_ext}}" alt="" class="img-fluid image1" />
+                <img src="/upload/{{ product.image_name[:1] }}/{{ product.image_name[1:1] }}/{{ product.image_name}}350х350.{{ product.image_ext}}" alt="" class="img-fluid " />
             </a>
         </div>
         <!-- /.image-->
         <div class="text">
-            <h3><a href="{{ path('product_show', {'id' : product.id }) }}">{{  product.title }}</a></h3>
+            <h3 style="overflow: hidden;"><a href="{{ path('product_show', {'id' : product.id }) }}">{{  product.title }}</a></h3>
             <p class="price">
 
                 {% if product.sale_price %}
