@@ -6,12 +6,16 @@ use App\Entity\Category;
 use App\Entity\Image;
 use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
+use Imagine\Image\ManipulatorInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use GuzzleHttp\Client;
+use Imagine\Gd\Imagine;
+use Imagine\Image\Box;
 
 class MinifanImportCommand extends Command
 {
@@ -19,14 +23,15 @@ class MinifanImportCommand extends Command
 
     private $client;
     private $em;
+    private $imagine;
 
     public function __construct(EntityManagerInterface $entityManager, ?string $name = null)
     {
         parent::__construct($name);
 
-        $this->client = new \GuzzleHttp\Client();
-        $this->em = $entityManager;
-
+        $this->client  = new Client();
+        $this->em      = $entityManager;
+        $this->imagine = new Imagine();
     }
 
     protected function configure()
@@ -108,8 +113,17 @@ class MinifanImportCommand extends Command
             $dirname = 'public/upload' . DIRECTORY_SEPARATOR . $filename[0] . DIRECTORY_SEPARATOR . $filename[1];
             if(!file_exists($dirname)) mkdir($dirname, 0755, true);
 
-            $im = imagecreatefromstring($img);
-            imagejpeg($im,$dirname . DIRECTORY_SEPARATOR . $filename . '.jpg');
+            $image = $this->imagine->load($img);
+
+            $image->thumbnail(new Box(350, 350), ManipulatorInterface::THUMBNAIL_INSET)
+                ->save($dirname . DIRECTORY_SEPARATOR . $filename . '350х350.jpg', [
+                    'jpeg_quality' => 100,
+                ]);
+
+            $image->thumbnail(new Box(350, 350), ManipulatorInterface::THUMBNAIL_INSET)
+                ->save($dirname . DIRECTORY_SEPARATOR . $filename . '160х160.jpg', [
+                    'jpeg_quality' => 100,
+                ]);
         endforeach;
 
         if (preg_match('#Нет в наличии #', $body)) $product->setOutOfStock(true);
