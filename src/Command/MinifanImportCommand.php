@@ -115,12 +115,12 @@ class MinifanImportCommand extends Command
 
             $image = $this->imagine->load($img);
 
-            $image->thumbnail(new Box(350, 350), ManipulatorInterface::THUMBNAIL_INSET)
+            $image->thumbnail(new Box(450, 450), ManipulatorInterface::THUMBNAIL_OUTBOUND | ManipulatorInterface::THUMBNAIL_FLAG_UPSCALE)
                 ->save($dirname . DIRECTORY_SEPARATOR . $filename . '350х350.jpg', [
                     'jpeg_quality' => 100,
                 ]);
 
-            $image->thumbnail(new Box(350, 350), ManipulatorInterface::THUMBNAIL_INSET)
+            $image->thumbnail(new Box(350, 350), ManipulatorInterface::THUMBNAIL_OUTBOUND | ManipulatorInterface::THUMBNAIL_FLAG_UPSCALE)
                 ->save($dirname . DIRECTORY_SEPARATOR . $filename . '160х160.jpg', [
                     'jpeg_quality' => 100,
                 ]);
