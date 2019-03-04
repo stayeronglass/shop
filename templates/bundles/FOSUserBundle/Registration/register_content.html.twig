@@ -5,7 +5,9 @@
             <p>
                 {% trans %}With registration with us new world of fashion, fantastic discounts and much more opens to you{% endtrans %}! {% trans %}The whole process will not take you more than a minute{% endtrans %}!
             </p>
-            <p class="text-muted">If you have any questions, please feel free to <a href="{{ path('contacts') }}">contact us</a>, our customer service center is working for you 24/7.</p>
+            <p class="text-muted">
+                {% trans %}If you have any questions, please feel free to contact us, our customer service center is working for you 24/7.{% endtrans %}
+            </p>
             <hr>
 
             {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}

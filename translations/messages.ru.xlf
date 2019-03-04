@@ -127,11 +127,15 @@
 
             <trans-unit id="register.text.one">
                 <source>With registration with us new world of fashion, fantastic discounts and much more opens to you</source>
-                <target>With registration with us new world of fashion, fantastic discounts and much more opens to you</target>
+                <target>Зарегистрировавшись на сайте вы сможете покупать минечки!</target>
             </trans-unit>
             <trans-unit id="register.text.two">
                 <source>The whole process will not take you more than a minute</source>
-                <target>The whole process will not take you more than a minute</target>
+                <target>Заполните поля ниже. Это не займет больше минуты.</target>
+            </trans-unit>
+            <trans-unit id="register.text.three">
+                <source>If you have any questions, please feel free to contact us, our customer service center is working for you 24/7.</source>
+                <target>О любых проблемах пишите в группу Вконтакте. Поможем чем сможем.</target>
             </trans-unit>
 
             <trans-unit id="register.now">
@@ -473,9 +477,18 @@
                 <target>оплатить</target>
             </trans-unit>
 
+
+           <trans-unit id="my.orders">
+               <source>my orders</source>
+               <target>мои заказы</target>
+           </trans-unit>
            <trans-unit id="order.status.created">
                 <source>created</source>
                 <target>создан</target>
+            </trans-unit>
+           <trans-unit id="order.status.paid">
+                <source>paid</source>
+                <target>оплачен</target>
             </trans-unit>
 
 

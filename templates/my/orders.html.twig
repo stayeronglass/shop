@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {% endblock %}
+{% block title %}{{ 'my orders'|trans|capitalize }} {% endblock %}
 
 {% block body %}
     <div class="box text-center">
@@ -39,7 +39,9 @@
                                 <td>{{ order.total }} </td>
                                 <td>
                                     <a href="{{ path('my_order_show', {'id':order.id }) }} " class="btn btn-outline-primary btn-sm">{% trans %}show{% endtrans %}</a>
-                                    <a href="{{ path('my_order_pay', {'id':order.id }) }} " class="btn btn-outline-primary btn-sm">{% trans %}pay{% endtrans %}</a>
+                                    {% if order.status_id is same as(1) %}
+                                        <a href="{{ path('my_order_pay', {'id':order.id }) }} " class="btn btn-outline-primary btn-sm">{% trans %}pay{% endtrans %}</a>
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% else %}
