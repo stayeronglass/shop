@@ -1,9 +1,9 @@
-<ul class="breadcrumb justify-content-md-start justify-content-center">
-    <li class="breadcrumb-item"><a href="{{ path('main') }}">Главная</a></li>
+<ul class="breadcrumb justify-content-md-start justify-content-lg-start">
+    <li class="breadcrumb-item" style="padding-left: .5rem;"><a href="{{ path('main') }}">Главная</a></li>
     {% for b in breadcrumbs %}
         <li class="breadcrumb-item"><a href="{{ path('category', {'slug':b.node_slug }) }}">{{ b.node_name }}</a></li>
     {% endfor %}
-    {% if product is defined and product is not null %}
-        <li class="breadcrumb-item">{{ product.title }}</a></li>
+    {% if (product is defined) and (product is not null) %}
+        <li class="breadcrumb-item">{{ product.title }}</li>
     {% endif %}
 </ul>

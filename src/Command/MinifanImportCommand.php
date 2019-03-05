@@ -124,7 +124,7 @@ class MinifanImportCommand extends Command
                     'jpeg_quality' => 100,
                 ]);
 
-            $image->thumbnail(new Box(350, 350), ManipulatorInterface::THUMBNAIL_OUTBOUND | ManipulatorInterface::THUMBNAIL_FLAG_UPSCALE)
+            $image->thumbnail(new Box(160, 160), ManipulatorInterface::THUMBNAIL_OUTBOUND | ManipulatorInterface::THUMBNAIL_FLAG_UPSCALE)
                 ->save($dirname . DIRECTORY_SEPARATOR . $filename . '160x160.jpg', [
                     'jpeg_quality' => 100,
                 ]);
