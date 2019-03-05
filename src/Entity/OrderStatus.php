@@ -13,6 +13,7 @@ class OrderStatus
 {
 
     const ORDER_STATUS_CREATED = 1;
+    const ORDER_STATUS_PAID = 2
 
     use TimestampableEntity, SoftDeleteableEntity;
 
@@ -45,7 +46,7 @@ class OrderStatus
         return $this;
     }
 
-    public function __toString()
+    public function __toString() : string
     {
         return $this->title;
     }

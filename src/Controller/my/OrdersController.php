@@ -42,7 +42,7 @@ class OrdersController extends AbstractController
      * @Route("/order/{id}", name="order_show", methods="GET")
      * @Security("is_granted('order', order)")
      */
-    public function order_show(Order $order): Response
+    public function show(Order $order): Response
     {
         return $this->render('my/order/show.html.twig', [
             'order'    => $order,
@@ -54,7 +54,7 @@ class OrdersController extends AbstractController
      * @Route("/order/pay/{id}", name="order_pay", methods="GET|POST")
      * @Security("is_granted('order', order)")
      */
-    public function order_pay(Order $order, Request $request): Response
+    public function pay(Order $order, Request $request): Response
     {
         $form    = $this->createForm(OrderPaymentType::class, $order);
         $form->handleRequest($request);

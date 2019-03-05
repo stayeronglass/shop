@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Product;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
@@ -82,6 +83,18 @@ class DefaultController extends Controller
             'cart_items'   => $items,
         ]);
     }
+
+
+    /**
+     * @Route("/autocomplete", name="autocomplete", methods="POST"))
+     */
+    public function autocomplete(): JsonResponse
+    {
+        $data = [];
+
+        return new JsonResponse($data);
+    }
+
 
     public function footer(): Response
     {
