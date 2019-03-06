@@ -51,12 +51,12 @@
                         </tfoot>
                     </table>
                 </div>
-                <div class="box-footer">
-                    <div class="pull-left"><a href="{{ path('main') }}" class="btn btn-outline-white-secondary capitalize_first_letter"><i class="fa fa-chevron-left"></i>{% trans %}сontinue shopping{% endtrans %}</a></div>
-                    <div class="pull-right">
+                <div class="box-footer ">
+                    <div class="col-lg-12 ">
+                        <a href="{{ path('main') }}" class="m-2 btn btn-outline-white-secondary capitalize_first_letter"><i class="fa fa-chevron-left"></i>{% trans %}сontinue shopping{% endtrans %}</a>
                         {% if cart is not empty %}
-                            <button formaction="{{ path('cart_index') }}" class="btn btn-outline-white-secondary capitalize_first_letter"><i class="fa fa-refresh"></i>{% trans %}update cart{% endtrans %}</button>
-                            <a href="{{ path('cart_checkout') }}" class="btn btn-outline-white-primary capitalize_first_letter">{% trans %}proceed to checkout{% endtrans %}<i class="fa fa-chevron-right"></i></a>
+                            <button formaction="{{ path('cart_index') }}" class="m-2 btn btn-outline-white-secondary capitalize_first_letter mr-2"><i class="fa fa-refresh"></i>{% trans %}update cart{% endtrans %}</button>
+                            <a href="{{ path('cart_checkout') }}" class="float-lg-right m-2 btn btn-outline-white-primary capitalize_first_letter mr-2">{% trans %}proceed to checkout{% endtrans %}<i class="fa fa-chevron-right"></i></a>
                         {% endif %}
                     </div>
                 </div>
