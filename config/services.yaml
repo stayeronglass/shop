@@ -84,3 +84,17 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Payment }
         public: true
+
+    admin.order:
+        class: App\Admin\OrderAdmin
+        arguments: [~, App\Entity\Order, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Order }
+        public: true
+
+    admin.orderstatus:
+        class: App\Admin\OrderStatusAdmin
+        arguments: [~, App\Entity\OrderStatus, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: OrderStatus }
+        public: true

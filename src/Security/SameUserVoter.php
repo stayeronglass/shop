@@ -21,10 +21,12 @@ class SameUserVoter extends Voter
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
         $user = $token->getUser();
-        if (!$user instanceof User) {
+
+        if ( !($user instanceof User) || (!$subject) ) {
             // the user must be logged in; if not, deny access
             return false;
         }
+
 
         return $user->getId() === $subject->getUser()->getid();
     }
