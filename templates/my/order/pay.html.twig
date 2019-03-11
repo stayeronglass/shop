@@ -25,7 +25,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="font-weight-bold capitalize_first_letter">{% trans %}status{% endtrans %}</td><td>{{ order.orderStatus|trans }} </td>
+                    <td class="font-weight-bold capitalize_first_letter">{% trans %}status{% endtrans %}</td>
+                    <td class="capitalize_first_letter">{{ order.orderStatus|trans }} </td>
                 </tr>
                 <tr>
                     <td class="font-weight-bold capitalize_first_letter">{% trans %}total{% endtrans %}</td><td>{{ order.total }} </td>
