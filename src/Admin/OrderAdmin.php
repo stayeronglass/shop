@@ -18,6 +18,9 @@ class OrderAdmin extends AbstractAdmin
         ->add('orderStatus', ModelType::class, [
             'label'    => 'Статус',
             'property' => 'title',
+            'attr'      => [
+                'style' => 'width: 200px'
+            ],
         ])
         ;
     }

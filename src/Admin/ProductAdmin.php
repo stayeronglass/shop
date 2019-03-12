@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
+use Sonata\FormatterBundle\Form\Type\FormatterType;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Form\Type\CollectionType;
@@ -23,8 +24,7 @@ class ProductAdmin extends AbstractAdmin
 
         ])
             ->add('description', SimpleFormatterType::class, [
-                'format' => 'richhtml',
-                'ckeditor_context' => 'default', // optional
+                'format' => 'text',
             ])
             ->add('price', TextType::class, [
                 'label' => 'Цена',
@@ -62,7 +62,7 @@ class ProductAdmin extends AbstractAdmin
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add('title'
+        $datagridMapper->add('title')
         ;
     }
 
