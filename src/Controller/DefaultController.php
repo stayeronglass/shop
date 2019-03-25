@@ -42,7 +42,6 @@ class DefaultController extends Controller
         $category     = $categoryRepo->findOneBy(['slug' => $slug]);
         if(null === $category) throw $this->createNotFoundException();
 
-        $title = $category->getName();
         $catQb = $categoryRepo->getChildrenQueryBuilder($category, true, null, 'ASC', true);
 
         $query     = $em->getRepository(Product::class)->getProductByCategory($catQb);
@@ -55,7 +54,6 @@ class DefaultController extends Controller
         return $this->render('default/category.html.twig', [
             'category' => $category,
             'products' => $products,
-            'title'    => $title,
         ]);
     }
 
@@ -169,6 +167,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/info", name="info", methods="GET"))
+     * condition="%kernel.environment% === 'dev'"
      */
     public function info()
     {

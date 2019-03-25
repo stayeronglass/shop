@@ -17,13 +17,15 @@ use Doctrine\ORM\Query\Expr;
  */
 class ProductRepository extends ServiceEntityRepository
 {
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Product::class);
     }
 
 
-    public function getSliderProducts(){
+    public function getSliderProducts() : array
+    {
         return $this->createQueryBuilder('p')
             ->select('p.id,p.title, i.name,i.ext')
             ->innerJoin('p.images', 'i',Expr\Join::WITH, 'i.main = 1')
@@ -35,13 +37,15 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
 
-    public function searchProducts($q){
+    public function searchProducts($q) : array
+    {
         return $this->searchProductsQuery($q)
             ->getArrayResult()
         ;
     }
 
-    public function searchProductsQuery($q){
+    public function searchProductsQuery($q) : Query
+    {
         $this->getEntityManager()->getConnection()->quote($q);
 
         return $this->createQueryBuilder('p')
@@ -59,7 +63,7 @@ class ProductRepository extends ServiceEntityRepository
      *
      * @return Query
      */
-    public function getProductByCategory(QueryBuilder $cqb)
+    public function getProductByCategory(QueryBuilder $cqb) : Query
     {
         $qb = $this->createQueryBuilder('p')
             ->select("p.title, p.id, p.price, i.name as image_name, i.ext as image_ext, cat.id AS cat_id, p.salePrice as sale_price")

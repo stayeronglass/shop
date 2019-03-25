@@ -6,6 +6,7 @@ use App\Entity\Cart;
 use App\Entity\Product;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use phpDocumentor\Reflection\DocBlock\Tags\Param;
 use phpDocumentor\Reflection\DocBlock\Tags\Uses;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\ORM\Query\Expr;
@@ -23,7 +24,8 @@ class CartRepository extends ServiceEntityRepository
         parent::__construct($registry, Cart::class);
     }
 
-    public function getCartByUser($uid){
+    public function getCartByUser($uid) : array
+    {
         return $this->createQueryBuilder('c')
             ->select('c.id')
             ->andWhere('c.user_id = :user_id')
@@ -33,7 +35,8 @@ class CartRepository extends ServiceEntityRepository
             ;
     }
 
-    public function getFullCartByUser($uid){
+    public function getFullCartByUser($uid): array
+    {
         return $this->createQueryBuilder('c')
             ->select('c.id, c.amount, p.id as pid, p.title, p.price, i.name as image_name, i.ext as image_ext ')
             ->innerJoin('c.product', 'p')
@@ -46,7 +49,7 @@ class CartRepository extends ServiceEntityRepository
             ;
     }
 
-    public function clearCartByUser($uid)
+    public function clearCartByUser($uid): array
     {
         return $this->createQueryBuilder('c')
             ->delete()
@@ -57,7 +60,8 @@ class CartRepository extends ServiceEntityRepository
         ;
     }
 
-    public function getCartAmountByUser($uid){
+    public function getCartAmountByUser($uid) : int
+    {
         $res =  $this->createQueryBuilder('c')
             ->select('sum(c.amount) as amount')
             ->andWhere('c.user_id = :user_id')
@@ -68,7 +72,7 @@ class CartRepository extends ServiceEntityRepository
         return $res[0]['amount'] ?? 0;
     }
 
-    public function add($amount, Product $product, User $user)
+    public function add($amount, Product $product, User $user): bool
     {
         $cart = $this->findOneBy(['product_id' => $product->getId(), 'user_id' => $user->getId()]);
 

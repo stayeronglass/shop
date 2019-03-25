@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Category;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
+use phpDocumentor\Reflection\DocBlock\Tags\Param;
 
 /**
  * @method Category|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,7 +15,8 @@ use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 class CategoryRepository extends NestedTreeRepository
 {
 
-    public function getMainCategories(){
+    public function getMainCategories() : array
+    {
         return $this->createQueryBuilder('p')
             ->andWhere('p.main = :main')
             ->setParameter('main', 1)

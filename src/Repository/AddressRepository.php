@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Address;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Types\Type;
+use Doctrine\ORM\Query;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -20,7 +21,7 @@ class AddressRepository extends ServiceEntityRepository
         parent::__construct($registry, Address::class);
     }
 
-    public function getUserAddressQuery($uid)
+    public function getUserAddressQuery($uid) : Query
     {
         return $this->_em->createQuery('
             SELECT a.id, a.address FROM App\Entity\Address a WHERE a.user_id = :user_id 
@@ -30,7 +31,7 @@ class AddressRepository extends ServiceEntityRepository
         ;
     }
 
-    public function getUserAddress($uid)
+    public function getUserAddress($uid) : array
     {
         return $this->getUserAddressQuery($uid)->getScalarResult();
     }

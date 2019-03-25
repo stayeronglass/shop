@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Order;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\DBAL\Types\Type;
 
@@ -20,7 +21,7 @@ class OrderRepository extends ServiceEntityRepository
         parent::__construct($registry, Order::class);
     }
 
-    public function getOrdersQueryByUser($uid)
+    public function getOrdersQueryByUser($uid) : Query
     {
         return $this->_em->createQuery('
             SELECT o.id, o.createdAt, o.total, os.title AS status, o.status_id 
