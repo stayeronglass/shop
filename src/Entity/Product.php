@@ -96,6 +96,7 @@ class Product
      */
     private $banner = false;
 
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();

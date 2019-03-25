@@ -15,6 +15,7 @@ use Sonata\FormatterBundle\Form\Type\FormatterType;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Form\Type\CollectionType;
+use Sonata\AdminBundle\Form\Type\AdminType;
 
 class ProductAdmin extends AbstractAdmin
 {
@@ -57,6 +58,10 @@ class ProductAdmin extends AbstractAdmin
                 'label' => 'Нет в наличии',
                 'required' => false,
             ])
+            ->add('images', ModelType::class, [
+                'multiple' => true,
+            ])
+
         ;
     }
 
@@ -73,5 +78,46 @@ class ProductAdmin extends AbstractAdmin
             ->add('id')
             ->addIdentifier('title')
         ;
+    }
+
+
+    public function prePersist($page)
+    {
+        $this->manageEmbeddedImageAdmins($page);
+    }
+
+
+    public function preUpdate($page)
+    {
+        $this->manageEmbeddedImageAdmins($page);
+    }
+
+
+    private function manageEmbeddedImageAdmins($page)
+    {
+        // Cycle through each field
+        foreach ($this->getFormFieldDescriptions() as $fieldName => $fieldDescription) {
+            // detect embedded Admins that manage Images
+            if ($fieldDescription->getType() === 'sonata_type_admin' &&
+                ($associationMapping = $fieldDescription->getAssociationMapping()) &&
+                $associationMapping['targetEntity'] === 'App\Entity\Image'
+            ) {
+                $getter = 'get'.$fieldName;
+                $setter = 'set'.$fieldName;
+
+                /** @var Image $image */
+                $image = $page->$getter();
+
+                if ($image) {
+                    if ($image->getFile()) {
+                        // update the Image to trigger file management
+                        $image->refreshUpdated();
+                    } elseif (!$image->getFile() && !$image->getFilename()) {
+                        // prevent Sf/Sonata trying to create and persist an empty Image
+                        $page->$setter(null);
+                    }
+                }
+            }
+        }
     }
 }
