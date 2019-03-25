@@ -98,3 +98,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: OrderStatus }
         public: true
+
+    admin.image:
+        class: App\Admin\ImageAdmin
+        arguments: [~, App\Entity\Image, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Image }
+        public: true
