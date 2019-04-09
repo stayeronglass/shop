@@ -6,13 +6,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Imagine\Image\Box;
+use Imagine\Image\ManipulatorInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile as UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
  */
 class Image
 {
-    const SERVER_PATH_TO_IMAGE_FOLDER = '/server/path/to/images';
     /**
      * Unmapped property to handle file uploads
      */
@@ -174,8 +176,31 @@ class Image
             $this->getFile()->getClientOriginalName()
         );
 
+        $filename = md5(rand());
+        $dirname = 'public/upload' . DIRECTORY_SEPARATOR . $filename[0] . DIRECTORY_SEPARATOR . $filename[1];
+
+        if(!file_exists($dirname)) mkdir($dirname, 0755, true);
+
+        $image = $this->imagine->load($this->getFile());
+
+        $image->save($dirname . DIRECTORY_SEPARATOR . $filename . '.jpg', [
+            'jpeg_quality' => 100,
+        ]);
+
+        $image->thumbnail(new Box(450, 450), ManipulatorInterface::THUMBNAIL_OUTBOUND | ManipulatorInterface::THUMBNAIL_FLAG_UPSCALE)
+            ->save($dirname . DIRECTORY_SEPARATOR . $filename . '450x450.jpg', [
+                'jpeg_quality' => 100,
+            ]);
+
+        $image->thumbnail(new Box(160, 160), ManipulatorInterface::THUMBNAIL_OUTBOUND | ManipulatorInterface::THUMBNAIL_FLAG_UPSCALE)
+            ->save($dirname . DIRECTORY_SEPARATOR . $filename . '160x160.jpg', [
+                'jpeg_quality' => 100,
+            ]);
+
+
         // set the path property to the filename where you've saved the file
-        $this->filename = $this->getFile()->getClientOriginalName();
+        $this->setName($filename);
+        $this->setExt('jpg');
 
         // clean up the file property as you won't need it anymore
         $this->setFile(null);
