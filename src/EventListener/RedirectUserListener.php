@@ -34,7 +34,7 @@ class RedirectUserListener
     }
 
 
-    private function isUserLogged()
+    private function isUserLogged() : bool
     {
         $token = $this->tokenStorage->getToken();
 
@@ -42,7 +42,7 @@ class RedirectUserListener
     }
 
 
-    private function isAnonymousPage($currentRoute)
+    private function isAnonymousPage($currentRoute) : bool
     {
         return \in_array(
             $currentRoute,

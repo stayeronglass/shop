@@ -9,14 +9,20 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Imagine\Image\Box;
 use Imagine\Image\ManipulatorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile as UploadedFile;
+use Imagine\Gd\Imagine;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
  */
 class Image
 {
+
+    const IMAGE_DIR = 'public/upload' . DIRECTORY_SEPARATOR;
+
+
     /**
      * Unmapped property to handle file uploads
+     *  @var UploadedFile
      */
     private $file;
 
@@ -135,7 +141,7 @@ class Image
     /**
      * @return UploadedFile
      */
-    public function getFile()
+    public function getFile() : ?UploadedFile
     {
         return $this->file;
     }
@@ -167,21 +173,14 @@ class Image
             return;
         }
 
-        // we use the original file name here but you should
-        // sanitize it at least to avoid any security issues
-
-        // move takes the target directory and target filename as params
-        $this->getFile()->move(
-            self::SERVER_PATH_TO_IMAGE_FOLDER,
-            $this->getFile()->getClientOriginalName()
-        );
 
         $filename = md5(rand());
-        $dirname = 'public/upload' . DIRECTORY_SEPARATOR . $filename[0] . DIRECTORY_SEPARATOR . $filename[1];
+        $dirname = self::IMAGE_DIR . $filename[0] . DIRECTORY_SEPARATOR . $filename[1];
 
         if(!file_exists($dirname)) mkdir($dirname, 0755, true);
 
-        $image = $this->imagine->load($this->getFile());
+        $imagine = new Imagine();
+        $image   = $imagine->load(file_get_contents($this->getFile()->getPathname()));
 
         $image->save($dirname . DIRECTORY_SEPARATOR . $filename . '.jpg', [
             'jpeg_quality' => 100,
