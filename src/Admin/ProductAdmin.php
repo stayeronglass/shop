@@ -2,6 +2,7 @@
 
 namespace App\Admin;
 
+use App\Entity\Product;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -51,15 +52,17 @@ class ProductAdmin extends AbstractAdmin
                 'required' => false,
             ])
             ->add('banner', CheckboxType::class, [
-                'label' => 'В банер',
+                'label'    => 'В банер',
                 'required' => false,
             ])
             ->add('outOfStock', CheckboxType::class, [
-                'label' => 'Нет в наличии',
+                'label'    => 'Нет в наличии',
                 'required' => false,
             ])
             ->add('images', ModelType::class, [
+                'label'    => 'Картинки',
                 'multiple' => true,
+                'required' => true,
             ])
 
         ;
@@ -81,20 +84,22 @@ class ProductAdmin extends AbstractAdmin
     }
 
 
-    public function prePersist($page)
+    public function prePersist($product)
     {
-        $this->manageEmbeddedImageAdmins($page);
+        $this->manageEmbeddedImageAdmins($product);
     }
 
 
-    public function preUpdate($page)
+    public function preUpdate($product)
     {
-        $this->manageEmbeddedImageAdmins($page);
+        $this->manageEmbeddedImageAdmins($product);
     }
 
 
-    private function manageEmbeddedImageAdmins($page)
+    private function manageEmbeddedImageAdmins(Product $product)
     {
-
+        foreach ($product->getImages() as $image):
+            $image->setProducts($product);
+        endforeach;
     }
 }
