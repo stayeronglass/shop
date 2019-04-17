@@ -40,15 +40,15 @@ class ProductAdmin extends AbstractAdmin
                 'multiple' => true,
             ])
             ->add('manufacturers', ModelAutocompleteType::class, [
-                'label' => 'Производитель',
+                'label'    => 'Производитель',
                 'property' => 'name',
             ])
             ->add('material', ModelAutocompleteType::class, [
-                'label' => 'Материал',
+                'label'    => 'Материал',
                 'property' => 'name',
             ])
             ->add('new', CheckboxType::class, [
-                'label' => 'В новинки',
+                'label'    => 'В новинки',
                 'required' => false,
             ])
             ->add('banner', CheckboxType::class, [

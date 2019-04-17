@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Product;
+use Doctrine\ORM\Query;
+use Knp\Component\Pager\Event\Subscriber\Paginate\Doctrine\ORM\QuerySubscriber\UsesPaginator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -44,11 +46,18 @@ class DefaultController extends Controller
 
         $catQb = $categoryRepo->getChildrenQueryBuilder($category, true, null, 'ASC', true);
 
-        $query     = $em->getRepository(Product::class)->getProductByCategory($catQb);
+        $query = $em->getRepository(Product::class)->getProductByCategory($catQb);
+        $query
+            ->setHint(UsesPaginator::HINT_FETCH_JOIN_COLLECTION, false)
+            ->setHydrationMode(Query::HYDRATE_SCALAR)
+        ;
+
+
         $products  = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             $request->query->getInt('per_page', 10)/* items per page*/
+
         );
 
         return $this->render('default/category.html.twig', [
