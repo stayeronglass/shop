@@ -2,7 +2,6 @@
 
 namespace App\Security;
 
-use App\Entity\Post;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -11,14 +10,14 @@ class SameUserVoter extends Voter
 {
 
 
-    protected function supports($attribute, $subject)
+    protected function supports($attribute, $subject)  : bool
     {
         return true;
     }
 
 
 
-    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token) : bool
     {
         $user = $token->getUser();
 
