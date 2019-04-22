@@ -19,6 +19,9 @@ class Image
 
     const IMAGE_DIR = 'public/upload' . DIRECTORY_SEPARATOR;
 
+    const IMAGE_THUMB_SMALL = '160x160';
+    const IMAGE_THUMB_BIG = '450x450';
+
 
     /**
      * Unmapped property to handle file uploads
