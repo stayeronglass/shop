@@ -57,13 +57,11 @@
                             </form>
                             <div id="thumbs" class="row">
                                 {% for i in images %}
-                                    {% if not loop.first %}
                                         <div class="col-4">
                                             <a href="/upload/{{ i.name[:1] }}/{{ i.name[1:1] }}/{{ i.name}}.{{ i.ext}}" class="thumb">
                                                 <img src="/upload/{{ i.name[:1] }}/{{ i.name[1:1] }}/{{ i.name}}160x160.{{ i.ext}}" alt="" class="img-fluid">
                                             </a>
                                         </div>
-                                    {% endif %}
                                  {% endfor %}
                             </div>
 
