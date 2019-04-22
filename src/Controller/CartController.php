@@ -70,7 +70,7 @@ class CartController extends AbstractController
     /**
      * @Route("/remove/{id}", name="remove")
      */
-    public function remove($id): JsonResponse
+    public function remove(int $id): JsonResponse
     {
         $em       = $this->getDoctrine()->getManager();
         $cartRepo = $em->getRepository(Cart::class);

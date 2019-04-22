@@ -34,9 +34,21 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/category/", name="categories", methods="GET"))
+     */
+    public function categories() : Response
+    {
+
+        return $this->render('default/categories.html.twig', [
+
+        ]);
+    }
+
+
+    /**
      * @Route("/category/{slug}", name="category", methods="GET"))
      */
-    public function category($slug, Request $request, PaginatorInterface $paginator): Response
+    public function category(string $slug, Request $request, PaginatorInterface $paginator): Response
     {
         $em           = $this->getDoctrine()->getManager();
         $categoryRepo = $em->getRepository(Category::class);

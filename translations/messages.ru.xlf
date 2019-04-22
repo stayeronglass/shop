@@ -60,6 +60,11 @@
                 <target>Название</target>
             </trans-unit>
 
+
+            <trans-unit id="categories">
+                <source>categories</source>
+                <target>категории</target>
+            </trans-unit>
             <trans-unit id="Category">
                 <source>Category</source>
                 <target>Категория</target>
