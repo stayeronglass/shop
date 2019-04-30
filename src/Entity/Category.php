@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Gedmo\Tree\Traits\NestedSetEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -14,7 +15,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Category
 {
-    use TimestampableEntity, NestedSetEntity;
+    use TimestampableEntity, NestedSetEntity, SoftDeleteableEntity;
 	
     /**
      * @ORM\Id()
@@ -63,10 +64,29 @@ class Category
      */
     private $main = false;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist"})
+     */
+    private $image;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $image_id;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
         $this->children = new ArrayCollection();
+    }
+
+
+
+
+
+    public function __toString()
+    {
+        return $this->name;
     }
 
     public function getId(): ?int
@@ -91,6 +111,13 @@ class Category
         return $this->slug;
     }
 
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
     public function getDescription(): ?string
     {
         return $this->description;
@@ -111,6 +138,18 @@ class Category
     public function setMain(?bool $main): self
     {
         $this->main = $main;
+
+        return $this;
+    }
+
+    public function getImageId(): ?int
+    {
+        return $this->image_id;
+    }
+
+    public function setImageId(?int $image_id): self
+    {
+        $this->image_id = $image_id;
 
         return $this;
     }
@@ -186,9 +225,16 @@ class Category
         return $this;
     }
 
-    public function __toString()
+    public function getImage(): ?Image
     {
-        return $this->name;
+        return $this->image;
+    }
+
+    public function setImage(?Image $image): self
+    {
+        $this->image = $image;
+
+        return $this;
     }
 
 }
