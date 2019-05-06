@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Product;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\Query;
 use Knp\Component\Pager\Event\Subscriber\Paginate\Doctrine\ORM\QuerySubscriber\UsesPaginator;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -33,14 +34,42 @@ class DefaultController extends Controller
         ]);
     }
 
+
     /**
-     * @Route("/category/", name="categories", methods="GET"))
+     * @Route("/categories/", name="main_categories", methods="GET"))
      */
-    public function categories() : Response
+    public function maincategories() : Response
     {
+        $em = $this->getDoctrine()->getManager();
+        $categoryRepo = $em->getRepository(Category::class);
+
+        return $this->render('default/main_categories.html.twig', [
+            'categories' => $categoryRepo->getMainCategories(),
+            'category'   => ['name' => 'Категории'],
+        ]);
+    }
+
+
+    /**
+     * @Route("/categories/{slug}", name="categories", methods="GET"))
+     */
+    public function categories(string $slug): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $categoryRepo = $em->getRepository(Category::class);
+
+
+        $category = $categoryRepo->findOneBy(['slug' => $slug]);
+        if (null === $category) throw $this->createNotFoundException();
+
+        $categories = $categoryRepo
+            ->getChildrenQueryBuilder($category, true, null, 'ASC', false)
+            ->getQuery()
+            ->getScalarResult();
 
         return $this->render('default/categories.html.twig', [
-
+            'categories' => $categories,
+            'category'   => $category,
         ]);
     }
 
