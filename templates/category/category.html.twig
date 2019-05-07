@@ -4,15 +4,31 @@
 
 {% block body %}
     {{ render(controller('App\\Controller\\DefaultController::breadcrumbs',{ 'node': category } )) }}
-        <div class="box text-center">
-            <div class="row">
-                <div class="col-md-10 offset-md-1">
-                    <h1>{{ category.name }}</h1>
+    <div class="box text-center">
+
+            <div class="same-height-row row justify-content-md-center align-items-md-center">
+                {% for c in categories %}
+                    {% if c.id != category.id  %}
+                        <div class="col-md-3 col-6 justify-content-md-center align-items-md-center">
+                            <div class="box no-border d-flex justify-content-center align-items-center">
+                                <h4><a href="{{ path('category', {'slug':c.slug }) }}">{{ c.name }}</a></h4>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <h1>{{ category.name }}</h1>
+                {% if 1 is same as (page)  %}
                     <p>
                         {{ category.description }}
                     </p>
-                </div>
+                {% endif %}
             </div>
+        </div>
 
             <div class="row products">
                 {% for product in products %}

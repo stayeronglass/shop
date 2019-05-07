@@ -27,31 +27,6 @@ class CategoryController extends Controller
 
         return $this->render('category/main.html.twig', [
             'categories' => $categoryRepo->getMainCategories(),
-            'category'   => ['name' => 'Категории'],
-        ]);
-    }
-
-
-    /**
-     * @Route("/categories/{slug}", name="categories", methods="GET"))
-     */
-    public function categories(string $slug): Response
-    {
-        $em = $this->getDoctrine()->getManager();
-        $categoryRepo = $em->getRepository(Category::class);
-
-
-        $category = $categoryRepo->findOneBy(['slug' => $slug]);
-        if (null === $category) throw $this->createNotFoundException();
-
-        $categories = $categoryRepo
-            ->getChildrenQueryBuilder($category, true, null, 'ASC', false)
-            ->getQuery()
-            ->getScalarResult();
-
-        return $this->render('category/categories.html.twig', [
-            'categories' => $categories,
-            'category'   => $category,
         ]);
     }
 
@@ -67,7 +42,7 @@ class CategoryController extends Controller
         $category     = $categoryRepo->findOneBy(['slug' => $slug]);
         if(null === $category) throw $this->createNotFoundException();
 
-        $catQb = $categoryRepo->getChildrenQueryBuilder($category, true, null, 'ASC', true);
+        $catQb = $categoryRepo->getChildrenQueryBuilder($category, true, 'id', 'ASC', true);
 
         $query = $em->getRepository(Product::class)->getProductByCategory($catQb);
         $query
@@ -75,17 +50,19 @@ class CategoryController extends Controller
             ->setHydrationMode(Query::HYDRATE_SCALAR)
         ;
 
-
+        $page = $request->query->getInt('page', 1);
         $products  = $paginator->paginate(
             $query, /* query NOT result */
-            $request->query->getInt('page', 1)/*page number*/,
+            $page,
             $request->query->getInt('per_page', 10)/* items per page*/
 
         );
 
-        return $this->render('category//category.html.twig', [
-            'category' => $category,
-            'products' => $products,
+        return $this->render('category/category.html.twig', [
+            'category'   => $category,
+            'products'   => $products,
+            'categories' => $categoryRepo->getCategories($catQb),
+            'page'       => $page,
         ]);
     }
 

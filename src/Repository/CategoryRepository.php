@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Category;
+use Doctrine\ORM\QueryBuilder;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 use phpDocumentor\Reflection\DocBlock\Tags\Param;
 
@@ -17,14 +18,36 @@ class CategoryRepository extends NestedTreeRepository
 
     public function getMainCategories() : array
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.main = :main')
+        return $this->getCategoriesQuery()
+            ->andWhere('cat.main = :main')
             ->setParameter('main', 1)
-            ->orderBy('p.id', 'ASC')
             ->getQuery()
             ->getArrayResult()
         ;
     }
 
+    public function getCategories(QueryBuilder $cqb = null): array
+    {
+        $q = $this->getCategoriesQuery();
 
+        if (null !== $cqb) {
+            $q->andWhere(
+                $q->expr()->in(
+                    'cat.id',
+                    $cqb->getDQL()
+                ))->setParameters($cqb->getParameters())
+            ;
+        }
+
+
+        return $q->getQuery()->getArrayResult();
+    }
+
+
+    public function getCategoriesQuery()
+    {
+        return $this->createQueryBuilder('cat')
+            ->orderBy('cat.id', 'ASC')
+        ;
+    }
 }
