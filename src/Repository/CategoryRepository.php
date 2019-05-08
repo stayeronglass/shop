@@ -22,11 +22,11 @@ class CategoryRepository extends NestedTreeRepository
             ->andWhere('cat.main = :main')
             ->setParameter('main', 1)
             ->getQuery()
-            ->getArrayResult()
+            ->getScalarResult()
         ;
     }
 
-    public function getCategories(QueryBuilder $cqb = null): array
+    public function getCategories(?QueryBuilder $cqb = null): array
     {
         $q = $this->getCategoriesQuery();
 
@@ -40,13 +40,15 @@ class CategoryRepository extends NestedTreeRepository
         }
 
 
-        return $q->getQuery()->getArrayResult();
+        return $q->getQuery()->getScalarResult();
     }
 
 
-    public function getCategoriesQuery()
+    public function getCategoriesQuery() : QueryBuilder
     {
         return $this->createQueryBuilder('cat')
+            ->select('cat.id, cat.slug, cat.name, cat.description, i.id as image_id, i.name as image_name, i.ext')
+            ->leftJoin('cat.image', 'i')
             ->orderBy('cat.id', 'ASC')
         ;
     }
