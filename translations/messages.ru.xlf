@@ -505,8 +505,16 @@
            <trans-unit id="transaction_number">
                 <source>transaction number</source>
                 <target>номер платежа</target>
-            </trans-unit>
+           </trans-unit>
 
+            <trans-unit id="product_not_found">
+               <source>product not found</source>
+               <target>товар не найден</target>
+           </trans-unit>
+           <trans-unit id="item_added_to_cart">
+               <source>item added to cart</source>
+               <target>товар добавлен в корзину</target>
+           </trans-unit>
 
        </body>
     </file>

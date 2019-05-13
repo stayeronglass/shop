@@ -17,6 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use App\Form\CartCheckoutType;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("/cart", name="cart_")
@@ -42,25 +43,25 @@ class CartController extends AbstractController
     /**
      * @Route("/add", name="add")
      */
-    public function add(Request $request, CartRepository $cartRepository): JsonResponse
+    public function add(Request $request, CartRepository $cartRepository, TranslatorInterface $translator): JsonResponse
     {
-        $em        = $this->getDoctrine()->getManager();
-        $product   = $em->getRepository(Product::class)->find($request->get('product_id'));
-        $user      = $this->getUser();
-        $error_message = '';
+        $em             = $this->getDoctrine()->getManager();
+        $product        = $em->getRepository(Product::class)->find($request->get('product_id'));
+        $user           = $this->getUser();
+        $error_message  = '';
 
         if ($product){
             $cartRepository->add($request->query->getInt('amount', 1), $product, $user);
         } else {
-            $error_message = 'product mot found!';
+            $error_message = $translator->trans('product not found');
         }
 
         $result = [
-          'message' => 'Товар добавлен в корзину',
-            'cart'  => $this->renderView('default/_cart.html.twig', [
+            'message' => $translator->trans('item added to cart'),
+            'cart'    => $this->renderView('default/_cart.html.twig', [
                 'cart_items' => $cartRepository->getCartAmountByUser($user->getId()),
             ]),
-          'error_message' => $error_message,
+          'error_message'    => $error_message,
         ];
 
         return new JsonResponse($result);
