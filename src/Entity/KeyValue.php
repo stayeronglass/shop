@@ -22,6 +22,13 @@ class KeyValue
      */
     private $key;
 
+    
+    /**
+     * @ORM\Column(name="description", type="string", length=255, nullable=false)
+     */
+    private $description;
+
+
     /**
      * @ORM\Column(name="value", type="text", nullable=false)
      */
@@ -30,6 +37,18 @@ class KeyValue
     public function getKey(): ?string
     {
         return $this->key;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
     }
 
     public function getValue(): ?string
@@ -43,5 +62,6 @@ class KeyValue
 
         return $this;
     }
+
 
 }

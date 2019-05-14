@@ -105,3 +105,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Image }
         public: true
+
+    admin.keyvalue:
+        class: App\Admin\KeyValueAdmin
+        arguments: [~, App\Entity\KeyValue, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: KeyValue }
+        public: true
