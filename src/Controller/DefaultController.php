@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\KeyValue;
 use App\Entity\Product;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,11 +22,12 @@ class DefaultController extends Controller
         $em         = $this->getDoctrine()->getManager();
         $banner     = $em->getRepository(Product::class)->getSliderProducts();
         $categories = $em->getRepository(Category::class)->getMainCategories();
-        
+        $kvr   = $em->getRepository(KeyValue::class);
+
         return $this->render('default/index.html.twig', [
             'banner'     => $banner,
             'categories' => $categories,
-            'title'      => 'Магазинчик "Голова Ногина"',
+            'title'      => $kvr->findOneBy(['key' => 'site_name']),
         ]);
     }
 
@@ -43,15 +45,19 @@ class DefaultController extends Controller
     public function header(): Response
     {
         $items = 0;
+        $em    = $this->getDoctrine()->getManager();
+        $kvr   = $em->getRepository(KeyValue::class);
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')){
-            $em    = $this->getDoctrine()->getManager();
             $items = $em->getRepository(Cart::class)->getCartAmountByUser($this->getUser()->getId());
         }
+
+        $title = $kvr->findOneBy(['key' => 'site_name']);
 
         return $this->render('default/header.html.twig', [
             'q'            => $_GET['q'] ?? '',
             'redirect_url' => $_SERVER['REQUEST_URI'],
             'cart_items'   => $items,
+            'title'        => $title,
         ]);
     }
 

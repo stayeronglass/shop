@@ -20,7 +20,7 @@ class KeyValueAdmin extends AbstractAdmin
     {
 
         $listMapper
-            ->add('key')
+            ->addIdentifier('key')
             ->add('description')
         ;
     }

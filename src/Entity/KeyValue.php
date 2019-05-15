@@ -34,6 +34,15 @@ class KeyValue
      */
     private $value;
 
+
+
+    public function setKey(string $key): self
+    {
+        $this->key = $key;
+
+        return $this;
+    }
+
     public function getKey(): ?string
     {
         return $this->key;
@@ -63,5 +72,8 @@ class KeyValue
         return $this;
     }
 
-
+    public function __toString(): string
+    {
+        return $this->value;
+    }
 }

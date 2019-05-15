@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% if title is defined %} {{ title }} | {% endif %} Your Website</title>
     {% include '_layout/header.html.twig' %}
 </head>
 <body class="undefined">
