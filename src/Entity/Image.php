@@ -195,7 +195,7 @@ class Image
             ]);
 
         $image->thumbnail(new Box(160, 160), ManipulatorInterface::THUMBNAIL_OUTBOUND | ManipulatorInterface::THUMBNAIL_FLAG_UPSCALE)
-            ->save($dirname . DIRECTORY_SEPARATOR . $filename . '160x160.jpg', [
+            ->save($dirname . DIRECTORY_SEPARATOR . $filename . '.jpg', [
                 'jpeg_quality' => 100,
             ]);
 
@@ -206,6 +206,12 @@ class Image
 
         // clean up the file property as you won't need it anymore
         $this->setFile(null);
+    }
+
+    public function getWebPath($size)
+    {
+        $name = $this->getName();
+        return "/upload/{$name[0]}/{$name[1]}/{$name}{$size}." . $this->getExt();
     }
 
 

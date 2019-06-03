@@ -2,6 +2,7 @@
 
 namespace App\Admin;
 
+use App\Entity\Image;
 use App\Entity\Product;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -22,9 +23,10 @@ class ProductAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('title', TextType::class, [
+        $formMapper
+            ->add('title', TextType::class, [
 
-        ])
+            ])
             ->add('description', SimpleFormatterType::class, [
                 'format' => 'text',
             ])
@@ -59,12 +61,21 @@ class ProductAdmin extends AbstractAdmin
                 'label'    => 'Нет в наличии',
                 'required' => false,
             ])
+        ;
+        $help   = '';
+        $images = $this->getSubject()->getImages();
+
+        foreach ($images as $image):
+            $help .= '<img src="'.$image->getWebPath(Image::IMAGE_THUMB_SMALL).'" class="admin-preview" alt="" style="width:100px;heigth:auto;" />';
+        endforeach;
+
+        $formMapper
             ->add('images', ModelType::class, [
                 'label'    => 'Картинки',
                 'multiple' => true,
-                'required' => true,
+                'required' => false,
+                'help'     => $help,
             ])
-
         ;
     }
 
