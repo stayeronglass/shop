@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% set title = product.title ~ title_postfix %}
+{% set title = product.title ~ ' | ' ~ title_postfix %}
 
 {% block body %}
             {{ render(controller('App\\Controller\\DefaultController::breadcrumbs',{ 'node': product.categories[0], 'product': product } )) }}

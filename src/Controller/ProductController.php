@@ -27,11 +27,10 @@ class ProductController extends Controller
         if(null === $product) throw $this->createNotFoundException();
 
         $kv      = $em->getRepository(KeyValue::class);
-
         return $this->render('product/full.html.twig', [
             'product' => $product,
             'images'  => $em->getRepository(Image::class)->getTImages($product->getId()),
-            'title_postfix' => $kv->findOneBy(['key' => 'product_postfix']) ?? '',
+            'title_postfix' => $kv->findOneBy(['key' => 'p_title_postfix']),
         ]);
     }
 }
