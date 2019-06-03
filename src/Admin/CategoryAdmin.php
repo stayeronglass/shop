@@ -3,6 +3,7 @@
 namespace App\Admin;
 
 use App\Entity\Category;
+use App\Entity\Image;
 use App\Entity\Product;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -20,6 +21,16 @@ class CategoryAdmin extends AbstractAdmin
             ->add('name', TextType::class)
             ->add('description', TextareaType::class)
             ->add('parent')
+        ;
+
+        $help   = '';
+        $images = $this->getSubject()->getImages();
+
+        foreach ($images as $image):
+            $help .= '<img src="'.$image->getWebPath(Image::IMAGE_THUMB_SMALL).'" class="admin-preview" alt="" style="width:100px;heigth:auto;" />';
+        endforeach;
+
+        $formMapper
             ->add('image', ModelType::class, [
                 'label'    => 'Картинка',
                 'multiple' => false,
