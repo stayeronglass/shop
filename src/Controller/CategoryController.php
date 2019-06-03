@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\KeyValue;
 use App\Entity\Product;
 use Doctrine\ORM\Query;
 use Knp\Component\Pager\Event\Subscriber\Paginate\Doctrine\ORM\QuerySubscriber\UsesPaginator;
@@ -24,9 +25,11 @@ class CategoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $categoryRepo = $em->getRepository(Category::class);
+        $kv    = $em->getRepository(KeyValue::class);
 
         return $this->render('category/main.html.twig', [
-            'categories' => $categoryRepo->getMainCategories(),
+            'categories'    => $categoryRepo->getMainCategories(),
+            'title_postfix' => $kv->findOneBy(['key' => 'all_category_postfix']),
         ]);
     }
 
@@ -42,6 +45,7 @@ class CategoryController extends Controller
         $category     = $categoryRepo->findOneBy(['slug' => $slug]);
         if(null === $category) throw $this->createNotFoundException();
 
+        $kv    = $em->getRepository(KeyValue::class);
         $catQb = $categoryRepo->getChildrenQueryBuilder($category, true, 'id', 'ASC', true);
 
         $query = $em->getRepository(Product::class)->getProductByCategory($catQb);
@@ -63,6 +67,7 @@ class CategoryController extends Controller
             'products'   => $products,
             'categories' => $categoryRepo->getCategories($catQb),
             'page'       => $page,
+            'title_postfix' => $kv->findOneBy(['key' => 'category_postfix']),
         ]);
     }
 

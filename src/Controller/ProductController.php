@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Image;
+use App\Entity\KeyValue;
 use App\Entity\Product;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
@@ -25,11 +26,12 @@ class ProductController extends Controller
         $product = $em->getRepository(Product::class)->find($id);
         if(null === $product) throw $this->createNotFoundException();
 
-        $images  = $em->getRepository(Image::class)->getTImages($product->getId());
+        $kv      = $em->getRepository(KeyValue::class);
 
         return $this->render('product/full.html.twig', [
             'product' => $product,
-            'images'  => $images,
+            'images'  => $em->getRepository(Image::class)->getTImages($product->getId()),
+            'title_postfix' => $kv->findOneBy(['key' => 'product_postfix']) ?? '',
         ]);
     }
 }

@@ -33,14 +33,15 @@ class ProductRepository extends ServiceEntityRepository
             ->setParameter('banner', 1)
             ->orderBy('p.id', 'ASC')
             ->getQuery()
-            ->getArrayResult()
+            ->getScalarResult()
         ;
     }
 
     public function searchProducts($q) : array
     {
-        return $this->searchProductsQuery($q)
-            ->getArrayResult()
+        return $this
+            ->searchProductsQuery($q)
+            ->getScalarResult()
         ;
     }
 
