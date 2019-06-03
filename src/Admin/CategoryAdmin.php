@@ -24,11 +24,9 @@ class CategoryAdmin extends AbstractAdmin
         ;
 
         $help   = '';
-        $images = $this->getSubject()->getImages();
-
-        foreach ($images as $image):
+        if ($image = $this->getSubject()->getImage()):
             $help .= '<img src="'.$image->getWebPath(Image::IMAGE_THUMB_SMALL).'" class="admin-preview" alt="" style="width:100px;heigth:auto;" />';
-        endforeach;
+        endif;
 
         $formMapper
             ->add('image', ModelType::class, [
@@ -36,6 +34,7 @@ class CategoryAdmin extends AbstractAdmin
                 'multiple' => false,
                 'required' => true,
                 'data'     => null,
+                'help'     => $help,
             ])
         ;
     }
