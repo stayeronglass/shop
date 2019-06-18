@@ -25,4 +25,5 @@ return [
     Knp\Bundle\MarkdownBundle\KnpMarkdownBundle::class => ['all' => true],
     Sonata\FormatterBundle\SonataFormatterBundle::class => ['all' => true],
     Knp\Bundle\PaginatorBundle\KnpPaginatorBundle::class => ['all' => true],
+    highlyprofessionalscum\TwigCacheBundle\TwigCacheBundle::class => ['all' => true],
 ];

@@ -2,6 +2,7 @@
 
 {% block body %}
     {{ render(controller('App\\Controller\\DefaultController::header')) }}
+    {% cache 'main_page' {time: 300} %}
     <!-- *** SLIDER ***-->
     <div id="slider" class="owl-carousel owl-theme">
         {% for b in banner %}
@@ -98,4 +99,5 @@
     </div>
 
     {{ render(controller('App\\Controller\\DefaultController::footer')) }}
+    {% endcache %}
 {% endblock %}
