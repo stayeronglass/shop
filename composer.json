@@ -3,6 +3,18 @@
     "type": "project",
     "license": "MIT",
     "description": "A skeleton to start a new Symfony website",
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/highlyprofessionalscum/twig-cache-extension.git"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/highlyprofessionalscum/twig-cache-bundle.git"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable" : true,
     "require": {
         "php": "^7.1.3",
         "ext-ctype": "*",
@@ -12,12 +24,13 @@
         "friendsofsymfony/ckeditor-bundle": "~1.2",
         "friendsofsymfony/user-bundle": "~2.1",
         "guzzlehttp/guzzle": "^6.3",
+        "highlyprofessionalscum/twig-cache-bundle": "dev-master",
         "imagine/imagine": "^1.2",
         "knplabs/knp-markdown-bundle": "^1.7",
         "knplabs/knp-paginator-bundle": "^2.8",
         "sensio/framework-extra-bundle": "^5.1",
-        "sonata-project/admin-bundle": "^3.40",
-        "sonata-project/doctrine-orm-admin-bundle": "^3.6",
+        "sonata-project/admin-bundle": "^3.50",
+        "sonata-project/doctrine-orm-admin-bundle": "^3.9",
         "sonata-project/formatter-bundle": "^4.1",
         "stof/doctrine-extensions-bundle": "^1.3",
         "symfony/asset": "*",
