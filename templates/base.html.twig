@@ -15,8 +15,10 @@
         </div>
     </div>
 </div>
-{{ render(controller('App\\Controller\\DefaultController::footer')) }}
 
+{% cache 'footer' {time: 3600} %}
+    {{ render(controller('App\\Controller\\DefaultController::footer')) }}
+{% endcache %}
 
 {% include '_layout/footer.html.twig' %}
 </body>
