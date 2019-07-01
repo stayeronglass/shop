@@ -33,6 +33,7 @@ class ProductRepository extends ServiceEntityRepository
             ->setParameter('banner', 1)
             ->orderBy('p.id', 'ASC')
             ->getQuery()
+            ->setCacheable(true)
             ->getScalarResult()
         ;
     }

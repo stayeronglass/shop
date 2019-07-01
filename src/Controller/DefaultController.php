@@ -22,7 +22,7 @@ class DefaultController extends Controller
         $em         = $this->getDoctrine()->getManager();
         $banner     = $em->getRepository(Product::class)->getSliderProducts();
         $categories = $em->getRepository(Category::class)->getMainCategories();
-        $kvr   = $em->getRepository(KeyValue::class);
+        $kvr        = $em->getRepository(KeyValue::class);
 
         return $this->render('default/index.html.twig', [
             'banner'     => $banner,
