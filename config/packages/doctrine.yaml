@@ -16,7 +16,7 @@ doctrine:
         url: '%env(resolve:DATABASE_URL)%'
     orm:
         second_level_cache:
-            enabled: true
+            enabled: false
             regions:
                 entity_that_rarely_changes:
                     lifetime: 86400 # 1 day
