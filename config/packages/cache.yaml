@@ -1,3 +1,7 @@
+parameters:
+    env(REDIS_DB): 0
+    redis_db: '%env(REDIS_DB)%'
+
 framework:
     cache:
         # Put the unique name of your app here: the prefix seed
@@ -18,7 +22,7 @@ framework:
         #pools:
             #my.dedicated.cache: ~
         app: cache.adapter.redis
-        default_redis_provider: redis://localhost
+        default_redis_provider: redis://localhost/1
         pools:
             redis_pool:
                 adapter: cache.app
