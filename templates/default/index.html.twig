@@ -1,6 +1,7 @@
 {% extends 'empty.html.twig' %}
 
 {% block body %}
+
     {{ render(controller('App\\Controller\\DefaultController::header')) }}
 
     {% cache 'main_page' {time: 300} %}
