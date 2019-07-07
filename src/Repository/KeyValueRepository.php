@@ -19,4 +19,22 @@ class KeyValueRepository extends ServiceEntityRepository
         parent::__construct($registry, KeyValue::class);
     }
 
+    public function getItems(array $keys): array
+    {
+        $qb = $this->createQueryBuilder('kv')
+            ->select('kv.key, kv.value')
+        ;
+        $data = $qb->andWhere(
+            $qb->expr()->in('kv.key', $keys))
+            ->getQuery()
+            ->useResultCache(true, 3600)
+            ->getArrayResult();
+
+        $result = [];
+        foreach ($data as $item) {
+            $result[$item['key']] = $item['value'];
+        }
+
+        return $result;
+    }
 }

@@ -27,7 +27,7 @@ class DefaultController extends Controller
         return $this->render('default/index.html.twig', [
             'banner'     => $banner,
             'categories' => $categories,
-            'title'      => $kvr->findOneBy(['key' => 'site_name']),
+            'title'      => $kvr->getItems(['site_name'])['site_name'],
         ]);
     }
 
@@ -51,13 +51,13 @@ class DefaultController extends Controller
             $items = $em->getRepository(Cart::class)->getCartAmountByUser($this->getUser()->getId());
         }
 
-        $title = $kvr->findOneBy(['key' => 'site_name']);
+        $kv = $kvr->getItems(['yandex_metrica']);
 
         return $this->render('default/header.html.twig', [
             'q'            => $_GET['q'] ?? '',
             'redirect_url' => $_SERVER['REQUEST_URI'],
             'cart_items'   => $items,
-            'title'        => $title,
+            'yandex_metrica' => $kv['yandex_metrica'],
         ]);
     }
 

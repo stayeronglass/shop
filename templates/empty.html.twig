@@ -1,9 +1,13 @@
+{% spaceless %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title %}{{ title }}{% endblock %}</title>
+    <title>{% if title is defined %} {{ title }} {% endif %}</title>
     {% include '_layout/header.html.twig' %}
+    <meta name="keywords" content="{% if keywords is defined %} {{ keywords }} {% endif %}" />
+    <meta name="description" content="{% if description is defined %} {{ description }} {% endif %}" />
 </head>
+{% endspaceless %}
 <body class="undefined">
 
 

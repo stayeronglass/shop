@@ -16,6 +16,7 @@ doctrine:
         # With Symfony 3.3, remove the `resolve:` prefix
         url: '%env(resolve:DATABASE_URL)%'
     orm:
+        result_cache_driver: redis
         second_level_cache:
             enabled: false
             regions:
