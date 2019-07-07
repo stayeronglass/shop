@@ -1,0 +1,94 @@
+<!-- *** SLIDER ***-->
+<div id="slider" class="owl-carousel owl-theme">
+    {% for b in banner %}
+        <div class="item">
+            <a href="{{ path('product_show', {'id':b.id}) }}">
+                <img src="/upload/{{ b.name[:1] }}/{{ b.name[1:1] }}/{{ b.name}}.{{ b.ext}}" alt="" class="img-fluid" width="450" height="450">
+            </a></div>
+    {% endfor %}
+</div>
+<!-- /#slider-->
+<!-- *** SLIDER END ***-->
+<div id="all">
+    <div id="content">
+        <div class="container">
+            <!-- *** ADVANTAGES ***-->
+            <div id="advantages">
+                <div class="box text-center">
+                    <h3 class="text-uppercase">{% trans %}bestsellers{% endtrans %}</h3>
+                    <p>{% trans %}25 beautiful HTML pages{% endtrans %}</p>
+                    <div class="same-height-row row">
+                        {% for category in categories %}
+                            <div class="col-md-3 col-6 justify-content-md-center align-items-md-center">
+                                <div class="box no-border d-flex justify-content-center align-items-center">
+                                    <h4><a href="{{ path('category', {'slug':category.slug }) }}">{{ category.name }}</a></h4>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <p class="read-more"><a href="{{ path('main_categories') }}" class="btn btn-outline-primary" target="_self">Все категории</a></p>
+                </div>
+            </div>
+            <!-- /#advantages-->
+            <!-- *** ADVANTAGES END ***-->
+
+        </div>
+        <!--
+        *** PROMO BAR ***
+        _________________________________________________________
+        -->
+        <div class="bar background-image-fixed-2 no-mb color-white text-center">
+            <div class="dark-mask"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="icon icon-lg"><i class="fa fa-file-code-o"></i></div>
+                        <h1>Магазинчик "Голова Ногина"</h1>
+                        <p class="lead">5 минут от метро Китай-город. Улица Покровка 2/1 строение 2, 4 этаж. Парковки во дворе НЕТ. Парковка в переулке - бесплатно.</p>
+                        <p class="text-center"><a href="{{ path('contacts') }}" class="btn btn-primary">Схема проезда</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- *** PROMO BAR END ***-->
+        <div class="container">
+            <!--
+            *** BLOG HOMEPAGE ***
+            _________________________________________________________
+            -->
+            <div class="box text-center">
+                <h3 class="text-uppercase">Как к нам попасть</h3>
+
+            </div>
+            <div id="blog-homepage" class="row">
+                <div class="col-sm-6">
+                    <div class="post">
+                        <h4>Пешком</h4>
+                        <hr>
+                        <p class="intro">
+                            Выход из метро Китай-город в сторону ул. Маросейка.<br /><br />
+                            У магазина "Магнолия" повернуть на Старосадский переулок, далее - в первый же вход во двор через арку. Заходить в подъезд напротив арки (домофон открыт или код В1В5702).
+                            <br /> <br />4 этаж, звонить в дверь напротив лифта.
+                        </p>
+                        <p class="read-more"><a href="https://yandex.ru/maps/-/CCUQQC9c" class="btn btn-outline-primary" target="_blank">Точка на яндекс картах</a></p>
+                        <p class="read-more"><a href="https://goo.gl/maps/fJiaLLtGqkn" class="btn btn-outline-primary" target="_blank">Точка на гугл картах</a></p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="post">
+                        <h4>На машине</h4>
+                        <hr>
+                        <p class="intro">
+                            Заезд через Старосадский переулок.<br /> <br />
+                            Парковки во дворе НЕТ. Парковка в переулке - бесплатно.
+                        </p>
+                        <p class="read-more"><a href="https://yandex.ru/maps/-/CCUQQC9c" class="btn btn-outline-primary" target="_blank">Точка на яндекс картах</a></p>
+                        <p class="read-more"><a href="https://goo.gl/maps/fJiaLLtGqkn" class="btn btn-outline-primary" target="_blank">Точка на гугл картах</a></p>
+                    </div>
+                </div>
+            </div>
+            <!-- /#blog-homepage-->
+            <!-- *** BLOG HOMEPAGE END ***-->
+        </div>
+    </div>
+</div>

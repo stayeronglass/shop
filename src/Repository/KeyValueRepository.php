@@ -27,12 +27,15 @@ class KeyValueRepository extends ServiceEntityRepository
         $data = $qb->andWhere(
             $qb->expr()->in('kv.key', $keys))
             ->getQuery()
-            ->useResultCache(true, 3600)
             ->getArrayResult();
 
         $result = [];
         foreach ($data as $item) {
             $result[$item['key']] = $item['value'];
+        }
+
+        foreach ($keys as $key){
+            $result[$key] = $result[$key] ?? '';
         }
 
         return $result;

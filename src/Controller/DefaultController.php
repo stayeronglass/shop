@@ -33,6 +33,18 @@ class DefaultController extends Controller
 
 
 
+    public function inner(): Response
+    {
+        $em         = $this->getDoctrine()->getManager();
+        $banner     = $em->getRepository(Product::class)->getSliderProducts();
+        $categories = $em->getRepository(Category::class)->getMainCategories();
+
+        return $this->render('default/main_inner.html.twig', [
+            'banner'     => $banner,
+            'categories' => $categories,
+        ]);
+    }
+
     /**
      * @Route("/contacts", name="contacts", methods="GET"))
      */
@@ -75,7 +87,11 @@ class DefaultController extends Controller
 
     public function footer(): Response
     {
+        $em         = $this->getDoctrine()->getManager();
+        $kvr        = $em->getRepository(KeyValue::class);
+
         return $this->render('default/footer.html.twig', [
+            'vk' => $kvr->getItems(['vk'])['vk'],
         ]);
     }
 
