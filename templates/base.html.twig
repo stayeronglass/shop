@@ -3,23 +3,25 @@
 <head>
     <title>{% if title is defined %} {{ title }} {% endif %}</title>
     {% include '_layout/header.html.twig' %}
+    <meta name="keywords" content=" {{ keywords }} " />
+    <meta name="description" content=" {{ description }} " />
 </head>
 <body class="undefined">
 
-{{ render(controller('App\\Controller\\DefaultController::header')) }}
-<div id="all">
-    <div id="content">
-        <div class="container">
-            {% block body %}
-            {% endblock %}
+    {{ render(controller('App\\Controller\\DefaultController::header')) }}
+    <div id="all">
+        <div id="content">
+            <div class="container">
+                {% block body %}
+                {% endblock %}
+            </div>
         </div>
     </div>
-</div>
 
-{% cache 'footer' {time: 3600} %}
-    {{ render(controller('App\\Controller\\DefaultController::footer')) }}
-{% endcache %}
+    {% cache 'footer' {time: 3600} %}
+        {{ render(controller('App\\Controller\\DefaultController::footer')) }}
+    {% endcache %}
 
-{% include '_layout/footer.html.twig' %}
+    {% include '_layout/footer.html.twig' %}
 </body>
 </html>

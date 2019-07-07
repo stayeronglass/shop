@@ -58,18 +58,14 @@ class DefaultController extends Controller
     {
         $items = 0;
         $em    = $this->getDoctrine()->getManager();
-        $kvr   = $em->getRepository(KeyValue::class);
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')){
             $items = $em->getRepository(Cart::class)->getCartAmountByUser($this->getUser()->getId());
         }
-
-        $kv = $kvr->getItems(['yandex_metrica']);
 
         return $this->render('default/header.html.twig', [
             'q'            => $_GET['q'] ?? '',
             'redirect_url' => $_SERVER['REQUEST_URI'],
             'cart_items'   => $items,
-            'yandex_metrica' => $kv['yandex_metrica'],
         ]);
     }
 

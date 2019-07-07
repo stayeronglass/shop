@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% if title is defined %} {{ title }} {% endif %}</title>
     {% include '_layout/header.html.twig' %}
+    <meta name="keywords" content="{% if keywords is defined %} {{ keywords }} {% endif %}" />
+    <meta name="description" content="{% if description is defined %} {{ description }} {% endif %}" />
 </head>
 <body class="undefined">
 
-{{ render(controller('App\\Controller\\MyController::header')) }}
+    {{ render(controller('App\\Controller\\MyController::header')) }}
 
-{% block body %}
-{% endblock %}
+    {% block body %}
+    {% endblock %}
 
-{{ render(controller('App\\Controller\\MyController::footer')) }}
-
-{% include '_layout/footer.html.twig' %}
+    {% cache 'footer' {time: 3600} %}
+        {{ render(controller('App\\Controller\\MyController::footer')) }}
+    {% endcache %}
+    {% include '_layout/footer.html.twig' %}
 </body>
 </html>
