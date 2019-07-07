@@ -54,6 +54,18 @@ class DefaultController extends Controller
         ]);
     }
 
+
+    public function head(): Response
+    {
+        $em         = $this->getDoctrine()->getManager();
+        $kvr        = $em->getRepository(KeyValue::class);
+
+        return $this->render('_layout/head.html.twig', $kvr->getItems([
+            'site_name', 'yandex_metrica', 'description', 'keywords'
+        ]));
+    }
+
+
     public function header(): Response
     {
         $items = 0;
