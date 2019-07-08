@@ -61,7 +61,7 @@ class DefaultController extends Controller
         $kvr        = $em->getRepository(KeyValue::class);
 
         return $this->render('_layout/head.html.twig', $kvr->getItems([
-            'site_name', 'yandex_metrica', 'description', 'keywords'
+            'yandex_metrica', 'description', 'keywords'
         ]));
     }
 

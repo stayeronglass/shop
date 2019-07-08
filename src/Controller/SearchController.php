@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\KeyValue;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Query;
 use Knp\Component\Pager\Event\Subscriber\Paginate\Doctrine\ORM\QuerySubscriber\UsesPaginator;
