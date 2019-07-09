@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% if title is not empty %} {{ title }} {% endif %}</title>
+    <title>{% if title is defined and title %} {{ title }} {% endif %}</title>
     {% include '_layout/header.html.twig' %}
 
     {{ render(controller('App\\Controller\\DefaultController::head')) }}
