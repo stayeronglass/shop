@@ -69,8 +69,9 @@ class DefaultController extends Controller
     public function header(): Response
     {
         $items = 0;
-        $em    = $this->getDoctrine()->getManager();
+
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')){
+            $em    = $this->getDoctrine()->getManager();
             $items = $em->getRepository(Cart::class)->getCartAmountByUser($this->getUser()->getId());
         }
 
@@ -83,6 +84,7 @@ class DefaultController extends Controller
 
     public function footer(): Response
     {
+
         $em         = $this->getDoctrine()->getManager();
         $kvr        = $em->getRepository(KeyValue::class);
         $categories = $em->getRepository(Category::class)->getMainCategories();

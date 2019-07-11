@@ -9,6 +9,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\KeyValueRepository")
+ * @ORM\Table(indexes={@ORM\Index(name="key_idx", columns={"key"})})
  */
 class KeyValue
 {
