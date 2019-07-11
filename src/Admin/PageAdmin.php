@@ -17,6 +17,8 @@ class PageAdmin extends AbstractAdmin
             ])
             ->add('h1', TextType::class, [
             ])
+            ->add('slug', TextType::class, [
+            ])
             ->add('content', TextareaType::class, [
             ])
 
