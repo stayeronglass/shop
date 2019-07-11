@@ -32,8 +32,9 @@
                 <div class="col-lg-3 col-md-6">
                     <h4 class="capitalize_first_letter">{% trans %}top categories{% endtrans %}</h4>
                     <ul>
-                        <li><a href="{{ path('category', {'slug':'warhammer40000' }) }}">Warhammer 40000</a></li>
-                        <li><a href="{{ path('category', {'slug':'warhammerageofsigmar' }) }}">Warhammer Age of Sigmar</a></li>
+                        {% for c in categories %}
+                        <li><a href="{{ path('category', {'slug':c.slug }) }}">{{ c.name }}</a></li>
+                        {% endfor %}
                     </ul>
                     <hr class="d-block d-lg-none">
                 </div>

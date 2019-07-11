@@ -20,6 +20,9 @@ class CategoryAdmin extends AbstractAdmin
         $formMapper
             ->add('name', TextType::class)
             ->add('description', TextareaType::class)
+            ->add('main',null,[
+                'label'    => 'На главную и вниз',
+            ])
             ->add('parent')
         ;
 

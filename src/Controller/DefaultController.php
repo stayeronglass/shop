@@ -81,6 +81,17 @@ class DefaultController extends Controller
         ]);
     }
 
+    public function footer(): Response
+    {
+        $em         = $this->getDoctrine()->getManager();
+        $kvr        = $em->getRepository(KeyValue::class);
+        $categories = $em->getRepository(Category::class)->getMainCategories();
+
+        return $this->render('default/footer.html.twig', [
+            'vk' => $kvr->getItems(['vk'])['vk'],
+            'categories' => $categories,
+        ]);
+    }
 
     /**
      * @Route("/autocomplete", name="autocomplete", methods="POST"))
@@ -92,16 +103,6 @@ class DefaultController extends Controller
         return new JsonResponse($data);
     }
 
-
-    public function footer(): Response
-    {
-        $em         = $this->getDoctrine()->getManager();
-        $kvr        = $em->getRepository(KeyValue::class);
-
-        return $this->render('default/footer.html.twig', [
-            'vk' => $kvr->getItems(['vk'])['vk'],
-        ]);
-    }
 
     /**
      * @Route("/breadcrumbs", name="breadcrumbs")
