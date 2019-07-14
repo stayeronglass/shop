@@ -35,14 +35,14 @@ class DefaultController extends Controller
 
     public function inner(): Response
     {
-        $em         = $this->getDoctrine()->getManager();
-        $banner     = $em->getRepository(Product::class)->getSliderProducts();
-        $categories = $em->getRepository(Category::class)->getMainCategories();
+        $em = $this->getDoctrine()->getManager();
 
-        return $this->render('default/main_inner.html.twig', [
-            'banner'     => $banner,
-            'categories' => $categories,
-        ]);
+        $params = $em->getRepository(KeyValue::class)->getItems(['russian_name', 'main_page_text']);
+
+        $params['categories'] = $em->getRepository(Category::class)->getMainCategories();
+        $params['banner']     = $em->getRepository(Product::class)->getSliderProducts();
+
+        return $this->render('default/main_inner.html.twig', $params);
     }
 
     /**
@@ -87,12 +87,12 @@ class DefaultController extends Controller
 
         $em         = $this->getDoctrine()->getManager();
         $kvr        = $em->getRepository(KeyValue::class);
-        $categories = $em->getRepository(Category::class)->getMainCategories();
 
-        return $this->render('default/footer.html.twig', [
-            'vk' => $kvr->getItems(['vk'])['vk'],
-            'categories' => $categories,
-        ]);
+        $params = $kvr->getItems(['vk', 'russian_name ']);
+        $params['categories'] = $em->getRepository(Category::class)->getMainCategories();
+        return $this->render('default/footer.html.twig',
+            $params
+        );
     }
 
     /**

@@ -1,4 +1,3 @@
-<!-- *** SLIDER ***-->
 <div id="slider" class="owl-carousel owl-theme">
     {% for b in banner %}
         <div class="item">
@@ -7,12 +6,25 @@
             </a></div>
     {% endfor %}
 </div>
-<!-- /#slider-->
-<!-- *** SLIDER END ***-->
+
+{% if main_page_text is defined and main_page_text %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="h1 text-center">{{ russian_name }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="lead">{{ main_page_text|raw }}</p>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
 <div id="all">
     <div id="content">
         <div class="container">
-            <!-- *** ADVANTAGES ***-->
             <div id="advantages">
                 <div class="box text-center">
                     <h3 class="text-uppercase">{% trans %}bestsellers{% endtrans %}</h3>
@@ -29,21 +41,15 @@
                     <p class="read-more"><a href="{{ path('main_categories') }}" class="btn btn-outline-primary" target="_self">Все категории</a></p>
                 </div>
             </div>
-            <!-- /#advantages-->
-            <!-- *** ADVANTAGES END ***-->
-
         </div>
-        <!--
-        *** PROMO BAR ***
-        _________________________________________________________
-        -->
+
         <div class="bar background-image-fixed-2 no-mb color-white text-center">
             <div class="dark-mask"></div>
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="icon icon-lg"><i class="fa fa-file-code-o"></i></div>
-                        <h1>Магазинчик "Голова Ногина"</h1>
+                        <h1>{{ russian_name }}</h1>
                         <p class="lead">5 минут от метро Китай-город. Улица Покровка 2/1 строение 2, 4 этаж. Парковки во дворе НЕТ. Парковка в переулке - бесплатно.</p>
                         <p class="text-center"><a href="{{ path('contacts') }}" class="btn btn-primary">Схема проезда</a></p>
                     </div>
@@ -52,13 +58,9 @@
         </div>
         <!-- *** PROMO BAR END ***-->
         <div class="container">
-            <!--
-            *** BLOG HOMEPAGE ***
-            _________________________________________________________
-            -->
+
             <div class="box text-center">
                 <h3 class="text-uppercase">Как к нам попасть</h3>
-
             </div>
             <div id="blog-homepage" class="row">
                 <div class="col-sm-6">
@@ -87,8 +89,6 @@
                     </div>
                 </div>
             </div>
-            <!-- /#blog-homepage-->
-            <!-- *** BLOG HOMEPAGE END ***-->
         </div>
     </div>
 </div>

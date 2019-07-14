@@ -55,6 +55,23 @@
                 <source>Product</source>
                 <target>Товары</target>
             </trans-unit>
+            <trans-unit id="Provider">
+                <source>Provider</source>
+                <target>Поставщик</target>
+            </trans-unit>
+            <trans-unit id="Provider List">
+                <source>Provider List</source>
+                <target>Список поставщиков</target>
+            </trans-unit>
+            <trans-unit id="Order">
+                <source>Order</source>
+                <target>Заказ</target>
+            </trans-unit>
+            <trans-unit id="OrderStatus">
+                <source>OrderStatus</source>
+                <target>Статус заказа</target>
+            </trans-unit>
+
             <trans-unit id="Title">
                 <source>Title</source>
                 <target>Название</target>

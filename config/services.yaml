@@ -120,3 +120,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Page }
         public: true
+
+    admin.provider:
+        class: App\Admin\ProviderAdmin
+        arguments: [~, App\Entity\Provider, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Provider }
+        public: true

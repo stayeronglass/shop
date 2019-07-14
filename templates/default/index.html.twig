@@ -4,12 +4,8 @@
 
     {{ render(controller('App\\Controller\\DefaultController::header')) }}
 
-    {% cache 'main_page_inner' {time: 3600} %}
         {{ render(controller('App\\Controller\\DefaultController::inner')) }}
-    {% endcache %}
 
-    {% cache 'footer' {time: 3600} %}
         {{ render(controller('App\\Controller\\DefaultController::footer')) }}
-    {% endcache %}
 
 {% endblock %}

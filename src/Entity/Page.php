@@ -9,7 +9,6 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PageRepository")
- * @ORM\Table(indexes={@ORM\Index(name="slug_idx", columns={"slug"})})
  */
 class Page
 {
@@ -28,7 +27,7 @@ class Page
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=false, unique=true)
      */
     private $slug;
 
