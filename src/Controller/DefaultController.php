@@ -45,16 +45,6 @@ class DefaultController extends Controller
         return $this->render('default/main_inner.html.twig', $params);
     }
 
-    /**
-     * @Route("/contacts", name="contacts", methods="GET"))
-     */
-    public function contacts(): Response
-    {
-        return $this->render('default/contacts.html.twig', [
-        ]);
-    }
-
-
     public function head(): Response
     {
         $em         = $this->getDoctrine()->getManager();
@@ -123,50 +113,6 @@ class DefaultController extends Controller
         return $this->render('default/breadcrumbs.html.twig', [
             'breadcrumbs' => $repo->getPathQuery($node)->getScalarResult(),
             'product'     => $product,
-        ]);
-    }
-
-
-    /**
-     * @Route("/about", name="about", methods="GET"))
-     */
-    public function about(): Response
-    {
-        return $this->render('default/about.html.twig', [
-        ]);
-    }
-
-
-    /**
-     * @Route("/faq", name="faq", methods="GET"))
-     */
-    public function faq(): Response
-    {
-        return $this->render('default/faq.html.twig', [
-            'title' => 'FAQ',
-        ]);
-    }
-
-
-    /**
-     * @Route("/privacy", name="privacy", methods="GET"))
-     */
-    public function privacy(): Response
-    {
-        return $this->render('default/privacy.html.twig', [
-            'title' => 'FAQ',
-        ]);
-    }
-
-
-
-
-    /**
-     * @Route("/termsandconditions", name="termsandconditions", methods="GET"))
-     */
-    public function termsandconditions(): Response
-    {
-        return $this->render('default/termsandconditions.html.twig', [
         ]);
     }
 

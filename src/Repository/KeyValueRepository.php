@@ -29,10 +29,14 @@ class KeyValueRepository extends ServiceEntityRepository
             ->getQuery()
             ->getArrayResult();
 
-        $result = array_flip($keys);
-        foreach ($data as $item) {
+        $result = [];
+        foreach ($keys as $key):
+            $result[$key] = '';
+        endforeach;
+
+        foreach ($data as $item):
             $result[$item['key']] = $item['value'];
-        }
+        endforeach;
 
         return $result;
     }
