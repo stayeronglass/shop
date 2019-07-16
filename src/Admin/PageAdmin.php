@@ -13,7 +13,7 @@ class PageAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('id', TextType::class, [
+            ->add('title', TextType::class, [
             ])
             ->add('h1', TextType::class, [
             ])
@@ -38,7 +38,7 @@ class PageAdmin extends AbstractAdmin
 
         $listMapper
             ->add('id')
-            ->add('h1')
+            ->addIdentifier('h1')
         ;
     }
 
