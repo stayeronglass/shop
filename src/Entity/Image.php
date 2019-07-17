@@ -19,8 +19,8 @@ class Image
 
     const IMAGE_DIR = 'public/upload' . DIRECTORY_SEPARATOR;
 
-    const IMAGE_THUMB_SMALL = '160x160';
-    const IMAGE_THUMB_BIG = '450x450';
+    const IMAGE_THUMB_SMALL = '_160x160';
+    const IMAGE_THUMB_BIG = '_450x450';
 
 
     /**
@@ -189,13 +189,13 @@ class Image
             'jpeg_quality' => 100,
         ]);
 
-        $image->thumbnail(new Box(450, 450), ManipulatorInterface::THUMBNAIL_OUTBOUND | ManipulatorInterface::THUMBNAIL_FLAG_UPSCALE)
-            ->save($dirname . DIRECTORY_SEPARATOR . $filename . '450x450.jpg', [
+        $image->thumbnail(new Box(450, 450), ManipulatorInterface::THUMBNAIL_INSET | ManipulatorInterface::THUMBNAIL_FLAG_UPSCALE)
+            ->save($dirname . DIRECTORY_SEPARATOR . $filename . static::IMAGE_THUMB_BIG. '.jpg', [
                 'jpeg_quality' => 100,
             ]);
 
-        $image->thumbnail(new Box(160, 160), ManipulatorInterface::THUMBNAIL_OUTBOUND | ManipulatorInterface::THUMBNAIL_FLAG_UPSCALE)
-            ->save($dirname . DIRECTORY_SEPARATOR . $filename . '.jpg', [
+        $image->thumbnail(new Box(160, 160), ManipulatorInterface::THUMBNAIL_INSET | ManipulatorInterface::THUMBNAIL_FLAG_UPSCALE)
+            ->save($dirname . DIRECTORY_SEPARATOR . $filename . static::IMAGE_THUMB_SMALL . '.jpg', [
                 'jpeg_quality' => 100,
             ]);
 

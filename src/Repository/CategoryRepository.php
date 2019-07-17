@@ -16,6 +16,12 @@ use phpDocumentor\Reflection\DocBlock\Tags\Param;
 class CategoryRepository extends NestedTreeRepository
 {
 
+    public function getAllCategories()
+    {
+        return $this->getChildrenQuery(null, false, 'id')
+            ->getScalarResult();
+    }
+
     public function getMainCategories() : array
     {
         return $this->getCategoriesQuery()

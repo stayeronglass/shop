@@ -1489,11 +1489,12 @@ a i.fa, button i.fa {
 }
 
 .navbar-brand {
+    font-weight: bold;
     display: inline-block;
     padding-top: .335rem;
     padding-bottom: .335rem;
-    margin-right: 1rem;
-    font-size: 1.1rem
+    margin-right: 0.3rem;
+    font-size: 1.5rem
 }
 
 .navbar-toggler {

@@ -1,0 +1,9 @@
+<div class="col-md-3 col-6 justify-content-md-center align-items-md-center">
+    <div class="box no-border d-flex justify-content-center align-items-center">
+        {% if category.slug is defined %}
+            <h4><a href="{{ path('category', {'slug':category.slug }) }}">{{ category.name }}</a></h4>
+        {% else %}
+            <h4><a href="{{ path('category', {'slug':category.node_slug }) }}">{{ category.node_name }}</a></h4>
+        {% endif %}
+    </div>
+</div>

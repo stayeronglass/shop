@@ -31,11 +31,7 @@
                     <p>{% trans %}25 beautiful HTML pages{% endtrans %}</p>
                     <div class="same-height-row row">
                         {% for category in categories %}
-                            <div class="col-md-3 col-6 justify-content-md-center align-items-md-center">
-                                <div class="box no-border d-flex justify-content-center align-items-center">
-                                    <h4><a href="{{ path('category', {'slug':category.slug }) }}">{{ category.name }}</a></h4>
-                                </div>
-                            </div>
+                            {% include 'category/item.html.twig' with {'category': category} %}
                         {% endfor %}
                     </div>
                     <p class="read-more"><a href="{{ path('main_categories') }}" class="btn btn-outline-primary" target="_self">Все категории</a></p>

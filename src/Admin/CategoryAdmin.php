@@ -35,9 +35,10 @@ class CategoryAdmin extends AbstractAdmin
             ->add('image', ModelType::class, [
                 'label'    => 'Картинка',
                 'multiple' => false,
-                'required' => true,
+                'required' => false,
                 'data'     => null,
                 'help'     => $help,
+
             ])
         ;
     }
