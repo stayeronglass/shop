@@ -78,7 +78,7 @@ class DefaultController extends Controller
         $em         = $this->getDoctrine()->getManager();
         $kvr        = $em->getRepository(KeyValue::class);
 
-        $params = $kvr->getItems(['vk', 'russian_name ']);
+        $params = $kvr->getItems(['vk', 'russian_name']);
         $params['categories'] = $em->getRepository(Category::class)->getMainCategories();
         return $this->render('default/footer.html.twig',
             $params

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% if title is defined and title %} {{ title }} {% endif %}</title>
+    {% if  is defined and title %}
+        <title>{{ title }}</title>
+    {% endif %}
     {% include '_layout/header.html.twig' %}
     {{ render(controller('App\\Controller\\DefaultController::head')) }}
 </head>
