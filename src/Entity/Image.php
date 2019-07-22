@@ -169,7 +169,7 @@ class Image
     /**
      * Manages the copying of the file to the relevant place on the server
      */
-    public function upload()
+    public function upload($flags = ManipulatorInterface::THUMBNAIL_INSET | ManipulatorInterface::THUMBNAIL_FLAG_UPSCALE)
     {
         // the file property can be empty if the field is not required
         if (null === $this->getFile()) {
@@ -189,12 +189,12 @@ class Image
             'jpeg_quality' => 100,
         ]);
 
-        $image->thumbnail(new Box(450, 450), ManipulatorInterface::THUMBNAIL_INSET | ManipulatorInterface::THUMBNAIL_FLAG_UPSCALE)
+        $image->thumbnail(new Box(450, 450), $flags)
             ->save($dirname . DIRECTORY_SEPARATOR . $filename . static::IMAGE_THUMB_BIG. '.jpg', [
                 'jpeg_quality' => 100,
             ]);
 
-        $image->thumbnail(new Box(160, 160), ManipulatorInterface::THUMBNAIL_INSET | ManipulatorInterface::THUMBNAIL_FLAG_UPSCALE)
+        $image->thumbnail(new Box(160, 160), $flags)
             ->save($dirname . DIRECTORY_SEPARATOR . $filename . static::IMAGE_THUMB_SMALL . '.jpg', [
                 'jpeg_quality' => 100,
             ]);
@@ -211,11 +211,11 @@ class Image
     public function getWebPath($size)
     {
         $name = $this->getName();
-        return "/upload/{$name[0]}/{$name[1]}/{$name}{$size}." . $this->getExt();
+        return self::IMAGE_DIR . "{$name[0]}/{$name[1]}/{$name}{$size}." . $this->getExt();
     }
 
 
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->id;
     }

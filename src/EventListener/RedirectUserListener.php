@@ -20,7 +20,7 @@ class RedirectUserListener
     }
 
 
-    public function onKernelRequest( $event)
+    public function onKernelRequest($event)
     {
         if ($this->isUserLogged() && $event->isMasterRequest()) {
 
@@ -44,9 +44,8 @@ class RedirectUserListener
 
     private function isAnonymousPage($currentRoute) : bool
     {
-        return \in_array(
-            $currentRoute,
-            ['fos_user_security_login', 'fos_user_resetting_request', 'app_user_registration']
-        );
+        $pages = ['fos_user_security_login' => true, 'fos_user_resetting_request' => true, 'app_user_registration' => true];
+
+        return $pages[$currentRoute] ?? false;
     }
 }

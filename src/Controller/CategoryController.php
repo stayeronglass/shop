@@ -58,7 +58,7 @@ class CategoryController extends Controller
         $products  = $paginator->paginate(
             $query, /* query NOT result */
             $page,
-            $request->query->getInt('per_page', 10)/* items per page*/
+            $request->query->getInt('per_page', 20)/* items per page*/
 
         );
 
