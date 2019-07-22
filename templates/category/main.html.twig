@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% set title = 'Категории' ~ ' | ' ~ title_postfix %}
+{% block title %}<title>{{ 'Категории' ~ ' | ' ~ title_postfix }}</title>{% endblock %}
+{% block description %}<meta name="description" content="Работает!" />{% endblock %}
+
 {% block body %}
     <!-- *** ADVANTAGES ***-->
     <div id="advantages">

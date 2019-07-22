@@ -1,8 +1,12 @@
 {% extends 'empty.html.twig' %}
 
+{% block title %}<title>{{ html_title }}</title>{% endblock %}
+{% block description %}<meta name="description" content="{{ html_description }}" />{% endblock %}
+
+
 {% block body %}
 
-    {{ render(controller('App\\Controller\\DefaultController::header')) }}
+        {{ render(controller('App\\Controller\\DefaultController::header')) }}
 
         {{ render(controller('App\\Controller\\DefaultController::inner')) }}
 

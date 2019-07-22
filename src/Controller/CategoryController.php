@@ -28,7 +28,7 @@ class CategoryController extends Controller
         $kv    = $em->getRepository(KeyValue::class);
 
         return $this->render('category/main.html.twig', [
-            'categories'    => $categoryRepo->getAllCategories(),
+            'categories'    => $categoryRepo->getMainCategories(),
             'title_postfix' => $kv->findOneBy(['key' => 'a_cat_title_postfix']),
         ]);
     }

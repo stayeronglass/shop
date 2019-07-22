@@ -2,6 +2,18 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
+            <trans-unit id="html.head.title" resname="html.head.title">
+                <source>Warhammer Discount</source>
+                <target>Warhammer Discount</target>
+            </trans-unit>
+            <trans-unit id="html.head.description" resname="html.head.description">
+                <source>Warhammer Discount</source>
+                <target>Warhammer Discount</target>
+            </trans-unit>
+            <trans-unit id="html.head.keywords" resname="html.head.keywords">
+                <source>Warhammer 40000, Age of sigmar, Warhammer Fantasy, купить</source>
+                <target>Warhammer 40000, Age of sigmar, Warhammer Fantasy, купить</target>
+            </trans-unit>
 
             <trans-unit id="main.about.header">
                 <source>bestsellers</source>

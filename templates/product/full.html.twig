@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% set title = product.title ~ ' | ' ~ title_postfix %}
+{% block title %}<title>{{ product.title ~ ' | ' ~ product_title_postfix }}</title>{% endblock %}
+{% block description %}<meta name="description" content="{{  product.title ~ ' | ' ~ product_description_postfix }}" />{% endblock %}
 
 {% block body %}
             {{ render(controller('App\\Controller\\DefaultController::breadcrumbs',{ 'node': product.categories[0], 'product': product } )) }}
@@ -8,7 +9,6 @@
                 <div class="row">
                     <div class="col-md-10 offset-md-1">
                         <h1>{{ product.title }}</h1>
-
                     </div>
                 </div>
             </div>
@@ -32,7 +32,6 @@
                             {% endif %}
                         </div>
                         <div class="col-md-6">
-
                             <form>
                                 <p class="price capitalize_first_letter">{% trans %}price{% endtrans %}:
                                     {% if product.salePrice %}

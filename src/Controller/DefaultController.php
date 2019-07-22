@@ -20,15 +20,9 @@ class DefaultController extends Controller
     public function index(): Response
     {
         $em         = $this->getDoctrine()->getManager();
-        $banner     = $em->getRepository(Product::class)->getSliderProducts();
-        $categories = $em->getRepository(Category::class)->getMainCategories();
         $kvr        = $em->getRepository(KeyValue::class);
 
-        return $this->render('default/index.html.twig', [
-            'banner'     => $banner,
-            'categories' => $categories,
-            'title'      => $kvr->getItems(['site_name'])['site_name'],
-        ]);
+        return $this->render('default/index.html.twig', $kvr->getItems(['html_title', 'html_description', 'html_keywords']));
     }
 
 
@@ -51,7 +45,7 @@ class DefaultController extends Controller
         $kvr        = $em->getRepository(KeyValue::class);
 
         return $this->render('_layout/head.html.twig', $kvr->getItems([
-            'yandex_metrica', 'description', 'keywords'
+            'yandex_metrica',
         ]));
     }
 

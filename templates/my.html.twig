@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% if title is defined and title is not empty %} {{ title }} {% endif %}</title>
-    {% include '_layout/header.html.twig' %}
+    {% block title %}<title>{% trans %}html.head.title{% endtrans %}</title>{% endblock %}
+    {% block description %}<meta name="description" content="{% trans %}html.head.description{% endtrans %}" />{% endblock %}
+    {% block keywords %}<meta name="keywords" content="{% trans %}html.head.keywords{% endtrans %}" />{% endblock %}
+
     {{ render(controller('App\\Controller\\DefaultController::head')) }}
 </head>
 <body class="undefined">
@@ -15,6 +17,7 @@
     {% cache 'footer' {time: 3600} %}
         {{ render(controller('App\\Controller\\MyController::footer')) }}
     {% endcache %}
+
     {% include '_layout/footer.html.twig' %}
 </body>
 </html>

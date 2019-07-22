@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% set title = category.name ~ ' | ' ~ title_postfix %}
+{% block title %}<title>{{ category.name ~ ' | ' ~ title_postfix }}</title>{% endblock %}
+{% block description %}<meta name="description" content="Работает!" />{% endblock %}
 
 {% block body %}
     {{ render(controller('App\\Controller\\DefaultController::breadcrumbs',{ 'node': category } )) }}

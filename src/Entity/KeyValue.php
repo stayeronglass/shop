@@ -16,7 +16,7 @@ class KeyValue
 
 
     /**
-     * @ORM\Column(name="`key`", type="string", length=20, nullable=false, unique=true)
+     * @ORM\Column(name="`key`", type="string", length=50, nullable=false, unique=true)
      * @ORM\Id
      * @ORM\GeneratedValue("NONE")
      */

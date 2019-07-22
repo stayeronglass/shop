@@ -20,14 +20,13 @@ class ProductController extends Controller
 
     /**
      * @Route("/{id}", name="product_show", methods="GET"))
-     * @Cache(lastModified="product.getUpdatedAt()", Etag="'product' ~ product.getId() ~ product.getUpdatedAt().getTimestamp()")
      */
     public function show(Product $product, KeyValueRepository $kv, ImageRepository $imageRepository): Response
     {
-        return $this->render('product/full.html.twig', [
-            'product' => $product,
-            'images'  => $imageRepository->getTImages($product->getId()),
-            'title_postfix' => $kv->findOneBy(['key' => 'p_title_postfix']),
-        ]);
+        $params = $kv->getItems(['product_title_postfix', 'product_description_postfix']);
+        $params['product'] = $product;
+        $params['images']  = $imageRepository->getTImages($product->getId());
+
+        return $this->render('product/full.html.twig', $params);
     }
 }
