@@ -5,6 +5,8 @@ namespace App\Controller\My;
 use App\Entity\Order;
 use App\Form\OrderPaymentType;
 use App\Repository\OrderRepository;
+use Doctrine\ORM\Query;
+use Knp\Component\Pager\Event\Subscriber\Paginate\Doctrine\ORM\QuerySubscriber\UsesPaginator;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,8 +28,15 @@ class OrdersController extends AbstractController
     public function orders(PaginatorInterface $paginator, Request $request, OrderRepository $repository): Response
     {
 
+        $query = $repository->getOrdersQueryByUser($this->getUser()->getId());
+
+        $query
+            ->setHint(UsesPaginator::HINT_FETCH_JOIN_COLLECTION, false)
+            ->setHydrationMode(Query::HYDRATE_SCALAR)
+        ;
+
         $orders = $paginator->paginate(
-            $repository->getOrdersQueryByUser($this->getUser()->getId()),
+            $query,
             $request->query->getInt('page', 1),
             10
         );

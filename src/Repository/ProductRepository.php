@@ -37,14 +37,6 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
 
-    public function searchProducts($q) : array
-    {
-        return $this
-            ->searchProductsQuery($q)
-            ->getScalarResult()
-        ;
-    }
-
     public function searchProductsQuery($q) : Query
     {
         $this->getEntityManager()->getConnection()->quote($q);
