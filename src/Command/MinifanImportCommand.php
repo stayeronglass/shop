@@ -16,6 +16,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use GuzzleHttp\Client;
 use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
+use Imagine\Image\Point;
+use Imagine\Image\Palette\Color\RGB as Color;
 
 class MinifanImportCommand extends Command
 {
@@ -115,16 +117,40 @@ class MinifanImportCommand extends Command
 
             $image = $this->imagine->load($img);
 
+            $palette = new \Imagine\Image\Palette\RGB();
+            $canvas  = $this->imagine->create(
+                new Box(450, 450),
+                $palette->color('#FFFFFF')
+            );
+
             $image->save($dirname . DIRECTORY_SEPARATOR . $filename . '.jpg', [
                 'jpeg_quality' => 100,
             ]);
 
-            $image->thumbnail(new Box(450, 450), ManipulatorInterface::THUMBNAIL_INSET | ManipulatorInterface::THUMBNAIL_FLAG_UPSCALE)
+            $big = $image->thumbnail(new Box(450, 450), ManipulatorInterface::THUMBNAIL_INSET | ManipulatorInterface::THUMBNAIL_FLAG_UPSCALE);
+
+            $y = (int) (450 - $big->getSize()->getHeight()) / 2;
+            $x = (int) (450 - $big->getSize()->getWidth()) / 2;
+
+
+            $canvas
+                ->paste($big, new Point($x, $y))
                 ->save($dirname . DIRECTORY_SEPARATOR . $filename . Image::IMAGE_THUMB_BIG . '.jpg', [
                     'jpeg_quality' => 100,
                 ]);
+            ;
 
-            $image->thumbnail(new Box(160, 160), ManipulatorInterface::THUMBNAIL_INSET | ManipulatorInterface::THUMBNAIL_FLAG_UPSCALE)
+            $canvas  = $this->imagine->create(
+                new Box(160, 160),
+                $palette->color('#FFFFFF')
+            );
+
+            $small = $image->thumbnail(new Box(160, 160), ManipulatorInterface::THUMBNAIL_INSET | ManipulatorInterface::THUMBNAIL_FLAG_UPSCALE);
+            $y = (int) (160 - $small->getSize()->getHeight()) / 2;
+            $x = (int) (160 - $small->getSize()->getWidth()) / 2;
+
+            $canvas
+                ->paste($small, new Point($x, $y))
                 ->save($dirname . DIRECTORY_SEPARATOR . $filename . Image::IMAGE_THUMB_SMALL . '.jpg', [
                     'jpeg_quality' => 100,
                 ]);
