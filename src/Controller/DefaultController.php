@@ -22,7 +22,7 @@ class DefaultController extends Controller
         $em         = $this->getDoctrine()->getManager();
         $kvr        = $em->getRepository(KeyValue::class);
 
-        return $this->render('default/index.html.twig', $kvr->getItems(['html_title', 'html_description', 'html_keywords']));
+        return $this->render('default/index.html.twig', $kvr->getItems(['main_html_title', 'html_description', 'html_keywords']));
     }
 
 
