@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Image;
+use App\Entity\KeyValue;
 use App\Entity\Product;
 use App\Repository\ImageRepository;
 use App\Repository\KeyValueRepository;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
@@ -21,12 +24,27 @@ class ProductController extends Controller
     /**
      * @Route("/{id}", name="product_show", methods="GET"))
      */
-    public function show(Product $product, KeyValueRepository $kv, ImageRepository $imageRepository): Response
+    public function show($id, CacheItemPoolInterface $cache): Response
     {
-        $params = $kv->getItems(['product_title_postfix', 'product_description_postfix']);
-        $params['product'] = $product;
-        $params['images']  = $imageRepository->getTImages($product->getId());
+        $resultItem = $cache->getItem('product_' . $id);
 
-        return $this->render('product/full.html.twig', $params);
+        if (!$resultItem->isHit()) {
+
+            $em = $this->getDoctrine()->getManager();
+
+            $params = $em->getRepository(KeyValue::class)->getItems(['product_title_postfix', 'product_description_postfix']);
+
+            $params['product'] = $em->getRepository(Product::class)->find($id);
+            $params['images']  = $em->getRepository(Image::class)->getTImages($id);
+
+            $data = $this->renderView('product/full.html.twig', $params);
+            $resultItem->set($data);
+            $cache->save($resultItem);
+        } else {
+            $data = $resultItem->get();
+        }
+
+
+        return new Response($data);
     }
 }
