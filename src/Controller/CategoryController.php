@@ -29,7 +29,7 @@ class CategoryController extends Controller
 
         return $this->render('category/main.html.twig', [
             'categories'    => $categoryRepo->getMainCategories(),
-            'title_postfix' => $kv->findOneBy(['key' => 'a_cat_title_postfix']),
+            'title_postfix' => $kv->findOneBy(['key' => 'main_cat_title_postfix']),
         ]);
     }
 

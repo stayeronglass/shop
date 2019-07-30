@@ -5,8 +5,6 @@ namespace App\Controller;
 use App\Entity\Image;
 use App\Entity\KeyValue;
 use App\Entity\Product;
-use App\Repository\ImageRepository;
-use App\Repository\KeyValueRepository;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;

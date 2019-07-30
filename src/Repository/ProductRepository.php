@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Image;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
@@ -21,6 +22,20 @@ class ProductRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Product::class);
+    }
+
+    public function getTImages($product_id) : array
+    {
+        return $this->createQueryBuilder('i')
+            ->select('i.name, i.ext')
+            ->from(Image::class, 'i')
+            ->andWhere('i.product_id = :product_id')
+            ->addOrderBy('i.main', 'DESC')
+            ->addOrderBy('i.id', 'ASC')
+            ->setParameter('product_id', $product_id)
+            ->getQuery()
+            ->getScalarResult()
+            ;
     }
 
 
