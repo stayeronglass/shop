@@ -22,9 +22,8 @@ class ProductController extends Controller
     /**
      * @Route("/{id}", name="product_show", methods="GET"))
      */
-    public function show($id, CacheItemPoolInterface $cache): Response
+    public function show($id): Response
     {
-        $resultItem = $cache->getItem('product_' . $id);
 
         if (!$resultItem->isHit()) {
 

@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Entity\KeyValue;
 use App\Entity\Product;
+use App\Repository\KeyValueRepository;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
@@ -17,12 +19,29 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="main", methods="GET")
      */
-    public function index(): Response
+    public function index(CacheItemPoolInterface $cache): Response
     {
-        $em         = $this->getDoctrine()->getManager();
-        $kvr        = $em->getRepository(KeyValue::class);
+        if (empty($_GET['q']) && $this->isGranted('IS_AUTHENTICATED_ANONYMOUSLY'))
+        {
+            $item = $cache->getItem('index');
+        } else {
+            $item = $cache->getItem('index');
+        }
 
-        return $this->render('default/index.html.twig', $kvr->getItems(['main_html_title', 'html_description', 'html_keywords']));
+        if ($item && $item->isHit()) {
+            $data = $item->get();
+        } else {
+            $em         = $this->getDoctrine()->getManager();
+            $kvr        = $em->getRepository(KeyValue::class);
+            $data = $this->renderView('default/index.html.twig', $kvr->getItems(['main_html_title', 'html_description', 'html_keywords']));
+            if ($item){
+                $item->set($data)->expiresAfter(3600);
+                $cache->save($item);
+            }
+
+        }
+
+        return new Response($data);
     }
 
 
@@ -39,12 +58,9 @@ class DefaultController extends Controller
         return $this->render('default/main_inner.html.twig', $params);
     }
 
-    public function head(): Response
+    public function head(KeyValueRepository $repository): Response
     {
-        $em         = $this->getDoctrine()->getManager();
-        $kvr        = $em->getRepository(KeyValue::class);
-
-        return $this->render('_layout/head.html.twig', $kvr->getItems([
+        return $this->render('_layout/head.html.twig', $repository->getItems([
             'yandex_metrica',
         ]));
     }

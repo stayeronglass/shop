@@ -22,6 +22,7 @@
                     <ul>
                         {% if is_granted('ROLE_USER') %}
                             <li class="capitalize_first_letter"><a href="{{ path('my_main') }}">{% trans %}personal account{% endtrans %}</a></li>
+                            <li class="capitalize_first_letter"><a href="{{ path('fos_user_security_logout') }}">{% trans %}logout{% endtrans %}</a></li>
                         {% else %}
                             <li class="capitalize_first_letter"><a href="{{ path('fos_user_security_login') }}">{% trans %}log in{% endtrans %}</a></li>
                             <li class="capitalize_first_letter"><a href="{{ path('fos_user_registration_register') }}">{% trans %}register{% endtrans %}</a></li>
