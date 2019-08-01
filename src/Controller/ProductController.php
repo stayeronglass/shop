@@ -25,7 +25,6 @@ class ProductController extends Controller
     public function show($id): Response
     {
 
-        if (!$resultItem->isHit()) {
 
             $em = $this->getDoctrine()->getManager();
 
@@ -35,12 +34,6 @@ class ProductController extends Controller
             $params['images']  = $em->getRepository(Image::class)->getTImages($id);
 
             $data = $this->renderView('product/full.html.twig', $params);
-            $resultItem->set($data);
-            $cache->save($resultItem);
-        } else {
-            $data = $resultItem->get();
-        }
-
 
         return new Response($data);
     }

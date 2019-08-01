@@ -8,22 +8,32 @@ use App\Entity\Product;
 use App\Repository\KeyValueRepository;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use App\Entity\Cart;
 use Symfony\Component\HttpFoundation\Response;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="main", methods="GET")
+     * @Route("/", name="main", methods="GET", condition="request.query.get('q')===null")
      */
-    public function index(CacheItemPoolInterface $cache): Response
+    public function index(Request $request, CacheItemPoolInterface $cache): Response
     {
+        dd($request);
+        $response = new Response();
         if (empty($_GET['q']) && $this->isGranted('IS_AUTHENTICATED_ANONYMOUSLY'))
         {
-            $item = $cache->getItem('index');
+            $item = $cache->getItem('index_etag');
+
+            if($item->isHit()){
+                $response->setEtag($item->get());
+                if($response->isNotModified($request)) return $response;
+            }
+
         } else {
             $item = $cache->getItem('index');
         }
@@ -60,6 +70,7 @@ class DefaultController extends Controller
 
     public function head(KeyValueRepository $repository): Response
     {
+
         return $this->render('_layout/head.html.twig', $repository->getItems([
             'yandex_metrica',
         ]));
