@@ -12,6 +12,11 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 class Provider
 {
 
+    const PROVIDER_MINIFAN = 1;
+    const PROVIDER_MINIATURES_CEMETERY = 2;
+    const PROVIDER_ALEGRIS = 3;
+
+
     use TimestampableEntity, SoftDeleteableEntity;
 
     /**

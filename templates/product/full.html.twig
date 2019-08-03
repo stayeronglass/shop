@@ -4,7 +4,7 @@
 {% block description %}<meta name="description" content="{{  product.title ~ ' | ' ~ product_description_postfix }}" />{% endblock %}
 
 {% block body %}
-            {{ render(controller('App\\Controller\\DefaultController::breadcrumbs',{ 'node': product.categories[0], 'product': product } )) }}
+            {{ render(controller('App\\Controller\\ADefaultController::breadcrumbs',{ 'node': product.categories[0], 'product': product } )) }}
             <div class="box text-center">
                 <div class="row">
                     <div class="col-md-10 offset-md-1">

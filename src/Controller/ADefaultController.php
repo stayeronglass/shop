@@ -15,44 +15,42 @@ use App\Entity\Cart;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-class DefaultController extends Controller
+class ADefaultController extends Controller
 {
     /**
-     * @Route("/", name="main", methods="GET", condition="request.query.get('q')===null")
+     * @Route("/", name="main", methods="GET")
      */
     public function index(Request $request, CacheItemPoolInterface $cache): Response
     {
-        dd($request);
         $response = new Response();
-        if (empty($_GET['q']) && $this->isGranted('IS_AUTHENTICATED_ANONYMOUSLY'))
-        {
-            $item = $cache->getItem('index_etag');
 
-            if($item->isHit()){
-                $response->setEtag($item->get());
-                if($response->isNotModified($request)) return $response;
-            }
+//        if (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+//            $item = $cache->getItem('index_etag');
+//            if ($item->isHit()) {
+//                $response->setEtag($item->get());
+//                if ($response->isNotModified($request)) return $response;
+//            } else{
+//                $now = new \DateTime();
+//                $etag = md5($now->getTimestamp());
+//                $item->set($etag);
+//                $cache->save($item);
+//                $response
+//                    ->setEtag($etag)
+//                    ->setLastModified($now);
+//            }
+//        }
 
-        } else {
-            $item = $cache->getItem('index');
-        }
 
-        if ($item && $item->isHit()) {
-            $data = $item->get();
-        } else {
-            $em         = $this->getDoctrine()->getManager();
-            $kvr        = $em->getRepository(KeyValue::class);
-            $data = $this->renderView('default/index.html.twig', $kvr->getItems(['main_html_title', 'html_description', 'html_keywords']));
-            if ($item){
-                $item->set($data)->expiresAfter(3600);
-                $cache->save($item);
-            }
+        $em = $this->getDoctrine()->getManager();
+        $kvr = $em->getRepository(KeyValue::class);
+        $data = $this->renderView('default/index.html.twig', $kvr->getItems(['main_html_title', 'html_description', 'html_keywords']));
+        $response->setContent($data);
 
-        }
-
-        return new Response($data);
+        return $response;
     }
+
 
 
 

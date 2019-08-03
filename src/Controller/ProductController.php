@@ -17,24 +17,18 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
-
-
     /**
      * @Route("/{id}", name="product_show", methods="GET"))
      */
     public function show($id): Response
     {
+        $em = $this->getDoctrine()->getManager();
 
+        $repo   = $em->getRepository(Product::class);
+        $params = $em->getRepository(KeyValue::class)->getItems(['product_title_postfix', 'product_description_postfix']);
+        $params['product'] = $repo->find($id);
+        $params['images']  = $repo->getTImages($id);
 
-            $em = $this->getDoctrine()->getManager();
-
-            $params = $em->getRepository(KeyValue::class)->getItems(['product_title_postfix', 'product_description_postfix']);
-
-            $params['product'] = $em->getRepository(Product::class)->find($id);
-            $params['images']  = $em->getRepository(Image::class)->getTImages($id);
-
-            $data = $this->renderView('product/full.html.twig', $params);
-
-        return new Response($data);
+        return $this->render('product/full.html.twig', $params);
     }
 }

@@ -4,7 +4,7 @@
 {% block description %}<meta name="description" content="Работает!" />{% endblock %}
 
 {% block body %}
-    {{ render(controller('App\\Controller\\DefaultController::breadcrumbs',{ 'node': category } )) }}
+    {{ render(controller('App\\Controller\\ADefaultController::breadcrumbs',{ 'node': category } )) }}
     <div class="box text-center">
 
             <div class="same-height-row row justify-content-md-center align-items-md-center">

@@ -25,7 +25,9 @@ class SearchController extends Controller
      */
     public function search(Request $request, ProductRepository $repository, PaginatorInterface $paginator): Response
     {
-        $query = $repository->searchProductsQuery($request->get('q'));
+
+        $search = $request->get('q');
+        $query = $repository->searchProductsQuery($search);
         $query
             ->setHint(UsesPaginator::HINT_FETCH_JOIN_COLLECTION, false)
             ->setHydrationMode(Query::HYDRATE_SCALAR)
@@ -39,6 +41,7 @@ class SearchController extends Controller
 
         return $this->render('search/full.html.twig', [
             'products' => $pagination,
+            'search'   => $search,
         ]);
     }
 }

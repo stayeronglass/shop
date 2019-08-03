@@ -5,12 +5,12 @@
     {% block description %}<meta name="description" content="{% trans %}html.head.description{% endtrans %}" />{% endblock %}
     {% block keywords %}<meta name="keywords" content="{% trans %}html.head.keywords{% endtrans %}" />{% endblock %}
 
-    {{ render(controller('App\\Controller\\DefaultController::head')) }}
+    {{ render(controller('App\\Controller\\ADefaultController::head')) }}
 
 </head>
 <body class="undefined">
 
-    {{ render(controller('App\\Controller\\DefaultController::header')) }}
+    {{ render(controller('App\\Controller\\ADefaultController::header')) }}
     <div id="all">
         <div id="content">
             <div class="container">
@@ -21,7 +21,7 @@
     </div>
 
     {% cache 'footer' {time: 3600} %}
-        {{ render(controller('App\\Controller\\DefaultController::footer')) }}
+        {{ render(controller('App\\Controller\\ADefaultController::footer')) }}
     {% endcache %}
 
     {% include '_layout/footer.html.twig' %}
