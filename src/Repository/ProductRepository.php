@@ -26,9 +26,9 @@ class ProductRepository extends ServiceEntityRepository
 
     public function getTImages($product_id) : array
     {
-        return $this->createQueryBuilder('i')
-            ->select('i.name, i.ext')
-            ->from(Image::class, 'i')
+        return $this->createQueryBuilder('p')
+            ->select('p.id, i.name, i.ext')
+            ->innerJoin('p.images', 'i')
             ->andWhere('i.product_id = :product_id')
             ->addOrderBy('i.main', 'DESC')
             ->addOrderBy('i.id', 'ASC')
@@ -42,7 +42,7 @@ class ProductRepository extends ServiceEntityRepository
     public function getSliderProducts() : array
     {
         return $this->createQueryBuilder('p')
-            ->select('p.id,p.title, i.name,i.ext')
+            ->select('p.id, p.title, i.name,i.ext')
             ->innerJoin('p.images', 'i',Expr\Join::WITH, 'i.main = 1')
             ->andWhere('p.banner = :banner')
             ->setParameter('banner', 1)
