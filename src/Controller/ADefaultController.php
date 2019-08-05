@@ -13,38 +13,33 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use App\Entity\Cart;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
-use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class ADefaultController extends Controller
 {
     /**
      * @Route("/", name="main", methods="GET")
      */
-    public function index(Request $request, CacheItemPoolInterface $cache): Response
+    public function index(Request $request, TagAwareCacheInterface $cache): Response
     {
         $response = new Response();
 
-//        if (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+//        if (!$this->getUser()) {
 //            $item = $cache->getItem('index_etag');
-//            if ($item->isHit()) {
-//                $response->setEtag($item->get());
-//                if ($response->isNotModified($request)) return $response;
-//            } else{
-//                $now = new \DateTime();
-//                $etag = md5($now->getTimestamp());
-//                $item->set($etag);
-//                $cache->save($item);
-//                $response
-//                    ->setEtag($etag)
-//                    ->setLastModified($now);
-//            }
+//            $response->setEtag($item->get());
+//            if ($response->isNotModified($request)) return $response->setPublic();
+//
+//            $now = new \DateTime();
+//            $etag = md5($now->getTimestamp());
+//            $item->set($etag)->tag(['index']);
+//            $cache->save($item);
+//            $response
+//                ->setEtag($etag)
+//                ->setLastModified($now);
 //        }
 
-
-        $em = $this->getDoctrine()->getManager();
-        $kvr = $em->getRepository(KeyValue::class);
+        $em   = $this->getDoctrine()->getManager();
+        $kvr  = $em->getRepository(KeyValue::class);
         $data = $this->renderView('default/index.html.twig', $kvr->getItems(['main_html_title', 'html_description', 'html_keywords']));
         $response->setContent($data);
 

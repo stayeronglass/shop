@@ -310,4 +310,13 @@ class Product
     }
 
 
+    public function __toString()
+    {
+        return $this->title;
+    }
+
+    public function getCacheKey()
+    {
+        return 'Product_' . $this->id;
+    }
 }

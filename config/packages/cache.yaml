@@ -28,3 +28,7 @@ framework:
                 adapter: cache.app
                 default_lifetime: 3600
 
+            redis_long_pool:
+                adapter: cache.app
+                default_lifetime: 86400
+
