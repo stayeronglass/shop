@@ -23,6 +23,8 @@ class ADefaultController extends Controller
     public function index(Request $request, TagAwareCacheInterface $cache): Response
     {
         $response = new Response();
+        $now  = new \DateTime();
+        $etag = md5($now->getTimestamp());
 
 //        if (!$this->getUser()) {
 //            $item = $cache->getItem('index_etag');
@@ -41,7 +43,17 @@ class ADefaultController extends Controller
         $em   = $this->getDoctrine()->getManager();
         $kvr  = $em->getRepository(KeyValue::class);
         $data = $this->renderView('default/index.html.twig', $kvr->getItems(['main_html_title', 'html_description', 'html_keywords']));
-        $response->setContent($data);
+
+
+        $item = $cache->getItem('index_etag');
+        $item->set($etag)->tag(['index']);
+        $cache->save($item);
+
+        $response
+            ->setPublic()
+            ->setEtag($etag)
+            ->setLastModified($now)
+            ->setContent($data);
 
         return $response;
     }
