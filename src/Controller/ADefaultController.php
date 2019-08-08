@@ -22,32 +22,32 @@ class ADefaultController extends Controller
      */
     public function index(Request $request, TagAwareCacheInterface $cache): Response
     {
+        $user     = (bool) $this->getUser();
         $response = new Response();
-        $now  = new \DateTime();
-        $etag = md5($now->getTimestamp());
+        $now      = new \DateTime();
+        $etag     = md5($now->getTimestamp());
 
-//        if (!$this->getUser()) {
-//            $item = $cache->getItem('index_etag');
-//            $response->setEtag($item->get());
-//            if ($response->isNotModified($request)) return $response->setPublic();
-//
-//            $now = new \DateTime();
-//            $etag = md5($now->getTimestamp());
-//            $item->set($etag)->tag(['index']);
-//            $cache->save($item);
-//            $response
-//                ->setEtag($etag)
-//                ->setLastModified($now);
-//        }
+        if (!$this->getUser()) {
+            $index_etag = $cache->getItem('index_etag');
+            $response->setEtag($index_etag->get());
+            if ($response->isNotModified($request)) return $response;
+
+            $index = $cache->getItem('index');
+            $item = $index->get();
+            if ($item) return $response->setContent($item)->setEtag($etag);
+        }
 
         $em   = $this->getDoctrine()->getManager();
         $kvr  = $em->getRepository(KeyValue::class);
         $data = $this->renderView('default/index.html.twig', $kvr->getItems(['main_html_title', 'html_description', 'html_keywords']));
 
+        if (!$user) {
+            $index->set($data);
+            $cache->save($index);
 
-        $item = $cache->getItem('index_etag');
-        $item->set($etag)->tag(['index']);
-        $cache->save($item);
+            $index_etag->set($etag);
+            $cache->save($index_etag);
+        }
 
         $response
             ->setPublic()
