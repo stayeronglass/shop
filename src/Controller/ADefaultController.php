@@ -27,14 +27,14 @@ class ADefaultController extends Controller
         $now      = new \DateTime();
         $etag     = md5($now->getTimestamp());
 
-        if (!$this->getUser()) {
+        if (!$user) {
             $index_etag = $cache->getItem('index_etag');
             $response->setEtag($index_etag->get());
-            if ($response->isNotModified($request)) return $response;
+          //  if ($response->isNotModified($request)) return $response;
 
             $index = $cache->getItem('index');
             $item = $index->get();
-            if ($item) return $response->setContent($item)->setEtag($etag);
+           // if ($item) return $response->setContent($item)->setEtag($etag);
         }
 
         $em   = $this->getDoctrine()->getManager();
@@ -50,7 +50,6 @@ class ADefaultController extends Controller
         }
 
         $response
-            ->setPublic()
             ->setEtag($etag)
             ->setLastModified($now)
             ->setContent($data);
