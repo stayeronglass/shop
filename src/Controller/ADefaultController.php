@@ -29,7 +29,7 @@ class ADefaultController extends Controller
 
         if (!$user) {
             $index_etag = $cache->getItem('index_etag');
-            $response->setEtag($index_etag->get());
+            $response->setEtag($index_etag->get(), true);
           //  if ($response->isNotModified($request)) return $response;
 
             $index = $cache->getItem('index');
@@ -50,7 +50,7 @@ class ADefaultController extends Controller
         }
 
         $response
-            ->setEtag($etag)
+            ->setEtag($etag, true)
             ->setLastModified($now)
             ->setContent($data);
 

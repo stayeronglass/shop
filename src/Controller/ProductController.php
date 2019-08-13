@@ -32,7 +32,7 @@ class ProductController extends Controller
 
         if (!$user) {
             $product_etag = $cache->getItem('product_' . $id . '_etag');
-            $response->setEtag($product_etag->get());
+            $response->setEtag($product_etag->get(), true);
             // if ($response->isNotModified($request)) return $response;
 
             $product = $cache->getItem('product_' . $id);
@@ -58,7 +58,7 @@ class ProductController extends Controller
         }
 
         $response
-            ->setEtag($etag)
+            ->setEtag($etag, true)
             ->setLastModified($now)
             ->setContent($data)
         ;
