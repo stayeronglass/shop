@@ -32,6 +32,11 @@ class Provider
     private $name;
 
     /**
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="provider")
+     */
+    private $products;
+
+    /**
      * @ORM\Column(type="text")
      */
     private $description;
