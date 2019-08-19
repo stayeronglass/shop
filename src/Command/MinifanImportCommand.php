@@ -46,7 +46,8 @@ class MinifanImportCommand extends Command
         ;
     }
 
-    private function productsOnPage($url){
+    private function productsOnPage(string $url): array
+    {
         $res = $this->client->request('GET', $url);
         $body = (string) $res->getBody();
         $products = [];
@@ -60,7 +61,8 @@ class MinifanImportCommand extends Command
         return array_unique($products);
     }
 
-    private function Pages($url){
+    private function Pages(string $url): array
+    {
         $res     = $this->client->request('GET', $url);
         $body    = (string) $res->getBody();
         $matches = '';
@@ -77,7 +79,8 @@ class MinifanImportCommand extends Command
         return $pages;
     }
 
-    private function parseProduct($url){
+    private function parseProduct(string $url): Product
+    {
         $res = $this->client->request('GET', $url);
         $body = $res->getBody();
 
