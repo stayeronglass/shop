@@ -5,6 +5,7 @@ namespace App\Command;
 use App\Entity\Category;
 use App\Entity\Image;
 use App\Entity\Product;
+use App\Entity\Provider;
 use Doctrine\ORM\EntityManagerInterface;
 use Imagine\Image\ManipulatorInterface;
 use Symfony\Component\Console\Command\Command;
@@ -94,6 +95,8 @@ class MinifanImportCommand extends Command
         preg_match('#<span class="totalPrice">(.*) руб.</span>#s',$body, $matches);
         $price = (int) $matches[1];
         $product->setPrice($price);
+
+        $product->setProviderId(Provider::PROVIDER_MINIFAN);
 
         $images = [];
         preg_match_all("#'.*/products_pictures/.*enl.*\.jpg'#", $body, $images);

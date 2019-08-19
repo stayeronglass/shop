@@ -67,6 +67,17 @@ class Product
     private $material_id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Provider", inversedBy="products")
+     * @ORM\JoinColumn(name="provider_id", referencedColumnName="id")
+     */
+    private $provider;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $provider_id;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="products", cascade={"persist"})
      */
     private $images;
@@ -96,11 +107,23 @@ class Product
      */
     private $banner = false;
 
-
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->images = new ArrayCollection();
+    }
+
+
+
+
+    public function __toString()
+    {
+        return $this->title;
+    }
+
+    public function getCacheKey()
+    {
+        return 'product_' . $this->id;
     }
 
     public function getId(): ?int
@@ -164,6 +187,18 @@ class Product
     public function setMaterialId(?int $material_id): self
     {
         $this->material_id = $material_id;
+
+        return $this;
+    }
+
+    public function getProviderId(): ?int
+    {
+        return $this->provider_id;
+    }
+
+    public function setProviderId(?int $provider_id): self
+    {
+        $this->provider_id = $provider_id;
 
         return $this;
     }
@@ -278,6 +313,18 @@ class Product
         return $this;
     }
 
+    public function getProvider(): ?Provider
+    {
+        return $this->provider;
+    }
+
+    public function setProvider(?Provider $provider): self
+    {
+        $this->provider = $provider;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Image[]
      */
@@ -307,16 +354,5 @@ class Product
         }
 
         return $this;
-    }
-
-
-    public function __toString()
-    {
-        return $this->title;
-    }
-
-    public function getCacheKey()
-    {
-        return 'Product_' . $this->id;
     }
 }
