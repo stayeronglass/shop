@@ -81,8 +81,8 @@ class MinifanImportCommand extends Command
 
     private function parseProduct(string $url): Product
     {
-        $res = $this->client->request('GET', $url);
-        $body = $res->getBody();
+        $res  = $this->client->request('GET', $url);
+        $body = (string) $res->getBody();
 
         $product = new Product();
         $matches = '';
