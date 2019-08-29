@@ -50,10 +50,10 @@ class ProductController extends Controller
         $data = $this->renderView('product/full.html.twig', $params);
 
         if (!$user) {
-            $product->set($data);
+            $product->set($data)->expiresAfter(3600);
             $cache->save($product);
 
-            $product_etag->set($etag);
+            $product_etag->set($etag)->expiresAfter(3600);
             $cache->save($product_etag);
         }
 

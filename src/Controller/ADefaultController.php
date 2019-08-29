@@ -42,10 +42,10 @@ class ADefaultController extends Controller
         $data = $this->renderView('default/index.html.twig', $kvr->getItems(['main_html_title', 'html_description', 'html_keywords']));
 
         if (!$user) {
-            $index->set($data);
+            $index->set($data)->expiresAfter(3600);;
             $cache->save($index);
 
-            $index_etag->set($etag);
+            $index_etag->set($etag)->expiresAfter(3600);;
             $cache->save($index_etag);
         }
 
