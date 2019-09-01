@@ -42,11 +42,12 @@ class ProductController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository(Product::class);
 
-        $params['product'] = $repo->find($id);
-        if (!$params['product']) throw new NotFoundHttpException();
+        $product = $repo->find($id);
+        if (!$product) throw new NotFoundHttpException();
 
-        $params = array_merge($params, $em->getRepository(KeyValue::class)->getItems(['product_title_postfix', 'product_description_postfix']));
-        $params['images'] = $repo->getTImages($id);
+        $params = $em->getRepository(KeyValue::class)->getItems(['product_title_postfix', 'product_description_postfix']);
+        $params['product'] = $product;
+        $params['images']  = $repo->getTImages($id);
         $data = $this->renderView('product/full.html.twig', $params);
 
         if (!$user) {
