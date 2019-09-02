@@ -84,20 +84,30 @@ class MinifanImportCommand extends Command
         $res  = $this->client->request('GET', $url);
         $body = (string) $res->getBody();
 
-        $product = new Product();
+
         $matches = '';
         preg_match('#<h1>(.*)</h1>#',$body, $matches);
 
         $title = trim($matches[1]);
+
+        $p =  $this->em->getRepository(Product::class)->findOneBy(['title' => $title]);
+        preg_match('#<span class="totalPrice">(.*) руб.</span>#s',$body, $matches);
+        $price = (int) $matches[1];
+
+        if($p){
+            $p->setPrice($price);
+            return $p;
+        }
+
+        $product = new Product();
         $product->setTitle($title);
+        $product->setPrice($price);
 
         preg_match('#<div class="cpt_product_description"><div>(.*)</div></div>#s',$body, $matches);
         $desc = $matches[1];
         $product->setDescription($desc);
 
-        preg_match('#<span class="totalPrice">(.*) руб.</span>#s',$body, $matches);
-        $price = (int) $matches[1];
-        $product->setPrice($price);
+
 
         $product->setProviderId(Provider::PROVIDER_MINIFAN);
 

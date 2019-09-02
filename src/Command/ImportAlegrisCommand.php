@@ -79,23 +79,32 @@ class ImportAlegrisCommand extends Command
         $res  = $this->client->request('GET', $url);
         $body = (string) $res->getBody();
 
-        $product = new Product();
-        $product->setProviderId(Provider::PROVIDER_ALEGRIS);
+
+
 
         preg_match('#<h1 itemprop="name" class="product_title entry-title ci-title-with-breadcrumb">(.*)</h1>#',$body, $matches);
         $title = trim($matches[1]);
-        $product->setTitle($title);
-
-        preg_match('#<p>(.*)<\/p>#Uis',$body, $matches);
-
-        $desc = trim($matches[1]);
-        $product->setDescription($desc);
 
 
         preg_match('#<span class="woocommerce-Price-amount amount">(.*)&nbsp;#Uis',$body, $matches);
 
         $price = $matches[1];
         $price = (int) str_replace(',', '', $price);
+
+        $p = $this->em->getRepository(Product::class)->findOneBy(['title' => $title]);
+        if($p){
+            $p->setPrice($price);
+            return $p;
+        }
+
+        $product = new Product();
+        $product->setTitle($title);
+
+        $product->setProviderId(Provider::PROVIDER_ALEGRIS);
+        preg_match('#<p>(.*)<\/p>#Uis',$body, $matches);
+
+        $desc = trim($matches[1]);
+        $product->setDescription($desc);
         $product->setPrice($price);
 
         $images = [];
