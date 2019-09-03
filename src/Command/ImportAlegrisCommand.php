@@ -9,6 +9,9 @@ use App\Entity\Provider;
 use Doctrine\ORM\EntityManagerInterface;
 use GuzzleHttp\Client;
 use Imagine\Gd\Imagine;
+use Imagine\Image\Box;
+use Imagine\Image\ManipulatorInterface;
+use Imagine\Image\Point;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -35,7 +38,7 @@ class ImportAlegrisCommand extends Command
     protected function configure()
     {
         $this
-            ->setDescription('Import product from miniaturesfan')
+            ->setDescription('Import product from alegris')
             ->addArgument('url', InputArgument::REQUIRED, 'url')
             ->addArgument('category', InputArgument::REQUIRED, 'category')
         ;
@@ -44,7 +47,6 @@ class ImportAlegrisCommand extends Command
 
     private function Pages(string $url): array
     {
-        $url = "https://alegris.ru/product-category/g-workshop/%d1%80%d0%b0%d1%81%d0%bf%d1%80%d0%be%d0%b4%d0%b0%d0%b6%d0%b0-games-workshop/page/1/";
         $res     = $this->client->request('GET', $url);
         $body    = (string) $res->getBody();
         $matches = '';
@@ -98,22 +100,76 @@ class ImportAlegrisCommand extends Command
         }
 
         $product = new Product();
-        $product->setTitle($title);
+        $product->setTitle($title)
+                ->setPrice($price)
+                ->setProviderId(Provider::PROVIDER_ALEGRIS);
+        ;
 
-        $product->setProviderId(Provider::PROVIDER_ALEGRIS);
-        preg_match('#<p>(.*)<\/p>#Uis',$body, $matches);
 
-        $desc = trim($matches[1]);
-        $product->setDescription($desc);
-        $product->setPrice($price);
+        preg_match('#<p>(.*)<\/p>#Uis', $body, $matches);
+        if (isset($matches[1])) {
+            $desc = trim($matches[1]);
+            $product->setDescription($desc);
+        }
+
 
         $images = [];
-        preg_match_all("#'.*/products_pictures/.*enl.*\.jpg'#", $body, $images);
+        preg_match_all("#<a href=\"(.*)\" itemprop=\"image\" class=\"woocommerce-main-image zoom\"#U", $body, $images);
 
-        foreach ($images[0] as $key => $image):
+        foreach ($images[1] as $key => $image):
+            $img = file_get_contents($image);
+
+            $filename = md5(rand());
             $i = new Image();
+
             if (0 === $key) $i->setMain(true);
+
+            $i->setName($filename);
+            $i->setExt('jpg');
             $product->addImage($i);
+
+            $dirname = 'public/upload' . DIRECTORY_SEPARATOR . $filename[0] . DIRECTORY_SEPARATOR . $filename[1];
+            if(!file_exists($dirname)) mkdir($dirname, 0755, true);
+
+            $image = $this->imagine->load($img);
+
+            $palette = new \Imagine\Image\Palette\RGB();
+            $canvas  = $this->imagine->create(
+                new Box(450, 450),
+                $palette->color('#FFFFFF')
+            );
+
+            $image->save($dirname . DIRECTORY_SEPARATOR . $filename . '.jpg', [
+                'jpeg_quality' => 100,
+            ]);
+
+            $big = $image->thumbnail(new Box(450, 450), ManipulatorInterface::THUMBNAIL_INSET | ManipulatorInterface::THUMBNAIL_FLAG_UPSCALE);
+
+            $y = (int) (450 - $big->getSize()->getHeight()) / 2;
+            $x = (int) (450 - $big->getSize()->getWidth()) / 2;
+
+
+            $canvas
+                ->paste($big, new Point($x, $y))
+                ->save($dirname . DIRECTORY_SEPARATOR . $filename . Image::IMAGE_THUMB_BIG . '.jpg', [
+                    'jpeg_quality' => 100,
+                ]);
+            ;
+
+            $canvas  = $this->imagine->create(
+                new Box(160, 160),
+                $palette->color('#FFFFFF')
+            );
+
+            $small = $image->thumbnail(new Box(160, 160), ManipulatorInterface::THUMBNAIL_INSET | ManipulatorInterface::THUMBNAIL_FLAG_UPSCALE);
+            $y = (int) (160 - $small->getSize()->getHeight()) / 2;
+            $x = (int) (160 - $small->getSize()->getWidth()) / 2;
+
+            $canvas
+                ->paste($small, new Point($x, $y))
+                ->save($dirname . DIRECTORY_SEPARATOR . $filename . Image::IMAGE_THUMB_SMALL . '.jpg', [
+                    'jpeg_quality' => 100,
+                ]);
 
         endforeach;
 
