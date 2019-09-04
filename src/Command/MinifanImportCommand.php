@@ -94,20 +94,25 @@ class MinifanImportCommand extends Command
         preg_match('#<span class="totalPrice">(.*) руб.</span>#s',$body, $matches);
         $price = (int) $matches[1];
 
-        if($p){
-            $p->setPrice($price);
+        $out = false;
+        if (preg_match('#Нет в наличии #', $body)) $out = true;
+
+        if ($p) {
+            $p->setPrice($price)
+                ->setOutOfStock($out);
+
             return $p;
         }
 
         $product = new Product();
-        $product->setTitle($title);
-        $product->setPrice($price);
+        $product->setTitle($title)
+                ->setPrice($price)
+                ->setOutOfStock($out)
+        ;
 
         preg_match('#<div class="cpt_product_description"><div>(.*)</div></div>#s',$body, $matches);
         $desc = $matches[1];
         $product->setDescription($desc);
-
-
 
         $product->setProviderId(Provider::PROVIDER_MINIFAN);
 
@@ -173,7 +178,7 @@ class MinifanImportCommand extends Command
 
         endforeach;
 
-        if (preg_match('#Нет в наличии #', $body)) $product->setOutOfStock(true);
+
 
         return $product;
 
@@ -188,12 +193,14 @@ class MinifanImportCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $now = new \DateTime();
         $io   = new SymfonyStyle($input, $output);
 
         $url  = $input->getArgument('url');
         $arg2 = $input->getArgument('category');
 
         $category = $this->em->getRepository(Category::class)->find($arg2);
+        if (!$category) throw new \Exception("categoty id = $arg2 not found!");
 
         foreach ($this->Pages($url) as $page) {
             foreach ($this->productsOnPage($page) as $product) {
@@ -205,6 +212,17 @@ class MinifanImportCommand extends Command
         }
 
         $this->em->flush();
+
+        $this->em->getRepository(Product::class)->createQueryBuilder('p')
+            ->update('p')
+            ->set('p.outOfStock', true)
+            ->where('p.createdAt < :now')
+            ->andWhere('p.categories IN (:categories)')
+            ->andWhere('p.provider_id = :provider_id')
+            ->set('now', $now)
+            ->set('provider_id', Provider::PROVIDER_MINIFAN)
+            ->set('categories', [$category->getId()])
+        ;
 
         $io->success('ALL DONE!');
 
