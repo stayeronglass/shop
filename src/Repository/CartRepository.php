@@ -24,7 +24,7 @@ class CartRepository extends ServiceEntityRepository
         parent::__construct($registry, Cart::class);
     }
 
-    public function getCartByUser($uid) : array
+    public function getCartByUser(int $uid) : array
     {
         return $this->createQueryBuilder('c')
             ->select('c.id')
@@ -35,7 +35,7 @@ class CartRepository extends ServiceEntityRepository
             ;
     }
 
-    public function getFullCartByUser($uid): array
+    public function getFullCartByUser(int $uid): array
     {
         return $this->createQueryBuilder('c')
             ->select('c.id, c.amount, p.id as pid, p.title, p.price, i.name as image_name, i.ext as image_ext ')

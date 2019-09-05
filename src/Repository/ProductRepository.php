@@ -24,7 +24,7 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-    public function getTImages($product_id) : array
+    public function getTImages(int $product_id) : array
     {
         return $this->createQueryBuilder('p')
             ->select('p.id, i.name, i.ext')
@@ -52,9 +52,9 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
 
-    public function searchProductsQuery($q) : Query
+    public function searchProductsQuery(?string $q) : Query
     {
-        $this->getEntityManager()->getConnection()->quote($q);
+        $this->getEntityManager()->getConnection()->quote(trim($q));
 
         return $this->createQueryBuilder('p')
             ->select("MATCH(p.title) AGAINST('{$q}') as relevance, p.title, p.id, p.price, p.salePrice as sale_price, i.name as image_name, i.ext as image_ext ")

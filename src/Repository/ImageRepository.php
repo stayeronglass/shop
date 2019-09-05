@@ -19,7 +19,7 @@ class ImageRepository extends ServiceEntityRepository
         parent::__construct($registry, Image::class);
     }
 
-    public function getTImages($product_id) : array
+    public function getTImages(int $product_id) : array
     {
         return $this->createQueryBuilder('i')
             ->select('i.name, i.ext')

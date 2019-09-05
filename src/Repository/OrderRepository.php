@@ -21,7 +21,7 @@ class OrderRepository extends ServiceEntityRepository
         parent::__construct($registry, Order::class);
     }
 
-    public function getOrdersQueryByUser($uid) : Query
+    public function getOrdersQueryByUser(int $uid) : Query
     {
         return $this->_em->createQuery('
             SELECT o.id, o.createdAt, o.total, os.title AS status, o.status_id 

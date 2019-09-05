@@ -21,7 +21,7 @@ class AddressRepository extends ServiceEntityRepository
         parent::__construct($registry, Address::class);
     }
 
-    public function getUserAddressQuery($uid) : Query
+    public function getUserAddressQuery(int $uid) : Query
     {
         return $this->_em->createQuery('
             SELECT a.id, a.address FROM App\Entity\Address a WHERE a.user_id = :user_id 
@@ -31,7 +31,7 @@ class AddressRepository extends ServiceEntityRepository
         ;
     }
 
-    public function getUserAddress($uid) : array
+    public function getUserAddress(int $uid) : array
     {
         return $this->getUserAddressQuery($uid)->getScalarResult();
     }
