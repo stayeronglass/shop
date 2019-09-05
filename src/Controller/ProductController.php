@@ -35,8 +35,8 @@ class ProductController extends Controller
             $response->setEtag($product_etag->get(), true);
             // if ($response->isNotModified($request)) return $response;
 
-            $product = $cache->getItem('product_' . $id);
-            $item = $product->get();
+            $productItem = $cache->getItem('product_' . $id);
+            $item = $productItem->get();
             //  if ($item) return $response->setContent($item)->setEtag($etag);
         }
         $em = $this->getDoctrine()->getManager();
@@ -51,8 +51,8 @@ class ProductController extends Controller
         $data = $this->renderView('product/full.html.twig', $params);
 
         if (!$user) {
-            $product->set($data)->expiresAfter(3600);
-            $cache->save($product);
+            $productItem->set($data)->expiresAfter(3600);
+            $cache->save($productItem);
 
             $product_etag->set($etag)->expiresAfter(3600);
             $cache->save($product_etag);
