@@ -25,6 +25,7 @@ security:
                 path:     /
                 domain:   ~
                 user_provider: fos_userbundle
+                always_remember_me: true
 
     access_control:
         - { path: ^/login$,    role: IS_AUTHENTICATED_ANONYMOUSLY }

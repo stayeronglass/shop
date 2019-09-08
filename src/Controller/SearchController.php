@@ -3,9 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\KeyValue;
-use App\Repository\ProductRepository;
-use Doctrine\ORM\Query;
-use Knp\Component\Pager\Event\Subscriber\Paginate\Doctrine\ORM\QuerySubscriber\UsesPaginator;
+use App\Repository\SearchRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
@@ -23,19 +21,16 @@ class SearchController extends Controller
     /**
      * @Route("/", name="index", methods="GET")
      */
-    public function search(Request $request, ProductRepository $repository, PaginatorInterface $paginator): Response
+    public function search(Request $request, SearchRepository $repository, PaginatorInterface $paginator): Response
     {
 
         $search = $request->get('q');
-        $query = $repository->searchProductsQuery($search);
-        $query
-            ->setHint(UsesPaginator::HINT_FETCH_JOIN_COLLECTION, false)
-            ->setHydrationMode(Query::HYDRATE_SCALAR)
-        ;
+        $query  = $repository->searchProductsQuery($search);
+
 
         $pagination = $paginator->paginate(
-            $query, /* query NOT result */
-            $request->query->getInt('page', 1)/*page number*/,
+            $query,
+            $request->query->getInt('page', 1),
             20
         );
 
