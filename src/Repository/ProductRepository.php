@@ -53,13 +53,6 @@ class ProductRepository extends ServiceEntityRepository
     }
 
 
-
-
-    /**
-     * @param QueryBuilder $cqb
-     *
-     * @return Query
-     */
     public function getProductByCategory(QueryBuilder $cqb) : Query
     {
         $qb = $this->createQueryBuilder('p')

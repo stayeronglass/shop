@@ -49,7 +49,7 @@ class CartRepository extends ServiceEntityRepository
             ;
     }
 
-    public function clearCartByUser($uid): array
+    public function clearCartByUser(int $uid): array
     {
         return $this->createQueryBuilder('c')
             ->delete()
@@ -60,7 +60,7 @@ class CartRepository extends ServiceEntityRepository
         ;
     }
 
-    public function getCartAmountByUser($uid) : int
+    public function getCartAmountByUser(int $uid) : int
     {
         $res =  $this->createQueryBuilder('c')
             ->select('sum(c.amount) as amount')
