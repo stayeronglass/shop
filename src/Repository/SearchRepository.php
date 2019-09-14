@@ -25,7 +25,7 @@ class SearchRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-    public function searchProductsQuery(?string $q) : array
+    public function searchProductsQuery(string $q) : array
     {
         $this->getEntityManager()->getConnection()->quote(trim($q));
 

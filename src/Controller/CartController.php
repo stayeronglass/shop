@@ -127,7 +127,7 @@ class CartController extends AbstractController
      public function finish(OrderRepository $repository, SessionInterface $session): Response
      {
          $order = $repository->find($session->get('order'));
-         if (!$order) $this->createNotFoundException();
+         if (!$order) throw $this->createNotFoundException();
 
 
          return $this->render('cart/finish.html.twig', [
@@ -159,7 +159,7 @@ class CartController extends AbstractController
         endforeach;
 
         if (empty($data)) {
-            $this->createNotFoundException();
+            throw $this->createNotFoundException();
         }
 
 
@@ -169,7 +169,7 @@ class CartController extends AbstractController
         $formData = $form->getData();
         $address  = $formData['address'];
 
-        if($address->getUserId() !== $userId) $this->createNotFoundException();
+        if($address->getUserId() !== $userId) throw $this->createNotFoundException();
 
         $delivery = $formData['delivery'];
         $payment  = $formData['payment'];

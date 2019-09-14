@@ -19,7 +19,8 @@ class PageController extends AbstractController
         $em     = $this->getDoctrine()->getManager();
         $params = $em->getRepository(KeyValue::class)->getItems(['russian_name']);
         $params['page'] = $em->getRepository(Page::class)->findOneBy(['slug' => $slug]);
-        if(!$params['page']) $this->createNotFoundException();
+
+        if (null === $params['page']) throw $this->createNotFoundException();
 
         return $this->render('page/page.html.twig', $params);
     }

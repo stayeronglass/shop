@@ -61,7 +61,7 @@ class AddressController extends AbstractController
     public function addressedit(Request $request, Address $address): Response
     {
         if ($address->getUserId() !== $this->getUser()->getId())
-            $this->createNotFoundException();
+            throw $this->createNotFoundException();
 
         $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);

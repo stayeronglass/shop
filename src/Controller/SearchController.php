@@ -24,9 +24,9 @@ class SearchController extends Controller
     public function search(Request $request, SearchRepository $repository, PaginatorInterface $paginator): Response
     {
 
-        $search = $request->get('q');
-        $query  = $repository->searchProductsQuery($search);
-
+        $search = trim($request->get('q'));
+        $query  = [];
+        if ($search) $query  = $repository->searchProductsQuery($search);
 
         $pagination = $paginator->paginate(
             $query,
