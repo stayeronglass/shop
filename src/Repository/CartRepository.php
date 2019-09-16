@@ -72,7 +72,7 @@ class CartRepository extends ServiceEntityRepository
         return $res[0]['amount'] ?? 0;
     }
 
-    public function add($amount, Product $product, User $user): bool
+    public function add(int $amount, Product $product, User $user): bool
     {
         $cart = $this->findOneBy(['product_id' => $product->getId(), 'user_id' => $user->getId()]);
 
