@@ -10,6 +10,7 @@ use Imagine\Image\Box;
 use Imagine\Image\ManipulatorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile as UploadedFile;
 use Imagine\Gd\Imagine;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
@@ -39,7 +40,7 @@ class Image
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $name;
 
@@ -55,7 +56,7 @@ class Image
     private $product_id;
 
     /**
-     * @ORM\Column(type="string", length=3)
+     * @ORM\Column(type="string", length=3, nullable=false)
      */
     private $ext;
 

@@ -20,19 +20,19 @@ class Address
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=1000)
+     * @ORM\Column(type="string", length=1000, nullable=false)
      * @Assert\NotBlank()
      */
     private $address;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=10, nullable=false)
      * @Assert\NotBlank()
      */
     private $zip;
 
     /**
-     * @ORM\Column(type="string", length=1000)
+     * @ORM\Column(type="string", length=1000, nullable=false)
      * @Assert\NotBlank()
      */
     private $recipient;
