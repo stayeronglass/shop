@@ -25,13 +25,13 @@ class Category
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $name;
 
     /**
      * @Gedmo\Slug(fields={"name"}, separator="_")
-     * @ORM\Column(length=128, unique=true)
+     * @ORM\Column(length=128, unique=true, nullable=false)
      */
     private $slug;
 

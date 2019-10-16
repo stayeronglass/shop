@@ -19,7 +19,7 @@ class Cart
     private $id;
 
     /**
-     * @ORM\Column(type="bigint")
+     * @ORM\Column(type="bigint", nullable=false)
      */
     private $amount = 0;
 
