@@ -12,7 +12,7 @@ class SameUserVoter extends Voter
 
     protected function supports($attribute, $subject)  : bool
     {
-        return true;
+        return $subject && method_exists($subject, 'getUser') && $subject->getUser();
     }
 
 
@@ -21,13 +21,12 @@ class SameUserVoter extends Voter
     {
         $user = $token->getUser();
 
-        if ( !($user instanceof User) || (!$subject) ) {
+        if ( !($user instanceof User) || (!$subject) || (!method_exists($subject, 'getUser')) || (!$subject->getUser())) {
             // the user must be logged in; if not, deny access
             return false;
         }
 
-
-        return $user->getId() === $subject->getUser()->getid();
+        return $user->getId() === $subject->getUser()->getId();
     }
 
 }
