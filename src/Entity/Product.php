@@ -9,6 +9,7 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\Index;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
@@ -25,7 +26,7 @@ class Product
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=1000, nullable=false))
+     * @ORM\Column(type="string", length=1000, nullable=false)
      */
     private $title;
 
@@ -58,6 +59,7 @@ class Product
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Material", inversedBy="products")
      * @ORM\JoinColumn(name="material_id", referencedColumnName="id")
+     * @Assert\Valid()
      */
     private $material;
 
@@ -69,6 +71,7 @@ class Product
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Provider", inversedBy="products")
      * @ORM\JoinColumn(name="provider_id", referencedColumnName="id")
+     * @Assert\Valid()
      */
     private $provider;
 
@@ -79,6 +82,7 @@ class Product
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="products", cascade={"persist"})
+     * @Assert\Valid()
      */
     private $images;
 
