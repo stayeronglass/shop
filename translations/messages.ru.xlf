@@ -545,6 +545,11 @@
                <target>товар добавлен в корзину</target>
            </trans-unit>
 
+            <trans-unit id="no_addresses_found">
+               <source>no addresses found</source>
+               <target>Адресов пока нет</target>
+           </trans-unit>
+
        </body>
     </file>
 </xliff>

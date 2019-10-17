@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\My;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Entity\User;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\AddressRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\My\AddressRepository")
  */
 class Address
 {
     use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

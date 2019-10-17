@@ -2,14 +2,13 @@
 
 namespace App\Controller;
 
-use App\Form\AddressType;
 use App\Repository\MessageRepository;
 use App\Repository\OrderRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
-use App\Entity\Address;
-use App\Repository\AddressRepository;
+use App\Entity\My\Address;
+use App\Repository\My\AddressRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Knp\Component\Pager\PaginatorInterface;

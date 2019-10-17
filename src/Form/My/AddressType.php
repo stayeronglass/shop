@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\My;
 
-use App\Entity\Address;
+use App\Entity\My\Address;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +14,6 @@ class AddressType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-
 
             ->add('recipient', TextType::class, [
                 'label' => 'recipient',

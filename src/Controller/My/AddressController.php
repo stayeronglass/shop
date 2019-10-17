@@ -2,14 +2,13 @@
 
 namespace App\Controller\My;
 
-use App\Entity\Address;
-use App\Form\AddressType;
+use App\Entity\My\Address;
+use App\Form\My\AddressType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * @Route("/my", name="my_")
@@ -19,10 +18,11 @@ class AddressController extends AbstractController
 {
     /**
      * @Route("/address/{id}", name="address_show")
-     * @Security("is_granted('address', address)")
      */
     public function address_show(Address $address): Response
     {
+        if ($address->getUserId() !== $this->getUser()->getId()) throw $this->createNotFoundException();
+
         return $this->render('my/order/show.html.twig', [
             'address'    => $address,
         ]);
@@ -30,7 +30,7 @@ class AddressController extends AbstractController
 
 
     /**
-     * @Route("/address/new", name="address_new", methods="GET|POST")
+     * @Route("/addressnew", name="address_new", methods="GET|POST")
      */
     public function addressnew(Request $request): Response
     {
@@ -47,7 +47,6 @@ class AddressController extends AbstractController
 
             return $this->redirectToRoute('my_account');
         }
-
         return $this->render('my/address/new.html.twig', [
             'address' => $address,
             'form'    => $form->createView(),
@@ -60,8 +59,7 @@ class AddressController extends AbstractController
      */
     public function addressedit(Request $request, Address $address): Response
     {
-        if ($address->getUserId() !== $this->getUser()->getId())
-            throw $this->createNotFoundException();
+        if ($address->getUserId() !== $this->getUser()->getId()) throw $this->createNotFoundException();
 
         $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);

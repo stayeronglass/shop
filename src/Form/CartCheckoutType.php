@@ -4,7 +4,7 @@ namespace App\Form;
 
 use App\Entity\Delivery;
 use App\Entity\Payment;
-use App\Entity\Address;
+use App\Entity\My\Address;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

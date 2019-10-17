@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repository\My;
 
-use App\Entity\Address;
+use App\Entity\My\Address;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Query;
@@ -24,7 +24,7 @@ class AddressRepository extends ServiceEntityRepository
     public function getUserAddressQuery(int $uid) : Query
     {
         return $this->_em->createQuery('
-            SELECT a.id, a.address FROM App\Entity\Address a WHERE a.user_id = :user_id 
+            SELECT a.id, a.address FROM App\Entity\My\Address a WHERE a.user_id = :user_id 
             ORDER BY a.id ASC
         ')
             ->setParameter('user_id', $uid, Type::INTEGER)
