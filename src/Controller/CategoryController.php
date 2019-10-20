@@ -23,9 +23,9 @@ class CategoryController extends Controller
      */
     public function maincategories() : Response
     {
-        $em = $this->getDoctrine()->getManager();
+        $em           = $this->getDoctrine()->getManager();
         $categoryRepo = $em->getRepository(Category::class);
-        $kv    = $em->getRepository(KeyValue::class);
+        $kv           = $em->getRepository(KeyValue::class);
 
         return $this->render('category/main.html.twig', [
             'categories'    => $categoryRepo->getMainCategories(),
