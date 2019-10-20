@@ -23,6 +23,8 @@ class CartCheckoutType extends AbstractType
                 'required'     => true,
                 'choice_label' => 'recipient',
                 'translation_domain' => false,
+                'label' => '',
+                'label_attr' => ['style' => 'display:none'],
             ])
 
             ->add('delivery', EntityType::class, [
@@ -35,6 +37,7 @@ class CartCheckoutType extends AbstractType
                     return $delivery->getTitle() . ' ' . $delivery->getPrice() . '₽';
                 },
                 'translation_domain' => false,
+                'label_attr' => ['style' => 'display:none'],
             ])
 
             ->add('payment', EntityType::class, [
@@ -47,6 +50,7 @@ class CartCheckoutType extends AbstractType
                     return $payment->getTitle();
                 },
                 'translation_domain' => false,
+                'label_attr' => ['style' => 'display:none'],
             ])
         ;
     }

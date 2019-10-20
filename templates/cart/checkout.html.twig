@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 
-{% block title %}{{ 'proceed to checkout'|trans|capitalize }}{% endblock %}
+{% block title %}<title>{{ 'proceed to checkout'|trans|capitalize  }}</title>{% endblock %}
 
 {% block body %}
 
@@ -25,6 +25,11 @@
                 <tr class="nav nav-pills nav-fill">
                     <td class="nav-item nav-link  active"><i class="fa fa-map-marker"></i><br>{% trans %}address{% endtrans %}</td>
                 </tr>
+                {% if addressMessage %}
+                    <tr class="nav nav-pills nav-fill">
+                        <td class="">{{ addressMessage|trans }}</td>
+                    </tr>
+                {% endif %}
                 {% for key, child in form.children.address %}
                     <tr>
                         <td>
@@ -33,8 +38,9 @@
                         </td>
                     </tr>
                     <tr><td>&nbsp;</td></tr>
-
                 {% endfor %}
+                <tr><td class="text-center center-block"><a href="{{ path('my_address_new')}}" class="btn btn-outline-white-secondary " target="_blank">{% trans %}create new address{% endtrans %}</a></td></tr>
+                <tr><td>&nbsp;</td></tr>
             </table>
         </div>
 

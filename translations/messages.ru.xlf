@@ -52,7 +52,7 @@
             </trans-unit>
             <trans-unit id="Delivery List">
                 <source>Delivery List</source>
-                <target>Список досствок</target>
+                <target>Список доставок</target>
             </trans-unit>
             <trans-unit id="Description">
                 <source>Description</source>

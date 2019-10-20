@@ -49,10 +49,11 @@ class OrdersController extends AbstractController
 
     /**
      * @Route("/order/{id}", name="order_show", methods="GET")
-     * @Security("is_granted('order', order)")
      */
     public function show(Order $order): Response
     {
+        if ($order->getUserId() !== $this->getUser()->getId()) throw $this->createNotFoundException();
+
         return $this->render('my/order/show.html.twig', [
             'order'    => $order,
         ]);
@@ -65,6 +66,8 @@ class OrdersController extends AbstractController
      */
     public function pay(Order $order, Request $request): Response
     {
+        if ($order->getUserId() !== $this->getUser()->getId()) throw $this->createNotFoundException();
+
         $form    = $this->createForm(OrderPaymentType::class, $order);
         $form->handleRequest($request);
 

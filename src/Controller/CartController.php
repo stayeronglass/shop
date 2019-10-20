@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Form\CartCheckoutType;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+
 /**
  * @Route("/cart", name="cart_")
  * @IsGranted("IS_AUTHENTICATED_FULLY")
@@ -75,15 +76,17 @@ class CartController extends AbstractController
     {
         $em       = $this->getDoctrine()->getManager();
         $cartRepo = $em->getRepository(Cart::class);
-        $user     = $this->getUser();
-        $cart     = $cartRepo->findOneBy(['id' => $id, 'user_id' => $user->getId()]);
+        $user_id  = $this->getUser()->getId();
+        $cart     = $cartRepo->findOneBy(['id' => $id, 'user_id' => $user_id]);
 
-        if ($cart){
-            $em->remove($cart);
-            $em->flush();
+        if ($cart) {
+            if ($cart->getUserId() === $user_id){
+                $em->remove($cart);
+                $em->flush();
+            }
         }
 
-        $cartItems = $cartRepo->getCartAmountByUser($user->getId());
+        $cartItems = $cartRepo->getCartAmountByUser($user_id);
 
         $result = [
             'message' => '',
@@ -103,10 +106,12 @@ class CartController extends AbstractController
     public function checkout(Request $request, SessionInterface $session): Response
     {
         $form = $this->createForm(CartCheckoutType::class);
-
+        $addressMessage = '';
         $form->handleRequest($request);
+        $formData = $form->getData();
+        $address  = $formData['address'];
 
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid() && $address){
 
             $order = $this->createOrder($form);
             $session->set('order', $order->getId());
@@ -114,9 +119,11 @@ class CartController extends AbstractController
             return $this->redirectToRoute('cart_finish');
         }
 
+        if(!$address) $addressMessage = 'Добавьте хотябы один адрес!';
 
         return $this->render('cart/checkout.html.twig', [
             'form'     => $form->createView(),
+            'addressMessage' => $addressMessage,
         ]);
     }
 
