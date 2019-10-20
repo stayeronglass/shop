@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Cart;
 use App\Entity\Delivery;
 use App\Entity\Payment;
 use App\Entity\My\Address;
@@ -17,40 +18,36 @@ class CartCheckoutType extends AbstractType
         $builder
             ->add('address', EntityType::class, [
                 'class'        => Address::class,
-                'placeholder'  => false,
                 'expanded'     => true,
                 'multiple'     => false,
                 'required'     => true,
                 'choice_label' => 'recipient',
-                'translation_domain' => false,
-                'label' => '',
-                'label_attr' => ['style' => 'display:none'],
+                'label_attr'   => ['style' => 'display:none'],
+                'placeholder'  => false,
             ])
 
             ->add('delivery', EntityType::class, [
                 'class'        => Delivery::class,
-                'placeholder'  => false,
                 'expanded'     => true,
                 'multiple'     => false,
                 'required'     => true,
                 'choice_label' => function (Delivery $delivery) {
                     return $delivery->getTitle() . ' ' . $delivery->getPrice() . '₽';
                 },
-                'translation_domain' => false,
-                'label_attr' => ['style' => 'display:none'],
+                'label_attr'   => ['style' => 'display:none'],
+                'placeholder'  => false,
             ])
 
             ->add('payment', EntityType::class, [
                 'class'        => Payment::class,
-                'placeholder'  => false,
                 'expanded'     => true,
                 'multiple'     => false,
                 'required'     => true,
                 'choice_label' => function (Payment $payment) {
                     return $payment->getTitle();
                 },
-                'translation_domain' => false,
-                'label_attr' => ['style' => 'display:none'],
+                'label_attr'   => ['style' => 'display:none'],
+                'placeholder'  => false,
             ])
         ;
     }
@@ -58,7 +55,9 @@ class CartCheckoutType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-
+        $resolver->setDefaults([
+            'translation_domain' => false,
+        ]);
     }
 
 }
