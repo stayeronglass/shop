@@ -9,7 +9,7 @@
 
             <div class="same-height-row row justify-content-md-center align-items-md-center">
                 {% for c in categories %}
-                    {% if c.id != category.id  %}
+                    {% if c.id is not same as (category.id)  %}
                         {% include 'category/item.html.twig' with {'category': c} %}
                     {% endif %}
                 {% endfor %}
