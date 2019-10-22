@@ -12,8 +12,9 @@
     {% block body %}
     {% endblock %}
 
-    {% cache '_layout_footer' {time: 3600} %}
         {% include '_layout/footer.html.twig' %}
-    {% endcache %}
+
+    {% block javascripts %}
+    {% endblock %}
 </body>
 </html>
