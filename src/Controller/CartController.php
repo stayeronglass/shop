@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Cart;
+use App\Entity\My\Address;
 use App\Entity\Order;
 use App\Entity\OrderStatus;
 use App\Entity\Product;
@@ -31,8 +32,17 @@ class CartController extends AbstractController
     /**
      * @Route("/", name="index", methods="GET|POST"))
      */
-    public function index(CartRepository $repository): Response
+    public function index(Request $request): Response
     {
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository(Cart::class);
+
+        $userId = $this->getUser()->getId();
+
+        if ($request->isMethod('post')):
+            $this->recalc($request->request->all(), $em, $repository, $userId);
+        endif;
+
         $cart = $repository->getFullCartByUser($this->getUser()->getId());
 
         return $this->render('cart/index.html.twig', [
@@ -40,6 +50,24 @@ class CartController extends AbstractController
         ]);
     }
 
+    private function recalc($data, $em, $repository, $userId)
+    {
+        foreach ($data  as $id => $value):
+            $amount = (int) $value;
+            $cart = $repository->findOneBy(['id' => $id, 'user_id' => $userId]);
+
+            if(!$cart) continue;
+
+            if ($amount === 0):
+                $em->remove($cart);
+            elseif ($cart->getAmount() !== $amount):
+                $cart->setAmount($amount);
+                $em->persist($cart);
+            endif;
+        endforeach;
+
+        $em->flush();
+    }
 
     /**
      * @Route("/add", name="add")
@@ -80,10 +108,8 @@ class CartController extends AbstractController
         $cart     = $cartRepo->findOneBy(['id' => $id, 'user_id' => $user_id]);
 
         if ($cart) {
-            if ($cart->getUserId() === $user_id){
-                $em->remove($cart);
-                $em->flush();
-            }
+            $em->remove($cart);
+            $em->flush();
         }
 
         $cartItems = $cartRepo->getCartAmountByUser($user_id);
@@ -174,6 +200,7 @@ class CartController extends AbstractController
         $data['total'] = $total;
 
         $formData = $form->getData();
+
         $address  = $formData['address'];
 
         if($address->getUserId() !== $userId) throw $this->createNotFoundException();
