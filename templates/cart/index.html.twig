@@ -15,48 +15,55 @@
             <form method="post" action="{{ path('cart_index') }}" enctype="application/x-www-form-urlencoded" name="cart">
                 <div class="table-responsive">
                     <table class="table">
-                        <thead>
-                        <tr>
-                            <th colspan="2" class="capitalize_first_letter">{% trans %}product{% endtrans %}</th>
-                            <th class="capitalize_first_letter">{% trans %}quantity{% endtrans %}</th>
-                            <th class="capitalize_first_letter">{% trans %}unit price{% endtrans %}</th>
-                            <th class="capitalize_first_letter">{% trans %}discount{% endtrans %}</th>
-                            <th colspan="2" class="capitalize_first_letter">{% trans %}total{% endtrans %}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% set total = 0 %}
-                        {% for c in cart %}
-                            {% set total = total +  c.price*c.amount %}
+
+                            <thead>
                             <tr>
-                                <td><a href="{{ path('product_show', {'id' : c.pid }) }}">
-                                        <img src="/upload/{{ c.image_name[:1] }}/{{ c.image_name[1:1] }}/{{ c.image_name}}.{{ c.image_ext}}" alt="{{ c.title }}"  />
-                                    </a>
-                                </td>
-                                <td><a href="{{ path('product_show', {'id' : c.pid }) }}">{{ c.title}}</a></td>
-                                <td>
-                                    <input value="{{ c.amount }}" class="form-control" name="{{ c.id }}">
-                                </td>
-                                <td>{{ c.price }}</td>
-                                <td>-</td>
-                                <td>{{ c.price*c.amount }}</td>
-                                <td><a href="{{ path('cart_remove', {'id' : c.id }) }}"><i class="fa fa-trash-o"></i></a></td>
+                                <th colspan="2" class="capitalize_first_letter">{% trans %}product{% endtrans %}</th>
+                                <th class="capitalize_first_letter">{% trans %}quantity{% endtrans %}</th>
+                                <th class="capitalize_first_letter">{% trans %}unit price{% endtrans %}</th>
+                                <th class="capitalize_first_letter">{% trans %}discount{% endtrans %}</th>
+                                <th colspan="2" class="capitalize_first_letter">{% trans %}total{% endtrans %}</th>
                             </tr>
-                        {% endfor  %}
-                        <tfoot>
-                        <tr>
-                            <th colspan="5" class="capitalize_first_letter">{% trans %}total{% endtrans %}</th>
-                            <th colspan="2">{{ total }} &#8381;</th>
-                        </tr>
-                        </tfoot>
+                            </thead>
+                        {% if cart is not empty %}
+                            <tbody>
+                            {% set total = 0 %}
+                            {% for c in cart %}
+                                {% set total = total +  c.price*c.amount %}
+                                <tr>
+                                    <td><a href="{{ path('product_show', {'id' : c.pid }) }}">
+                                            <img src="/upload/{{ c.image_name[:1] }}/{{ c.image_name[1:1] }}/{{ c.image_name}}.{{ c.image_ext}}" alt="{{ c.title }}"  />
+                                        </a>
+                                    </td>
+                                    <td><a href="{{ path('product_show', {'id' : c.pid }) }}">{{ c.title}}</a></td>
+                                    <td>
+                                        <input value="{{ c.amount }}" class="form-control" name="{{ c.id }}">
+                                    </td>
+                                    <td>{{ c.price }}</td>
+                                    <td>-</td>
+                                    <td>{{ c.price*c.amount }}</td>
+                                    <td><a href="{{ path('cart_remove', {'id' : c.id }) }}"><i class="fa fa-trash-o"></i></a></td>
+                                </tr>
+                            {% endfor  %}
+                            <tfoot>
+                            <tr>
+                                <th colspan="5" class="capitalize_first_letter">{% trans %}total{% endtrans %}</th>
+                                <th colspan="2">{{ total }} &#8381;</th>
+                            </tr>
+                            </tfoot>
+                        {% else %}
+                            <tbody>
+                                <tr>
+                                    <th class="capitalize_first_letter">{% trans %}no item in cart{% endtrans %}</th>
+                                </tr>
+                            </tbody>
+                        {% endif %}
                     </table>
                 </div>
                 <div class="box-footer ">
                     <div class="col-lg-12 ">
                         <a href="{{ path('main') }}" class="m-2 btn btn-outline-white-secondary capitalize_first_letter"><i class="fa fa-chevron-left"></i>{% trans %}сontinue shopping{% endtrans %}</a>
                         {% if cart is not empty %}
-
-
                             <button formaction="{{ path('cart_index') }}" class="m-2 btn btn-outline-white-secondary capitalize_first_letter mr-2"><i class="fa fa-refresh"></i>{% trans %}update cart{% endtrans %}</button>
                             <a href="{{ path('cart_checkout') }}" class="float-lg-right m-2 btn btn-outline-white-primary capitalize_first_letter mr-2">{% trans %}proceed to checkout{% endtrans %}<i class="fa fa-chevron-right"></i></a>
                         {% endif %}
