@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CartRepository")
@@ -20,6 +21,7 @@ class Cart
 
     /**
      * @ORM\Column(type="bigint", nullable=false)
+     * @Assert\GreaterThan(0)
      */
     private $amount = 0;
 

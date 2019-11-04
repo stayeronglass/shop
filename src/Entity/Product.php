@@ -27,11 +27,13 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=1000, nullable=false)
+     * @Assert\NotBlank()
      */
     private $title;
 
     /**
      * @ORM\Column(type="integer", nullable=false)
+     * @Assert\NotBlank()
      */
     private $price;
 
@@ -42,12 +44,14 @@ class Product
 
     /**
      * @ORM\ManyToMany(targetEntity="Category", inversedBy="products")
+     * @Assert\Valid()
      */
     private $categories;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Manufacturer", inversedBy="products")
      * @ORM\JoinColumn(name="manufacturer_id", referencedColumnName="id")
+     * @Assert\Valid()
      */
     private $manufacturers;
 
@@ -103,11 +107,13 @@ class Product
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
+     * @Assert\NotNull()
      */
     private $new = false;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
+     * @Assert\NotNull()
      */
     private $banner = false;
 

@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -23,21 +24,27 @@ class Page
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
+     * @Assert\NotBlank()
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Unique()
      */
     private $slug;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
+     * @Assert\NotBlank()
      */
     private $h1;
 
     /**
      * @ORM\Column(type="text", nullable=false)
+     * @Assert\NotBlank()
+     *
      */
     private $content;
 

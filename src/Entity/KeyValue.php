@@ -19,18 +19,22 @@ class KeyValue
      * @ORM\Column(name="`key`", type="string", length=50, nullable=false, unique=true)
      * @ORM\Id
      * @ORM\GeneratedValue("NONE")
+     * @Assert\NotBlank()
+     * @Assert\Unique()
      */
     private $key;
 
     
     /**
      * @ORM\Column(name="description", type="string", length=255, nullable=false)
+     * @Assert\NotBlank()
      */
     private $description;
 
 
     /**
      * @ORM\Column(name="value", type="text", nullable=false)
+     * @Assert\NotBlank()
      */
     private $value;
 
