@@ -25,33 +25,33 @@ class ProductController extends Controller
      */
     public function show($id, Request $request, TagAwareCacheInterface $cache): Response
     {
-        $user = (bool) $this->getUser();
+        $user     = (bool) $this->getUser();
         $response = new Response();
-        $now = new \DateTime();
-        $etag = md5($now->getTimestamp());
+        $now      = new \DateTime();
+        $etag     = md5($now->getTimestamp());
 
         if (!$user) {
             $product_etag = $cache->getItem('product_' . $id . '_etag');
             $response->setEtag($product_etag->get(), true);
-            // if ($response->isNotModified($request)) return $response;
+            if ($response->isNotModified($request)) return $response;
 
             $productItem = $cache->getItem('product_' . $id);
             $item = $productItem->get();
-            //  if ($item) return $response->setContent($item)->setEtag($etag);
+            if ($item) return $response->setContent($item)->setEtag($etag, true);
         }
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository(Product::class);
 
-        $product = $repo->find($id);
-        if (!$product) throw new NotFoundHttpException();
+        if (null === ($product = $repo->find($id))) throw new NotFoundHttpException();
+
 
         $params = $em->getRepository(KeyValue::class)->getItems(['product_title_postfix', 'product_description_postfix']);
         $params['product'] = $product;
         $params['images']  = $repo->getTImages($id);
-        $data = $this->renderView('product/full.html.twig', $params);
+        $content = $this->renderView('product/full.html.twig', $params);
 
         if (!$user) {
-            $productItem->set($data)->expiresAfter(3600);
+            $productItem->set($content)->expiresAfter(3600);
             $cache->save($productItem);
 
             $product_etag->set($etag)->expiresAfter(3600);
@@ -61,7 +61,7 @@ class ProductController extends Controller
         $response
             ->setEtag($etag, true)
             ->setLastModified($now)
-            ->setContent($data)
+            ->setContent($content)
         ;
 
         return $response;
