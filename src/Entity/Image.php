@@ -41,6 +41,8 @@ class Image
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
+     * @Assert\NotBlank()
+     * @Assert\Length(255)
      */
     private $name;
 
@@ -57,6 +59,8 @@ class Image
 
     /**
      * @ORM\Column(type="string", length=3, nullable=false)
+     * @Assert\NotBlank()
+     * @Assert\Length(3)
      */
     private $ext;
 

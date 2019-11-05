@@ -40,7 +40,8 @@ class Order
 
 
     /**
-     * @ORM\Column(type="string" , nullable=true, length=255)
+     * @ORM\Column(type="string", nullable=true, length=255)
+     * @Assert\Length(255)
      */
     private $payment;
 
@@ -64,6 +65,7 @@ class Order
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank()
+     * @Assert\GreaterThan(0)
      */
     private $total = 0;
 

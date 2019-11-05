@@ -29,6 +29,7 @@ class Manufacturer
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotBlank()
+     * @Assert\Length(255)
      */
     private $name;
 

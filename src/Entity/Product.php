@@ -28,12 +28,14 @@ class Product
     /**
      * @ORM\Column(type="string", length=1000, nullable=false)
      * @Assert\NotBlank()
+     * @Assert\Length(1000)
      */
     private $title;
 
     /**
      * @ORM\Column(type="integer", nullable=false)
      * @Assert\NotBlank()
+     * @Assert\GreaterThan(0)
      */
     private $price;
 

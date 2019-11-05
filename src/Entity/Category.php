@@ -9,6 +9,9 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Gedmo\Tree\Traits\NestedSetEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 /**
  * @Gedmo\Tree(type="nested")
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
@@ -26,12 +29,18 @@ class Category
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(255)
      */
     private $name;
 
     /**
      * @Gedmo\Slug(fields={"name"}, separator="_")
      * @ORM\Column(length=128, unique=true, nullable=false)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(128)
      */
     private $slug;
 
