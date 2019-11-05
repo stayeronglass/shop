@@ -30,7 +30,7 @@ class Provider
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotBlank()
-     * @Assert\Length(255)
+     * @Assert\Length(min = 1,max = 255)
      */
     private $name;
 

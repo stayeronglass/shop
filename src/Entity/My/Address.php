@@ -24,27 +24,27 @@ class Address
     /**
      * @ORM\Column(type="string", length=1000, nullable=false)
      * @Assert\NotBlank()
-     * @Assert\Length(1000)
+     * @Assert\Length(min = 1,max = 1000)
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=false)
      * @Assert\NotBlank()
-     * @Assert\Length(10)
+     * @Assert\Length(min = 1,max = 10)
      */
     private $zip;
 
     /**
      * @ORM\Column(type="string", length=1000, nullable=false)
      * @Assert\NotBlank()
-     * @Assert\Length(1000)
+     * @Assert\Length(min = 1,max = 1000)
      */
     private $recipient;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     * @Assert\Length(100)
+     * @Assert\Length(min = 1,max = 100)
      */
     private $phone;
 

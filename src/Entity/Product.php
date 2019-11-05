@@ -28,7 +28,7 @@ class Product
     /**
      * @ORM\Column(type="string", length=1000, nullable=false)
      * @Assert\NotBlank()
-     * @Assert\Length(1000)
+     * @Assert\Length(min = 1,max = 1000)
      */
     private $title;
 

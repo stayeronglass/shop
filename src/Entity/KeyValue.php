@@ -21,7 +21,7 @@ class KeyValue
      * @ORM\GeneratedValue("NONE")
      * @Assert\NotBlank()
      * @Assert\Unique()
-     * @Assert\Length(50)
+     * @Assert\Length(min = 1,max = 50)
      */
     private $key;
 
@@ -29,7 +29,7 @@ class KeyValue
     /**
      * @ORM\Column(name="description", type="string", length=255, nullable=false)
      * @Assert\NotBlank()
-     * @Assert\Length(255)
+     * @Assert\Length(min = 1,max = 255)
      */
     private $description;
 

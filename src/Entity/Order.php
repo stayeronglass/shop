@@ -41,7 +41,7 @@ class Order
 
     /**
      * @ORM\Column(type="string", nullable=true, length=255)
-     * @Assert\Length(255)
+     * @Assert\Length(min = 1,max = 255)
      */
     private $payment;
 
