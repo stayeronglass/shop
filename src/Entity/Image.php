@@ -60,7 +60,7 @@ class Image
     /**
      * @ORM\Column(type="string", length=3, nullable=false)
      * @Assert\NotBlank()
-     * @Assert\Length(min = 1,max = 3)
+     * @Assert\Length(3)
      */
     private $ext;
 
