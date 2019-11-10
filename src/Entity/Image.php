@@ -216,7 +216,7 @@ class Image
     public function getWebPath($size)
     {
         $name = $this->getName();
-        return '/' . self::IMAGE_DIR . "{$name[0]}/{$name[1]}/{$name}{$size}." . $this->getExt();
+        return '/upload/' ."{$name[0]}/{$name[1]}/{$name}{$size}." . $this->getExt();
     }
 
 
