@@ -7,3 +7,5 @@ php bin/console doctrine:cache:clear-metadata
 php bin/console doctrine:cache:clear-result
 
 php bin/console cache:pool:clear cache.app
+
+composer dump-autoload --optimize --classmap-authoritative
