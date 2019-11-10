@@ -29,12 +29,13 @@ class ADefaultController extends Controller
 
         if (!$user) {
             $index_etag = $cache->getItem('index_etag');
-            $response->setEtag($index_etag->get(), true);
-          //  if ($response->isNotModified($request)) return $response;
+            $etag = $index_etag->get() ?? $etag;
+            $response->setEtag($etag, true);
+            if ($response->isNotModified($request)) return $response;
 
             $index = $cache->getItem('index');
             $item = $index->get();
-           // if ($item) return $response->setContent($item)->setEtag($etag);
+            if ($item) return $response->setContent($item)->setEtag($etag);
         }
 
         $em   = $this->getDoctrine()->getManager();

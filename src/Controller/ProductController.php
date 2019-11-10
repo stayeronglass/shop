@@ -30,9 +30,12 @@ class ProductController extends Controller
         $now      = new \DateTime();
         $etag     = md5($now->getTimestamp());
 
+
         if (!$user) {
             $product_etag = $cache->getItem('product_' . $id . '_etag');
-            $response->setEtag($product_etag->get(), true);
+            $etag = $product_etag->get() ?? $etag;
+
+            $response->setEtag($etag, true);
             if ($response->isNotModified($request)) return $response;
 
             $productItem = $cache->getItem('product_' . $id);
