@@ -98,9 +98,6 @@ class MinifanImportCommand extends Command
         if (preg_match('#Нет в наличии#i', $body)) $out = true;
 
 
-        var_dump($title);
-        var_dump($out);
-
         if ($p) {
             $p->setPrice($price)
                 ->setOutOfStock($out);
