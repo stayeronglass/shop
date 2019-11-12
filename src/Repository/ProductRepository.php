@@ -56,7 +56,7 @@ class ProductRepository extends ServiceEntityRepository
     public function getProductByCategory(QueryBuilder $cqb) : Query
     {
         $qb = $this->createQueryBuilder('p')
-            ->select("p.title, p.id, p.price, i.name as image_name, i.ext as image_ext, cat.id AS cat_id, p.salePrice as sale_price")
+            ->select("p.title, p.id, p.price, i.name as image_name, i.ext as image_ext, cat.id AS cat_id, p.salePrice as sale_price, p.outOfStock as outofstock")
             ->innerJoin('p.images', 'i',Expr\Join::WITH, 'i.main = 1')
             ->innerJoin('p.categories', 'cat')
             ->orderBy('p.id', 'DESC')
