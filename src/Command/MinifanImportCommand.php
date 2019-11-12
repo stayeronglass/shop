@@ -95,7 +95,11 @@ class MinifanImportCommand extends Command
         $price = (int) $matches[1];
 
         $out = false;
-        if (preg_match('#Нет в наличии #', $body)) $out = true;
+        if (preg_match('#Нет в наличии#i', $body)) $out = true;
+
+
+        var_dump($title);
+        var_dump($out);
 
         if ($p) {
             $p->setPrice($price)
