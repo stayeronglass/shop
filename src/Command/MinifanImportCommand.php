@@ -217,7 +217,7 @@ class MinifanImportCommand extends Command
         $this->em->getRepository(Product::class)->createQueryBuilder('p')
             ->update('p')
             ->set('p.outOfStock', true)
-            ->where('p.createdAt < :now')
+            ->where('p.updatedAt < :now')
             ->andWhere('p.categories IN (:categories)')
             ->andWhere('p.provider_id = :provider_id')
             ->set('now', $now)
