@@ -85,11 +85,12 @@ class ImportAlegrisCommand extends Command
 
 
         preg_match('#<h1 itemprop="name" class="product_title entry-title ci-title-with-breadcrumb">(.*)</h1>#',$body, $matches);
+        if (!isset($matches[1])) throw  new \Exception('Чет название не найдено!');
         $title = trim($matches[1]);
 
 
         preg_match('#<span class="woocommerce-Price-amount amount">(.*)&nbsp;#Uis',$body, $matches);
-
+        if (!isset($matches[1])) throw  new \Exception('Чет цена не найдена!');
         $price = $matches[1];
         $price = (int) str_replace(',', '', $price);
 

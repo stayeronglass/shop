@@ -87,15 +87,15 @@ class MinifanImportCommand extends Command
 
         $matches = '';
         preg_match('#<h1>(.*)</h1>#',$body, $matches);
-
+        if (!isset($matches[1])) throw  new \Exception('Чет название не найдено!');
         $title = trim($matches[1]);
 
         $p =  $this->em->getRepository(Product::class)->findOneBy(['title' => $title]);
         preg_match('#<span class="totalPrice">(.*) руб.</span>#s',$body, $matches);
+        if (!isset($matches[1])) throw  new \Exception('Чет цена не найдена!');
         $price = (int) $matches[1];
 
-        $out = false;
-        if (preg_match('#Нет в наличии#i', $body)) $out = true;
+        $out = (bool) preg_match('#Нет в наличии#i', $body);
 
 
         if ($p) {
@@ -119,6 +119,7 @@ class MinifanImportCommand extends Command
 
         $images = [];
         preg_match_all("#'.*/products_pictures/.*enl.*\.jpg'#", $body, $images);
+        if (!isset($matches[0])) throw  new \Exception('Чет картинок нет !');
 
         foreach ($images[0] as $key => $image):
 
@@ -194,7 +195,7 @@ class MinifanImportCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $now = new \DateTime();
+        $now  = new \DateTime();
         $io   = new SymfonyStyle($input, $output);
 
         $url  = $input->getArgument('url');
