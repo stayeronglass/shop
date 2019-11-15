@@ -188,7 +188,7 @@ class ImportAlegrisCommand extends Command
         $now = new \DateTime();
 
         $category = $this->em->getRepository(Category::class)->find($arg2);
-        if (!$category) throw new \Exception("categoty id = $arg2 not found!");
+        if (!$category) throw new \Exception("category id = $arg2 not found!");
 
         foreach ($this->Pages($url) as $page) {
             foreach ($this->productsOnPage($page) as $product) {
@@ -201,16 +201,16 @@ class ImportAlegrisCommand extends Command
 
         $this->em->flush();
 
-        $this->em->getRepository(Product::class)->createQueryBuilder('p')
-            ->update('p')
-            ->set('p.outOfStock', true)
-            ->where('p.createdAt < :now')
-            ->andWhere('p.categories IN (:categories)')
-            ->andWhere('p.provider_id = :provider_id')
-            ->set('now', $now)
-            ->set('provider_id', Provider::PROVIDER_ALEGRIS)
-            ->set('categories', [$category->getId()])
-        ;
+//        $this->em->getRepository(Product::class)->createQueryBuilder('p')
+//            ->update('p')
+//            ->set('p.outOfStock', true)
+//            ->where('p.createdAt < :now')
+//            ->andWhere('p.categories IN (:categories)')
+//            ->andWhere('p.provider_id = :provider_id')
+//            ->set('now', $now)
+//            ->set('provider_id', Provider::PROVIDER_ALEGRIS)
+//            ->set('categories', [$category->getId()])
+//        ;
 
         $io->success('ALL DONE!');
     }

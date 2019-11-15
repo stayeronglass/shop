@@ -2,6 +2,8 @@
 
 namespace App\Command;
 
+use App\Entity\Category;
+use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
 use GuzzleHttp\Client;
 use Imagine\Gd\Imagine;
@@ -39,19 +41,75 @@ class ImportVKCommand extends Command
     }
 
 
+    private function productsOnPage($url)
+    {
+        $res = $this->client->request('GET', $url);
+        $body = (string) $res->getBody();
+        $products = [];
+        $matches = '';
+        preg_match_all('#<div class="market_row_name"><a href="(.*)" .*</a></div>#sU', $body,$matches );
+
+        foreach ($matches[1] as $match):
+            $products[] = "https://vk.com/$match";
+        endforeach;
+
+        return array_unique($products);
+    }
+
+
+    private function parseProduct($url)
+    {
+        $res  = $this->client->request('GET', $url);
+        $body = (string) $res->getBody();
+
+        var_dump($url);
+        file_put_contents('111.html', $body);
+
+
+        $matches = '';
+        preg_match('#<div class="market_item_title"#sU',$body, $matches);
+        var_dump($matches);exit;
+        if (!isset($matches[1])) throw  new \Exception('Чет название не найдено!');
+        $title = trim($matches[1]);
+
+
+        $p =  $this->em->getRepository(Product::class)->findOneBy(['title' => $title]);
+        preg_match('#<div class="market_item_title" title=".*>(.*)</div>',$body, $matches);
+        if (!isset($matches[1])) throw  new \Exception('Чет цена не найдена!');
+        $price = (int) $matches[1];
+
+        $out = false;
+
+
+        if ($p) {
+            $p->setPrice($price)
+                ->setOutOfStock($out);
+
+            return $p;
+        }
+    }
+
+
+// https://vk.com/
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
-        $arg1 = $input->getArgument('arg1');
+        $url = $input->getArgument('url');
+        $category = $input->getArgument('category');
 
-        if ($arg1) {
-            $io->note(sprintf('You passed an argument: %s', $arg1));
-        }
+        $category = $this->em->getRepository(Category::class)->find($category);
+        //if (!$category) throw new \Exception("category id = $category not found!");
 
-        if ($input->getOption('option1')) {
-            // ...
-        }
+            foreach ($this->productsOnPage($url) as $product) {
+                $p = $this->parseProduct($product);
+                $p->addCategory($category);
 
-        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
+                $this->em->persist($p);
+            }
+
+        $this->em->flush();
+
+
+        $io->success('ALL DONE!');
     }
 }

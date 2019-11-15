@@ -202,7 +202,7 @@ class MinifanImportCommand extends Command
         $arg2 = $input->getArgument('category');
 
         $category = $this->em->getRepository(Category::class)->find($arg2);
-        if (!$category) throw new \Exception("categoty id = $arg2 not found!");
+        if (!$category) throw new \Exception("category id = $arg2 not found!");
 
         foreach ($this->Pages($url) as $page) {
             foreach ($this->productsOnPage($page) as $product) {
@@ -215,16 +215,16 @@ class MinifanImportCommand extends Command
 
         $this->em->flush();
 
-        $this->em->getRepository(Product::class)->createQueryBuilder('p')
-            ->update('p')
-            ->set('p.outOfStock', true)
-            ->where('p.updatedAt < :now')
-            ->andWhere('p.categories IN (:categories)')
-            ->andWhere('p.provider_id = :provider_id')
-            ->set('now', $now)
-            ->set('provider_id', Provider::PROVIDER_MINIFAN)
-            ->set('categories', [$category->getId()])
-        ;
+//        $this->em->getRepository(Product::class)->createQueryBuilder('p')
+//            ->update('p')
+//            ->set('p.outOfStock', true)
+//            ->where('p.updatedAt < :now')
+//            ->andWhere('p.categories IN (:categories)')
+//            ->andWhere('p.provider_id = :provider_id')
+//            ->set('now', $now)
+//            ->set('provider_id', Provider::PROVIDER_MINIFAN)
+//            ->set('categories', [$category->getId()])
+//        ;
 
         $io->success('ALL DONE!');
 
