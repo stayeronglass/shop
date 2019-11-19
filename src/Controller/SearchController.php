@@ -26,7 +26,7 @@ class SearchController extends Controller
 
         $search = trim($request->get('q'));
         $query  = [];
-        if ($search) $query  = $repository->searchProductsQuery($search);
+        if ($search) $query = $repository->searchProductsQuery($search);
 
         $pagination = $paginator->paginate(
             $query,

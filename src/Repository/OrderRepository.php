@@ -6,7 +6,7 @@ use App\Entity\Order;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAL\Types\Types;
 
 /**
  * @method Order|null find($id, $lockMode = null, $lockVersion = null)
@@ -30,7 +30,7 @@ class OrderRepository extends ServiceEntityRepository
             WHERE o.user_id = :user_id 
             ORDER BY o.id DESC
         ')
-            ->setParameter('user_id', $uid, Type::INTEGER)
+            ->setParameter('user_id', $uid, Types::INTEGER)
             ;
     }
 }
