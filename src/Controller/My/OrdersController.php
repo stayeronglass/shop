@@ -62,7 +62,6 @@ class OrdersController extends AbstractController
 
     /**
      * @Route("/order/pay/{id}", name="order_pay", methods="GET|POST")
-     * @Security("is_granted('order', order)")
      */
     public function pay(Order $order, Request $request): Response
     {
@@ -88,4 +87,11 @@ class OrdersController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/order/payment", name="payment", methods="GET")
+     */
+    public function payment()
+    {
+
+    }
 }
