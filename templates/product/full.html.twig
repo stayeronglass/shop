@@ -17,7 +17,7 @@
                     <div id="productMain" class="row">
                         <div class="col-md-6">
                             {% set im = images[0] %}
-                            <div id="mainImage"><img src="//upload/{{ im.name[:1] }}/{{ im.name[1:1] }}/{{ im.name}}.{{ im.ext}}" alt="" class="img-fluid" /></div>
+                            <div id="mainImage"><img src="/upload/{{ im.name[:1] }}/{{ im.name[1:1] }}/{{ im.name}}.{{ im.ext}}" alt="" class="img-fluid" /></div>
                             {% if product.salePrice %}
                                 <div class="ribbon sale">
                                     <div class="theribbon">{% trans %}sale{% endtrans %}</div>
