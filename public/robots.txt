@@ -7,3 +7,5 @@ Disallow: /cart
 Disallow: /login
 Disallow: /logout
 Disallow: /register/
+
+Host: https://warhammerdiscount.ru
