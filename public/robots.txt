@@ -9,3 +9,5 @@ Disallow: /logout
 Disallow: /register/
 
 Host: https://warhammerdiscount.ru
+
+Sitemap: http://warhammerdiscount.ru/sitemap.xml
