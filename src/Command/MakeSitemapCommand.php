@@ -12,11 +12,13 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class MakeSitemapCommand extends Command
 {
     protected static $defaultName = 'make-sitemap';
     private $em;
+    private $router;
 
 
     protected function configure()
@@ -28,9 +30,10 @@ class MakeSitemapCommand extends Command
 
 
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, UrlGeneratorInterface $router)
     {
         parent::__construct();
+        $this->router = $router;
         $this->em = $em;
     }
 
@@ -39,8 +42,8 @@ class MakeSitemapCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         file_put_contents('public/sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ');
+            <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+        ');
 
         $this->dumpCategories();
         $this->dumpProducts();
@@ -60,18 +63,28 @@ class MakeSitemapCommand extends Command
         $repo = $this->em->getRepository(Product::class);
         while (true) {
             $FirstResult = 0;
-            $categories = $repo->createQueryBuilder('p')
+            $products = $repo->createQueryBuilder('p')
+
+                ->select('p.id, p.updatedAt')
                 ->orderBy('p.id')
                 ->setMaxResults(100)
                 ->setFirstResult($FirstResult)
                 ->getQuery()
-                ->getScalarResult();
+                ->getArrayResult();
 
-            var_dump($categories);
-            exit;
-            if (!$categories) break;
+            if (!$products) break;
+            foreach ($products as $product):
+                $url = "
+                    <url>
+                          <loc>".$this->router->generate('product_show', ['id' => $product['id']], UrlGeneratorInterface::ABSOLUTE_URL)."</loc>
+                          <lastmod>".$product['updatedAt']->format('Y-m-d')."</lastmod>
+                          <changefreq>daily</changefreq>
+                          <priority>0.8</priority>
+                       </url>
+                    ";
+                file_put_contents('public/sitemap.xml',$url, FILE_APPEND);
+            endforeach;
 
-            file_put_contents('public/sitemap.xml','', FILE_APPEND);
 
             $FirstResult = $FirstResult + 100;
         }
@@ -86,18 +99,27 @@ class MakeSitemapCommand extends Command
         $repo = $this->em->getRepository(Page::class);
         while (true) {
             $FirstResult = 0;
-            $categories = $repo->createQueryBuilder('p')
-                ->orderBy('p.id')
+            $pages = $repo->createQueryBuilder('p')
+                ->orderBy('p.id, p.slug, p.updatedAt')
                 ->setMaxResults(100)
                 ->setFirstResult($FirstResult)
                 ->getQuery()
-                ->getScalarResult();
+                ->getArrayResult();
 
-            var_dump($categories);
-            exit;
-            if (!$categories) break;
+            if (!$pages) break;
 
-            file_put_contents('public/sitemap.xml','', FILE_APPEND);
+            foreach ($pages as $page):
+                $url = "
+                    <url>
+                          <loc>".$this->router->generate('page', ['slug' => $page['slug']], UrlGeneratorInterface::ABSOLUTE_URL)."</loc>
+                          <lastmod>".$page['updatedAt']->format('Y-m-d')."</lastmod>
+                          <changefreq>daily</changefreq>
+                          <priority>0.8</priority>
+                       </url>
+                    ";
+                file_put_contents('public/sitemap.xml',$url, FILE_APPEND);
+            endforeach;
+
             $FirstResult = $FirstResult + 100;
         }
 
@@ -112,18 +134,27 @@ class MakeSitemapCommand extends Command
         while (true) {
             $FirstResult = 0;
             $categories = $repo->createQueryBuilder('c')
+                ->select('c.id,c.slug, c.updatedAt')
                 ->orderBy('c.id')
                 ->setMaxResults(100)
                 ->setFirstResult($FirstResult)
                 ->getQuery()
-                ->getScalarResult();
+                ->getArrayResult();
 
-            var_dump($categories);
-            exit;
             if (!$categories) break;
+            foreach ($categories as $category):
+                $url = "
+                    <url>
+                          <loc>".$this->router->generate('category', ['slug' => $category['slug']], UrlGeneratorInterface::ABSOLUTE_URL)."</loc>
+                          <lastmod>".$category['updatedAt']->format('Y-m-d')."</lastmod>
+                          <changefreq>daily</changefreq>
+                          <priority>0.8</priority>
+                       </url>
+                    ";
+                file_put_contents('public/sitemap.xml',$url, FILE_APPEND);
+                $FirstResult = $FirstResult + 100;
+           endforeach;
 
-            file_put_contents('public/sitemap.xml','', FILE_APPEND);
-            $FirstResult = $FirstResult + 100;
         }
 
         return $FirstResult;
