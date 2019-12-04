@@ -61,8 +61,9 @@ class MakeSitemapCommand extends Command
     private function dumpProducts()
     {
         $repo = $this->em->getRepository(Product::class);
+        $FirstResult = 0;
         while (true) {
-            $FirstResult = 0;
+
             $products = $repo->createQueryBuilder('p')
 
                 ->select('p.id, p.updatedAt')
@@ -97,8 +98,9 @@ class MakeSitemapCommand extends Command
     private function dumpPages()
     {
         $repo = $this->em->getRepository(Page::class);
+        $FirstResult = 0;
         while (true) {
-            $FirstResult = 0;
+
             $pages = $repo->createQueryBuilder('p')
                 ->orderBy('p.id, p.slug, p.updatedAt')
                 ->setMaxResults(100)
@@ -131,8 +133,8 @@ class MakeSitemapCommand extends Command
     private function dumpCategories()
     {
         $repo = $this->em->getRepository(Category::class);
+        $FirstResult = 0;
         while (true) {
-            $FirstResult = 0;
             $categories = $repo->createQueryBuilder('c')
                 ->select('c.id,c.slug, c.updatedAt')
                 ->orderBy('c.id')
@@ -140,7 +142,6 @@ class MakeSitemapCommand extends Command
                 ->setFirstResult($FirstResult)
                 ->getQuery()
                 ->getArrayResult();
-
             if (!$categories) break;
             foreach ($categories as $category):
                 $url = "
@@ -152,11 +153,10 @@ class MakeSitemapCommand extends Command
                        </url>
                     ";
                 file_put_contents('public/sitemap.xml',$url, FILE_APPEND);
-                $FirstResult = $FirstResult + 100;
+
            endforeach;
-
+            $FirstResult = $FirstResult + 100;
         }
-
         return $FirstResult;
     }
 
