@@ -3,6 +3,10 @@
 parameters:
     locale: 'ru'
 
+    router.request_context.host: 'warhammerdiscount.ru'
+    router.request_context.scheme: 'https'
+    asset.request_context.secure: true
+
 services:
 
 
