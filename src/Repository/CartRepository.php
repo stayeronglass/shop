@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Cart;
+use App\Entity\Image;
 use App\Entity\Product;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -40,7 +41,8 @@ class CartRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
             ->select('c.id, c.amount, p.id as pid, p.title, p.price, i.name as image_name, i.ext as image_ext ')
             ->innerJoin('c.product', 'p')
-            ->innerJoin('p.images', 'i',Expr\Join::WITH, 'i.main = 1')
+            ->innerJoin('p.images', 'i',Expr\Join::WITH, 'i.main = :image_main')
+            ->setParameter('image_main', Image::MAIN_IMAGE)
             ->andWhere('c.user_id = :user_id')
             ->setParameter('user_id', $uid)
             ->orderBy('c.id', 'ASC')

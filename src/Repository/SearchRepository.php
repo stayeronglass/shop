@@ -2,11 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Image;
 use App\Entity\Product;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Query;
-use http\QueryString;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\ORM\Query\Expr;
 
@@ -31,10 +30,11 @@ class SearchRepository extends ServiceEntityRepository
 
         return $this->createQueryBuilder('p')
             ->select("MATCH(p.title) AGAINST('($q*) (\"$q\")' BOOLEAN ) as relevance, p.title, p.id, p.price, p.salePrice as sale_price, i.name as image_name, i.ext as image_ext ")
-            ->innerJoin('p.images', 'i',Expr\Join::WITH, 'i.main = 1')
+            ->innerJoin('p.images', 'i',Expr\Join::WITH, 'i.main = :image_main')
             ->having('relevance > 0')
             ->setMaxResults(100)
             ->orderBy('relevance', 'DESC')
+            ->setParameter('image_main', Image::MAIN_IMAGE)
             ->getQuery()
             ->getScalarResult()
             ;

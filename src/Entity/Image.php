@@ -18,6 +18,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Image
 {
 
+    const MAIN_IMAGE = 1;
+
     const IMAGE_DIR = 'public/upload' . DIRECTORY_SEPARATOR;
 
     const IMAGE_THUMB_SMALL = '_160x160';
