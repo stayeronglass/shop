@@ -27,7 +27,7 @@ class SearchRepository extends ServiceEntityRepository
 
     public function searchProductsQuery(string $q) : array
     {
-        $this->getEntityManager()->getConnection()->quote(trim($q));
+        $this->getEntityManager()->getConnection()->quote($q);
 
         return $this->createQueryBuilder('p')
             ->select("MATCH(p.title) AGAINST('($q*) (\"$q\")' BOOLEAN ) as relevance, p.title, p.id, p.price, p.salePrice as sale_price, i.name as image_name, i.ext as image_ext ")
