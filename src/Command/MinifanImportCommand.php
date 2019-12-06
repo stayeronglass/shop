@@ -228,5 +228,7 @@ class MinifanImportCommand extends Command
 
         $io->success('ALL DONE!');
 
+        return 0;
+
     }//protected function execute(InputInterface $input, OutputInterface $output)
 }

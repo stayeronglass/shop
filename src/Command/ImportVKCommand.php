@@ -111,5 +111,7 @@ class ImportVKCommand extends Command
 
 
         $io->success('ALL DONE!');
+
+        return 0;
     }
 }

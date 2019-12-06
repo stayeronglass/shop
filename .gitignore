@@ -16,3 +16,4 @@
 ###< symfony/webpack-encore-pack ###
 .gitignore
 .idea/
+/public/sitemap.xml
