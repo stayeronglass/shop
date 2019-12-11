@@ -31,11 +31,11 @@ class ADefaultController extends Controller
             $index_etag = $cache->getItem('index_etag');
             $etag = $index_etag->get() ?? $etag;
             $response->setEtag($etag, true);
-            if ($response->isNotModified($request)) return $response;
+           // if ($response->isNotModified($request)) return $response;
 
             $index = $cache->getItem('index');
             $item = $index->get();
-            if ($item) return $response->setContent($item)->setEtag($etag);
+          //  if ($item) return $response->setContent($item)->setEtag($etag);
         }
 
         $em   = $this->getDoctrine()->getManager();
@@ -73,12 +73,12 @@ class ADefaultController extends Controller
         return $this->render('default/main_inner.html.twig', $params);
     }
 
-    public function head(KeyValueRepository $repository): Response
+    public function head(KeyValueRepository $repository, Request $request): Response
     {
+        $params = $repository->getItems(['yandex_metrica']);
+        $params['canonical'] = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
-        return $this->render('_layout/head.html.twig', $repository->getItems([
-            'yandex_metrica',
-        ]));
+        return $this->render('_layout/head.html.twig', $params);
     }
 
 

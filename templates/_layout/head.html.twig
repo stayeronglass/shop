@@ -24,3 +24,6 @@
 {% endif %}
 
 <meta name="yandex-verification" content="b706fd85f2ab69ed" />
+{% if canonical is defined and canonical  %}
+<link rel="canonical" href="{{ canonical }}"/>
+{% endif %}
