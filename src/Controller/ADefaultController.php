@@ -73,7 +73,7 @@ class ADefaultController extends Controller
         return $this->render('default/main_inner.html.twig', $params);
     }
 
-    public function head(KeyValueRepository $repository, Request $request): Response
+    public function head(KeyValueRepository $repository): Response
     {
         $params = $repository->getItems(['yandex_metrica']);
         $params['canonical'] = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
