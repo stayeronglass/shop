@@ -43,10 +43,9 @@ class ProductRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->select('p.id, p.title, i.name,i.ext')
-            ->innerJoin('p.images', 'i',Expr\Join::WITH, 'i.main = :image_main')
+            ->innerJoin('p.images', 'i',Expr\Join::WITH, 'i.main = 1')
             ->andWhere('p.banner = :banner')
             ->setParameter('banner', 1)
-            ->setParameter('image_main', Image::MAIN_IMAGE)
             ->orderBy('p.id', 'ASC')
             ->getQuery()
             ->getScalarResult()
@@ -58,10 +57,9 @@ class ProductRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('p')
             ->select("p.title, p.id, p.price, i.name as image_name, i.ext as image_ext, cat.id AS cat_id, p.salePrice as sale_price, p.outOfStock as outofstock")
-            ->innerJoin('p.images', 'i',Expr\Join::WITH, 'i.main = :image_main')
+            ->innerJoin('p.images', 'i',Expr\Join::WITH, 'i.main = 1')
             ->innerJoin('p.categories', 'cat')
             ->orderBy('p.id', 'DESC')
-            ->setParameter('image_main', Image::MAIN_IMAGE)
         ;
         $qb->andWhere(
             $qb->expr()->in(

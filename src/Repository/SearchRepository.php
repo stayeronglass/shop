@@ -29,7 +29,7 @@ class SearchRepository extends ServiceEntityRepository
         $this->getEntityManager()->getConnection()->quote($q);
 
         return $this->createQueryBuilder('p')
-            ->select("MATCH(p.title) AGAINST('($q*) (\"$q\")' BOOLEAN ) as relevance, p.title, p.id, p.price, p.salePrice as sale_price, i.name as image_name, i.ext as image_ext ")
+            ->select("MATCH(p.title) AGAINST('($q*) (\"$q\")' BOOLEAN ) as relevance, p.title, p.id, p.price, p.salePrice as sale_price, p.outOfStock as outofstock, i.name as image_name, i.ext as image_ext ")
             ->innerJoin('p.images', 'i',Expr\Join::WITH, 'i.main = :image_main')
             ->having('relevance > 0')
             ->setMaxResults(100)
