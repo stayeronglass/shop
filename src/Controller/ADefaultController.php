@@ -77,6 +77,7 @@ class ADefaultController extends Controller
     {
         $params = $repository->getItems(['yandex_metrica']);
         $params['canonical'] = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        if(!empty($_REQUEST['page'])) $params['noindex'] = 1;
 
         return $this->render('_layout/head.html.twig', $params);
     }

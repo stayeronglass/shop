@@ -27,3 +27,6 @@
 {% if canonical is defined and canonical  %}
 <link rel="canonical" href="{{ canonical }}"/>
 {% endif %}
+{% if noindex is defined and noindex  %}
+<meta name="robots" content="noindex" />
+{% endif %}
