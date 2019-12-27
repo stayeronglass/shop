@@ -10,14 +10,10 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
-use Sonata\FormatterBundle\Form\Type\FormatterType;
 use Sonata\AdminBundle\Form\Type\ModelType;
-use Sonata\AdminBundle\Form\Type\ModelListType;
-use Sonata\AdminBundle\Form\Type\CollectionType;
-use Sonata\AdminBundle\Form\Type\AdminType;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class ProductAdmin extends AbstractAdmin
 {
@@ -63,9 +59,7 @@ class ProductAdmin extends AbstractAdmin
             ])
         ;
         $help   = '';
-        $images = $this->getSubject()->getImages();
-
-        foreach ($images as $image):
+        foreach ($this->getSubject()->getImages() as $image):
             $help .= '<img src="'.$image->getWebPath(Image::IMAGE_THUMB_SMALL).'" class="admin-preview" alt="" style="width:100px;heigth:auto;" />';
         endforeach;
 
@@ -104,6 +98,19 @@ class ProductAdmin extends AbstractAdmin
     public function preUpdate($product)
     {
         $this->manageEmbeddedImageAdmins($product);
+    }
+
+
+    public function postUpdate($product)
+    {
+        /**
+         * @var $cache TagAwareCacheInterface
+         *
+         */
+        $cache = $this->getConfigurationPool()->getContainer()->get('cache.adapter.redis');
+
+        $cache->delete('product' . $product->getId());
+        $cache->delete('product_' . $product->getId() . '_etag');
     }
 
 
