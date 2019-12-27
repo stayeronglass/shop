@@ -9,3 +9,5 @@ php7.3 bin/console doctrine:cache:clear-result
 php7.3 bin/console cache:pool:clear cache.app
 
 composer dump-autoload --optimize --classmap-authoritative
+
+chown -R www-data/www-data var/
