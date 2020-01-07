@@ -144,6 +144,16 @@ class ADefaultController extends Controller
     }
 
 
+
+    /**
+     * @Route("/robots.txt", name="robots_txt", methods="GET"))
+     */
+    public function robots(KeyValueRepository $repository) : Response
+    {
+        return new Response($repository->getItems(['robots_txt'])['robots_txt'], Response::HTTP_OK, ['Content-Type'=> 'text/plain']);
+    }
+
+
     /**
      * @Route("/info", name="info", methods="GET"))
      * condition="%kernel.environment% === 'dev'"
