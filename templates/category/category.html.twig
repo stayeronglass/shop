@@ -14,21 +14,28 @@
                     {% endif %}
                 {% endfor %}
             </div>
+        <div class="row" >
+            <div class="col-md-10 offset-md-1">
+                <h1>{{ category.name }}</h1>
 
-
-            <div class="row">
-                <div class="col-md-10 offset-md-1">
-                    <h1>{{ category.name }}</h1>
-                </div>
             </div>
+        </div>
+        {% if 1 is same as (page) %}
+                <div class="row">
+                    <div class="col-md-10 offset-md-1">
+                        <p>
+                            {{ category.description }}
+                        </p>
+                    </div>
+                </div>
+        {% endif %}
+    </div>
 
             <div class="row products">
                 {% for product in products %}
                     {% include 'product/short.html.twig' with {'product': product} %}
                 {% endfor %}
             </div>
-
-        </div>
 
 
     <div class="pages">
@@ -37,15 +44,5 @@
         </nav>
     </div>
 
-    {% if 1 is same as (page) %}
-    <div class="box text-center">
-        <div class="row">
-            <div class="col-md-10 offset-md-1">
-                    <p>
-                        {{ category.description }}
-                    </p>
-            </div>
-        </div>
-    </div>
-    {% endif %}
+
 {% endblock %}
