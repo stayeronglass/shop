@@ -75,7 +75,7 @@ class ADefaultController extends Controller
 
     public function head(KeyValueRepository $repository): Response
     {
-        $params = $repository->getItems(['yandex_metrica']);
+        $params = $repository->getItems(['yandex_metrica', 'yandex_verification']);
         $params['canonical'] = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         if(!empty($_REQUEST['page'])) $params['noindex'] = 1;
 

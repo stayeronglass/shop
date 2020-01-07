@@ -6,6 +6,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use FOS\UserBundle\Model\User;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
+
 
 class RedirectUserListener
 {
@@ -20,9 +22,9 @@ class RedirectUserListener
     }
 
 
-    public function onKernelRequest($event)
+    public function onKernelRequest(RequestEvent $event)
     {
-        if ($this->isUserLogged() && $event->isMasterRequest()) {
+        if ($event->isMasterRequest() && $this->isUserLogged()) {
 
             $currentRoute = $event->getRequest()->attributes->get('_route');
 
@@ -31,6 +33,8 @@ class RedirectUserListener
                 $event->setResponse($response);
             }
         }
+
+        return;
     }
 
 
