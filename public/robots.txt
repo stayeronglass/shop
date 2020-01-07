@@ -11,4 +11,4 @@ Disallow: /*?page=
 
 Host: https://warhammerdiscount.ru
 
-Sitemap: http://warhammerdiscount.ru/sitemap.xml
+Sitemap: https://warhammerdiscount.ru/sitemap.xml
