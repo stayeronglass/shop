@@ -77,7 +77,8 @@ class ADefaultController extends Controller
     {
         $params = $repository->getItems(['yandex_metrica', 'yandex_verification']);
         $params['canonical'] = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-        if(!empty($_REQUEST['page'])) $params['noindex'] = 1;
+
+        if (!empty($_REQUEST['page']) && ('1' !== $_REQUEST['page'])) $params['noindex'] = 1;
 
         return $this->render('_layout/head.html.twig', $params);
     }
@@ -87,7 +88,7 @@ class ADefaultController extends Controller
     {
         $items = 0;
 
-        if ($this->isGranted('IS_AUTHENTICATED_FULLY')){
+        if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
             $em    = $this->getDoctrine()->getManager();
             $items = $em->getRepository(Cart::class)->getCartAmountByUser($this->getUser()->getId());
         }
