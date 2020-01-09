@@ -154,7 +154,7 @@ class ADefaultController extends Controller
      */
     public function robots(KeyValueRepository $repository) : Response
     {
-        return new Response($repository->getItems(['robots_txt'])['robots_txt'], Response::HTTP_OK, ['Content-Type'=> 'text/plain']);
+        return new Response($repository->getValue('robots_txt'), Response::HTTP_OK, ['Content-Type'=> 'text/plain']);
     }
 
 
