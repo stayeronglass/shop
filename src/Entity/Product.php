@@ -17,6 +17,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Product
 {
+    const CACHE_TIMEOUT      = 3600;
+    const CACHE_ETAG_TIMEOUT = 3600;
+
+
     use TimestampableEntity, SoftDeleteableEntity;
     /**
      * @ORM\Id()
@@ -133,9 +137,14 @@ class Product
         return $this->title;
     }
 
-    public function getCacheKey()
+    public function getCacheKey() : string
     {
         return 'product_' . $this->id;
+    }
+
+    public function getCacheEtagKey() : string
+    {
+        return 'product_' . $this->id . '_etag';
     }
 
     public function getId(): ?int

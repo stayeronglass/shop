@@ -42,7 +42,8 @@ class ProductController extends Controller
             $item = $productItem->get();
             if ($item) return $response->setContent($item)->setEtag($etag, true);
         }
-        $em = $this->getDoctrine()->getManager();
+
+        $em   = $this->getDoctrine()->getManager();
         $repo = $em->getRepository(Product::class);
 
         if (null === ($product = $repo->find($id))) throw new NotFoundHttpException();
@@ -54,10 +55,10 @@ class ProductController extends Controller
         $content = $this->renderView('product/full.html.twig', $params);
 
         if (!$user) {
-            $productItem->set($content)->expiresAfter(3600);
+            $productItem->set($content)->expiresAfter(Product::CACHE_TIMEOUT);
             $cache->save($productItem);
 
-            $product_etag->set($etag)->expiresAfter(3600);
+            $product_etag->set($etag)->expiresAfter(Product::CACHE_ETAG_TIMEOUT);
             $cache->save($product_etag);
         }
 

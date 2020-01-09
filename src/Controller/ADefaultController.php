@@ -17,6 +17,9 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class ADefaultController extends Controller
 {
+    const CACHE_TIMEOUT      = 3600;
+    const CACHE_ETAG_TIMEOUT = 3600;
+
     /**
      * @Route("/", name="main", methods="GET")
      */
@@ -43,10 +46,10 @@ class ADefaultController extends Controller
         $data = $this->renderView('default/index.html.twig', $kvr->getItems(['main_html_title', 'html_description', 'html_keywords']));
 
         if (!$user) {
-            $index->set($data)->expiresAfter(3600);
+            $index->set($data)->expiresAfter(static::CACHE_TIMEOUT);
             $cache->save($index);
 
-            $index_etag->set($etag)->expiresAfter(3600);
+            $index_etag->set($etag)->expiresAfter(static::CACHE_ETAG_TIMEOUT);
             $cache->save($index_etag);
         }
 
