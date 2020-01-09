@@ -9,21 +9,14 @@
         <div class="text">
             <h3 style="overflow: hidden;"><a href="{{ path('product_show', {'id' : product.id }) }}">{{  product.title }}</a></h3>
             <p class="price">
-
-                {% if product.sale_price %}
-                    {% if product.outofstock %}
-                        Нет в наличии
-                    {% else %}
-                        <del>{{  product.price }} &#8381;</del>&nbsp;{{  product.sale_price }} &#8381; &nbsp;&nbsp;
-                    {% endif %}
-                {% else %}
-                    {% if product.outofstock %}
-                        Нет в наличии
-                    {% else %}
-                        {{  product.price }} &#8381; &nbsp;&nbsp;
-                    {% endif %}
-                {% endif %}
                 {% if not product.outofstock %}
+
+                    {% if product.sale_price %}
+                        <del>{{  product.price }} &#8381;</del>&nbsp;{{  product.sale_price }} &#8381; &nbsp;&nbsp;
+                    {% else %}
+                        {{  product.price }} &#8381;&nbsp;&nbsp;
+                    {% endif %}
+
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <a href="javascript:void(0)" onclick="add(this, {{ product.id }})" class="btn btn-primary mr-1" title="в корзину"><i class="fa fa-shopping-cart"></i></a>
                     {% else %}
@@ -31,6 +24,9 @@
                             <i class="fa fa-shopping-cart"></i>
                         </button>
                     {% endif %}
+
+                {% else %}
+                    Нет в наличии
                 {% endif %}
             </p>
 
