@@ -18,7 +18,7 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 class ADefaultController extends Controller
 {
     const CACHE_TIMEOUT      = 3600;
-    const CACHE_ETAG_TIMEOUT = 3600;
+    const CACHE_TIMEOUT_ETAG = 3600;
 
     /**
      * @Route("/", name="main", methods="GET")
@@ -49,7 +49,7 @@ class ADefaultController extends Controller
             $index->set($data)->expiresAfter(static::CACHE_TIMEOUT);
             $cache->save($index);
 
-            $index_etag->set($etag)->expiresAfter(static::CACHE_ETAG_TIMEOUT);
+            $index_etag->set($etag)->expiresAfter(static::CACHE_TIMEOUT_ETAG);
             $cache->save($index_etag);
         }
 

@@ -58,7 +58,7 @@ class ProductController extends Controller
             $productItem->set($content)->expiresAfter(Product::CACHE_TIMEOUT);
             $cache->save($productItem);
 
-            $product_etag->set($etag)->expiresAfter(Product::CACHE_ETAG_TIMEOUT);
+            $product_etag->set($etag)->expiresAfter(Product::CACHE_TIMEOUT_ETAG);
             $cache->save($product_etag);
         }
 

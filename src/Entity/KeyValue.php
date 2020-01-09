@@ -49,12 +49,12 @@ class KeyValue
         return $this;
     }
 
-    public function getKey(): ?string
+    public function getKey(): string
     {
         return $this->key;
     }
 
-    public function getDescription(): ?string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -66,7 +66,7 @@ class KeyValue
         return $this;
     }
 
-    public function getValue(): ?string
+    public function getValue(): string
     {
         return $this->value;
     }

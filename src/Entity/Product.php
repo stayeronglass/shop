@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Product
 {
     const CACHE_TIMEOUT      = 3600;
-    const CACHE_ETAG_TIMEOUT = 3600;
+    const CACHE_TIMEOUT_ETAG = 3600;
 
 
     use TimestampableEntity, SoftDeleteableEntity;
@@ -132,7 +132,7 @@ class Product
 
 
 
-    public function __toString()
+    public function __toString() : string
     {
         return $this->title;
     }
@@ -147,12 +147,12 @@ class Product
         return 'product_' . $this->id . '_etag';
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -164,7 +164,7 @@ class Product
         return $this;
     }
 
-    public function getPrice(): ?int
+    public function getPrice(): int
     {
         return $this->price;
     }
