@@ -21,10 +21,11 @@ class ProductAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('title', TextType::class, [
-
+                'label' => 'Заголовок',
             ])
             ->add('description', SimpleFormatterType::class, [
                 'format' => 'text',
+                'label' => 'Текст',
             ])
             ->add('price', TextType::class, [
                 'label' => 'Цена',
@@ -107,7 +108,7 @@ class ProductAdmin extends AbstractAdmin
          * @var $cache TagAwareCacheInterface
          *
          */
-        $cache = $this->getConfigurationPool()->getContainer()->get('cache.adapter.redis');
+        $cache = $this->getConfigurationPool()->getContainer()->get('cache.app');
 
         $cache->delete('product' . $product->getId());
         $cache->delete('product_' . $product->getId() . '_etag');
