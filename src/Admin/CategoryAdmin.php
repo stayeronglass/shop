@@ -18,12 +18,20 @@ class CategoryAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name', TextType::class)
-            ->add('description', TextareaType::class)
-            ->add('main',null,[
+            ->add('name', TextType::class, [
+                'label'    => 'Название',
+                'required' => true,
+            ])
+            ->add('description', TextareaType::class, [
+                'label'    => 'Описание',
+                'required' => true,
+            ])
+            ->add('main',null, [
                 'label'    => 'На главную и вниз',
             ])
-            ->add('parent')
+            ->add('parent', null, [
+                'label'    => 'Родительская категория',
+            ])
         ;
 
         $help   = '';

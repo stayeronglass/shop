@@ -19,14 +19,14 @@ class KeyValueRepository extends ServiceEntityRepository
         parent::__construct($registry, KeyValue::class);
     }
 
-    public function getValue(string $key)
+    public function getValue(string $key) : string
     {
         return $this->createQueryBuilder('kv')
             ->select('kv.value')
             ->where('kv.key = :key')
             ->setParameter('key', $key)
             ->getQuery()
-            ->getSingleResult()['value']
+            ->getSingleScalarResult()['value']
         ;
 
     }

@@ -29,12 +29,15 @@ class KeyValueAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('key', TextType::class, [
-                'required' => true
+                'label'    => 'Уникальный ключ',
+                'required' => true,
             ])
             ->add('description', TextType::class, [
+                'label'    => 'Описание',
                 'required' => true
             ])
             ->add('value', TextareaType::class, [
+                'label'    => 'Значение',
                 'required' => true
             ])
         ;

@@ -21,25 +21,27 @@ class ProductAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('title', TextType::class, [
-
+                'required' => true,
+                'label'    => 'Заголовок',
             ])
             ->add('description', SimpleFormatterType::class, [
-                'format' => 'text',
+                'required' => true,
+                'format'   => 'text',
+                'label'    => 'Текст',
             ])
             ->add('price', TextType::class, [
-                'label' => 'Цена',
+                'required' => true,
+                'label'    => 'Цена',
             ])
             ->add('categories', ModelAutocompleteType::class, [
-                'property' => 'name',
-                'multiple' => true,
-            ])
-            ->add('categories', ModelAutocompleteType::class, [
+                'label'    => 'Категории',
                 'property' => 'name',
                 'multiple' => true,
             ])
             ->add('manufacturers', ModelAutocompleteType::class, [
                 'label'    => 'Производитель',
                 'property' => 'name',
+
             ])
             ->add('material', ModelAutocompleteType::class, [
                 'label'    => 'Материал',
@@ -51,11 +53,9 @@ class ProductAdmin extends AbstractAdmin
             ])
             ->add('banner', CheckboxType::class, [
                 'label'    => 'В банер',
-                'required' => false,
             ])
             ->add('outOfStock', CheckboxType::class, [
                 'label'    => 'Нет в наличии',
-                'required' => false,
             ])
         ;
         $help   = '';
@@ -107,7 +107,7 @@ class ProductAdmin extends AbstractAdmin
          * @var $cache TagAwareCacheInterface
          *
          */
-        $cache = $this->getConfigurationPool()->getContainer()->get('cache.adapter.redis');
+        $cache = $this->getConfigurationPool()->getContainer()->get('cache.app');
 
         $cache->delete('product' . $product->getId());
         $cache->delete('product_' . $product->getId() . '_etag');
