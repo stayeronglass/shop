@@ -26,7 +26,7 @@ class KeyValueRepository extends ServiceEntityRepository
             ->where('kv.key = :key')
             ->setParameter('key', $key)
             ->getQuery()
-            ->getSingleScalarResult()['value']
+            ->getSingleScalarResult()
         ;
 
     }
