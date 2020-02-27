@@ -10,6 +10,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -26,11 +27,14 @@ class CategoryAdmin extends AbstractAdmin
                 'label'    => 'Описание',
                 'required' => true,
             ])
-            ->add('main',null, [
+            ->add('main',CheckboxType::class, [
                 'label'    => 'На главную и вниз',
             ])
             ->add('parent', null, [
                 'label'    => 'Родительская категория',
+            ])
+            ->add('special', CheckboxType::class, [
+                'label'    => 'Служебная (показывается родительская)',
             ])
         ;
 
