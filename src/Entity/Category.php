@@ -80,6 +80,15 @@ class Category
      */
     private $image_id;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $special = false;
+
+
+
+
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -243,4 +252,17 @@ class Category
         return $this;
     }
 
+
+    public function setSpecial(bool $special): self
+    {
+        $this->special = $special;
+
+        return $this;
+    }
+
+
+    public function getSpecial()
+    {
+        return $this->special;
+    }
 }
