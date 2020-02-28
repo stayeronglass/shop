@@ -43,7 +43,7 @@ class CategoryController extends Controller
         $categoryRepo = $em->getRepository(Category::class);
 
         $category     = $categoryRepo->findOneBy(['slug' => $slug]);
-        if(null === $category) throw $this->createNotFoundException();
+        if((null === $category) || $category->getSpecial()) throw $this->createNotFoundException();
 
         $kv    = $em->getRepository(KeyValue::class);
         $catQb = $categoryRepo->getChildrenQueryBuilder($category, true, 'id', 'ASC', true);
