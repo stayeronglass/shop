@@ -26,6 +26,8 @@ class CategoryRepository extends NestedTreeRepository
     {
         return $this->getCategoriesQuery()
             ->andWhere('cat.main = :main')
+            ->andWhere('cat.special = :special')
+            ->setParameter('special', false)
             ->setParameter('main', 1)
             ->getQuery()
             ->getScalarResult()
@@ -45,6 +47,9 @@ class CategoryRepository extends NestedTreeRepository
             ;
         }
 
+        $q
+            ->andWhere('cat.special = :special')
+            ->setParameter('special', false);
 
         return $q->getQuery()->getScalarResult();
     }
