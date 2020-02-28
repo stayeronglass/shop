@@ -123,6 +123,12 @@ class Product
      */
     private $banner = false;
 
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $articul;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
