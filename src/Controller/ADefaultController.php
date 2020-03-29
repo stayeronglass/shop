@@ -25,12 +25,15 @@ class ADefaultController extends Controller
      */
     public function index(Request $request, TagAwareCacheInterface $cache): Response
     {
+
         $user     = (bool) $this->getUser();
         $response = new Response();
+        $response->setPublic();
+
         $now      = new \DateTime();
         $etag     = md5($now->getTimestamp());
 
-        if (!$user) {
+        if (!$user && ('dev' !== $_SERVER['APP_ENV'])) {
             $index_etag = $cache->getItem('index_etag');
             $etag = $index_etag->get() ?? $etag;
             $response->setEtag($etag, true);
@@ -45,7 +48,7 @@ class ADefaultController extends Controller
         $kvr  = $em->getRepository(KeyValue::class);
         $data = $this->renderView('default/index.html.twig', $kvr->getItems(['main_html_title', 'html_description', 'html_keywords']));
 
-        if (!$user) {
+        if (!$user && ('dev' !== $_SERVER['APP_ENV'])) {
             $index->set($data)->expiresAfter(static::CACHE_TIMEOUT);
             $cache->save($index);
 
@@ -79,9 +82,9 @@ class ADefaultController extends Controller
     public function head(KeyValueRepository $repository): Response
     {
         $params = $repository->getItems(['yandex_metrica', 'yandex_verification']);
-        $params['canonical'] = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $params['canonical'] = 'https://' . $_SERVER['HTTP_HOST'] . parse_url($_SERVER["REQUEST_URI"])['path'];
 
-        if ( !empty($_GET['page']) || !empty($_GET['q']) ) $params['noindex'] = 1;
+        $params['noindex'] = (bool) $_GET;
 
         return $this->render('_layout/head.html.twig', $params);
     }
@@ -154,7 +157,7 @@ class ADefaultController extends Controller
      */
     public function robots(KeyValueRepository $repository) : Response
     {
-        return new Response($repository->getValue('robots_txt'), Response::HTTP_OK, ['Content-Type'=> 'text/plain']);
+        return new Response($repository->getValue('robots_txt'), Response::HTTP_OK, ['Content-Type' => 'text/plain']);
     }
 
 
