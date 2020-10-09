@@ -27,11 +27,13 @@ class ProductController extends Controller
     {
         $user     = (bool) $this->getUser();
         $response = new Response();
+        $response->setPublic();
+
         $now      = new \DateTime();
         $etag     = md5($now->getTimestamp());
 
 
-        if (!$user) {
+        if (!$user && ('dev' !== $_SERVER['APP_ENV'])) {
             $product_etag = $cache->getItem('product_' . $id . '_etag');
             $etag = $product_etag->get() ?? $etag;
 
@@ -54,7 +56,7 @@ class ProductController extends Controller
         $params['images']  = $repo->getTImages($id);
         $content = $this->renderView('product/full.html.twig', $params);
 
-        if (!$user) {
+        if (!$user && ('dev' !== $_SERVER['APP_ENV'])) {
             $productItem->set($content)->expiresAfter(Product::CACHE_TIMEOUT);
             $cache->save($productItem);
 
